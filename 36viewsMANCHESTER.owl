@@ -23,32 +23,11 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
-ObjectProperty: bodyOfWaterMotif
-
-    SubPropertyOf: 
-        depictsMotif
-    
-    
 ObjectProperty: containsSpecifcIndividuals
-
-    
-ObjectProperty: depictsMotif
 
     
 ObjectProperty: hasExactCardinality
 
-    
-ObjectProperty: peopleAtWorkMotif
-
-    SubPropertyOf: 
-        depictsMotif
-    
-    
-ObjectProperty: wildlifeMotif
-
-    SubPropertyOf: 
-        depictsMotif
-    
     
 Class: Agriculture_Theme
 
@@ -79,11 +58,17 @@ Class: Mount_Fuji_Background
     SubClassOf: 
         View_of_Mount_Fuji
     
+    DisjointWith: 
+        Mount_Fuji_Foreground
+    
     
 Class: Mount_Fuji_Foreground
 
     SubClassOf: 
         View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Mount_Fuji_Background
     
     
 Class: People_Motif
@@ -178,6 +163,8 @@ Individual: Ejiri_in_Suruga_Province
 Individual: Enoshima_in_Sagami_Province
 
     Types: 
+        Boats_Motif,
+        Maritime_Theme,
         Mount_Fuji_Background,
         View_of_Mount_Fuji
     
@@ -323,7 +310,8 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
 
     Types: 
         Mount_Fuji_Background,
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        Wildlife_Motif
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -364,7 +352,8 @@ Individual: Umezawa_in_Sagami_Province
 
     Types: 
         Mount_Fuji_Background,
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        Wildlife_Motif
     
     
 Individual: Under_Mannen_Bridge_at_Fukagawa
@@ -382,7 +371,8 @@ Individual: Ushibori_in_Hitachi_Province
         Boats_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        Wildlife_Motif
     
     
 Individual: Watermill_at_Onden
