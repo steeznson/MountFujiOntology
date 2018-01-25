@@ -1,0 +1,861 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji">
+    <Prefix name="" IRI="http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#"/>
+    <Prefix name="dc" IRI="http://purl.org/dc/elements/1.1/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <NamedIndividual IRI="#Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Inume_Pass_Kōshū"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#South_Wind_Clear_Sky"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mishima_Pass_in_Kai_Province"/>
+    </Declaration>
+    <Declaration>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Tsukuda_Island_in_Musashi_Province"/>
+    </Declaration>
+    <Declaration>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Hodogaya_on_the_Tōkaidō"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Tea_house_at_Koishikawa._The_morning_after_a_snowfall"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Watermill_at_Onden"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+    </Declaration>
+    <Declaration>
+        <Datatype abbreviatedIRI="rdf:PlainLiteral"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rainstorm_Beneath_the_Summit"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mount_Fuji_from_the_mountains_of_Tōtōmi"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#A_View_of_Mount_Fuji_Across_Lake_Suwa"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Urbanisation_Theme"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mount_Fuji_Background"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Asakusa_Hongan-ji_temple_in_the_Eastern_capital"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Maritime_Theme"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Agriculture_Theme"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Cushion_Pine_at_Aoyama"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasExactCardinality"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#The_Kazusa_Province_sea_route"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Shichiri_beach_in_Sagami_Province"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#People_Motif"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Boats_Motif"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Sazai_hall_-_Temple_of_Five_Hundred_Rakan"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ejiri_in_Suruga_Province"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#The_lake_of_Hakone_in_Sagami_Province"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Shimomeguro"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Senju_Musashi_Province"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#containsSpecifcIndividuals"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Enoshima_in_Sagami_Province"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mount_Fuji_Foreground"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Umezawa_in_Sagami_Province"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Tama_River_in_Musashi_Province"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Yoshida_at_Tōkaidō"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Wildlife_Motif"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Bay_of_Noboto"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Bodies_Of_Water_Motif"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Fuji_View_Field_in_Owari_Province"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Sundai_Edo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Kajikazawa_in_Kai_Province"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Barrier_Town_on_the_Sumida_River"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Agriculture_Theme"/>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Boats_Motif"/>
+        <Class IRI="#Maritime_Theme"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Bodies_Of_Water_Motif"/>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Maritime_Theme"/>
+        <Class IRI="#Bodies_Of_Water_Motif"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mount_Fuji_Foreground"/>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#People_Motif"/>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Urbanisation_Theme"/>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#View_of_Mount_Fuji"/>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="#containsSpecifcIndividuals"/>
+                <ObjectOneOf>
+                    <NamedIndividual IRI="#Hodogaya_on_the_Tōkaidō"/>
+                    <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+                    <NamedIndividual IRI="#Cushion_Pine_at_Aoyama"/>
+                    <NamedIndividual IRI="#Umezawa_in_Sagami_Province"/>
+                    <NamedIndividual IRI="#Tama_River_in_Musashi_Province"/>
+                    <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+                    <NamedIndividual IRI="#Shichiri_beach_in_Sagami_Province"/>
+                    <NamedIndividual IRI="#Senju_Musashi_Province"/>
+                    <NamedIndividual IRI="#Bay_of_Noboto"/>
+                    <NamedIndividual IRI="#Watermill_at_Onden"/>
+                    <NamedIndividual IRI="#Yoshida_at_Tōkaidō"/>
+                    <NamedIndividual IRI="#The_Kazusa_Province_sea_route"/>
+                    <NamedIndividual IRI="#Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province"/>
+                    <NamedIndividual IRI="#Shimomeguro"/>
+                    <NamedIndividual IRI="#Barrier_Town_on_the_Sumida_River"/>
+                    <NamedIndividual IRI="#Inume_Pass_Kōshū"/>
+                    <NamedIndividual IRI="#Tsukuda_Island_in_Musashi_Province"/>
+                    <NamedIndividual IRI="#Mishima_Pass_in_Kai_Province"/>
+                    <NamedIndividual IRI="#Sundai_Edo"/>
+                    <NamedIndividual IRI="#Enoshima_in_Sagami_Province"/>
+                    <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+                    <NamedIndividual IRI="#Tea_house_at_Koishikawa._The_morning_after_a_snowfall"/>
+                    <NamedIndividual IRI="#Mount_Fuji_from_the_mountains_of_Tōtōmi"/>
+                    <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+                    <NamedIndividual IRI="#The_lake_of_Hakone_in_Sagami_Province"/>
+                    <NamedIndividual IRI="#Fuji_View_Field_in_Owari_Province"/>
+                    <NamedIndividual IRI="#Sazai_hall_-_Temple_of_Five_Hundred_Rakan"/>
+                    <NamedIndividual IRI="#Asakusa_Hongan-ji_temple_in_the_Eastern_capital"/>
+                    <NamedIndividual IRI="#Rainstorm_Beneath_the_Summit"/>
+                    <NamedIndividual IRI="#South_Wind_Clear_Sky"/>
+                    <NamedIndividual IRI="#Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi"/>
+                    <NamedIndividual IRI="#Ejiri_in_Suruga_Province"/>
+                    <NamedIndividual IRI="#A_View_of_Mount_Fuji_Across_Lake_Suwa"/>
+                    <NamedIndividual IRI="#A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo"/>
+                    <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+                    <NamedIndividual IRI="#Kajikazawa_in_Kai_Province"/>
+                </ObjectOneOf>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Wildlife_Motif"/>
+        <Class IRI="#View_of_Mount_Fuji"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectIntersectionOf>
+            <Class abbreviatedIRI="owl:Thing"/>
+            <ObjectExactCardinality cardinality="36">
+                <ObjectProperty IRI="#hasExactCardinality"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <Class IRI="#Mount_Fuji_Foreground"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#A_View_of_Mount_Fuji_Across_Lake_Suwa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#A_View_of_Mount_Fuji_Across_Lake_Suwa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#A_View_of_Mount_Fuji_Across_Lake_Suwa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#A_View_of_Mount_Fuji_Across_Lake_Suwa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Urbanisation_Theme"/>
+        <NamedIndividual IRI="#A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Asakusa_Hongan-ji_temple_in_the_Eastern_capital"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Asakusa_Hongan-ji_temple_in_the_Eastern_capital"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Urbanisation_Theme"/>
+        <NamedIndividual IRI="#Asakusa_Hongan-ji_temple_in_the_Eastern_capital"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Asakusa_Hongan-ji_temple_in_the_Eastern_capital"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Barrier_Town_on_the_Sumida_River"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Barrier_Town_on_the_Sumida_River"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Barrier_Town_on_the_Sumida_River"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Bay_of_Noboto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Bay_of_Noboto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Bay_of_Noboto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Bay_of_Noboto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Bay_of_Noboto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Cushion_Pine_at_Aoyama"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Cushion_Pine_at_Aoyama"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Cushion_Pine_at_Aoyama"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Agriculture_Theme"/>
+        <NamedIndividual IRI="#Ejiri_in_Suruga_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Ejiri_in_Suruga_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Ejiri_in_Suruga_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Ejiri_in_Suruga_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Enoshima_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Enoshima_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Enoshima_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Enoshima_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Enoshima_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Agriculture_Theme"/>
+        <NamedIndividual IRI="#Fuji_View_Field_in_Owari_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Fuji_View_Field_in_Owari_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Fuji_View_Field_in_Owari_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Fuji_View_Field_in_Owari_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Hodogaya_on_the_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Hodogaya_on_the_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Hodogaya_on_the_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Inume_Pass_Kōshū"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Inume_Pass_Kōshū"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Inume_Pass_Kōshū"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Kajikazawa_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Kajikazawa_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Kajikazawa_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Kajikazawa_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Mishima_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Mishima_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Urbanisation_Theme"/>
+        <NamedIndividual IRI="#Mishima_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Mishima_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Mount_Fuji_from_the_mountains_of_Tōtōmi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Mount_Fuji_from_the_mountains_of_Tōtōmi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Mount_Fuji_from_the_mountains_of_Tōtōmi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Urbanisation_Theme"/>
+        <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Nihonbashi_bridge_in_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Foreground"/>
+        <NamedIndividual IRI="#Rainstorm_Beneath_the_Summit"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Rainstorm_Beneath_the_Summit"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Sazai_hall_-_Temple_of_Five_Hundred_Rakan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Sazai_hall_-_Temple_of_Five_Hundred_Rakan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Urbanisation_Theme"/>
+        <NamedIndividual IRI="#Sazai_hall_-_Temple_of_Five_Hundred_Rakan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Sazai_hall_-_Temple_of_Five_Hundred_Rakan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Agriculture_Theme"/>
+        <NamedIndividual IRI="#Senju_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Senju_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Senju_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Senju_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Shichiri_beach_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Shichiri_beach_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Shimomeguro"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Shimomeguro"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Shimomeguro"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Agriculture_Theme"/>
+        <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Shore_of_Tago_Bay_Ejiri_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Foreground"/>
+        <NamedIndividual IRI="#South_Wind_Clear_Sky"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#South_Wind_Clear_Sky"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Agriculture_Theme"/>
+        <NamedIndividual IRI="#Sundai_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Sundai_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Sundai_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Sundai_Edo"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Tama_River_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Tama_River_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Tama_River_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Tama_River_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Tama_River_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Tea_house_at_Koishikawa._The_morning_after_a_snowfall"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Tea_house_at_Koishikawa._The_morning_after_a_snowfall"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Urbanisation_Theme"/>
+        <NamedIndividual IRI="#Tea_house_at_Koishikawa._The_morning_after_a_snowfall"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Tea_house_at_Koishikawa._The_morning_after_a_snowfall"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Wildlife_Motif"/>
+        <NamedIndividual IRI="#Tea_house_at_Koishikawa._The_morning_after_a_snowfall"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Agriculture_Theme"/>
+        <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#The_Great_Wave_off_Kanagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#The_Kazusa_Province_sea_route"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#The_Kazusa_Province_sea_route"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#The_Kazusa_Province_sea_route"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#The_Kazusa_Province_sea_route"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#The_lake_of_Hakone_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#The_lake_of_Hakone_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Tsukuda_Island_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Tsukuda_Island_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Tsukuda_Island_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Tsukuda_Island_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Tsukuda_Island_in_Musashi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Umezawa_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Umezawa_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Wildlife_Motif"/>
+        <NamedIndividual IRI="#Umezawa_in_Sagami_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Urbanisation_Theme"/>
+        <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Under_Mannen_Bridge_at_Fukagawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Boats_Motif"/>
+        <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Maritime_Theme"/>
+        <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Wildlife_Motif"/>
+        <NamedIndividual IRI="#Ushibori_in_Hitachi_Province"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Agriculture_Theme"/>
+        <NamedIndividual IRI="#Watermill_at_Onden"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Watermill_at_Onden"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Watermill_at_Onden"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Watermill_at_Onden"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mount_Fuji_Background"/>
+        <NamedIndividual IRI="#Yoshida_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#People_Motif"/>
+        <NamedIndividual IRI="#Yoshida_at_Tōkaidō"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#View_of_Mount_Fuji"/>
+        <NamedIndividual IRI="#Yoshida_at_Tōkaidō"/>
+    </ClassAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#View_of_Mount_Fuji</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">OWL is built on an open-world assumption, however 36 Views of Mount Fuji is a closed-world ontology.</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+
