@@ -4,8 +4,7 @@ use warnings;
 my $filename = '36viewsMANCHESTER.owl';
 
 print "Enter search term: ";
-my $search = <STDIN>;
-chomp $search;
+chomp (my $search = <STDIN>);
 exit 0 if ($search eq "");
 
 open (my $fh, '<encoding(UTF-8)', $filename)
