@@ -79,6 +79,15 @@ Class: Mount_Fuji_Foreground
         Mount_Fuji_Background
     
     
+Class: Neither_Boats_Motif_Nor_Agriculture_Theme
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointUnionOf: 
+        Agriculture_Theme, Boats_Motif
+    
+    
 Class: People_And_Wildlife_Motifs
 
     SubClassOf: 
@@ -317,7 +326,6 @@ Individual: Shimomeguro
 Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
 
     Types: 
-        Agriculture_Theme,
         Boats_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
@@ -376,7 +384,6 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
 Individual: The_Great_Wave_off_Kanagawa
 
     Types: 
-        Agriculture_Theme,
         Boats_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
