@@ -41,6 +41,14 @@ Class: Boats_Motif
         Maritime_Theme
     
     
+Class: Boats_Motif_And_Urbanisation_Theme
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Boats_Motif
+         and Urbanisation_Theme
+    
+    
 Class: Bodies_Of_Water_Motif
 
     SubClassOf: 
@@ -71,6 +79,14 @@ Class: Mount_Fuji_Foreground
         Mount_Fuji_Background
     
     
+Class: People_And_Wildlife_Motifs
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        People_Motif
+         and Wildlife_Motif
+    
+    
 Class: People_Motif
 
     SubClassOf: 
@@ -81,6 +97,14 @@ Class: Urbanisation_Theme
 
     SubClassOf: 
         View_of_Mount_Fuji
+    
+    
+Class: Urbanisation_Theme_And_Wildlife_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Urbanisation_Theme
+         and Wildlife_Motif
     
     
 Class: View_of_Mount_Fuji
@@ -218,7 +242,6 @@ Individual: Mishima_Pass_in_Kai_Province
     Types: 
         Mount_Fuji_Background,
         People_Motif,
-        Urbanisation_Theme,
         View_of_Mount_Fuji
     
     
@@ -243,6 +266,7 @@ Individual: Nihonbashi_bridge_in_Edo
 
     Types: 
         Boats_Motif,
+        Boats_Motif_And_Urbanisation_Theme,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -314,6 +338,7 @@ Individual: Sundai_Edo
         Agriculture_Theme,
         Mount_Fuji_Background,
         People_Motif,
+        Urbanisation_Theme,
         View_of_Mount_Fuji
     
     
@@ -343,6 +368,7 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
         Mount_Fuji_Background,
         People_Motif,
         Urbanisation_Theme,
+        Urbanisation_Theme_And_Wildlife_Motif,
         View_of_Mount_Fuji,
         Wildlife_Motif
     
@@ -388,6 +414,7 @@ Individual: Umezawa_in_Sagami_Province
 
     Types: 
         Mount_Fuji_Background,
+        People_And_Wildlife_Motifs,
         View_of_Mount_Fuji,
         Wildlife_Motif
     
@@ -396,6 +423,7 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
         Boats_Motif,
+        Boats_Motif_And_Urbanisation_Theme,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -409,6 +437,7 @@ Individual: Ushibori_in_Hitachi_Province
         Boats_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
+        People_And_Wildlife_Motifs,
         People_Motif,
         View_of_Mount_Fuji,
         Wildlife_Motif

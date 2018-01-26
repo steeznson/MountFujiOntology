@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-my $filename = '36viewsMANCHESTER.owl';
+my $filename = '36views.owl';
 
 print "Enter search term: ";
 chomp (my $search = <STDIN>);
