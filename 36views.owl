@@ -46,6 +46,9 @@ Class: Maritime_Theme
     SubClassOf: 
         Bodies_Of_Water_Motif
     
+    DisjointWith: 
+        Neither_Martime_nor_Agriculture_Themes
+    
     
 Class: Martime_And_Urbanisation_Themes
 
@@ -78,6 +81,18 @@ Class: Neither_Martime_nor_Agriculture_Themes
     SubClassOf: 
         View_of_Mount_Fuji
     
+    DisjointWith: 
+        Maritime_Theme, Urbanisation_Theme
+    
+    
+Class: No_People_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        People_Motif
+    
     
 Class: People_And_Wildlife_Motifs
 
@@ -92,11 +107,17 @@ Class: People_Motif
     SubClassOf: 
         View_of_Mount_Fuji
     
+    DisjointWith: 
+        No_People_Motif
+    
     
 Class: Urbanisation_Theme
 
     SubClassOf: 
         View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Neither_Martime_nor_Agriculture_Themes
     
     
 Class: Urbanisation_Theme_And_Wildlife_Motif
@@ -126,6 +147,9 @@ Class: Wildlife_Motif
     
 Class: owl:Thing
 
+    Annotations: 
+        rdfs:comment "Group Axioms guideline: all restrictions for a class should be in a single restriction and owl:Thing/36 Views are functionally equivalent."@en
+    
     SubClassOf: 
         owl:Thing
          and (hasExactCardinality exactly 36 owl:Thing)
@@ -136,6 +160,7 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
     Types: 
         Maritime_Theme,
         Mount_Fuji_Background,
+        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -143,7 +168,6 @@ Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         Urbanisation_Theme,
         View_of_Mount_Fuji
@@ -153,7 +177,6 @@ Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         Urbanisation_Theme,
         View_of_Mount_Fuji
@@ -262,6 +285,7 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_K
     Types: 
         Maritime_Theme,
         Mount_Fuji_Background,
+        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -281,6 +305,7 @@ Individual: Rainstorm_Beneath_the_Summit
     Types: 
         Mount_Fuji_Foreground,
         Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -288,7 +313,6 @@ Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         Urbanisation_Theme,
         View_of_Mount_Fuji
@@ -308,6 +332,7 @@ Individual: Shichiri_beach_in_Sagami_Province
     Types: 
         Mount_Fuji_Background,
         Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -334,6 +359,7 @@ Individual: South_Wind_Clear_Sky
     Types: 
         Mount_Fuji_Foreground,
         Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -369,7 +395,6 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         Urbanisation_Theme,
         Urbanisation_Theme_And_Wildlife_Motif,
@@ -391,6 +416,7 @@ Individual: The_Kazusa_Province_sea_route
     Types: 
         Maritime_Theme,
         Mount_Fuji_Background,
+        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -399,6 +425,7 @@ Individual: The_lake_of_Hakone_in_Sagami_Province
     Types: 
         Mount_Fuji_Background,
         Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
         View_of_Mount_Fuji
     
     
