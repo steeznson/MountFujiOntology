@@ -1,0 +1,498 @@
+Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+Class: Agriculture_Theme
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Bodies_Of_Water_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Maritime_Theme
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+    
+    DisjointWith: 
+        Neither_Martime_nor_Agriculture_Themes
+    
+    
+Class: Martime_And_Urbanisation_Themes
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Maritime_Theme
+         and Urbanisation_Theme
+    
+    
+Class: Mount_Fuji_Background
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Mount_Fuji_Foreground
+    
+    
+Class: Mount_Fuji_Foreground
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Mount_Fuji_Background
+    
+    
+Class: Neither_Martime_nor_Agriculture_Themes
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Maritime_Theme, Urbanisation_Theme
+    
+    
+Class: No_People_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        People_Motif
+    
+    
+Class: People_And_Wildlife_Motifs
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        People_Motif
+         and Wildlife_Motif
+    
+    
+Class: People_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        No_People_Motif
+    
+    
+Class: Urbanisation_Theme
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Neither_Martime_nor_Agriculture_Themes
+    
+    
+Class: Urbanisation_Theme_And_Wildlife_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Urbanisation_Theme
+         and Wildlife_Motif
+    
+    
+Class: View_of_Mount_Fuji
+
+    Annotations: 
+        rdfs:comment "Group Axioms guideline: all restrictions for a class should be in a single restriction. While owl:Thing and View_of_Mount_Fuji contain the same members they are functionally different in terms of what they restrict. In this case it is more informative to have two separate classes despite this being less parsimonious."@en
+    
+    SubClassOf: 
+        owl:Thing
+    
+    
+Class: Wildlife_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: owl:Thing
+
+    Annotations: 
+        rdfs:comment "OWL is built on an open-world assumption, however 36 Views of Mount Fuji is a closed-world ontology. This ontology has an exact cardinality of 36."@en
+    
+    
+Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        No_People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+
+    Types: 
+        Mount_Fuji_Background,
+        People_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+
+    Types: 
+        Mount_Fuji_Background,
+        People_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Barrier_Town_on_the_Sumida_River
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Bay_of_Noboto
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Cushion_Pine_at_Aoyama
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Ejiri_in_Suruga_Province
+
+    Types: 
+        Agriculture_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Enoshima_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Fuji_View_Field_in_Owari_Province
+
+    Types: 
+        Agriculture_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Hodogaya_on_the_Tōkaidō
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Inume_Pass_Kōshū
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Kajikazawa_in_Kai_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Mishima_Pass_in_Kai_Province
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        No_People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Nihonbashi_bridge_in_Edo
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Martime_And_Urbanisation_Themes,
+        Mount_Fuji_Background,
+        People_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Rainstorm_Beneath_the_Summit
+
+    Types: 
+        Mount_Fuji_Foreground,
+        Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mount_Fuji_Background,
+        People_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Senju_Musashi_Province
+
+    Types: 
+        Agriculture_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Shichiri_beach_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Shimomeguro
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: South_Wind_Clear_Sky
+
+    Types: 
+        Mount_Fuji_Foreground,
+        Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Sundai_Edo
+
+    Types: 
+        Agriculture_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Tama_River_in_Musashi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mount_Fuji_Background,
+        People_Motif,
+        Urbanisation_Theme,
+        Urbanisation_Theme_And_Wildlife_Motif,
+        View_of_Mount_Fuji,
+        Wildlife_Motif
+    
+    
+Individual: The_Great_Wave_off_Kanagawa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: The_Kazusa_Province_sea_route
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        No_People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: The_lake_of_Hakone_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        No_People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Tsukuda_Island_in_Musashi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Umezawa_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_And_Wildlife_Motifs,
+        View_of_Mount_Fuji,
+        Wildlife_Motif
+    
+    
+Individual: Under_Mannen_Bridge_at_Fukagawa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Martime_And_Urbanisation_Themes,
+        Mount_Fuji_Background,
+        People_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Ushibori_in_Hitachi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Mount_Fuji_Background,
+        People_And_Wildlife_Motifs,
+        People_Motif,
+        View_of_Mount_Fuji,
+        Wildlife_Motif
+    
+    
+Individual: Watermill_at_Onden
+
+    Types: 
+        Agriculture_Theme,
+        Bodies_Of_Water_Motif,
+        Mount_Fuji_Background,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Yoshida_at_Tōkaidō
+
+    Types: 
+        Mount_Fuji_Background,
+        Neither_Martime_nor_Agriculture_Themes,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    

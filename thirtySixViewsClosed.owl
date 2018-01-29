@@ -131,7 +131,7 @@ Class: Urbanisation_Theme_And_Wildlife_Motif
 Class: View_of_Mount_Fuji
 
     Annotations: 
-        rdfs:comment "OWL is built on an open-world assumption, however 36 Views of Mount Fuji is a closed-world ontology."@en
+        rdfs:comment "Group Axioms guideline: all restrictions for a class should be in a single restriction. While owl:Thing and View_of_Mount_Fuji contain the same members they are functionally different in terms of what they restrict. In this case it is more informative to have two separate classes despite this being less parsimonious."@en
     
     SubClassOf: 
         owl:Thing,
@@ -148,7 +148,7 @@ Class: Wildlife_Motif
 Class: owl:Thing
 
     Annotations: 
-        rdfs:comment "Group Axioms guideline: all restrictions for a class should be in a single restriction and owl:Thing/36 Views are functionally equivalent."@en
+        rdfs:comment "OWL is built on an open-world assumption, however 36 Views of Mount Fuji is a closed-world ontology. This ontology has an exact cardinality of 36."@en
     
     SubClassOf: 
         owl:Thing
@@ -158,6 +158,7 @@ Class: owl:Thing
 Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         No_People_Motif,
@@ -194,6 +195,7 @@ Individual: Barrier_Town_on_the_Sumida_River
 Individual: Bay_of_Noboto
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -221,6 +223,7 @@ Individual: Ejiri_in_Suruga_Province
 Individual: Enoshima_in_Sagami_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -257,6 +260,7 @@ Individual: Inume_Pass_Kōshū
 Individual: Kajikazawa_in_Kai_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
         People_Motif,
         View_of_Mount_Fuji
@@ -283,6 +287,7 @@ Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
 Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         No_People_Motif,
@@ -292,6 +297,7 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_K
 Individual: Nihonbashi_bridge_in_Edo
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Martime_And_Urbanisation_Themes,
         Mount_Fuji_Background,
@@ -312,6 +318,7 @@ Individual: Rainstorm_Beneath_the_Summit
 Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
 
     Types: 
+        Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
         People_Motif,
         Urbanisation_Theme,
@@ -330,6 +337,7 @@ Individual: Senju_Musashi_Province
 Individual: Shichiri_beach_in_Sagami_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
         Neither_Martime_nor_Agriculture_Themes,
         No_People_Motif,
@@ -348,6 +356,7 @@ Individual: Shimomeguro
 Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -376,6 +385,7 @@ Individual: Sundai_Edo
 Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -385,6 +395,7 @@ Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_
 Individual: Tama_River_in_Musashi_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -394,6 +405,7 @@ Individual: Tama_River_in_Musashi_Province
 Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
 
     Types: 
+        Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
         People_Motif,
         Urbanisation_Theme,
@@ -405,6 +417,7 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
 Individual: The_Great_Wave_off_Kanagawa
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -414,6 +427,7 @@ Individual: The_Great_Wave_off_Kanagawa
 Individual: The_Kazusa_Province_sea_route
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         No_People_Motif,
@@ -423,6 +437,7 @@ Individual: The_Kazusa_Province_sea_route
 Individual: The_lake_of_Hakone_in_Sagami_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
         Neither_Martime_nor_Agriculture_Themes,
         No_People_Motif,
@@ -432,6 +447,7 @@ Individual: The_lake_of_Hakone_in_Sagami_Province
 Individual: Tsukuda_Island_in_Musashi_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_Motif,
@@ -441,6 +457,7 @@ Individual: Tsukuda_Island_in_Musashi_Province
 Individual: Umezawa_in_Sagami_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
         Neither_Martime_nor_Agriculture_Themes,
         People_And_Wildlife_Motifs,
@@ -451,6 +468,7 @@ Individual: Umezawa_in_Sagami_Province
 Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Martime_And_Urbanisation_Themes,
         Mount_Fuji_Background,
@@ -462,6 +480,7 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
 Individual: Ushibori_in_Hitachi_Province
 
     Types: 
+        Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
         People_And_Wildlife_Motifs,
@@ -474,6 +493,7 @@ Individual: Watermill_at_Onden
 
     Types: 
         Agriculture_Theme,
+        Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
         People_Motif,
         View_of_Mount_Fuji
