@@ -5,8 +5,15 @@ use strict;
 use warnings;
 
 # Global Vars
-my $filename;
-my $search;
+my $filename; # .owl file
+my $search; # search term
+my $fh; # file buffer
+
+# Main routine
+get_ontology();
+open_file();
+get_search();
+print_output();
 
 # Select ontology sub-routine
 sub get_ontology{
@@ -25,7 +32,7 @@ sub get_ontology{
 	return $filename;
 }
 
-# Select search term sub-routine
+# Select search term 
 sub get_search{
 	print ">>>
 	View all classes (1), all individuals (2),
@@ -38,13 +45,17 @@ sub get_search{
 	return $search;
 }
 
-# Main routine
-get_ontology();
-open (my $fh, '<encoding(UTF-8)', $filename)
-	or die "Could not open file '$filename' $!";
-get_search();
-print ">>>\n"; # output formatting
-while (my $row = <$fh>) {
-	chomp $row; 
-	print "$row\n" if ($row =~ $search);
+# Open file
+sub open_file{
+	open ($fh, '<encoding(UTF-8)', $filename)
+		or die "Could not open file '$filename' $!";
+}
+
+# Print output
+sub print_output{
+	print ">>>\n"; # output formatting
+	while (my $row = <$fh>) {
+		chomp $row; 
+		print "$row\n" if ($row =~ $search);
+	}
 }
