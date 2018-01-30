@@ -23,103 +23,208 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
-Class: Agriculture_Theme
+Class: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     SubClassOf: 
         View_of_Mount_Fuji
     
     
-Class: Bodies_Of_Water_Motif
+Class: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
 
     SubClassOf: 
         View_of_Mount_Fuji
     
     
-Class: Maritime_Theme
-
-    SubClassOf: 
-        Bodies_Of_Water_Motif
-    
-    DisjointWith: 
-        Neither_Martime_nor_Agriculture_Themes
-    
-    
-Class: Martime_And_Urbanisation_Themes
-
-    SubClassOf: 
-        View_of_Mount_Fuji,
-        Maritime_Theme
-         and Urbanisation_Theme
-    
-    
-Class: Mount_Fuji_Background
+Class: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
 
     SubClassOf: 
         View_of_Mount_Fuji
     
-    DisjointWith: 
-        Mount_Fuji_Foreground
     
-    
-Class: Mount_Fuji_Foreground
+Class: Barrier_Town_on_the_Sumida_River
 
     SubClassOf: 
         View_of_Mount_Fuji
     
-    DisjointWith: 
-        Mount_Fuji_Background
     
-    
-Class: Neither_Martime_nor_Agriculture_Themes
+Class: Bay_of_Noboto
 
     SubClassOf: 
         View_of_Mount_Fuji
     
-    DisjointWith: 
-        Maritime_Theme, Urbanisation_Theme
     
-    
-Class: No_People_Motif
+Class: Cushion_Pine_at_Aoyama
 
     SubClassOf: 
         View_of_Mount_Fuji
     
-    DisjointWith: 
-        People_Motif
     
-    
-Class: People_And_Wildlife_Motifs
-
-    SubClassOf: 
-        View_of_Mount_Fuji,
-        People_Motif
-         and Wildlife_Motif
-    
-    
-Class: People_Motif
+Class: Ejiri_in_Suruga_Province
 
     SubClassOf: 
         View_of_Mount_Fuji
     
-    DisjointWith: 
-        No_People_Motif
     
-    
-Class: Urbanisation_Theme
+Class: Enoshima_in_Sagami_Province
 
     SubClassOf: 
         View_of_Mount_Fuji
     
-    DisjointWith: 
-        Neither_Martime_nor_Agriculture_Themes
     
-    
-Class: Urbanisation_Theme_And_Wildlife_Motif
+Class: Fuji_View_Field_in_Owari_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji,
-        Urbanisation_Theme
-         and Wildlife_Motif
+        View_of_Mount_Fuji
+    
+    
+Class: Hodogaya_on_the_Tōkaidō
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Inume_Pass_Kōshū
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Kajikazawa_in_Kai_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Mishima_Pass_in_Kai_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Mount_Fuji_from_the_mountains_of_Tōtōmi
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Mount_Fuji_reflects_in_Lake_Kawaguchi
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Nihonbashi_bridge_in_Edo
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Rainstorm_Beneath_the_Summit
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Sazai_hall_Temple_of_Five_Hundred_Raken
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Senju_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Shichiri_beach_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Shimomeguro
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: South_Wind_Clear_Sky
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Sundai_Edo
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Tama_River_in_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Tea_house_at_Koishikawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: The_Great_Wave_off_Kanagawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: The_Kazusa_Province_sea_route
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: The_lake_of_Hakone_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Tsukuda_Island_in_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Umezawa_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Under_Mannen_Bridge_at_Fukagawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Ushibori_in_Hitachi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji
     
     
 Class: View_of_Mount_Fuji
@@ -131,7 +236,13 @@ Class: View_of_Mount_Fuji
         owl:Thing
     
     
-Class: Wildlife_Motif
+Class: Watermill_at_Onden
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Yoshida_at_Tōkaidō
 
     SubClassOf: 
         View_of_Mount_Fuji
@@ -146,353 +257,252 @@ Class: owl:Thing
 Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        No_People_Motif,
+        A_View_of_Mount_Fuji_Across_Lake_Suwa,
         View_of_Mount_Fuji
     
     
 Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
 
     Types: 
-        Mount_Fuji_Background,
-        People_Motif,
-        Urbanisation_Theme,
+        A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
         View_of_Mount_Fuji
     
     
 Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
 
     Types: 
-        Mount_Fuji_Background,
-        People_Motif,
-        Urbanisation_Theme,
+        Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
         View_of_Mount_Fuji
     
     
 Individual: Barrier_Town_on_the_Sumida_River
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
+        Barrier_Town_on_the_Sumida_River,
         View_of_Mount_Fuji
     
     
 Individual: Bay_of_Noboto
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Bay_of_Noboto,
         View_of_Mount_Fuji
     
     
 Individual: Cushion_Pine_at_Aoyama
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
+        Cushion_Pine_at_Aoyama,
         View_of_Mount_Fuji
     
     
 Individual: Ejiri_in_Suruga_Province
 
     Types: 
-        Agriculture_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Ejiri_in_Suruga_Province,
         View_of_Mount_Fuji
     
     
 Individual: Enoshima_in_Sagami_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Enoshima_in_Sagami_Province,
         View_of_Mount_Fuji
     
     
 Individual: Fuji_View_Field_in_Owari_Province
 
     Types: 
-        Agriculture_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Fuji_View_Field_in_Owari_Province,
         View_of_Mount_Fuji
     
     
 Individual: Hodogaya_on_the_Tōkaidō
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
+        Hodogaya_on_the_Tōkaidō,
         View_of_Mount_Fuji
     
     
 Individual: Inume_Pass_Kōshū
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
+        Inume_Pass_Kōshū,
         View_of_Mount_Fuji
     
     
 Individual: Kajikazawa_in_Kai_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Mount_Fuji_Background,
-        People_Motif,
+        Kajikazawa_in_Kai_Province,
         View_of_Mount_Fuji
     
     
 Individual: Mishima_Pass_in_Kai_Province
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
+        Mishima_Pass_in_Kai_Province,
         View_of_Mount_Fuji
     
     
 Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
+        Mount_Fuji_from_the_mountains_of_Tōtōmi,
         View_of_Mount_Fuji
     
     
 Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        No_People_Motif,
+        Mount_Fuji_reflects_in_Lake_Kawaguchi,
         View_of_Mount_Fuji
     
     
 Individual: Nihonbashi_bridge_in_Edo
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Martime_And_Urbanisation_Themes,
-        Mount_Fuji_Background,
-        People_Motif,
-        Urbanisation_Theme,
+        Nihonbashi_bridge_in_Edo,
         View_of_Mount_Fuji
     
     
 Individual: Rainstorm_Beneath_the_Summit
 
     Types: 
-        Mount_Fuji_Foreground,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
+        Rainstorm_Beneath_the_Summit,
         View_of_Mount_Fuji
     
     
 Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Mount_Fuji_Background,
-        People_Motif,
-        Urbanisation_Theme,
+        Sazai_hall_Temple_of_Five_Hundred_Raken,
         View_of_Mount_Fuji
     
     
 Individual: Senju_Musashi_Province
 
     Types: 
-        Agriculture_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Senju_Musashi_Province,
         View_of_Mount_Fuji
     
     
 Individual: Shichiri_beach_in_Sagami_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
+        Shichiri_beach_in_Sagami_Province,
         View_of_Mount_Fuji
     
     
 Individual: Shimomeguro
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
+        Shimomeguro,
         View_of_Mount_Fuji
     
     
 Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,
         View_of_Mount_Fuji
     
     
 Individual: South_Wind_Clear_Sky
 
     Types: 
-        Mount_Fuji_Foreground,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
+        South_Wind_Clear_Sky,
         View_of_Mount_Fuji
     
     
 Individual: Sundai_Edo
 
     Types: 
-        Agriculture_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
-        Urbanisation_Theme,
+        Sundai_Edo,
         View_of_Mount_Fuji
     
     
 Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi,
         View_of_Mount_Fuji
     
     
 Individual: Tama_River_in_Musashi_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Tama_River_in_Musashi_Province,
         View_of_Mount_Fuji
     
     
 Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Mount_Fuji_Background,
-        People_Motif,
-        Urbanisation_Theme,
-        Urbanisation_Theme_And_Wildlife_Motif,
-        View_of_Mount_Fuji,
-        Wildlife_Motif
+        Tea_house_at_Koishikawa,
+        View_of_Mount_Fuji
     
     
 Individual: The_Great_Wave_off_Kanagawa
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        The_Great_Wave_off_Kanagawa,
         View_of_Mount_Fuji
     
     
 Individual: The_Kazusa_Province_sea_route
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        No_People_Motif,
+        The_Kazusa_Province_sea_route,
         View_of_Mount_Fuji
     
     
 Individual: The_lake_of_Hakone_in_Sagami_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
+        The_lake_of_Hakone_in_Sagami_Province,
         View_of_Mount_Fuji
     
     
 Individual: Tsukuda_Island_in_Musashi_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_Motif,
+        Tsukuda_Island_in_Musashi_Province,
         View_of_Mount_Fuji
     
     
 Individual: Umezawa_in_Sagami_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_And_Wildlife_Motifs,
-        View_of_Mount_Fuji,
-        Wildlife_Motif
+        Umezawa_in_Sagami_Province,
+        View_of_Mount_Fuji
     
     
 Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Martime_And_Urbanisation_Themes,
-        Mount_Fuji_Background,
-        People_Motif,
-        Urbanisation_Theme,
+        Under_Mannen_Bridge_at_Fukagawa,
         View_of_Mount_Fuji
     
     
 Individual: Ushibori_in_Hitachi_Province
 
     Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Mount_Fuji_Background,
-        People_And_Wildlife_Motifs,
-        People_Motif,
-        View_of_Mount_Fuji,
-        Wildlife_Motif
+        Ushibori_in_Hitachi_Province,
+        View_of_Mount_Fuji
     
     
 Individual: Watermill_at_Onden
 
     Types: 
-        Agriculture_Theme,
-        Bodies_Of_Water_Motif,
-        Mount_Fuji_Background,
-        People_Motif,
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        Watermill_at_Onden
     
     
 Individual: Yoshida_at_Tōkaidō
 
     Types: 
-        Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_Motif,
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        Yoshida_at_Tōkaidō
     
     
