@@ -35,21 +35,19 @@ Class: Bodies_Of_Water_Motif
         View_of_Mount_Fuji
     
     
+Class: Disjoint_Union_People_Mount_Fuji_Foreground
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointUnionOf: 
+        Mount_Fuji_Foreground, People_Motif
+    
+    
 Class: Maritime_Theme
 
     SubClassOf: 
         Bodies_Of_Water_Motif
-    
-    DisjointWith: 
-        Neither_Martime_nor_Agriculture_Themes
-    
-    
-Class: Martime_And_Urbanisation_Themes
-
-    SubClassOf: 
-        View_of_Mount_Fuji,
-        Maritime_Theme
-         and Urbanisation_Theme
     
     
 Class: Mount_Fuji_Background
@@ -70,56 +68,19 @@ Class: Mount_Fuji_Foreground
         Mount_Fuji_Background
     
     
-Class: Neither_Martime_nor_Agriculture_Themes
-
-    SubClassOf: 
-        View_of_Mount_Fuji
-    
-    DisjointWith: 
-        Maritime_Theme, Urbanisation_Theme
-    
-    
-Class: No_People_Motif
-
-    SubClassOf: 
-        View_of_Mount_Fuji
-    
-    DisjointWith: 
-        People_Motif
-    
-    
-Class: People_And_Wildlife_Motifs
-
-    SubClassOf: 
-        View_of_Mount_Fuji,
-        People_Motif
-         and Wildlife_Motif
-    
-    
 Class: People_Motif
 
     SubClassOf: 
         View_of_Mount_Fuji
     
     DisjointWith: 
-        No_People_Motif
+        WIldlife_Not_People
     
     
 Class: Urbanisation_Theme
 
     SubClassOf: 
         View_of_Mount_Fuji
-    
-    DisjointWith: 
-        Neither_Martime_nor_Agriculture_Themes
-    
-    
-Class: Urbanisation_Theme_And_Wildlife_Motif
-
-    SubClassOf: 
-        View_of_Mount_Fuji,
-        Urbanisation_Theme
-         and Wildlife_Motif
     
     
 Class: View_of_Mount_Fuji
@@ -129,6 +90,24 @@ Class: View_of_Mount_Fuji
     
     SubClassOf: 
         owl:Thing
+    
+    
+Class: WIldlife_Not_People
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Wildlife_Motif
+    
+    DisjointWith: 
+        People_Motif
+    
+    
+Class: Wildlife_And_Bodies_of_Water
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Bodies_Of_Water_Motif
+         and Wildlife_Motif
     
     
 Class: Wildlife_Motif
@@ -147,9 +126,9 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     Types: 
         Bodies_Of_Water_Motif,
+        Disjoint_Union_People_Mount_Fuji_Foreground,
         Maritime_Theme,
         Mount_Fuji_Background,
-        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -175,7 +154,6 @@ Individual: Barrier_Town_on_the_Sumida_River
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
@@ -194,7 +172,6 @@ Individual: Cushion_Pine_at_Aoyama
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
@@ -231,7 +208,6 @@ Individual: Hodogaya_on_the_Tōkaidō
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
@@ -240,7 +216,6 @@ Individual: Inume_Pass_Kōshū
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
@@ -258,7 +233,6 @@ Individual: Mishima_Pass_in_Kai_Province
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
@@ -267,7 +241,6 @@ Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
@@ -276,9 +249,9 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_K
 
     Types: 
         Bodies_Of_Water_Motif,
+        Disjoint_Union_People_Mount_Fuji_Foreground,
         Maritime_Theme,
         Mount_Fuji_Background,
-        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -287,7 +260,6 @@ Individual: Nihonbashi_bridge_in_Edo
     Types: 
         Bodies_Of_Water_Motif,
         Maritime_Theme,
-        Martime_And_Urbanisation_Themes,
         Mount_Fuji_Background,
         People_Motif,
         Urbanisation_Theme,
@@ -298,8 +270,6 @@ Individual: Rainstorm_Beneath_the_Summit
 
     Types: 
         Mount_Fuji_Foreground,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -326,9 +296,8 @@ Individual: Shichiri_beach_in_Sagami_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Disjoint_Union_People_Mount_Fuji_Foreground,
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -336,7 +305,6 @@ Individual: Shimomeguro
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
@@ -355,8 +323,6 @@ Individual: South_Wind_Clear_Sky
 
     Types: 
         Mount_Fuji_Foreground,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -397,8 +363,8 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
         Mount_Fuji_Background,
         People_Motif,
         Urbanisation_Theme,
-        Urbanisation_Theme_And_Wildlife_Motif,
         View_of_Mount_Fuji,
+        Wildlife_And_Bodies_of_Water,
         Wildlife_Motif
     
     
@@ -416,9 +382,9 @@ Individual: The_Kazusa_Province_sea_route
 
     Types: 
         Bodies_Of_Water_Motif,
+        Disjoint_Union_People_Mount_Fuji_Foreground,
         Maritime_Theme,
         Mount_Fuji_Background,
-        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -426,9 +392,8 @@ Individual: The_lake_of_Hakone_in_Sagami_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Disjoint_Union_People_Mount_Fuji_Foreground,
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        No_People_Motif,
         View_of_Mount_Fuji
     
     
@@ -447,9 +412,9 @@ Individual: Umezawa_in_Sagami_Province
     Types: 
         Bodies_Of_Water_Motif,
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
-        People_And_Wildlife_Motifs,
         View_of_Mount_Fuji,
+        WIldlife_Not_People,
+        Wildlife_And_Bodies_of_Water,
         Wildlife_Motif
     
     
@@ -458,7 +423,6 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
     Types: 
         Bodies_Of_Water_Motif,
         Maritime_Theme,
-        Martime_And_Urbanisation_Themes,
         Mount_Fuji_Background,
         People_Motif,
         Urbanisation_Theme,
@@ -471,7 +435,6 @@ Individual: Ushibori_in_Hitachi_Province
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         Mount_Fuji_Background,
-        People_And_Wildlife_Motifs,
         People_Motif,
         View_of_Mount_Fuji,
         Wildlife_Motif
@@ -491,7 +454,6 @@ Individual: Yoshida_at_Tōkaidō
 
     Types: 
         Mount_Fuji_Background,
-        Neither_Martime_nor_Agriculture_Themes,
         People_Motif,
         View_of_Mount_Fuji
     
