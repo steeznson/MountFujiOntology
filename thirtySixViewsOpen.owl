@@ -23,10 +23,19 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
+ObjectProperty: depictsConstruction
+
+    
+ObjectProperty: depictsRooftops
+
+    
 ObjectProperty: hasAHorse
 
     
 ObjectProperty: hasTwoMountFujis
+
+    
+ObjectProperty: indoorScene
 
     
 ObjectProperty: owl:topObjectProperty
@@ -38,7 +47,19 @@ ObjectProperty: redMountFuji
         owl:topObjectProperty
     
     
+ObjectProperty: rooftopsForeground
+
+    SubPropertyOf: 
+        depictsRooftops
+    
+    
 Class: Agriculture_Theme
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Animals_Motif
 
     SubClassOf: 
         View_of_Mount_Fuji
@@ -62,7 +83,7 @@ Class: Disjoint_Union_People_Mount_Fuji_Foreground
 Class: Horse_Motif
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        Animals_Motif
     
     
 Class: Maritime_Theme
@@ -134,7 +155,7 @@ Class: Wildlife_And_Bodies_of_Water
 Class: Wildlife_Motif
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        Animals_Motif
     
     
 Class: owl:Thing
@@ -161,6 +182,9 @@ Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
         Urbanisation_Theme,
         View_of_Mount_Fuji
     
+    Facts:  
+     rooftopsForeground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+    
     
 Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
 
@@ -170,6 +194,9 @@ Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
         Urbanisation_Theme,
         View_of_Mount_Fuji
     
+    Facts:  
+     rooftopsForeground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+    
     
 Individual: Barrier_Town_on_the_Sumida_River
 
@@ -178,6 +205,9 @@ Individual: Barrier_Town_on_the_Sumida_River
         Mount_Fuji_Background,
         People_Motif,
         View_of_Mount_Fuji
+    
+    Facts:  
+     rooftopsForeground  Barrier_Town_on_the_Sumida_River
     
     
 Individual: Bay_of_Noboto
@@ -225,6 +255,9 @@ Individual: Fuji_View_Field_in_Owari_Province
         People_Motif,
         View_of_Mount_Fuji
     
+    Facts:  
+     depictsConstruction  Fuji_View_Field_in_Owari_Province
+    
     
 Individual: Hodogaya_on_the_Tōkaidō
 
@@ -267,6 +300,9 @@ Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
         People_Motif,
         View_of_Mount_Fuji
     
+    Facts:  
+     depictsConstruction  Mount_Fuji_from_the_mountains_of_Tōtōmi
+    
     
 Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
 
@@ -291,6 +327,9 @@ Individual: Nihonbashi_bridge_in_Edo
         Urbanisation_Theme,
         View_of_Mount_Fuji
     
+    Facts:  
+     rooftopsForeground  Nihonbashi_bridge_in_Edo
+    
     
 Individual: Rainstorm_Beneath_the_Summit
 
@@ -310,6 +349,9 @@ Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
         People_Motif,
         Urbanisation_Theme,
         View_of_Mount_Fuji
+    
+    Facts:  
+     rooftopsForeground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan
     
     
 Individual: Senju_Musashi_Province
@@ -368,6 +410,9 @@ Individual: Sundai_Edo
         Urbanisation_Theme,
         View_of_Mount_Fuji
     
+    Facts:  
+     depictsRooftops  Sundai_Edo
+    
     
 Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
 
@@ -399,6 +444,9 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
         View_of_Mount_Fuji,
         Wildlife_And_Bodies_of_Water,
         Wildlife_Motif
+    
+    Facts:  
+     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -461,6 +509,9 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
         Urbanisation_Theme,
         View_of_Mount_Fuji
     
+    Facts:  
+     depictsRooftops  Under_Mannen_Bridge_at_Fukagawa
+    
     
 Individual: Ushibori_in_Hitachi_Province
 
@@ -482,6 +533,9 @@ Individual: Watermill_at_Onden
         People_Motif,
         View_of_Mount_Fuji
     
+    Facts:  
+     rooftopsForeground  Watermill_at_Onden
+    
     
 Individual: Yoshida_at_Tōkaidō
 
@@ -489,5 +543,8 @@ Individual: Yoshida_at_Tōkaidō
         Mount_Fuji_Background,
         People_Motif,
         View_of_Mount_Fuji
+    
+    Facts:  
+     indoorScene  Yoshida_at_Tōkaidō
     
     
