@@ -23,6 +23,21 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
+ObjectProperty: hasAHorse
+
+    
+ObjectProperty: hasTwoMountFujis
+
+    
+ObjectProperty: owl:topObjectProperty
+
+    
+ObjectProperty: redMountFuji
+
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    
 Class: Agriculture_Theme
 
     SubClassOf: 
@@ -42,6 +57,12 @@ Class: Disjoint_Union_People_Mount_Fuji_Foreground
     
     DisjointUnionOf: 
         Mount_Fuji_Foreground, People_Motif
+    
+    
+Class: Horse_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
     
     
 Class: Maritime_Theme
@@ -153,6 +174,7 @@ Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
 Individual: Barrier_Town_on_the_Sumida_River
 
     Types: 
+        Horse_Motif,
         Mount_Fuji_Background,
         People_Motif,
         View_of_Mount_Fuji
@@ -207,6 +229,7 @@ Individual: Fuji_View_Field_in_Owari_Province
 Individual: Hodogaya_on_the_Tōkaidō
 
     Types: 
+        Horse_Motif,
         Mount_Fuji_Background,
         People_Motif,
         View_of_Mount_Fuji
@@ -254,6 +277,9 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_K
         Mount_Fuji_Background,
         View_of_Mount_Fuji
     
+    Facts:  
+     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
+    
     
 Individual: Nihonbashi_bridge_in_Edo
 
@@ -272,6 +298,9 @@ Individual: Rainstorm_Beneath_the_Summit
         Mount_Fuji_Foreground,
         View_of_Mount_Fuji
     
+    Facts:  
+     redMountFuji  Rainstorm_Beneath_the_Summit
+    
     
 Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
 
@@ -287,6 +316,7 @@ Individual: Senju_Musashi_Province
 
     Types: 
         Agriculture_Theme,
+        Horse_Motif,
         Mount_Fuji_Background,
         People_Motif,
         View_of_Mount_Fuji
@@ -324,6 +354,9 @@ Individual: South_Wind_Clear_Sky
     Types: 
         Mount_Fuji_Foreground,
         View_of_Mount_Fuji
+    
+    Facts:  
+     redMountFuji  South_Wind_Clear_Sky
     
     
 Individual: Sundai_Edo
