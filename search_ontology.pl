@@ -19,7 +19,8 @@ print_output();
 sub get_ontology{
 	print ">>>
 	Which ontology would you like to search?
-	Open-world Assumption (1), Open-world Assumption v2 (2),
+	Open-world Assumption (1), 
+	Open-world Assumption v2 (2),
 	Closed-world Assumption (3): ";
 	chomp(my $ontology = <STDIN>);
 	if($ontology=="1") {
