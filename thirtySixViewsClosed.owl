@@ -202,7 +202,7 @@ Class: Wildlife_Motif
         Animals_Motif
     
     
-Class: Wildlife_Not_People_Not_Snowcapped
+Class: Wildlife_Not_People_DISJOINTED_Not_Snowcapped
 
     SubClassOf: 
         View_of_Mount_Fuji
@@ -644,7 +644,7 @@ Individual: Umezawa_in_Sagami_Province
         WIldlife_Not_People,
         Wildlife_And_Bodies_of_Water,
         Wildlife_Motif,
-        Wildlife_Not_People_Not_Snowcapped
+        Wildlife_Not_People_DISJOINTED_Not_Snowcapped
     
     Facts:  
      mistForeground  Umezawa_in_Sagami_Province,

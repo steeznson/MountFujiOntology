@@ -10,25 +10,25 @@ my $search; # search term
 my $fh; # file buffer
 
 # Main routine
-get_ontology();
-open_file();
-get_search();
-print_output();
+do {
+	get_ontology();
+	open_file();
+	get_search();
+	print_output();
+} while (1); # loop until user exits
 
 # Select ontology sub-routine
 sub get_ontology{
 	print ">>>
 	Which ontology would you like to search?
-	Open-world Assumption (1), 
-	Open-world Assumption v2 (2),
-	Closed-world Assumption (3): ";
+	Closed-world Assumption (1) or
+	Open-world Assumption (2). 
+	Enter another number to quit: ";
 	chomp(my $ontology = <STDIN>);
 	if($ontology=="1") {
-		$filename = "thirtySixViewsOpen.owl";
-	}elsif($ontology=="2") {
-		$filename = "thirtySixViewsOpen-discrete.owl";
-	}elsif($ontology=="3") {
 		$filename = "thirtySixViewsClosed.owl";
+	}elsif($ontology=="2") {
+		$filename = "thirtySixViewsOpen.owl";
 	}else{exit 0;}
 	return $filename;
 }
