@@ -36,8 +36,9 @@ sub get_ontology{
 # Select search term 
 sub get_search{
 	print ">>>
-	View all classes (1), all individuals (2),
-	all object properties (3) or enter a search term: ";
+	View all classes (1), individuals (2),
+	object properties (3) 
+	or enter a search term: ";
 	chomp($search = <STDIN>);
 	exit 0 if ($search eq "");
 	if ($search eq "1"){$search = "Class:";}
