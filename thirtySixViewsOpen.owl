@@ -57,6 +57,9 @@ ObjectProperty: hasTwoMountFujis
 ObjectProperty: indoorScene
 
     
+ObjectProperty: mistForeground
+
+    
 ObjectProperty: mountFujiBackground
 
     DisjointWith: 
@@ -210,7 +213,8 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
         View_of_Mount_Fuji
     
     Facts:  
-     mountFujiBackground  A_View_of_Mount_Fuji_Across_Lake_Suwa
+     mountFujiBackground  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
     
     
 Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
@@ -286,7 +290,8 @@ Individual: Ejiri_in_Suruga_Province
     
     Facts:  
      discolouredMountFuji  Ejiri_in_Suruga_Province,
-     mountFujiBackground  Ejiri_in_Suruga_Province
+     mountFujiBackground  Ejiri_in_Suruga_Province,
+     treeForeground  Ejiri_in_Suruga_Province
     
     
 Individual: Enoshima_in_Sagami_Province
@@ -331,6 +336,8 @@ Individual: Hodogaya_on_the_Tōkaidō
 Individual: Inume_Pass_Kōshū
 
     Types: 
+        Animals_Motif,
+        Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
@@ -358,7 +365,8 @@ Individual: Mishima_Pass_in_Kai_Province
         View_of_Mount_Fuji
     
     Facts:  
-     mountFujiBackground  Mishima_Pass_in_Kai_Province
+     mountFujiBackground  Mishima_Pass_in_Kai_Province,
+     treeForeground  Mishima_Pass_in_Kai_Province
     
     
 Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
@@ -442,6 +450,7 @@ Individual: Senju_Musashi_Province
         View_of_Mount_Fuji
     
     Facts:  
+     discolouredMountFuji  Senju_Musashi_Province,
      mountFujiBackground  Senju_Musashi_Province
     
     
@@ -454,6 +463,7 @@ Individual: Shichiri_beach_in_Sagami_Province
         View_of_Mount_Fuji
     
     Facts:  
+     discolouredMountFuji  Shichiri_beach_in_Sagami_Province,
      mountFujiBackground  Shichiri_beach_in_Sagami_Province
     
     
@@ -465,6 +475,7 @@ Individual: Shimomeguro
         View_of_Mount_Fuji
     
     Facts:  
+     mistForeground  Shimomeguro,
      mountFujiBackground  Shimomeguro
     
     
@@ -504,7 +515,8 @@ Individual: Sundai_Edo
     
     Facts:  
      depictsRooftops  Sundai_Edo,
-     mountFujiBackground  Sundai_Edo
+     mountFujiBackground  Sundai_Edo,
+     treeForeground  Sundai_Edo
     
     
 Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
@@ -529,7 +541,8 @@ Individual: Tama_River_in_Musashi_Province
         View_of_Mount_Fuji
     
     Facts:  
-     mountFujiBackground  Tama_River_in_Musashi_Province
+     mountFujiBackground  Tama_River_in_Musashi_Province,
+     treeForeground  Tama_River_in_Musashi_Province
     
     
 Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
@@ -547,7 +560,8 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
     Facts:  
      discolouredMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
      mountFujiBackground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -586,6 +600,7 @@ Individual: The_lake_of_Hakone_in_Sagami_Province
         View_of_Mount_Fuji
     
     Facts:  
+     mistForeground  The_lake_of_Hakone_in_Sagami_Province,
      mountFujiBackground  The_lake_of_Hakone_in_Sagami_Province
     
     
@@ -614,6 +629,7 @@ Individual: Umezawa_in_Sagami_Province
         Wildlife_Not_People_Not_Snowcapped
     
     Facts:  
+     mistForeground  Umezawa_in_Sagami_Province,
      mountFujiBackground  Umezawa_in_Sagami_Province
     
     
