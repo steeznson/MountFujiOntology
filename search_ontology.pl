@@ -1,4 +1,4 @@
-#! /usr/bin/perl 'search_ontology.pl'
+#!/usr/bin/perl
 
 # Packages
 use strict;
