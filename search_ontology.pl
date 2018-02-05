@@ -24,14 +24,17 @@ do {
 sub get_ontology{
 	print ">>>
 	Which ontology would you like to search?
-	Closed-world Assumption (1) or
-	Open-world Assumption (2). 
+	Closed-world Assumption (1),
+	Open-world Assumption (2) or
+	MVP Ontology (3). 
 	Enter another number to quit: ";
 	chomp(my $ontology = <STDIN>);
 	if($ontology=="1") {
 		$filename = "thirtySixViewsClosed.owl";
 	}elsif($ontology=="2") {
 		$filename = "thirtySixViewsOpen.owl";
+	}elsif($ontology=="3") P
+		$filename = "thirtySixViewsMVP.owl";
 	}else{exit 0;}
 	return $filename;
 }
