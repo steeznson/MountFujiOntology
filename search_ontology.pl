@@ -33,7 +33,7 @@ sub get_ontology{
 		$filename = "thirtySixViewsClosed.owl";
 	}elsif($ontology=="2") {
 		$filename = "thirtySixViewsOpen.owl";
-	}elsif($ontology=="3") P
+	}elsif($ontology=="3") { 
 		$filename = "thirtySixViewsMVP.owl";
 	}else{exit 0;}
 	return $filename;
