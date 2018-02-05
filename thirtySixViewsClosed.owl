@@ -137,6 +137,15 @@ Class: Maritime_Theme
         Bodies_Of_Water_Motif
     
     
+Class: NOT_Wildlife_Not_People_AND_NOT_Snowcapped
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointUnionOf: 
+        Snow_Capped_Mount_Fuji, WIldlife_Not_People
+    
+    
 Class: Not_People
 
     SubClassOf: 
@@ -200,15 +209,6 @@ Class: Wildlife_Motif
 
     SubClassOf: 
         Animals_Motif
-    
-    
-Class: Wildlife_Not_People_DISJOINTED_Not_Snowcapped
-
-    SubClassOf: 
-        View_of_Mount_Fuji
-    
-    DisjointUnionOf: 
-        Snow_Capped_Mount_Fuji, WIldlife_Not_People
     
     
 Class: owl:Thing
@@ -295,6 +295,7 @@ Individual: Cushion_Pine_at_Aoyama
         View_of_Mount_Fuji
     
     Facts:  
+     depictsRooftops  Cushion_Pine_at_Aoyama,
      discolouredMountFuji  Cushion_Pine_at_Aoyama,
      mountFujiBackground  Cushion_Pine_at_Aoyama
     
@@ -640,11 +641,11 @@ Individual: Umezawa_in_Sagami_Province
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        NOT_Wildlife_Not_People_AND_NOT_Snowcapped,
         View_of_Mount_Fuji,
         WIldlife_Not_People,
         Wildlife_And_Bodies_of_Water,
-        Wildlife_Motif,
-        Wildlife_Not_People_DISJOINTED_Not_Snowcapped
+        Wildlife_Motif
     
     Facts:  
      mistForeground  Umezawa_in_Sagami_Province,
