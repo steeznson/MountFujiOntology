@@ -370,9 +370,6 @@ Class: Ushibori_in_Hitachi_Province
     
 Class: View_of_Mount_Fuji
 
-    Annotations: 
-        rdfs:comment "Group Axioms guideline: all restrictions for a class should be in a single restriction. While owl:Thing and View_of_Mount_Fuji contain the same members they are functionally different in terms of what they restrict. In this case it is more informative to have two separate classes despite this being less parsimonious."@en
-    
     SubClassOf: 
         owl:Thing
     
