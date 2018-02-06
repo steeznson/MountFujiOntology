@@ -31,6 +31,12 @@ ObjectProperty: boatsForegroundOrBackground
     
 ObjectProperty: containsSpecificIndividuals
 
+    Annotations: 
+        rdfs:comment "Symmetric because each indivdual is related by their membership of a set of specific members."@en
+    
+    Characteristics: 
+        Symmetric
+    
     
 ObjectProperty: depictsConstruction
 
@@ -56,6 +62,12 @@ ObjectProperty: hasBoatForeground
     
 ObjectProperty: hasExactCardinality
 
+    Annotations: 
+        rdfs:comment "Reflexive because each individual is related to itself by being a member of a set with an exact cardinality (36)."@en
+    
+    Characteristics: 
+        Reflexive
+    
     
 ObjectProperty: hasTwoMountFujis
 
@@ -181,10 +193,12 @@ Class: View_of_Mount_Fuji
     Annotations: 
         rdfs:comment "Group Axioms guideline: all restrictions for a class should be in a single restriction. While owl:Thing and View_of_Mount_Fuji contain the same members they are functionally different in terms of what they restrict. In this case it is more informative to have two separate classes despite this being less parsimonious."@en
     
+    EquivalentTo: 
+        owl:Thing
+    
     SubClassOf: 
         owl:Thing,
-        View_of_Mount_Fuji
-         and (containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo , Asakusa_Hongan-ji_temple_in_the_Eastern_capital , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tōkaidō , Inume_Pass_Kōshū , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Tōtōmi , Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tōkaidō , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi , Tama_River_in_Musashi_Province , Tea_house_at_Koishikawa._The_morning_after_a_snowfall , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tōkaidō}))
+        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo , Asakusa_Hongan-ji_temple_in_the_Eastern_capital , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tōkaidō , Inume_Pass_Kōshū , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Tōtōmi , Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tōkaidō , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi , Tama_River_in_Musashi_Province , Tea_house_at_Koishikawa._The_morning_after_a_snowfall , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tōkaidō})
     
     
 Class: Wildlife_AND_Bodies_of_Water
@@ -216,9 +230,11 @@ Class: owl:Thing
     Annotations: 
         rdfs:comment "Closed-world assumption: Only 36 things can exist in this ontology."@en
     
+    EquivalentTo: 
+        View_of_Mount_Fuji
+    
     SubClassOf: 
-        owl:Thing
-         and (hasExactCardinality exactly 36 owl:Thing)
+        hasExactCardinality exactly 36 owl:Thing
     
     
 Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
@@ -637,6 +653,12 @@ Individual: The_lake_of_Hakone_in_Sagami_Province
     Facts:  
      mistForeground  The_lake_of_Hakone_in_Sagami_Province,
      mountFujiBackground  The_lake_of_Hakone_in_Sagami_Province
+    
+    
+Individual: Thirty_Seventh_View
+
+    Annotations: 
+        rdfs:comment "Synthetic 37th View to test reasoner"@en
     
     
 Individual: Tsukuda_Island_in_Musashi_Province
