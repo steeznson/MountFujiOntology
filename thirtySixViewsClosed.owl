@@ -234,7 +234,7 @@ Class: owl:Thing
         View_of_Mount_Fuji
     
     SubClassOf: 
-        hasExactCardinality exactly 36 owl:Thing
+        hasExactCardinality exactly 36 View_of_Mount_Fuji
     
     
 Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
@@ -653,12 +653,6 @@ Individual: The_lake_of_Hakone_in_Sagami_Province
     Facts:  
      mistForeground  The_lake_of_Hakone_in_Sagami_Province,
      mountFujiBackground  The_lake_of_Hakone_in_Sagami_Province
-    
-    
-Individual: Thirty_Seventh_View
-
-    Annotations: 
-        rdfs:comment "Synthetic 37th View to test reasoner"@en
     
     
 Individual: Tsukuda_Island_in_Musashi_Province

@@ -59,6 +59,15 @@ ObjectProperty: depictsTemple
 ObjectProperty: discolouredMountFuji
 
     
+ObjectProperty: hasSpecificIndividual
+
+    Annotations: 
+        rdfs:comment "inverse functional: restrict domain to one individual"@en
+    
+    Characteristics: 
+        InverseFunctional
+    
+    
 ObjectProperty: hasTwoMountFujis
 
     
@@ -167,205 +176,239 @@ ObjectProperty: yellowMountFuji
 Class: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa})
     
     
 Class: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo})
     
     
 Class: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Asakusa_Hongan-ji_temple_in_the_Eastern_capital})
     
     
 Class: Barrier_Town_on_the_Sumida_River
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Barrier_Town_on_the_Sumida_River})
     
     
 Class: Bay_of_Noboto
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Bay_of_Noboto})
     
     
 Class: Cushion_Pine_at_Aoyama
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Cushion_Pine_at_Aoyama})
     
     
 Class: Ejiri_in_Suruga_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Ejiri_in_Suruga_Province})
     
     
 Class: Enoshima_in_Sagami_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Enoshima_in_Sagami_Province})
     
     
 Class: Fuji_View_Field_in_Owari_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Fuji_View_Field_in_Owari_Province})
     
     
 Class: Hodogaya_on_the_Tōkaidō
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Hodogaya_on_the_Tōkaidō})
     
     
 Class: Inume_Pass_Kōshū
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Inume_Pass_Kōshū})
     
     
 Class: Kajikazawa_in_Kai_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Kajikazawa_in_Kai_Province})
     
     
 Class: Mishima_Pass_in_Kai_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Mishima_Pass_in_Kai_Province})
     
     
 Class: Mount_Fuji_from_the_mountains_of_Tōtōmi
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Mount_Fuji_from_the_mountains_of_Tōtōmi})
     
     
 Class: Mount_Fuji_reflects_in_Lake_Kawaguchi
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province})
     
     
 Class: Nihonbashi_bridge_in_Edo
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Nihonbashi_bridge_in_Edo})
     
     
 Class: Rainstorm_Beneath_the_Summit
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Rainstorm_Beneath_the_Summit})
     
     
 Class: Sazai_hall_Temple_of_Five_Hundred_Raken
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Sazai_hall_-_Temple_of_Five_Hundred_Rakan})
     
     
 Class: Senju_Musashi_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Senju_Musashi_Province})
     
     
 Class: Shichiri_beach_in_Sagami_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Shichiri_beach_in_Sagami_Province})
     
     
 Class: Shimomeguro
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Shimomeguro})
     
     
 Class: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Shore_of_Tago_Bay_Ejiri_at_Tōkaidō})
     
     
 Class: South_Wind_Clear_Sky
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({South_Wind_Clear_Sky})
     
     
 Class: Sundai_Edo
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Sundai_Edo})
     
     
 Class: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi})
     
     
 Class: Tama_River_in_Musashi_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Tama_River_in_Musashi_Province})
     
     
 Class: Tea_house_at_Koishikawa
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Tea_house_at_Koishikawa._The_morning_after_a_snowfall})
     
     
 Class: The_Great_Wave_off_Kanagawa
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({The_Great_Wave_off_Kanagawa})
     
     
 Class: The_Kazusa_Province_sea_route
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({The_Kazusa_Province_sea_route})
     
     
 Class: The_lake_of_Hakone_in_Sagami_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({The_lake_of_Hakone_in_Sagami_Province})
     
     
 Class: Tsukuda_Island_in_Musashi_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Tsukuda_Island_in_Musashi_Province})
     
     
 Class: Umezawa_in_Sagami_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Umezawa_in_Sagami_Province})
     
     
 Class: Under_Mannen_Bridge_at_Fukagawa
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Under_Mannen_Bridge_at_Fukagawa})
     
     
 Class: Ushibori_in_Hitachi_Province
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Ushibori_in_Hitachi_Province})
     
     
 Class: View_of_Mount_Fuji
@@ -377,13 +420,15 @@ Class: View_of_Mount_Fuji
 Class: Watermill_at_Onden
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Watermill_at_Onden})
     
     
 Class: Yoshida_at_Tōkaidō
 
     SubClassOf: 
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        hasSpecificIndividual exactly 1 ({Yoshida_at_Tōkaidō})
     
     
 Class: owl:Thing
