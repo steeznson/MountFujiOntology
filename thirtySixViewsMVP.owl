@@ -29,6 +29,12 @@ ObjectProperty: boatsForegroundOrBackground
         Maritime_Theme
     
     
+ObjectProperty: colouredMountFuji
+
+    DisjointWith: 
+        discolouredMountFuji
+    
+    
 ObjectProperty: depictsConstruction
 
     
@@ -41,20 +47,13 @@ ObjectProperty: depictsTemple
 ObjectProperty: discolouredMountFuji
 
     DisjointWith: 
-        redMountFuji,
-        yellowMountFuji
+        colouredMountFuji
     
     
 ObjectProperty: hasBoatForeground
 
     SubPropertyOf: 
         boatsForegroundOrBackground
-    
-    
-ObjectProperty: hasSpecificIndividual
-
-    Characteristics: 
-        InverseFunctional
     
     
 ObjectProperty: hasTwoMountFujis
@@ -72,16 +71,6 @@ ObjectProperty: mountFujiForeground
 ObjectProperty: owl:topObjectProperty
 
     
-ObjectProperty: redMountFuji
-
-    SubPropertyOf: 
-        owl:topObjectProperty
-    
-    DisjointWith: 
-        discolouredMountFuji,
-        yellowMountFuji
-    
-    
 ObjectProperty: rooftopsForeground
 
     SubPropertyOf: 
@@ -90,13 +79,6 @@ ObjectProperty: rooftopsForeground
     
 ObjectProperty: treeForeground
 
-    
-ObjectProperty: yellowMountFuji
-
-    DisjointWith: 
-        discolouredMountFuji,
-        redMountFuji
-    
     
 Class: Agriculture_Theme
 
@@ -129,15 +111,6 @@ Class: People_Motif
 
     DisjointWith: 
         Wildlife_NOT_People
-    
-    
-Class: Singleton_Class_Great_Wave
-
-    Annotations: 
-        rdfs:comment "As the most popular woodcut in the Views, Great Wave has been singled out. This is only possible in an open-world ontology."@en
-    
-    SubClassOf: 
-        hasSpecificIndividual exactly 1 ({The_Great_Wave_off_Kanagawa})
     
     
 Class: Snow_Capped_Mount_Fuji
@@ -349,8 +322,8 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_K
         owl:Thing
     
     Facts:  
-     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
-     yellowMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
+     colouredMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
+     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
     
     
 Individual: Nihonbashi_bridge_in_Edo
@@ -375,8 +348,8 @@ Individual: Rainstorm_Beneath_the_Summit
         owl:Thing
     
     Facts:  
-     mountFujiForeground  Rainstorm_Beneath_the_Summit,
-     redMountFuji  Rainstorm_Beneath_the_Summit
+     colouredMountFuji  Rainstorm_Beneath_the_Summit,
+     mountFujiForeground  Rainstorm_Beneath_the_Summit
     
     
 Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
@@ -452,8 +425,8 @@ Individual: South_Wind_Clear_Sky
         owl:Thing
     
     Facts:  
-     mountFujiForeground  South_Wind_Clear_Sky,
-     redMountFuji  South_Wind_Clear_Sky
+     colouredMountFuji  South_Wind_Clear_Sky,
+     mountFujiForeground  South_Wind_Clear_Sky
     
     
 Individual: Sundai_Edo
@@ -519,7 +492,6 @@ Individual: The_Great_Wave_off_Kanagawa
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
-        Singleton_Class_Great_Wave,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
