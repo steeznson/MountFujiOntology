@@ -8,6 +8,7 @@
 \usepackage{listings}
 \usepackage[paper=a4paper,layout= letterpaper]{geometry} 
 \usepackage{courier}
+\usepackage{graphicx}
 \lstset{basicstyle=\ttfamily,breaklines=true}
 \title{\textbf{Models of Concepts: A Case Study-based evaluation of Web Ontology Language (OWL2) Functionality and Methodology}}
 \author{Examination Number: 40298315}
@@ -18,19 +19,125 @@
 \maketitle
 
 \begin{abstract}
-This is my abstract.
+  Insert compact and informative summary here.
 \end{abstract}
 
 \tableofcontents
 
 \newpage\section{Introduction}
+% explain project overview in greater detail
 
-\section{Description Logics and OWL}
+\section{The OWL2 Specification}
+\subsection{Description Logics}
+% History and background
+\begin{quote}
+  Description logic languages are then viewed as the core of knowledge representation systems, considering both the structure of a DL knowledge base and its associated reasoning services (Baader, 2003, pp.5).
+\end{quote}
+%Brachman 1979 transitive identity attributions. IS-A relationships.
+Quillian's semantic networks (1967) and Minsky's frame systems (1981) both pioneered network structures that represented sets of individuals and their relationships. Post-1985 description logics began under the name ``terminological systems'' before being known as ``concept languages'' (Baader, 2003, pp.6-7).
+\begin{quote}
+  The first basic step for construction is provided by the disjointed alphabets of symbols that are used to denote atomic concepts, designated by unary predicate symbols; the latter are used to express relationships between concepts (Baader, 2003, pp.11).
+\end{quote}
+% disjunction, conjunction, quantifiers, subsumption
+% A-Box and T-Box assertions (combination `hybrid') (roles RBox)
+% Donini 1994 individuals complicate reasoning (ABox)
+% 1984 Brachman and Levenesque trade-off between expressiveness and reasoning
+% pp23 Baader three approaches to ontology building:
+% limited and complete, expressive and incomplete, expressive and complete
+% 1993 Patel-Schneider and Swartout propose LISP-like syntax
+\begin{quote}
+  The model of a domain in DL is embedded in a knowledge base. Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction (Baader, 2003, pp.27).
+\end{quote}
+\subsection{OWL Languages}
+% discuss abstract owl syntax
+% compare different owl functional syntaxes (Manchester and XML)
 
-\section{36 Views of Mount Fuji}
+\section{Case Study: 36 Views of Mount Fuji}
+% chosen because restricted in size and potentially problematic bc closed-world
+\begin{quote}
+  The non-finiteness of the domain and the open-world assumption are distinguishing features of Description Logics with respect to the modelling languages developed in the study of databases (Baader, 2003, pp.11).
+\end{quote}
 
+\section{Capturing the 36 Views}
+\subsection{Maximal Detail}
+% reasoner output
+\subsection{Allowing the Open-world Assumption}
+% reasoner output
+\subsection{Minimal Viable Product}
+% reasoner output
+\subsection{Assessment}
+% ANTIPATTERNS
+%Three classes: logical, non-logical, guidelines
+%- Logical
+%AndIsOr: relation cannot be simultaneously (and) and (or)
+%OnlynessIsLoneliness: link only A and B with universal restriction but later link some A to C (disjunction B and C)
+%UniversalExistence: A is simultaneously subsumed by all roles of B but only some of C. (disjunction B and C)
+%EquivalenceIsDifference: ontologist wants to say that A is a subclass of B but says that they are equivalent
+%- Non-Logical
+%SynonymeOfEquivalence: having two equivalent classes where one would suffice. 
+%SumOfSome: Multiple (some) quantifier relationships for the same concept
+%SomeMeansAtLeastOne: no need to specify cardinality when using (some) quantifier
+%- Guidelines
+%DisjointednessOfComplement: more correct to say that two concepts are disjoint than A === (not B)
+%Domain&CardinalityConstraints: cardinality restrictions are exact and should not be used in place of universal restrictions
+%GroupAxioms: group all restrictions for a class into a single restriction
+%MinIsZero: trivial that a set is larger than zero in a well designed ontology
+
+
+\section{Improving the OWL2 standard}
+% WHY
+% ``Problems of OWL syntax'' Manchester University Presses
+% Legibility issues - mention my perl script
+% Issues utilising OWL, hierarchy:
+% OWL standard implementors, OWL software developers, ontology engineers
+% have to ensure accessible to all three
+% WHY NOT
+% implementation should be as small as possible
+% not precluded from working on closed-world ontology aretfacts
+% not all closed-world ontologies have to be strictly closed
+% could be handled by a protege plugin
+
+\section{Conclusion}
+% placeholder title
+Insert measured conclusion here.
+
+\begin{thebibliography}{99}
+  
+\bibitem{}
+  Baader, F. et al.: 
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition, Cambridge University Press New York, 2003.
+
+\bibitem{}
+  Horris, M.: 
+  \textit{A Practical Guide to Building OWL Ontologies},
+  1st Edition, University of Manchester, 2011.
+
+\bibitem{} 
+  Krötzsch, M., Simancik, F., Horrocks, I.: 
+  \textit{A Description Logic Primer},
+  Computing Research Repository abs/1201.4089, 2012.
+
+\bibitem{} 
+  Roussey, C., Corcho, O, Blazquez, L.M.V.: 
+  \textit{A Catalogue of OWL Ontology AntiPatterns},
+  K-CAP '09 Proceedings of the fifth international conference on Knowledge capture,
+  ACM New York, pp.205-206, 2009. 
+
+\bibitem{} 
+  Schlobach, S., Huang, Z., Cornet, R., van Harmelen, F.: 
+  \textit{Debugging Incoherent Terminologies},
+  Journal of Automated Reasoning, Springer, 2007.
+
+\bibitem{}
+  Warren P., Mulholland P., Collins T., Motta E.:
+  (2014) \textit{The Usability of Description Logics},
+  The Semantic Web: Trends and Challenges, Springer, 2014.
+
+\end{thebibliography}
+
+\newpage
 \section{Appendix}
-
 \subsection{Figure 1: Maximally descriptive ontology (Closed-world)}
 \begin{lstlisting}
 Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
@@ -780,618 +887,8 @@ Individual: Yoshida_at_Tokaido
      mountFujiBackground  Yoshida_at_Tokaido
 \end{lstlisting}
 
-\subsection{Figure 2: Minimum Viable Product Ontology (Open-world)}
-\begin{lstlisting}
-Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
-Prefix: dc: <http://purl.org/dc/elements/1.1/>
-Prefix: owl: <http://www.w3.org/2002/07/owl#>
-Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-Prefix: xml: <http://www.w3.org/XML/1998/namespace>
-Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
-
-
-
-Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
-
-
-AnnotationProperty: rdfs:comment
-
-    
-Datatype: rdf:PlainLiteral
-
-    
-Datatype: xsd:int
-
-    
-Datatype: xsd:string
-
-    
-ObjectProperty: boatsForegroundOrBackground
-
-    Domain: 
-        Maritime_Theme
-    
-    
-ObjectProperty: colouredMountFuji
-
-    DisjointWith: 
-        discolouredMountFuji
-    
-    
-ObjectProperty: depictsConstruction
-
-    
-ObjectProperty: depictsRooftops
-
-    
-ObjectProperty: depictsTemple
-
-    
-ObjectProperty: discolouredMountFuji
-
-    DisjointWith: 
-        colouredMountFuji
-    
-    
-ObjectProperty: hasBoatForeground
-
-    SubPropertyOf: 
-        boatsForegroundOrBackground
-    
-    
-ObjectProperty: hasTwoMountFujis
-
-    
-ObjectProperty: indoorScene
-
-    
-ObjectProperty: mistForeground
-
-    
-ObjectProperty: mountFujiForeground
-
-    
-ObjectProperty: owl:topObjectProperty
-
-    
-ObjectProperty: rooftopsForeground
-
-    SubPropertyOf: 
-        depictsRooftops
-    
-    
-ObjectProperty: treeForeground
-
-    
-Class: Agriculture_Theme
-
-    
-Class: Animals_Motif
-
-    
-Class: Bodies_Of_Water_Motif
-
-    
-Class: Horse_Motif
-
-    SubClassOf: 
-        Animals_Motif
-    
-    
-Class: Maritime_Theme
-
-    SubClassOf: 
-        Bodies_Of_Water_Motif
-    
-    
-Class: NOT_Agriculture_AND_NOT_Maritime
-
-    DisjointUnionOf: 
-        Agriculture_Theme, Maritime_Theme
-    
-    
-Class: People_Motif
-
-    DisjointWith: 
-        Wildlife_NOT_People
-    
-    
-Class: Snow_Capped_Mount_Fuji
-
-    
-Class: Urbanisation_Theme
-
-    
-Class: Wildlife_AND_Bodies_of_Water
-
-    SubClassOf: 
-        Bodies_Of_Water_Motif
-         and Wildlife_Motif
-    
-    
-Class: Wildlife_Motif
-
-    SubClassOf: 
-        Animals_Motif
-    
-    
-Class: Wildlife_NOT_People
-
-    SubClassOf: 
-        Wildlife_Motif
-    
-    DisjointWith: 
-        People_Motif
-    
-    
-Class: owl:Thing
-
-    Annotations: 
-        rdfs:comment "This ontology artefact represents the same information as the Closed-world ontology as efficiently as possible. MVP."@en
-    
-    
-Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
-    
-    
-Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Urbanisation_Theme,
-        owl:Thing
-    
-    Facts:  
-     rooftopsForeground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
-    
-    
-Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Urbanisation_Theme,
-        owl:Thing
-    
-    Facts:  
-     depictsTemple  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     rooftopsForeground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital
-    
-    
-Individual: Barrier_Town_on_the_Sumida_River
-
-    Types: 
-        Animals_Motif,
-        Horse_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     rooftopsForeground  Barrier_Town_on_the_Sumida_River
-    
-    
-Individual: Bay_of_Noboto
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        owl:Thing
-    
-    
-Individual: Cushion_Pine_at_Aoyama
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        owl:Thing
-    
-    Facts:  
-     depictsRooftops  Cushion_Pine_at_Aoyama,
-     discolouredMountFuji  Cushion_Pine_at_Aoyama
-    
-    
-Individual: Ejiri_in_Suruga_Province
-
-    Types: 
-        Agriculture_Theme,
-        People_Motif,
-        owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Ejiri_in_Suruga_Province,
-     treeForeground  Ejiri_in_Suruga_Province
-    
-    
-Individual: Enoshima_in_Sagami_Province
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    
-Individual: Fuji_View_Field_in_Owari_Province
-
-    Types: 
-        Agriculture_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     depictsConstruction  Fuji_View_Field_in_Owari_Province
-    
-    
-Individual: Hodogaya_on_the_Tokaido
-
-    Types: 
-        Animals_Motif,
-        Horse_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    
-Individual: Inume_Pass_Koshu
-
-    Types: 
-        Animals_Motif,
-        Horse_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    
-Individual: Kajikazawa_in_Kai_Province
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Kajikazawa_in_Kai_Province
-    
-    
-Individual: Mishima_Pass_in_Kai_Province
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        owl:Thing
-    
-    Facts:  
-     treeForeground  Mishima_Pass_in_Kai_Province
-    
-    
-Individual: Mount_Fuji_from_the_mountains_of_Totomi
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi,
-     discolouredMountFuji  Mount_Fuji_from_the_mountains_of_Totomi
-    
-    
-Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     colouredMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi,
-     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi
-    
-    
-Individual: Nihonbashi_bridge_in_Edo
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Urbanisation_Theme,
-        owl:Thing
-    
-    Facts:  
-     rooftopsForeground  Nihonbashi_bridge_in_Edo
-    
-    
-Individual: Rainstorm_Beneath_the_Summit
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     colouredMountFuji  Rainstorm_Beneath_the_Summit,
-     mountFujiForeground  Rainstorm_Beneath_the_Summit
-    
-    
-Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Urbanisation_Theme,
-        owl:Thing
-    
-    Facts:  
-     depictsTemple  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
-     rooftopsForeground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan
-    
-    
-Individual: Senju_Musashi_Province
-
-    Types: 
-        Agriculture_Theme,
-        Animals_Motif,
-        Horse_Motif,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Senju_Musashi_Province
-    
-    
-Individual: Shichiri_beach_in_Sagami_Province
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Shichiri_beach_in_Sagami_Province
-    
-    
-Individual: Shimomeguro
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     mistForeground  Shimomeguro
-    
-    
-Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     hasBoatForeground  Shore_of_Tago_Bay_Ejiri_at_Tokaido
-    
-    
-Individual: South_Wind_Clear_Sky
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        owl:Thing
-    
-    Facts:  
-     colouredMountFuji  South_Wind_Clear_Sky,
-     mountFujiForeground  South_Wind_Clear_Sky
-    
-    
-Individual: Sundai_Edo
-
-    Types: 
-        Agriculture_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Urbanisation_Theme,
-        owl:Thing
-    
-    Facts:  
-     depictsRooftops  Sundai_Edo,
-     treeForeground  Sundai_Edo
-    
-    
-Individual: Sunset_across_the_Ryogoku_bridge
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        owl:Thing
-    
-    Facts:  
-     hasBoatForeground  Sunset_across_the_Ryogoku_bridge
-    
-    
-Individual: Tama_River_in_Musashi_Province
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        owl:Thing
-    
-    Facts:  
-     treeForeground  Tama_River_in_Musashi_Province
-    
-    
-Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
-
-    Types: 
-        Animals_Motif,
-        Bodies_Of_Water_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Urbanisation_Theme,
-        Wildlife_AND_Bodies_of_Water,
-        Wildlife_Motif,
-        owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
-    
-    
-Individual: The_Great_Wave_off_Kanagawa
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     hasBoatForeground  The_Great_Wave_off_Kanagawa
-    
-    
-Individual: The_Kazusa_Province_sea_route
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     hasBoatForeground  The_Kazusa_Province_sea_route
-    
-    
-Individual: The_lake_of_Hakone_in_Sagami_Province
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        owl:Thing
-    
-    Facts:  
-     mistForeground  The_lake_of_Hakone_in_Sagami_Province
-    
-    
-Individual: Tsukuda_Island_in_Musashi_Province
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        owl:Thing
-    
-    Facts:  
-     hasBoatForeground  Tsukuda_Island_in_Musashi_Province
-    
-    
-Individual: Umezawa_in_Sagami_Province
-
-    Types: 
-        Animals_Motif,
-        Bodies_Of_Water_Motif,
-        NOT_Agriculture_AND_NOT_Maritime,
-        Wildlife_AND_Bodies_of_Water,
-        Wildlife_Motif,
-        Wildlife_NOT_People,
-        owl:Thing
-    
-    Facts:  
-     mistForeground  Umezawa_in_Sagami_Province
-    
-    
-Individual: Under_Mannen_Bridge_at_Fukagawa
-
-    Types: 
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Urbanisation_Theme,
-        owl:Thing
-    
-    Facts:  
-     depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
-     discolouredMountFuji  Under_Mannen_Bridge_at_Fukagawa,
-     hasBoatForeground  Under_Mannen_Bridge_at_Fukagawa
-    
-    
-Individual: Ushibori_in_Hitachi_Province
-
-    Types: 
-        Animals_Motif,
-        Bodies_Of_Water_Motif,
-        Maritime_Theme,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        Wildlife_Motif,
-        owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Ushibori_in_Hitachi_Province,
-     hasBoatForeground  Ushibori_in_Hitachi_Province
-    
-    
-Individual: Watermill_at_Onden
-
-    Types: 
-        Agriculture_Theme,
-        Bodies_Of_Water_Motif,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     rooftopsForeground  Watermill_at_Onden
-    
-    
-Individual: Yoshida_at_Tokaido
-
-    Types: 
-        NOT_Agriculture_AND_NOT_Maritime,
-        People_Motif,
-        Snow_Capped_Mount_Fuji,
-        owl:Thing
-    
-    Facts:  
-     indoorScene  Yoshida_at_Tokaido
-
-\end{lstlisting}
-
-\subsection{Figure 3: Alternative Open-world Formulation}
+\newpage
+\subsection{Figure 2: Detailed Open-world Formulation}
 \begin{lstlisting}
 Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
 Prefix: dc: <http://purl.org/dc/elements/1.1/>
@@ -2358,6 +1855,619 @@ Individual: Yoshida_at_Tokaido
 
 \end{lstlisting}
 
+\newpage
+\subsection{Figure 3: Minimum Viable Product Ontology (Open-world)}
+\begin{lstlisting}
+Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: boatsForegroundOrBackground
+
+    Domain: 
+        Maritime_Theme
+    
+    
+ObjectProperty: colouredMountFuji
+
+    DisjointWith: 
+        discolouredMountFuji
+    
+    
+ObjectProperty: depictsConstruction
+
+    
+ObjectProperty: depictsRooftops
+
+    
+ObjectProperty: depictsTemple
+
+    
+ObjectProperty: discolouredMountFuji
+
+    DisjointWith: 
+        colouredMountFuji
+    
+    
+ObjectProperty: hasBoatForeground
+
+    SubPropertyOf: 
+        boatsForegroundOrBackground
+    
+    
+ObjectProperty: hasTwoMountFujis
+
+    
+ObjectProperty: indoorScene
+
+    
+ObjectProperty: mistForeground
+
+    
+ObjectProperty: mountFujiForeground
+
+    
+ObjectProperty: owl:topObjectProperty
+
+    
+ObjectProperty: rooftopsForeground
+
+    SubPropertyOf: 
+        depictsRooftops
+    
+    
+ObjectProperty: treeForeground
+
+    
+Class: Agriculture_Theme
+
+    
+Class: Animals_Motif
+
+    
+Class: Bodies_Of_Water_Motif
+
+    
+Class: Horse_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+    
+Class: Maritime_Theme
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+    
+    
+Class: NOT_Agriculture_AND_NOT_Maritime
+
+    DisjointUnionOf: 
+        Agriculture_Theme, Maritime_Theme
+    
+    
+Class: People_Motif
+
+    DisjointWith: 
+        Wildlife_NOT_People
+    
+    
+Class: Snow_Capped_Mount_Fuji
+
+    
+Class: Urbanisation_Theme
+
+    
+Class: Wildlife_AND_Bodies_of_Water
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+         and Wildlife_Motif
+    
+    
+Class: Wildlife_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+    
+Class: Wildlife_NOT_People
+
+    SubClassOf: 
+        Wildlife_Motif
+    
+    DisjointWith: 
+        People_Motif
+    
+    
+Class: owl:Thing
+
+    Annotations: 
+        rdfs:comment "This ontology artefact represents the same information as the Closed-world ontology as efficiently as possible. MVP."@en
+    
+    
+Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
+    
+    
+Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    Facts:  
+     rooftopsForeground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+    
+    
+Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    Facts:  
+     depictsTemple  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+     rooftopsForeground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+    
+    
+Individual: Barrier_Town_on_the_Sumida_River
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     rooftopsForeground  Barrier_Town_on_the_Sumida_River
+    
+    
+Individual: Bay_of_Noboto
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Cushion_Pine_at_Aoyama
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        owl:Thing
+    
+    Facts:  
+     depictsRooftops  Cushion_Pine_at_Aoyama,
+     discolouredMountFuji  Cushion_Pine_at_Aoyama
+    
+    
+Individual: Ejiri_in_Suruga_Province
+
+    Types: 
+        Agriculture_Theme,
+        People_Motif,
+        owl:Thing
+    
+    Facts:  
+     discolouredMountFuji  Ejiri_in_Suruga_Province,
+     treeForeground  Ejiri_in_Suruga_Province
+    
+    
+Individual: Enoshima_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Fuji_View_Field_in_Owari_Province
+
+    Types: 
+        Agriculture_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     depictsConstruction  Fuji_View_Field_in_Owari_Province
+    
+    
+Individual: Hodogaya_on_the_Tokaido
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Inume_Pass_Koshu
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Kajikazawa_in_Kai_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        owl:Thing
+    
+    Facts:  
+     discolouredMountFuji  Kajikazawa_in_Kai_Province
+    
+    
+Individual: Mishima_Pass_in_Kai_Province
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        owl:Thing
+    
+    Facts:  
+     treeForeground  Mishima_Pass_in_Kai_Province
+    
+    
+Individual: Mount_Fuji_from_the_mountains_of_Totomi
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi,
+     discolouredMountFuji  Mount_Fuji_from_the_mountains_of_Totomi
+    
+    
+Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     colouredMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi,
+     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi
+    
+    
+Individual: Nihonbashi_bridge_in_Edo
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    Facts:  
+     rooftopsForeground  Nihonbashi_bridge_in_Edo
+    
+    
+Individual: Rainstorm_Beneath_the_Summit
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     colouredMountFuji  Rainstorm_Beneath_the_Summit,
+     mountFujiForeground  Rainstorm_Beneath_the_Summit
+    
+    
+Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    Facts:  
+     depictsTemple  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     rooftopsForeground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+    
+    
+Individual: Senju_Musashi_Province
+
+    Types: 
+        Agriculture_Theme,
+        Animals_Motif,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     discolouredMountFuji  Senju_Musashi_Province
+    
+    
+Individual: Shichiri_beach_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     discolouredMountFuji  Shichiri_beach_in_Sagami_Province
+    
+    
+Individual: Shimomeguro
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     mistForeground  Shimomeguro
+    
+    
+Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     hasBoatForeground  Shore_of_Tago_Bay_Ejiri_at_Tokaido
+    
+    
+Individual: South_Wind_Clear_Sky
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        owl:Thing
+    
+    Facts:  
+     colouredMountFuji  South_Wind_Clear_Sky,
+     mountFujiForeground  South_Wind_Clear_Sky
+    
+    
+Individual: Sundai_Edo
+
+    Types: 
+        Agriculture_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    Facts:  
+     depictsRooftops  Sundai_Edo,
+     treeForeground  Sundai_Edo
+    
+    
+Individual: Sunset_across_the_Ryogoku_bridge
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    Facts:  
+     hasBoatForeground  Sunset_across_the_Ryogoku_bridge
+    
+    
+Individual: Tama_River_in_Musashi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    Facts:  
+     treeForeground  Tama_River_in_Musashi_Province
+    
+    
+Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif,
+        owl:Thing
+    
+    Facts:  
+     discolouredMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+    
+    
+Individual: The_Great_Wave_off_Kanagawa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     hasBoatForeground  The_Great_Wave_off_Kanagawa
+    
+    
+Individual: The_Kazusa_Province_sea_route
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     hasBoatForeground  The_Kazusa_Province_sea_route
+    
+    
+Individual: The_lake_of_Hakone_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        owl:Thing
+    
+    Facts:  
+     mistForeground  The_lake_of_Hakone_in_Sagami_Province
+    
+    
+Individual: Tsukuda_Island_in_Musashi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    Facts:  
+     hasBoatForeground  Tsukuda_Island_in_Musashi_Province
+    
+    
+Individual: Umezawa_in_Sagami_Province
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        NOT_Agriculture_AND_NOT_Maritime,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif,
+        Wildlife_NOT_People,
+        owl:Thing
+    
+    Facts:  
+     mistForeground  Umezawa_in_Sagami_Province
+    
+    
+Individual: Under_Mannen_Bridge_at_Fukagawa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    Facts:  
+     depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
+     discolouredMountFuji  Under_Mannen_Bridge_at_Fukagawa,
+     hasBoatForeground  Under_Mannen_Bridge_at_Fukagawa
+    
+    
+Individual: Ushibori_in_Hitachi_Province
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Wildlife_Motif,
+        owl:Thing
+    
+    Facts:  
+     discolouredMountFuji  Ushibori_in_Hitachi_Province,
+     hasBoatForeground  Ushibori_in_Hitachi_Province
+    
+    
+Individual: Watermill_at_Onden
+
+    Types: 
+        Agriculture_Theme,
+        Bodies_Of_Water_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     rooftopsForeground  Watermill_at_Onden
+    
+    
+Individual: Yoshida_at_Tokaido
+
+    Types: 
+        NOT_Agriculture_AND_NOT_Maritime,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    Facts:  
+     indoorScene  Yoshida_at_Tokaido
+
+\end{lstlisting}
+
+\newpage
 \subsection{Figure 4: Small script to search ontologies with the command line}
 \begin{lstlisting}
 #!/usr/bin/perl
@@ -2429,5 +2539,15 @@ sub print_output{
 	}
 } 
 \end{lstlisting}
+
+\newpage
+\subsection{Initial Research Proposal}
+\includegraphics[scale=0.55]{proposal-0}
+\newpage
+\includegraphics[scale=0.55]{proposal-1}
+\newpage
+\includegraphics[scale=0.55]{proposal-2}
+\newpage
+\includegraphics[scale=0.55]{proposal-3}
 
 \end{document}
