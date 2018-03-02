@@ -9,6 +9,7 @@
 \usepackage[paper=a4paper,layout= letterpaper]{geometry} 
 \usepackage{courier}
 \usepackage{graphicx}
+\usepackage{amsmath}
 \lstset{basicstyle=\ttfamily,breaklines=true}
 \title{\textbf{Models of Concepts: A Case Study-based evaluation of Web Ontology Language (OWL2) Functionality and Methodology}}
 \author{Examination Number: 40298315}
@@ -29,19 +30,46 @@
 
 \section{The OWL2 Specification}
 \subsection{Description Logics}
-% History and background
+Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
+DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in Artifical Intelligence research and other industries.\par
+Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{P`} is a functionally similar yet significantly distinct concept to \textit{Q`} is not.
+Brachman \& Levanesque (1984) significantly found that first order logic (FOL) not suitable for describing these sorts of complex relationships.
+They identify a fundamental tension between a language's expressive power and it's tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a consistent syntactic subset of first order logic.}\par
+Brachman \& Levenesque use the thought experiment of \(\alpha\) an inference implicit in a KB that needs to be deduced computationally:  
+\begin{quote}
+  In other words the, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. (Brachman \& Levaneqsue, 1984, 79)
+\end{quote}
+Because it is trivial that the KB will entail \(\alpha\) if it subsumes \(\alpha\) there emerges a problem of generality wherein the reasoner is unable to narrow the scope of their enquiry.
+Proving a theorem in FOL is a notoriously fickle process.
+It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computational power. This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
+DL were thus required to fit into a niche of expressivity between propositional logic and FOL.
+Brachman \& Levanesque gesture towards Database Management Systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
+\begin{quote}
+  The expressive power of FOL determines not so much what can be said, but what can be left unsaid... In other words, the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. (Brachman \& Levanesque, 1984, 82)
+\end{quote}
+Modern DL languages have pursued this notion.\footnote{Bachman \& Levanesque discuss how this approach is ``relaxing the standards of correctness'' (81). Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
+
 \begin{quote}
   Description logic languages are then viewed as the core of knowledge representation systems, considering both the structure of a DL knowledge base and its associated reasoning services (Baader, 2003, pp.5).
 \end{quote}
+% knowledge buses, KR systems are explicit structures that channel knowledge (B\&L79)
+%(OWN THOUGHT) need to be able to recognise the _shape_ of a proposition
 %Brachman 1979 transitive identity attributions. IS-A relationships.
 Quillian's semantic networks (1967) and Minsky's frame systems (1981) both pioneered network structures that represented sets of individuals and their relationships. Post-1985 description logics began under the name ``terminological systems'' before being known as ``concept languages'' (Baader, 2003, pp.6-7).
 \begin{quote}
   The first basic step for construction is provided by the disjointed alphabets of symbols that are used to denote atomic concepts, designated by unary predicate symbols; the latter are used to express relationships between concepts (Baader, 2003, pp.11).
 \end{quote}
+
+\begin{quote}
+  Two possible solutions to intractability problem: first is to push the computational barrier as far back as possible, the second is to relax our standards of correctnes (B\&L81)
+\end{quote}
+% second solution, comparison with error handling OWN IDEA
+
 % disjunction, conjunction, quantifiers, subsumption
 % A-Box and T-Box assertions (combination `hybrid') (roles RBox)
+% predicates( unary (types) || binary (attributes) ) (B&L 85)
 % Donini 1994 individuals complicate reasoning (ABox)
-% 1984 Brachman and Levenesque trade-off between expressiveness and reasoning
+% (86 BL) subsumption and disjointness utilised without having to enlarge KB - frame description form
 % pp23 Baader three approaches to ontology building:
 % limited and complete, expressive and incomplete, expressive and complete
 % 1993 Patel-Schneider and Swartout propose LISP-like syntax
@@ -61,6 +89,8 @@ Quillian's semantic networks (1967) and Minsky's frame systems (1981) both pione
 \section{Capturing the 36 Views}
 \subsection{Maximal Detail}
 % reasoner output
+% (83) ``In a very real sense, the KB is an analogue of the domain of interest, not so different from other analogues such as maps or physical models.''
+%<NOTE TO SELF: CLOSED-WORLD ASSUMPTION OUGHT TO MAKE REASONING MORE TRACTABLE>
 \subsection{Allowing the Open-world Assumption}
 % reasoner output
 \subsection{Minimal Viable Product}
@@ -85,8 +115,10 @@ Quillian's semantic networks (1967) and Minsky's frame systems (1981) both pione
 
 
 \section{Improving the OWL2 standard}
+\subsection{Basic Perl Parser}
 % WHY
 % ``Problems of OWL syntax'' Manchester University Presses
+% ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
 % Legibility issues - mention my perl script
 % Issues utilising OWL, hierarchy:
 % OWL standard implementors, OWL software developers, ontology engineers
@@ -96,6 +128,10 @@ Quillian's semantic networks (1967) and Minsky's frame systems (1981) both pione
 % not precluded from working on closed-world ontology aretfacts
 % not all closed-world ontologies have to be strictly closed
 % could be handled by a protege plugin
+% who is the language for? logicians, programmers or ontology engineers?
+\begin{quote}
+  Moreover, we need to know more about what people find easy or hard to handle. There is no doubt that people can reason when necessary with radically incomplete knowledge (such as that expressible in FOL) but apparently only by going into a special problem-solving or logic puzzle mode. In normal commonsense situations, when reading a geography book, for instance, the ability to handle disjunctions (say) seems to be quite limited. (B\&L 89)
+\end{quote}
 
 \section{Conclusion}
 % placeholder title
