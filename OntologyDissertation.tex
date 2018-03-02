@@ -41,41 +41,29 @@ Brachman \& Levenesque use the thought experiment of \(\alpha\) an inference imp
 \end{quote}
 Because it is trivial that the KB will entail \(\alpha\) if it subsumes \(\alpha\) there emerges a problem of generality wherein the reasoner is unable to narrow the scope of their enquiry.
 Proving a theorem in FOL is a notoriously fickle process.
-It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computational power. This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
+It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computation. This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
 DL were thus required to fit into a niche of expressivity between propositional logic and FOL.
 Brachman \& Levanesque gesture towards Database Management Systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
 \begin{quote}
   The expressive power of FOL determines not so much what can be said, but what can be left unsaid... In other words, the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. (Brachman \& Levanesque, 1984, 82)
 \end{quote}
-Modern DL languages have pursued this notion.\footnote{Bachman \& Levanesque discuss how this approach is ``relaxing the standards of correctness'' (81). Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
-
+Modern DL languages have pursued this direction.\footnote{Bachman \& Levanesque discuss how this approach is ``relaxing the standards of correctness'' (81). Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
+Languages conform to Knowledge Representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
+They are also known as ``concept languages'' (Baader, 2003, 6).
+They operate over discrete domains using a hybrid of two forms of predicate - terminologies and assertions.\par
+Terminology and assertion predicates are also known as TBox and ABox predicates:
 \begin{quote}
-  Description logic languages are then viewed as the core of knowledge representation systems, considering both the structure of a DL knowledge base and its associated reasoning services (Baader, 2003, pp.5).
+  The model of a domain in DL is embedded in a knowledge base. Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. (Baader, 2003, pp.27)
 \end{quote}
-% knowledge buses, KR systems are explicit structures that channel knowledge (B\&L79)
-%(OWN THOUGHT) need to be able to recognise the _shape_ of a proposition
-%Brachman 1979 transitive identity attributions. IS-A relationships.
-Quillian's semantic networks (1967) and Minsky's frame systems (1981) both pioneered network structures that represented sets of individuals and their relationships. Post-1985 description logics began under the name ``terminological systems'' before being known as ``concept languages'' (Baader, 2003, pp.6-7).
-\begin{quote}
-  The first basic step for construction is provided by the disjointed alphabets of symbols that are used to denote atomic concepts, designated by unary predicate symbols; the latter are used to express relationships between concepts (Baader, 2003, pp.11).
-\end{quote}
-
-\begin{quote}
-  Two possible solutions to intractability problem: first is to push the computational barrier as far back as possible, the second is to relax our standards of correctnes (B\&L81)
-\end{quote}
-% second solution, comparison with error handling OWN IDEA
-
+% explain this quote
+% pp23 Baader three approaches to ontology building:
+% limited and complete, expressive and incomplete, expressive and complete
+% denote atomic concepts, designated by unary predicate symbols (Baader, 2003, pp.11).
 % disjunction, conjunction, quantifiers, subsumption
 % A-Box and T-Box assertions (combination `hybrid') (roles RBox)
 % predicates( unary (types) || binary (attributes) ) (B&L 85)
 % Donini 1994 individuals complicate reasoning (ABox)
 % (86 BL) subsumption and disjointness utilised without having to enlarge KB - frame description form
-% pp23 Baader three approaches to ontology building:
-% limited and complete, expressive and incomplete, expressive and complete
-% 1993 Patel-Schneider and Swartout propose LISP-like syntax
-\begin{quote}
-  The model of a domain in DL is embedded in a knowledge base. Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction (Baader, 2003, pp.27).
-\end{quote}
 \subsection{OWL Languages}
 % discuss abstract owl syntax
 % compare different owl functional syntaxes (Manchester and XML)
