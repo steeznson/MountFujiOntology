@@ -11,11 +11,11 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \lstset{basicstyle=\ttfamily,breaklines=true}
-\title{\textbf{Models of Concepts: A Case Study-based evaluation of Web Ontology Language (OWL2) Functionality and Methodology}}
+\title{\textbf{Designing Decriptions: A Case Study-based evaluation of Web Ontology Language (OWL2) Functionality and Methodology}}
 \author{Examination Number: 40298315}
 \affil{School of Computing}
 \affil{Edinburgh Napier}
-\date{2018}
+\date{23.04.18}
 \begin{document}
 \maketitle
 
@@ -31,50 +31,86 @@
 \section{The OWL2 Specification}
 \subsection{Description Logics}
 Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
-DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in Artifical Intelligence research and other industries.\par
+DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artifical intelligence research and other industries.\par
 Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{P`} is a functionally similar yet significantly distinct concept to \textit{Q`} is not.
-Brachman \& Levanesque (1984) significantly found that first order logic (FOL) not suitable for describing these sorts of complex relationships.
+Levesque \& Brachman (1987) significantly found that first-order logic (FOL) not suitable for describing these sorts of complex relationships.
 They identify a fundamental tension between a language's expressive power and it's tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a consistent syntactic subset of first order logic.}\par
 Brachman \& Levenesque use the thought experiment of \(\alpha\) an inference implicit in a KB that needs to be deduced computationally:  
 \begin{quote}
-  In other words the, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. (Brachman \& Levaneqsue, 1984, 79)
+  In other words, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. (Brachman \& Levaneqsue, 1987, 79)
 \end{quote}
 Because it is trivial that the KB will entail \(\alpha\) if it subsumes \(\alpha\) there emerges a problem of generality wherein the reasoner is unable to narrow the scope of their enquiry.
 Proving a theorem in FOL is a notoriously fickle process.
 It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computation. This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
-DL were thus required to fit into a niche of expressivity between propositional logic and FOL.
-Brachman \& Levanesque gesture towards Database Management Systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
+DL were required to fit into a niche of expressivity between propositional logic and FOL.
+Levesque \& Brachman gesture towards database management systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
 \begin{quote}
-  The expressive power of FOL determines not so much what can be said, but what can be left unsaid... In other words, the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. (Brachman \& Levanesque, 1984, 82)
+  The expressive power of FOL determines not so much what can be said, but what can be left unsaid... In other words, the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. (Levesque \& Brachman, 1987, 82)
 \end{quote}
-Modern DL languages have pursued this direction.\footnote{Bachman \& Levanesque discuss how this approach is ``relaxing the standards of correctness'' (81). Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
-Languages conform to Knowledge Representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
+Modern DL languages have pursued this direction.\footnote{Levesque \& Brachman discuss how this approach is ``relaxing the standards of correctness'' (1987, 81). Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
+Languages conform to knowledge representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
 They are also known as ``concept languages'' (Baader, 2003, 6).
 They operate over discrete domains using a hybrid of two forms of predicate - terminologies and assertions.\par
-Terminology and assertion predicates are also known as TBox and ABox predicates:
+Terminology and assertion predicates are also known as TBox and ABox predicates respectively:
 \begin{quote}
-  The model of a domain in DL is embedded in a knowledge base. Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. (Baader, 2003, pp.27)
+  The model of a domain in DL is embedded in a knowledge base. Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. (Baader, 2003, 27)
 \end{quote}
-% explain this quote
-% pp23 Baader three approaches to ontology building:
-% limited and complete, expressive and incomplete, expressive and complete
-% denote atomic concepts, designated by unary predicate symbols (Baader, 2003, pp.11).
-% disjunction, conjunction, quantifiers, subsumption
-% A-Box and T-Box assertions (combination `hybrid') (roles RBox)
-% predicates( unary (types) || binary (attributes) ) (B&L 85)
-% Donini 1994 individuals complicate reasoning (ABox)
-% (86 BL) subsumption and disjointness utilised without having to enlarge KB - frame description form
+TBoxes are unary values that classify the individuals in one's ontology.
+ABoxes are binary attributes that are applied to individuals within the ontology.
+These assumptions can be stipulated to be subsumed by one another, intersected with one another, disjoint from one another, or even composed of a disjoint union of two others.\par
+It should be noted that Baader has introduced the notion of the discrete domain being a \textit{world}.
+Worlds are blank canvases to be explicitly populated by the ontology engineer.
+Pressingly, there is a distinction between an open-world assumption and a closed-world assumption that is relevant for the case study in this article:
+\begin{quote}
+\textbf{Open-world Assumption}: an assumption that a given statement may possibly be true regardless of its nominal truth value.
+\end{quote}
+The closed-world assumption is the opposite assumption, that any given statement that is known to be true is true. OWL languages utilise the open-world assumption.\par
 \subsection{OWL Languages}
-% discuss abstract owl syntax
-% compare different owl functional syntaxes (Manchester and XML)
-
-\section{Case Study: 36 Views of Mount Fuji}
-% chosen because restricted in size and potentially problematic bc closed-world
+Baader (2003, 23) discusses three approaches to constructing a KR system:
+\begin{enumerate}
+\item{Limited and complete: systems designed so that inferences can be efficiently computed at the expense of expressiveness.}
+\item{Expressive and incomplete: systems designed for expressiveness and efficiency at the expense of fully functioning reasoning capacities.}
+\item{Expressive and complete: systems designed for expressiveness and speed at the expense of efficiency.}
+\end{enumerate}
+OWL is a family of DL languages that typically follows the latter approach, offering the maximum expressiveness while being computationally complete.\footnote{Alternative reasoning `profiles' are offered in the OWL2 standard.} The OWL languages all adhere to a standard from the World Wide Web Consortium (W3C).\par
+In the abstract OWL syntax is comprised of three components: individuals, properties and classes.
+Individuals represent objects within our domain of interest.
+OWL does not adhere to the Unique Name Assumption (UNA) that prevents names from co-referring to individuals, as a consequence an individual could for example be referred to with multiple names.
+The latter two are OWL's implementation of the ABox and TBox predicates from §2.1.\par
+Properties (ABox) can have characteristics that place parameters on their application.
+They can be used to describe the relationships between individuals or a single individuals attributes.
+Finally classes (TBox) are used to create taxonomies (hierarchies of sets) that individuals are instances of.
+Every class must be subsumed by a primitive class called ``owl:Thing'' but aside from this restriction the engineer is given a blank canvas to populate with their classes.
+Properties and classes can be subsumed by one another, composed of one another or defined in contrast to one another.\par
+Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
-  The non-finiteness of the domain and the open-world assumption are distinguishing features of Description Logics with respect to the modelling languages developed in the study of databases (Baader, 2003, pp.11).
+  `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class}. `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} whose name is `Allan' satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa. Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal}, which in turn is subsumed by \textbf{Owl:Thing}.
+\end{quote}
+Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/, accessed 05.03.18, \textit{MIT License}}
+Protégé was utilised in the production of the ontologies for the case study in this article with the FaCT reasoner.\par
+A FaCT reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
+It will also deduce the applications of the `isOwnerOf'' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
+It would flag up an incoherent ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
+The two most common OWL languages are the XML and Manchester OWLs.
+Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
+The ontology artefacts in this article are written in Manchester OWL.\par
+
+\section{Case Study: Thirty-Six Views of Mount Fuji}
+Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
+As the name might suggest there are thirty-six prints and each one depicts Mount Fuji in either in the foreground or background.
+The scenes accomodate a variety of seasons, motifs and themes.
+The series achieved regional and international acclaim: both due artist's to the mastery of the medium and the prominence of Mount Fuji in Japanese culture.
+One print in the series, \textit{The Great Wave off Kanagawa}, has surpassed the others to become one of the world's most widely recognisable images.\par
+There are several features of this collection that make it an interesting case study.
+Firstly it is restricted to an exact cardinality and the set of works contains specific individuals.
+This poses a problem for OWL as an accurate modelling this world requires a closed-world assumption.\par
+% chosen because restricted in size and potentially problematic bc closed-world
+% Donini 1994 individuals complicate reasoning (ABox)
+\begin{quote}
+  The non-finiteness of the domain and the open-world assumption are distinguishing features of Description Logics with respect to the modelling languages developed in the study of databases (Baader, 2003, 11).
 \end{quote}
 
-\section{Capturing the 36 Views}
+\section{Capturing the Thirty-Six Views}
 \subsection{Maximal Detail}
 % reasoner output
 % (83) ``In a very real sense, the KB is an analogue of the domain of interest, not so different from other analogues such as maps or physical models.''
@@ -103,7 +139,7 @@ Terminology and assertion predicates are also known as TBox and ABox predicates:
 
 
 \section{Improving the OWL2 standard}
-\subsection{Basic Perl Parser}
+\subsection{Simple Perl Parser}
 % WHY
 % ``Problems of OWL syntax'' Manchester University Presses
 % ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
@@ -133,9 +169,24 @@ Insert measured conclusion here.
   1st Edition, Cambridge University Press New York, 2003.
 
 \bibitem{}
-  Horris, M.: 
+  Brachman, R., Levesque, H.:
+  \textit{The Tractability of Subsumption in Frame-Based Description Languages},
+  AAAI-84 Proceedings, 1984.
+
+\bibitem{}
+  Horridge, M.: 
   \textit{A Practical Guide to Building OWL Ontologies},
   1st Edition, University of Manchester, 2011.
+
+\bibitem{}
+  Levesque, H., Brachman, R.:
+  \textit{Expressiveness and tractibility in knowledge represesentation and reasoning},
+  Journal of Computing Intelligence, pp.78-92, 1987.
+
+\bibitem{}
+  Motik, B., Horrocks, I.:
+  \textit{Problems with OWL Syntax},
+  University of Manchester, 2006.
 
 \bibitem{} 
   Krötzsch, M., Simancik, F., Horrocks, I.: 
@@ -2492,7 +2543,7 @@ Individual: Yoshida_at_Tokaido
 \end{lstlisting}
 
 \newpage
-\subsection{Figure 4: Small script to search ontologies with the command line}
+\subsection{Figure 4: Simple Perl parser for Manchester OWL2}
 \begin{lstlisting}
 #!/usr/bin/perl
 
@@ -2500,7 +2551,7 @@ Individual: Yoshida_at_Tokaido
 use strict;
 use warnings;
 
-# Turn off unusual character print warning
+# Turn off Japanese character print warning
 no warnings 'utf8';
 
 # Global Vars
