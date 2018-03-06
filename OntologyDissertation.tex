@@ -31,7 +31,7 @@
 \section{The OWL2 Specification}
 \subsection{Description Logics}
 Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
-DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artifical intelligence research and other industries.\par
+DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artificial intelligence research and other industries.\par
 Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{P`} is a functionally similar yet significantly distinct concept to \textit{Q`} is not.
 Levesque \& Brachman (1987) significantly found that first-order logic (FOL) not suitable for describing these sorts of complex relationships.
 They identify a fundamental tension between a language's expressive power and it's tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a consistent syntactic subset of first order logic.}\par
@@ -98,17 +98,20 @@ The ontology artefacts in this article are written in Manchester OWL.\par
 \section{Case Study: Thirty-Six Views of Mount Fuji}
 Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
 As the name might suggest there are thirty-six prints and each one depicts Mount Fuji in either in the foreground or background.
-The scenes accomodate a variety of seasons, motifs and themes.
+The scenes accommodate a variety of seasons, motifs and themes.
 The series achieved regional and international acclaim: both due artist's to the mastery of the medium and the prominence of Mount Fuji in Japanese culture.
 One print in the series, \textit{The Great Wave off Kanagawa}, has surpassed the others to become one of the world's most widely recognisable images.\par
 There are several features of this collection that make it an interesting case study.
-Firstly it is restricted to an exact cardinality and the set of works contains specific individuals.
-This poses a problem for OWL as an accurate modelling this world requires a closed-world assumption.\par
-% chosen because restricted in size and potentially problematic bc closed-world
-% Donini 1994 individuals complicate reasoning (ABox)
-\begin{quote}
-  The non-finiteness of the domain and the open-world assumption are distinguishing features of Description Logics with respect to the modelling languages developed in the study of databases (Baader, 2003, 11).
-\end{quote}
+It is restricted to an exact cardinality and the set of works contains specific individuals.
+This poses a problem for OWL as an accurate modelling this world requires a closed-world assumption.
+To briefly reiterate, this is the assumption that established truth values in the domain are immutable.
+OWL utilises the open-world assumption, indeed Baader describes it as a ``distinguishing feature'' of DL modelling languages (2003, 11). This shall require additional constraints upon the modelled ontology.\par
+The \textit{Views} also contain many distinct individuals.
+Donini (\textit{in} Baader, 2003, 135) identifies individuals are a source of difficulty for reasoners.
+In particular ABox predicates can slow down the reasoner's deductions considerably.
+This case-study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
+Usually the engineer sets the parameters of an ontology at both the TBox and ABox level and the ontology is then populated as it is used.
+This provides scope for several different ontology formulations that would otherwise not be possible.\par
 
 \section{Capturing the Thirty-Six Views}
 \subsection{Maximal Detail}
@@ -180,7 +183,7 @@ Insert measured conclusion here.
 
 \bibitem{}
   Levesque, H., Brachman, R.:
-  \textit{Expressiveness and tractibility in knowledge represesentation and reasoning},
+  \textit{Expressiveness and tractibility in knowledge representation and reasoning},
   Journal of Computing Intelligence, pp.78-92, 1987.
 
 \bibitem{}
