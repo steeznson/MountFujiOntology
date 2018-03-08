@@ -1,4 +1,4 @@
-\documentclass[titlepage, 12pt]{article}
+\documentclass[titlepage,a4paper, 12pt]{article}
 \usepackage{csquotes}
 \usepackage{authblk}
 \usepackage[utf8]{inputenc}
@@ -6,7 +6,6 @@
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage{listings}
-\usepackage[paper=a4paper,layout= letterpaper]{geometry} 
 \usepackage{courier}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -95,7 +94,8 @@ The two most common OWL languages are the XML and Manchester OWLs.
 Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
 The ontology artefacts in this article are written in Manchester OWL.\par
 
-\section{Case Study: Thirty-Six Views of Mount Fuji}
+\section{Capturing the Thirty-Six Views}
+\subsection{Case Study: Thirty-Six Views of Mount Fuji}
 Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
 As the name might suggest there are thirty-six prints and each one depicts Mount Fuji.
 The scenes accommodate a variety of seasons, motifs and themes.
@@ -112,9 +112,8 @@ In particular ABox predicates can slow down the reasoner's deductions considerab
 Lastly, the \textit{Views} are comprised of specific individuals. This case-study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
 Usually the engineer sets the parameters of an ontology at both the TBox and ABox level and the ontology is then populated as it is used.
 This feature provides scope for several different ontology formulations that would otherwise not be possible.\par
-
-\section{Capturing the Thirty-Six Views}
 \subsection{Maximal Detail}
+The first ontology artefect is captures as much of the world as possible (see Appendix, §6.1).
 % reasoner output
 % (83) ``In a very real sense, the KB is an analogue of the domain of interest, not so different from other analogues such as maps or physical models.''
 %<NOTE TO SELF: CLOSED-WORLD ASSUMPTION OUGHT TO MAKE REASONING MORE TRACTABLE>
@@ -142,20 +141,22 @@ This feature provides scope for several different ontology formulations that wou
 
 
 \section{Improving the OWL2 standard}
-\subsection{Simple Perl Parser}
-% WHY
-% ``Problems of OWL syntax'' Manchester University Presses
-% ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
-% Legibility issues - mention my perl script
-% Issues utilising OWL, hierarchy:
-% OWL standard implementors, OWL software developers, ontology engineers
-% have to ensure accessible to all three
+\subsection{Issues raised by the Case-study}
 % WHY NOT
 % implementation should be as small as possible
 % not precluded from working on closed-world ontology aretfacts
 % not all closed-world ontologies have to be strictly closed
 % could be handled by a protege plugin
+\subsection{Simple Perl Parser}
+% Prelude to legibility and Perspectives
+\subsection{The Tripartite Structure of Ontology Engineering}
 % who is the language for? logicians, programmers or ontology engineers?
+% OWL standard implementors, OWL software developers, ontology engineers
+% have to ensure accessible to all three
+\subsection{OWL Legibility}
+% ``Problems of OWL syntax'' Manchester University Presses
+% ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
+
 \begin{quote}
   Moreover, we need to know more about what people find easy or hard to handle. There is no doubt that people can reason when necessary with radically incomplete knowledge (such as that expressible in FOL) but apparently only by going into a special problem-solving or logic puzzle mode. In normal commonsense situations, when reading a geography book, for instance, the ability to handle disjunctions (say) seems to be quite limited. (B\&L 89)
 \end{quote}
@@ -2620,12 +2621,16 @@ sub print_output{
 
 \newpage
 \subsection{Initial Research Proposal}
+\noindent
 \includegraphics[scale=0.55]{proposal-0}
 \newpage
+\noindent
 \includegraphics[scale=0.55]{proposal-1}
 \newpage
+\noindent
 \includegraphics[scale=0.55]{proposal-2}
 \newpage
+\noindent
 \includegraphics[scale=0.55]{proposal-3}
 
 \end{document}
