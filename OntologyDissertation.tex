@@ -75,12 +75,14 @@ OWL is a family of DL languages that typically follows the latter approach, offe
 In the abstract OWL syntax is comprised of three components: individuals, properties and classes.
 Individuals represent objects within our domain of interest.
 OWL does not adhere to the Unique Name Assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John Le Carre' or `David Cornwell'.
-The latter two are OWL's implementation of the ABox and TBox predicates from §2.1.\par
+The latter two components are OWL's implementation of the ABox and TBox predicates from §2.1.\par
 Properties (ABox) can have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
+Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties.
+Although the OWL2 standard also allows the creation of Data Properties as well as Object Properties these cannot be covered in this article.\footnote{Data Properties are all subsumed by a primitive class called `owl:topDataProperty'.}
 Finally, classes (TBox) are used to create taxonomies (hierarchies of sets) that individuals are instances of.
-Every class must be subsumed by a primitive class called `owl:Thing', but aside from this restriction the engineer is given freedom to arrange their classes.
-Properties and classes can be subsumed by one another, composed of one another or defined in contrast to one another.\par
+Just as with properties, every class must be subsumed by a primitive class called `owl:Thing'. 
+Properties and classes can be subsumed by others of their kind, composed of others of their kind or defined in contrast to others of their kind.\par
 Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
   `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class}. `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} whose name is `Allan' satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa. Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal}, which in turn is subsumed by \textbf{owl:Thing}.
@@ -111,7 +113,7 @@ Donini (\textit{in} Baader, 2003, 135) identifies individuals are a source of di
 In particular ABox predicates can slow down the reasoner's deductions considerably.\par
 Lastly, the \textit{Views} are comprised of specific individuals. This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
 Usually the engineer sets the parameters of an ontology at both the TBox and ABox level and the ontology is then populated as it is used.
-This feature provides scope for several different ontology formulations that would otherwise not be possible.\par
+This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
 \subsection{Maximal Detail}
 The first ontology artefect captures as much of the world as possible (see Appendix, §6.1).
 Ontology engineers would rarely use the maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
@@ -120,15 +122,60 @@ The maximal detail ontology needed to force a closed-world assumption.
 A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
 This signals that all that can exist in the ontology are views of Mount Fuji.
 The next step was to create two reflexive properties hasExactCardinality and containsSpecificIndividuals.
-The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the class View\_of\_Mount\_Fuji can only fully represent the \textit{Views of Mount Fuji} by having an exact cardinality of 36.
-Similarly, 
-The next most fundamental classes are Agriculture\_Theme, Animals\_Motif, Martime\_Theme, People\_Motif, Snow\_Capped\_Mount\_Fuji and Urbanisation\_Theme.
+The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the class owl:Thing can only fully represent the closed \textit{Views of Mount Fuji} by having an exact cardinality of 36.
+Similarly, containsSpecificIndividuals is a reflexive property for the class View\_of\_Mount\_Fuji.
+Every single individual in the ontology is explicitly listed as this property is applied as no other individual can exist in this ontology.
+This property acts as a whitelist for the reasoner for valid individuals in the ontology.\par
+The reason that owl:Thing and View\_of\_Mount\_Fuji are separate classes despite being equivalent is that there is a meaningful distinction in scope between the two.
+While it may be more parsimonious to merge the classes and apply both properties to owl:Thing it is better practice to restrict the application of axioms to one per class.
+This is known as the group axiom guideline.
+There is a meaningful difference in the functionality of these two classes and it ought to be argued that the order of the generality being established is important.
+First it is established that there are thirty-six owl:Things and then more specifically the whitelist of allowed things is introduced.
+This concludes the application of the closed-world assumption on this ontology.\par
+The next most fundamental classes are Agriculture\_Theme, Animals\_Motif, Bodies\_Of\_Water\_Motif, People\_Motif, Snow\_Capped\_Mount\_Fuji and Urbanisation\_Theme.
+These classes are relatively self explanatory and provide the foundation for the other TBox assertions in the ontology.
+Animals\_Motif has two subclasses, Horse\_Motif and Wildlife\_Motif. Likewise, Bodies\_Of\_Water\_Motif has the Maritime\_Theme subclass.\par
+There are also several classes that exist in relation to these more fundamental classes: NOT\_Agriculture\_AND\_NOT\_Maritime, NOT\_People, Wildlife\_AND\_Bodies\_of\_Water and Wildlife\_NOT\_People.
+Their names are descriptive but it is worth discussing exactly how these classes are formed.
+NOT\_Argiculture\_AND\_NOT\_Maritime is a class composed of the disjoint union of both the Agriculture\_Theme and Martime\_Theme classes - it contains only individuals that do not manifest the Argiculture \textit{or} Martime themes.
+NOT\_People is a class that is disjoint from the People\_Motif class - it contains only those individuals that do not feature people (a common motif in this series).
+Wildlife\_AND\_Bodies\_Of\_Water is the union of both the Wildlife and Bodies\_Of\_Water motifs, containing all members of both classes.
+The final class, Wildlife\_NOT\_People, contains all members of the Wildlife\_Motif class that do not feature people.\par
+Our ABox assertions are binary predicates that either apply or do not apply to every individual in the ontology.
+The most fundamental property is owl:topObjectProperty, which operates in a similar manner to owl:Thing to provide a basic profile for the property predicate.
+The next most fundamental properties are boatsForegroundOrBackground, containsSpecficIndividuals, depictsConstruction, depictsRooftops, depictsTemple, discolouredMountFuji, hasExactCardinality, hasTwoMountFujis, indoorScene, mistForeground, mountFujiBackground, mountFujiForeground, redMountFuji, treeForeground and yellowMountFuji.
+Two of these properties have already been discussed earlier in this section and the others are self explanatory.
+None of the properties have characteristics aside from the two reflexive properties already discussed as the predicates are not characterising relationships between individuals, rather they are just providing a means to differentiate individuals.
+However, it is worth mentioning that discolouredMountFuji, redMountFuji and yellowMountFuji are all disjoint from one another, as Mount Fuji cannot be depicted with more than one of these properties.
+Similarly mountFujiBackground and mountFujiForeground are disjoint from one another.
+As an aside, hasBoatsForegroundOrBackground exists in the domain of the Maritime\_Theme class as all individuals in the class contain boats.
+There also exist less fundamental properties, although there are not too many.
+depictsRooftops subsumes a property called rooftopsForeground and; hasBoatsForegroundOrBackground subsumes hasBoatsForeground.\par 
+%ObjectProperty: boatsForegroundOrBackground
+%ObjectProperty: containsSpecificIndividuals
+%ObjectProperty: depictsConstruction
+%ObjectProperty: depictsRooftops
+%ObjectProperty: depictsTemple
+%ObjectProperty: discolouredMountFuji
+%ObjectProperty: hasBoatForeground
+%ObjectProperty: hasExactCardinality
+%ObjectProperty: hasTwoMountFujis
+%ObjectProperty: indoorScene
+%ObjectProperty: mistForeground
+%ObjectProperty: mountFujiBackground
+%ObjectProperty: mountFujiForeground
+%ObjectProperty: owl:topObjectProperty
+%ObjectProperty: redMountFuji
+%ObjectProperty: rooftopsForeground
+%ObjectProperty: treeForeground
+%ObjectProperty: yellowMountFuji
+
 % reasoner output
 % (83) ``In a very real sense, the KB is an analogue of the domain of interest, not so different from other analogues such as maps or physical models.''
 %<NOTE TO SELF: CLOSED-WORLD ASSUMPTION OUGHT TO MAKE REASONING MORE TRACTABLE>
 \subsection{Allowing the Open-world Assumption}
 % reasoner output
-\subsection{Minimal Viable Product}
+\subsection{Minimum Viable Product}
 % reasoner output
 \subsection{Assessment}
 % ANTIPATTERNS
