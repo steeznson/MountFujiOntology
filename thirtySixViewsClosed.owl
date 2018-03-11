@@ -32,10 +32,10 @@ ObjectProperty: boatsForegroundOrBackground
 ObjectProperty: containsSpecificIndividuals
 
     Annotations: 
-        rdfs:comment "Symmetric because each indivdual is related by their membership of a set of specific members."@en
+        rdfs:comment "Reflexive as the set is related to the Thirty-six views by containing specific members."@en
     
     Characteristics: 
-        Symmetric
+        Reflexive
     
     
 ObjectProperty: depictsConstruction
