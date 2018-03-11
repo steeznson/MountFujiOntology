@@ -79,11 +79,11 @@ The latter two are OWL's implementation of the ABox and TBox predicates from §2
 Properties (ABox) can have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
 Finally, classes (TBox) are used to create taxonomies (hierarchies of sets) that individuals are instances of.
-Every class must be subsumed by a primitive class called `Owl:Thing', but aside from this restriction the engineer is given freedom to arrange their classes.
+Every class must be subsumed by a primitive class called `owl:Thing', but aside from this restriction the engineer is given freedom to arrange their classes.
 Properties and classes can be subsumed by one another, composed of one another or defined in contrast to one another.\par
 Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
-  `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class}. `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} whose name is `Allan' satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa. Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal}, which in turn is subsumed by \textbf{Owl:Thing}.
+  `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class}. `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} whose name is `Allan' satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa. Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal}, which in turn is subsumed by \textbf{owl:Thing}.
 \end{quote}
 Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/, accessed 05.03.18, \textit{MIT License}}
 Protégé was utilised in the production of the ontologies for the case study in this article with the FaCT reasoner.\par
@@ -109,11 +109,20 @@ OWL utilises the open-world assumption, indeed Baader describes it as a ``distin
 The \textit{Views} also contain many distinct individuals.
 Donini (\textit{in} Baader, 2003, 135) identifies individuals are a source of difficulty for reasoners.
 In particular ABox predicates can slow down the reasoner's deductions considerably.\par
-Lastly, the \textit{Views} are comprised of specific individuals. This case-study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
+Lastly, the \textit{Views} are comprised of specific individuals. This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
 Usually the engineer sets the parameters of an ontology at both the TBox and ABox level and the ontology is then populated as it is used.
 This feature provides scope for several different ontology formulations that would otherwise not be possible.\par
 \subsection{Maximal Detail}
-The first ontology artefect is captures as much of the world as possible (see Appendix, §6.1).
+The first ontology artefect captures as much of the world as possible (see Appendix, §6.1).
+Ontology engineers would rarely use the maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
+Ideally an ontology should describe its subject in the most economical way possible.\par
+The maximal detail ontology needed to force a closed-world assumption.
+A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
+This signals that all that can exist in the ontology are views of Mount Fuji.
+The next step was to create two reflexive properties hasExactCardinality and containsSpecificIndividuals.
+The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the class View\_of\_Mount\_Fuji can only fully represent the \textit{Views of Mount Fuji} by having an exact cardinality of 36.
+Similarly, 
+The next most fundamental classes are Agriculture\_Theme, Animals\_Motif, Martime\_Theme, People\_Motif, Snow\_Capped\_Mount\_Fuji and Urbanisation\_Theme.
 % reasoner output
 % (83) ``In a very real sense, the KB is an analogue of the domain of interest, not so different from other analogues such as maps or physical models.''
 %<NOTE TO SELF: CLOSED-WORLD ASSUMPTION OUGHT TO MAKE REASONING MORE TRACTABLE>
@@ -141,7 +150,7 @@ The first ontology artefect is captures as much of the world as possible (see Ap
 
 
 \section{Improving the OWL2 standard}
-\subsection{Issues raised by the Case-study}
+\subsection{Issues Raised by the Case Study}
 % WHY NOT
 % implementation should be as small as possible
 % not precluded from working on closed-world ontology aretfacts
@@ -253,10 +262,10 @@ ObjectProperty: boatsForegroundOrBackground
 ObjectProperty: containsSpecificIndividuals
 
     Annotations: 
-        rdfs:comment "Symmetric because each indivdual is related by their membership of a set of specific members."@en
+        rdfs:comment "Reflexive as the set is related to the Thirty-six views by containing specific members."@en
     
     Characteristics: 
-        Symmetric
+        Reflexive
     
     
 ObjectProperty: depictsConstruction
@@ -284,7 +293,7 @@ ObjectProperty: hasBoatForeground
 ObjectProperty: hasExactCardinality
 
     Annotations: 
-        rdfs:comment "Reflexive because each individual is related to itself by being a member of a set with an exact cardinality (36)."@en
+        rdfs:comment "Reflexive as the class is related to itself by being a set with an exact cardinality (36)."@en
     
     Characteristics: 
         Reflexive
@@ -419,7 +428,7 @@ Class: View_of_Mount_Fuji
     
     SubClassOf: 
         owl:Thing,
-        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo , Asakusa_Hongan-ji_temple_in_the_Eastern_capital , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tokaido , Inume_Pass_Koshu , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Totomi , Mount_Fuji_reflects_in_Lake_Kawaguchi , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tokaido , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryogoku_bridge , Tama_River_in_Musashi_Province , Tea_house_at_Koishikawa._The_morning_after_a_snowfall , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tokaido})
+        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo , Asakusa_Hongan-ji_temple_in_the_Eastern_capital , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tokaido , Inume_Pass_Koshu , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Totomi , Mount_Fuji_reflects_in_Lake_Kawaguchi , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tokaido , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryogoku_bridge , Tama_River_in_Musashi_Province , Tea_house_at_Koisikawa , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tokaido})
     
     
 Class: Wildlife_AND_Bodies_of_Water
@@ -815,7 +824,7 @@ Individual: Tama_River_in_Musashi_Province
      treeForeground  Tama_River_in_Musashi_Province
     
     
-Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+Individual: Tea_house_at_Koisikawa
 
     Types: 
         Animals_Motif,
@@ -829,10 +838,10 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
         Wildlife_Motif
     
     Facts:  
-     discolouredMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     mountFujiBackground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+     discolouredMountFuji  Tea_house_at_Koisikawa,
+     mountFujiBackground  Tea_house_at_Koisikawa,
+     rooftopsForeground  Tea_house_at_Koisikawa,
+     treeForeground  Tea_house_at_Koisikawa
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -1330,7 +1339,7 @@ Class: Tea_house_at_Koishikawa
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Tea_house_at_Koishikawa._The_morning_after_a_snowfall})
+        hasSpecificIndividual exactly 1 ({Tea_house_at_Koisikawa})
     
     
 Class: The_Great_Wave_off_Kanagawa
@@ -1777,24 +1786,24 @@ Individual: Tama_River_in_Musashi_Province
      treeForeground  Tama_River_in_Musashi_Province
     
     
-Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+Individual: Tea_house_at_Koisikawa
 
     Types: 
         Tea_house_at_Koishikawa,
         View_of_Mount_Fuji
     
     Facts:  
-     animalsMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     bodiesOfWaterMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     discolouredMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     mountFujiBackground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     peopleMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     snowCappedMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     urbanisationTheme  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     wildlifeAndBodiesOfWater  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     wildlifeMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+     animalsMotif  Tea_house_at_Koisikawa,
+     bodiesOfWaterMotif  Tea_house_at_Koisikawa,
+     discolouredMountFuji  Tea_house_at_Koisikawa,
+     mountFujiBackground  Tea_house_at_Koisikawa,
+     peopleMotif  Tea_house_at_Koisikawa,
+     rooftopsForeground  Tea_house_at_Koisikawa,
+     snowCappedMountFuji  Tea_house_at_Koisikawa,
+     treeForeground  Tea_house_at_Koisikawa,
+     urbanisationTheme  Tea_house_at_Koisikawa,
+     wildlifeAndBodiesOfWater  Tea_house_at_Koisikawa,
+     wildlifeMotif  Tea_house_at_Koisikawa
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -2406,7 +2415,7 @@ Individual: Tama_River_in_Musashi_Province
      treeForeground  Tama_River_in_Musashi_Province
     
     
-Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+Individual: Tea_house_at_Koisikawa
 
     Types: 
         Animals_Motif,
@@ -2420,9 +2429,9 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
         owl:Thing
     
     Facts:  
-     discolouredMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
-     treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+     discolouredMountFuji  Tea_house_at_Koisikawa,
+     rooftopsForeground  Tea_house_at_Koisikawa,
+     treeForeground  Tea_house_at_Koisikawa
     
     
 Individual: The_Great_Wave_off_Kanagawa
