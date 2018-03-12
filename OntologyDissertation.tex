@@ -1,4 +1,4 @@
-\documentclass[titlepage,a4paper, 12pt]{article}
+\documentclass[titlepage,a4paper,12pt,oneside]{book}
 \usepackage{csquotes}
 \usepackage{authblk}
 \usepackage[utf8]{inputenc}
@@ -9,6 +9,8 @@
 \usepackage{courier}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage[toc,page]{appendix}
+\usepackage[sort&compress,comma,authoryear]{natbib}
 \lstset{basicstyle=\ttfamily,breaklines=true}
 \title{\textbf{Designing Decriptions: A Case Study-based evaluation of Web Ontology Language (OWL2) Functionality and Methodology}}
 \author{Examination Number: 40298315}
@@ -18,25 +20,25 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-  Insert compact and informative summary here.
-\end{abstract}
+%\begin{abstract}
+%  Insert compact and informative summary here.
+%\end{abstract}
 
 \tableofcontents
 
-\newpage\section{Introduction}
+\chapter{Introduction}
 % explain project overview in greater detail
 
-\section{The OWL2 Specification}
-\subsection{Description Logics}
+\chapter{The OWL2 Specification}
+\section{Description Logics}
 Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
 DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artificial intelligence research and other industries.\par
-Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{P`} is a functionally similar yet significantly distinct concept to \textit{Q`} is not.
+Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{P $'$} is a functionally similar yet significantly distinct concept to \textit{Q $'$} is not.
 Levesque \& Brachman (1987) found that first-order logic (FOL) is not suitable for describing these sorts of complex relationships.
 They identify a fundamental tension between a language's expressive power and its tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a syntactically consistent subset of first order logic.}\par
 Brachman \& Levenesque use the thought experiment of \(\alpha\), an inference implicit in a KB that needs to be deduced computationally:  
 \begin{quote}
-  In other words, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. (Brachman \& Levaneqsue, 1987, 79)
+  In other words, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. \cite[79]{expressiveness1987}
 \end{quote}
 Because it is trivial that the KB will entail \(\alpha\) if it subsumes \(\alpha\) there emerges a problem of generality wherein the reasoner is unable to narrow the scope of their enquiry.
 Proving a theorem in FOL is a notoriously fickle process.
@@ -45,14 +47,14 @@ This form of DL may work as a heuristic but success is not guaranteed. Such a sy
 DL were required to fit into a niche of expressivity between propositional logic and FOL.
 Levesque \& Brachman gesture towards database management systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
 \begin{quote}
-  ...the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. (Levesque \& Brachman, 1987, 82)
+  ...the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. \cite[82]{expressiveness1987}
 \end{quote}
-Modern DL languages have pursued this direction.\footnote{Levesque \& Brachman discuss how this approach is ``relaxing the standards of correctness'' (1987, 81). Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
+Modern DL languages have pursued this direction.\footnote{There is an argument that this approach is ``relaxing the standards of correctness'' \cite[81]{expressiveness1987}. Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
 Languages conform to knowledge representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
 They operate over discrete domains using a hybrid of two forms of predicate - terminologies and assertions.\par
 Terminology and assertion predicates are also known as TBox and ABox predicates respectively:
 \begin{quote}
-  Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. (Baader, 2003, 27)
+  Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. \cite[27]{handbook2003}
 \end{quote}
 TBoxes are unary values that classify the individuals in one's ontology.
 ABoxes are binary attributes that are applied to individuals within the ontology.
@@ -64,8 +66,8 @@ Pressingly, there is a distinction between an open-world assumption and a closed
 \textbf{Open-world Assumption}: an assumption that a given statement may possibly be true regardless of its nominal truth value.
 \end{quote}
 The closed-world assumption is the opposite assumption, that any given statement that is known to be true is true. OWL languages utilise the open-world assumption.\par
-\subsection{OWL Languages}
-Baader (2003, 23) discusses three approaches to constructing a KR system:
+\section{OWL Languages}
+Baader discusses three approaches to constructing a KR system \cite[23]{handbook2003}:
 \begin{enumerate}
 \item{Limited and complete: systems designed so that inferences can be efficiently computed at the expense of expressiveness.}
 \item{Expressive and incomplete: systems designed for expressiveness and efficiency at the expense of fully functioning reasoning capacities.}
@@ -74,7 +76,7 @@ Baader (2003, 23) discusses three approaches to constructing a KR system:
 OWL is a family of DL languages that typically follows the latter approach, offering the maximum expressiveness while being computationally complete.\footnote{Alternative reasoning `profiles' are offered in the OWL2 standard.} The OWL languages all adhere to a standard from the World Wide Web Consortium (W3C).\par
 In the abstract OWL syntax is comprised of three components: individuals, properties and classes.
 Individuals represent objects within our domain of interest.
-OWL does not adhere to the Unique Name Assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John Le Carre' or `David Cornwell'.
+OWL does not adhere to the unique name assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John Le Carre' or `David Cornwell'.
 The latter two components are OWL's implementation of the ABox and TBox predicates from §2.1.\par
 Properties (ABox) can have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
@@ -96,8 +98,8 @@ The two most common OWL languages are the XML and Manchester OWLs.
 Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
 The ontology artefacts in this article are written in Manchester OWL.\par
 
-\section{Capturing the Thirty-Six Views}
-\subsection{Case Study: Thirty-Six Views of Mount Fuji}
+\chapter{Capturing the Thirty-Six Views}
+\section{Case Study: the Thirty-Six Views of Mount Fuji}
 Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
 As the name might suggest there are thirty-six prints and each one depicts Mount Fuji.
 The scenes accommodate a variety of seasons, motifs and themes.
@@ -107,17 +109,18 @@ There are several features of this collection that make it an interesting case s
 Firstly, it is restricted to an exact cardinality.
 This poses a problem for OWL as an accurate modelling this world requires a closed-world assumption.
 To briefly reiterate, this is the assumption that established truth values in the domain are immutable.
-OWL utilises the open-world assumption, indeed Baader describes it as a ``distinguishing feature'' of DL modelling languages (2003, 11). This shall require additional constraints upon the modelled ontology.\par
+OWL utilises the open-world assumption, indeed it has been described as a ``distinguishing feature'' of DL modelling languages \cite[11]{handbook2003}. This shall require additional constraints upon the modelled ontology.\par
 The \textit{Views} also contain many distinct individuals.
-Donini (\textit{in} Baader, 2003, 135) identifies individuals are a source of difficulty for reasoners.
+Donini \cite[135]{handbook2003} identifies individuals are a source of difficulty for reasoners.
 In particular ABox predicates can slow down the reasoner's deductions considerably.\par
 Lastly, the \textit{Views} are comprised of specific individuals. This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
 Usually the engineer sets the parameters of an ontology at both the TBox and ABox level and the ontology is then populated as it is used.
 This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
-\subsection{Maximal Detail}
-The first ontology artefect captures as much of the world as possible (see Appendix, §6.1).
+\section{Maximal Detail}
+The first ontology artefect captures as much of the world as possible (see Appendix A).
 Ontology engineers would rarely use the maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
 Ideally an ontology should describe its subject in the most economical way possible.\par
+\subsection{Implementing the Closed-world Assumption}
 The maximal detail ontology needed to force a closed-world assumption.
 A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
 This signals that all that can exist in the ontology are views of Mount Fuji.
@@ -132,52 +135,49 @@ This is known as the group axiom guideline.
 There is a meaningful difference in the functionality of these two classes and it ought to be argued that the order of the generality being established is important.
 First it is established that there are thirty-six owl:Things and then more specifically the whitelist of allowed things is introduced.
 This concludes the application of the closed-world assumption on this ontology.\par
+\subsection{Classes}
 The next most fundamental classes are Agriculture\_Theme, Animals\_Motif, Bodies\_Of\_Water\_Motif, People\_Motif, Snow\_Capped\_Mount\_Fuji and Urbanisation\_Theme.
 These classes are relatively self explanatory and provide the foundation for the other TBox assertions in the ontology.
 Animals\_Motif has two subclasses, Horse\_Motif and Wildlife\_Motif. Likewise, Bodies\_Of\_Water\_Motif has the Maritime\_Theme subclass.\par
 There are also several classes that exist in relation to these more fundamental classes: NOT\_Agriculture\_AND\_NOT\_Maritime, NOT\_People, Wildlife\_AND\_Bodies\_of\_Water and Wildlife\_NOT\_People.
-Their names are descriptive but it is worth discussing exactly how these classes are formed.
-NOT\_Argiculture\_AND\_NOT\_Maritime is a class composed of the disjoint union of both the Agriculture\_Theme and Martime\_Theme classes - it contains only individuals that do not manifest the Argiculture \textit{or} Martime themes.
-NOT\_People is a class that is disjoint from the People\_Motif class - it contains only those individuals that do not feature people (a common motif in this series).
-Wildlife\_AND\_Bodies\_Of\_Water is the union of both the Wildlife and Bodies\_Of\_Water motifs, containing all members of both classes.
-The final class, Wildlife\_NOT\_People, contains all members of the Wildlife\_Motif class that do not feature people.\par
+Their names are descriptive but it is worth discussing exactly how these classes are formed:
+\begin{itemize}
+\item{NOT\_Argiculture\_AND\_NOT\_Maritime is a class composed of the disjoint union of both the Agriculture\_Theme and Martime\_Theme classes. It contains only individuals that do not manifest the Argiculture \textit{nor} Martime themes.}
+\item{NOT\_People is a class that is disjoint from the People\_Motif class. It contains only those individuals that do not feature people (a common motif in this series).}
+\item{Wildlife\_AND\_Bodies\_Of\_Water is the union of both the Wildlife and Bodies\_Of\_Water motifs. It contains all members of both classes.}
+  \item{The final class, Wildlife\_NOT\_People. It contains all members of the Wildlife\_Motif class that do not feature people.}
+\end{itemize}
+
+\subsection{Properties}
 Our ABox assertions are binary predicates that either apply or do not apply to every individual in the ontology.
 The most fundamental property is owl:topObjectProperty, which operates in a similar manner to owl:Thing to provide a basic profile for the property predicate.
-The next most fundamental properties are boatsForegroundOrBackground, containsSpecficIndividuals, depictsConstruction, depictsRooftops, depictsTemple, discolouredMountFuji, hasExactCardinality, hasTwoMountFujis, indoorScene, mistForeground, mountFujiBackground, mountFujiForeground, redMountFuji, treeForeground and yellowMountFuji.
+The next most fundamental properties are boatsForegroundOrBackground, containsSpecficIndividuals, depictsConstruction, depictsRooftops, depictsTemple, discolouredMountFuji, hasExactCardinality, hasTwoMountFujis, indoorScene, mistForeground, mountFujiBackground, mountFujiForeground, redMountFuji, treeForeground and yellowMountFuji.\par
 Two of these properties have already been discussed earlier in this section and the others are self explanatory.
 None of the properties have characteristics aside from the two reflexive properties already discussed as the predicates are not characterising relationships between individuals, rather they are just providing a means to differentiate individuals.
 However, it is worth mentioning that discolouredMountFuji, redMountFuji and yellowMountFuji are all disjoint from one another, as Mount Fuji cannot be depicted with more than one of these properties.
 Similarly mountFujiBackground and mountFujiForeground are disjoint from one another.
 As an aside, hasBoatsForegroundOrBackground exists in the domain of the Maritime\_Theme class as all individuals in the class contain boats.
 There also exist less fundamental properties, although there are not too many.
-depictsRooftops subsumes a property called rooftopsForeground and; hasBoatsForegroundOrBackground subsumes hasBoatsForeground.\par 
-%ObjectProperty: boatsForegroundOrBackground
-%ObjectProperty: containsSpecificIndividuals
-%ObjectProperty: depictsConstruction
-%ObjectProperty: depictsRooftops
-%ObjectProperty: depictsTemple
-%ObjectProperty: discolouredMountFuji
-%ObjectProperty: hasBoatForeground
-%ObjectProperty: hasExactCardinality
-%ObjectProperty: hasTwoMountFujis
-%ObjectProperty: indoorScene
-%ObjectProperty: mistForeground
-%ObjectProperty: mountFujiBackground
-%ObjectProperty: mountFujiForeground
-%ObjectProperty: owl:topObjectProperty
-%ObjectProperty: redMountFuji
-%ObjectProperty: rooftopsForeground
-%ObjectProperty: treeForeground
-%ObjectProperty: yellowMountFuji
-
+depictsRooftops subsumes a property called rooftopsForeground, and, hasBoatsForegroundOrBackground subsumes hasBoatsForeground.\par
+\subsection{The Reasoner}
+The reasoner struggles with this ontology.
+Typically it takes five minutes for the reasoner to deduce its inferences from this KB.
+Curiously, the closed-world assumption ought to make reasoning more tractable, however in this case the FaCT reasoner is designed to reason efficiently over an ontology with the open-world assumption.
+As this ontology forces the closed-world assumption with the two reflexive properties (hasExactCardinality and containsSpecificIndividuals), the reasoner is having to factor in many additional steps when handling the thirty-six individuals.
+Each individual, as every individual is a member of the View\_of\_Mount\_Fuji class, has two additional binary predicates attached to every propositional calculation the reasoner needs to compute.\par
+Despite being slow the reasoner is fully functional. As we can see in fig. 1, it is able to locate instances where classes are invalid.\par 
+\textit{Figure 1:}
+\newline
+\includegraphics[scale=0.3]{DisjointUnionClosed}
+In this output the class NOT\_Agriculture\_AND\_NOT\_Urbanisation, a disjoint union of Agriculture and Urbanisation themes, is refuted by the existence of an individual who manifests both of these themes.\par
 % reasoner output
 % (83) ``In a very real sense, the KB is an analogue of the domain of interest, not so different from other analogues such as maps or physical models.''
 %<NOTE TO SELF: CLOSED-WORLD ASSUMPTION OUGHT TO MAKE REASONING MORE TRACTABLE>
-\subsection{Allowing the Open-world Assumption}
+\section{Detailed Open-world Assumption}
 % reasoner output
-\subsection{Minimum Viable Product}
+\section{Minimum Viable Product}
 % reasoner output
-\subsection{Assessment}
+\section{Assessment}
 % ANTIPATTERNS
 %Three classes: logical, non-logical, guidelines
 %- Logical
@@ -196,84 +196,97 @@ depictsRooftops subsumes a property called rooftopsForeground and; hasBoatsForeg
 %MinIsZero: trivial that a set is larger than zero in a well designed ontology
 
 
-\section{Improving the OWL2 standard}
-\subsection{Issues Raised by the Case Study}
+\chapter{Improving the OWL2 standard}
+\section{Issues Raised by the Case Study}
 % WHY NOT
 % implementation should be as small as possible
 % not precluded from working on closed-world ontology aretfacts
 % not all closed-world ontologies have to be strictly closed
 % could be handled by a protege plugin
-\subsection{Simple Perl Parser}
+\section{Simple Perl Parser}
 % Prelude to legibility and Perspectives
-\subsection{The Tripartite Structure of Ontology Engineering}
+\section{The Tripartite Structure of Ontology Engineering}
 % who is the language for? logicians, programmers or ontology engineers?
 % OWL standard implementors, OWL software developers, ontology engineers
 % have to ensure accessible to all three
-\subsection{OWL Legibility}
+\section{OWL Legibility}
 % ``Problems of OWL syntax'' Manchester University Presses
 % ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
 
 \begin{quote}
-  Moreover, we need to know more about what people find easy or hard to handle. There is no doubt that people can reason when necessary with radically incomplete knowledge (such as that expressible in FOL) but apparently only by going into a special problem-solving or logic puzzle mode. In normal commonsense situations, when reading a geography book, for instance, the ability to handle disjunctions (say) seems to be quite limited. (B\&L 89)
+  Moreover, we need to know more about what people find easy or hard to handle. There is no doubt that people can reason when necessary with radically incomplete knowledge (such as that expressible in FOL) but apparently only by going into a special problem-solving or logic puzzle mode. In normal commonsense situations, when reading a geography book, for instance, the ability to handle disjunctions (say) seems to be quite limited. \cite[89]{expressiveness1987}
 \end{quote}
 
-\section{Conclusion}
+\chapter{Conclusion}
 % placeholder title
 Insert measured conclusion here.
 
 \begin{thebibliography}{99}
-  
-\bibitem{}
+
+\bibitem[Baader, 2003]{handbook2003}
   Baader, F. et al.: 
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
-  1st Edition, Cambridge University Press New York, 2003.
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
 
-\bibitem{}
+\bibitem[Brachman \& Levesque, 1984]{frame-based1984}
   Brachman, R., Levesque, H.:
   \textit{The Tractability of Subsumption in Frame-Based Description Languages},
-  AAAI-84 Proceedings, 1984.
+  AAAI-84 Proceedings,
+  1984.
 
-\bibitem{}
+\bibitem[Horridge, 2011]{guide2011}
   Horridge, M.: 
   \textit{A Practical Guide to Building OWL Ontologies},
-  1st Edition, University of Manchester, 2011.
+  1st Edition,
+  University of Manchester, 2011.
 
-\bibitem{}
+\bibitem[Levesque \& Brachman, 1987]{expressiveness1987}
   Levesque, H., Brachman, R.:
   \textit{Expressiveness and tractibility in knowledge representation and reasoning},
-  Journal of Computing Intelligence, pp.78-92, 1987.
+  Journal of Computing Intelligence,
+  pp.78-92,
+  1987.
 
-\bibitem{}
+\bibitem[Horrocks \& Motik, 2006]{problems2006}
   Motik, B., Horrocks, I.:
   \textit{Problems with OWL Syntax},
-  University of Manchester, 2006.
+  University of Manchester,
+  2006.
 
-\bibitem{} 
+\bibitem[Krötzsch, Simancik \& Horrocks, 2012]{primer2012}
   Krötzsch, M., Simancik, F., Horrocks, I.: 
   \textit{A Description Logic Primer},
-  Computing Research Repository abs/1201.4089, 2012.
+  Computing Research Repository abs/1201.4089,
+  2012.
 
-\bibitem{} 
+\bibitem[Roussey, Corcho \& Blazquez, 2009]{antipatterns2009}
   Roussey, C., Corcho, O, Blazquez, L.M.V.: 
   \textit{A Catalogue of OWL Ontology AntiPatterns},
   K-CAP '09 Proceedings of the fifth international conference on Knowledge capture,
-  ACM New York, pp.205-206, 2009. 
+  ACM New York,
+  pp.205-206,
+  2009. 
 
-\bibitem{} 
+\bibitem[Schlobach, Huang, Cornet \& van Harmelen, 2007]{incoherent2007} 
   Schlobach, S., Huang, Z., Cornet, R., van Harmelen, F.: 
   \textit{Debugging Incoherent Terminologies},
-  Journal of Automated Reasoning, Springer, 2007.
+  Journal of Automated Reasoning,
+  Springer,
+  2007.
 
-\bibitem{}
+\bibitem[Warren, Mulholland, Collins \& Motta, 2014]{usability2014}
   Warren P., Mulholland P., Collins T., Motta E.:
-  (2014) \textit{The Usability of Description Logics},
-  The Semantic Web: Trends and Challenges, Springer, 2014.
+  \textit{The Usability of Description Logics},
+  The Semantic Web: Trends and Challenges,
+  Springer,
+  2014.
 
 \end{thebibliography}
 
-\newpage
-\section{Appendix}
-\subsection{Figure 1: Maximally descriptive ontology (Closed-world)}
+\begin{appendices}
+\chapter{Maximally descriptive ontology (Closed-world)}
 \begin{lstlisting}
 Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
 Prefix: dc: <http://purl.org/dc/elements/1.1/>
@@ -1023,7 +1036,7 @@ Individual: Yoshida_at_Tokaido
 \end{lstlisting}
 
 \newpage
-\subsection{Figure 2: Detailed Open-world Formulation}
+\chapter{Detailed Open-world Formulation}
 \begin{lstlisting}
 Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
 Prefix: dc: <http://purl.org/dc/elements/1.1/>
@@ -1991,7 +2004,7 @@ Individual: Yoshida_at_Tokaido
 \end{lstlisting}
 
 \newpage
-\subsection{Figure 3: Minimum Viable Product Ontology (Open-world)}
+\chapter{Minimum Viable Product Ontology (Open-world)}
 \begin{lstlisting}
 Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
 Prefix: dc: <http://purl.org/dc/elements/1.1/>
@@ -2603,7 +2616,7 @@ Individual: Yoshida_at_Tokaido
 \end{lstlisting}
 
 \newpage
-\subsection{Figure 4: Simple Perl parser for Manchester OWL2}
+\chapter{Simple Perl parser for Manchester OWL2}
 \begin{lstlisting}
 #!/usr/bin/perl
 
@@ -2676,7 +2689,7 @@ sub print_output{
 \end{lstlisting}
 
 \newpage
-\subsection{Initial Research Proposal}
+\chapter{Initial Research Proposal}
 \noindent
 \includegraphics[scale=0.55]{proposal-0}
 \newpage
@@ -2688,5 +2701,7 @@ sub print_output{
 \newpage
 \noindent
 \includegraphics[scale=0.55]{proposal-3}
+
+\end{appendices}
 
 \end{document}
