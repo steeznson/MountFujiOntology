@@ -20,9 +20,9 @@
 \begin{document}
 \maketitle
 
-%\begin{abstract}
-%  Insert compact and informative summary here.
-%\end{abstract}
+\chapter*{Abstract}
+  Insert compact and informative summary here.
+
 
 \tableofcontents
 
@@ -67,7 +67,7 @@ Pressingly, there is a distinction between an open-world assumption and a closed
 \end{quote}
 The closed-world assumption is the opposite assumption, that any given statement that is known to be true is true. OWL languages utilise the open-world assumption.\par
 \section{OWL Languages}
-Baader discusses three approaches to constructing a KR system \cite[23]{handbook2003}:
+There are three approaches to constructing a KR system \cite[23]{handbook2003}:
 \begin{enumerate}
 \item{Limited and complete: systems designed so that inferences can be efficiently computed at the expense of expressiveness.}
 \item{Expressive and incomplete: systems designed for expressiveness and efficiency at the expense of fully functioning reasoning capacities.}
@@ -127,8 +127,13 @@ This signals that all that can exist in the ontology are views of Mount Fuji.
 The next step was to create two reflexive properties hasExactCardinality and containsSpecificIndividuals.
 The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the class owl:Thing can only fully represent the closed \textit{Views of Mount Fuji} by having an exact cardinality of 36.
 Similarly, containsSpecificIndividuals is a reflexive property for the class View\_of\_Mount\_Fuji.
-Every single individual in the ontology is explicitly listed as this property is applied as no other individual can exist in this ontology.
-This property acts as a whitelist for the reasoner for valid individuals in the ontology.\par
+Every single individual in the ontology is explicitly listed as this property is applied as no other individual can exist in this ontology (see Figure 1).
+\newline
+\centerline{\includegraphics[scale=0.4]{closedComment2}}\\
+\centerline{\textit{Figure 1}}
+\newline
+This property acts as a whitelist for the reasoner for valid individuals in the ontology. The `exactly' keyword is essential to stipulate this condition.
+The stipulation reads that the class may only contain one instance of an array containing each distinct individual in the class.\par
 The reason that owl:Thing and View\_of\_Mount\_Fuji are separate classes despite being equivalent is that there is a meaningful distinction in scope between the two.
 While it may be more parsimonious to merge the classes and apply both properties to owl:Thing it is better practice to restrict the application of axioms to one per class.
 This is known as the group axiom guideline.
@@ -140,12 +145,12 @@ The next most fundamental classes are Agriculture\_Theme, Animals\_Motif, Bodies
 These classes are relatively self explanatory and provide the foundation for the other TBox assertions in the ontology.
 Animals\_Motif has two subclasses, Horse\_Motif and Wildlife\_Motif. Likewise, Bodies\_Of\_Water\_Motif has the Maritime\_Theme subclass.\par
 There are also several classes that exist in relation to these more fundamental classes: NOT\_Agriculture\_AND\_NOT\_Maritime, NOT\_People, Wildlife\_AND\_Bodies\_of\_Water and Wildlife\_NOT\_People.
-Their names are descriptive but it is worth discussing exactly how these classes are formed:
+Their names are descriptive but it is worth briefly mentioning how these classes are formed:
 \begin{itemize}
 \item{NOT\_Argiculture\_AND\_NOT\_Maritime is a class composed of the disjoint union of both the Agriculture\_Theme and Martime\_Theme classes. It contains only individuals that do not manifest the Argiculture \textit{nor} Martime themes.}
 \item{NOT\_People is a class that is disjoint from the People\_Motif class. It contains only those individuals that do not feature people (a common motif in this series).}
 \item{Wildlife\_AND\_Bodies\_Of\_Water is the union of both the Wildlife and Bodies\_Of\_Water motifs. It contains all members of both classes.}
-  \item{The final class, Wildlife\_NOT\_People. It contains all members of the Wildlife\_Motif class that do not feature people.}
+  \item{Wildlife\_NOT\_People contains all members of the Wildlife\_Motif class that do not feature people.}
 \end{itemize}
 
 \subsection{Properties}
@@ -159,21 +164,36 @@ Similarly mountFujiBackground and mountFujiForeground are disjoint from one anot
 As an aside, hasBoatsForegroundOrBackground exists in the domain of the Maritime\_Theme class as all individuals in the class contain boats.
 There also exist less fundamental properties, although there are not too many.
 depictsRooftops subsumes a property called rooftopsForeground, and, hasBoatsForegroundOrBackground subsumes hasBoatsForeground.\par
+By couching the \textit{Views} in terms of these ABox assertions and the TBox assertions from §3.2.3 each individual view can be differentiated and uniquely identified by the reasoner. 
 \subsection{The Reasoner}
 The reasoner struggles with this ontology.
 Typically it takes five minutes for the reasoner to deduce its inferences from this KB.
 Curiously, the closed-world assumption ought to make reasoning more tractable, however in this case the FaCT reasoner is designed to reason efficiently over an ontology with the open-world assumption.
 As this ontology forces the closed-world assumption with the two reflexive properties (hasExactCardinality and containsSpecificIndividuals), the reasoner is having to factor in many additional steps when handling the thirty-six individuals.
 Each individual, as every individual is a member of the View\_of\_Mount\_Fuji class, has two additional binary predicates attached to every propositional calculation the reasoner needs to compute.\par
-Despite being slow the reasoner is fully functional. As we can see in fig. 1, it is able to locate instances where classes are invalid.\par 
-\textit{Figure 1:}
+Despite being slow the reasoner is fully functional. As we can see in fig. 2, it is able to locate instances where classes are invalid.
 \newline
-\includegraphics[scale=0.3]{DisjointUnionClosed}
-In this output the class NOT\_Agriculture\_AND\_NOT\_Urbanisation, a disjoint union of Agriculture and Urbanisation themes, is refuted by the existence of an individual who manifests both of these themes.\par
-% reasoner output
-% (83) ``In a very real sense, the KB is an analogue of the domain of interest, not so different from other analogues such as maps or physical models.''
-%<NOTE TO SELF: CLOSED-WORLD ASSUMPTION OUGHT TO MAKE REASONING MORE TRACTABLE>
+\newline
+\centerline{\includegraphics[scale=0.3]{DisjointUnionClosed}}\\
+\centerline{\textit{Figure 2}}
+\newline
+In this output the class NOT\_Agriculture\_AND\_NOT\_Urbanisation, a disjoint union of Agriculture and Urbanisation themes, is refuted by the existence of an individual who manifests both of these themes. While this may appear trivial, reasoning over a large KB would be significantly more challenging for a human reasoner.\par
+Fig. 3 demonstrates the direct repercussions of the closed-world assumption on the reasoner: 
+\newline
+\newline
+\centerline{\includegraphics[scale=0.3]{SingletonClosed}}\\
+\centerline{\textit{Figure 3}}
+\newline
+The creation of a singleton class, containing only one individual, has caused the reasoner to flag the ontology as inconsistent.
+As the singleton class is subsumed by the View\_of\_Mount\_Fuji it cannot contradicted the parameters of its superclass.
+For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory properties.\par
+The next two ontology artefacts aim to simplify the KB.
+Initially by representing the KB without forcing the open-world assumption and then by presenting the most economical version of the KB while retaining the same functionality.
 \section{Detailed Open-world Assumption}
+Trying to simulate elements of a closed-world assumption without forcing it on the ontology would not normally be possible.
+However, as stated in §3.1, the \textit{Views} make an unusual case study as the individuals that will populate the ontology are already known by the ontology engineer.\par
+The open-world ontology utilises TBox assertions to stipulate that only the thirty-six \textit{Views} can exist because each view has its own singleton class that is subsumed by the View\_of\_Mount\_Fuji class. Each class 
+
 % reasoner output
 \section{Minimum Viable Product}
 % reasoner output
@@ -488,7 +508,7 @@ Class: View_of_Mount_Fuji
     
     SubClassOf: 
         owl:Thing,
-        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo , Asakusa_Hongan-ji_temple_in_the_Eastern_capital , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tokaido , Inume_Pass_Koshu , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Totomi , Mount_Fuji_reflects_in_Lake_Kawaguchi , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tokaido , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryogoku_bridge , Tama_River_in_Musashi_Province , Tea_house_at_Koisikawa , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tokaido})
+        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop , Asakusa_Hongan-ji_temple , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tokaido , Inume_Pass_Koshu , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Totomi , Mount_Fuji_reflects_in_Lake_Kawaguchi , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tokaido , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryogoku_bridge , Tama_River_in_Musashi_Province , Tea_house_at_Koisikawa , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tokaido})
     
     
 Class: Wildlife_AND_Bodies_of_Water
@@ -541,7 +561,7 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
      treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
     
     
-Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+Individual: A_sketch_of_the_Mitsui_shop
 
     Types: 
         NOT_Agriculture_AND_NOT_Maritime,
@@ -551,11 +571,11 @@ Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
         View_of_Mount_Fuji
     
     Facts:  
-     mountFujiBackground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
-     rooftopsForeground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+     mountFujiBackground  A_sketch_of_the_Mitsui_shop,
+     rooftopsForeground  A_sketch_of_the_Mitsui_shop
     
     
-Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+Individual: Asakusa_Hongan-ji_temple
 
     Types: 
         NOT_Agriculture_AND_NOT_Maritime,
@@ -565,9 +585,9 @@ Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
         View_of_Mount_Fuji
     
     Facts:  
-     depictsTemple  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     mountFujiBackground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     rooftopsForeground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+     depictsTemple  Asakusa_Hongan-ji_temple,
+     mountFujiBackground  Asakusa_Hongan-ji_temple,
+     rooftopsForeground  Asakusa_Hongan-ji_temple
     
     
 Individual: Barrier_Town_on_the_Sumida_River
@@ -1099,13 +1119,22 @@ ObjectProperty: depictsTemple
 ObjectProperty: discolouredMountFuji
 
     
+ObjectProperty: hasExactCardinality
+
+    Annotations: 
+        rdfs:comment "Reflexive: Each individual is related to its class by being the only instance."@en
+    
+    Characteristics: 
+        Reflexive
+    
+    
 ObjectProperty: hasSpecificIndividual
 
     Annotations: 
-        rdfs:comment "inverse functional: restrict domain to one individual"@en
+        rdfs:comment "Reflexive: Each individual is related to its class by being the only instance."@en
     
     Characteristics: 
-        InverseFunctional
+        Reflexive
     
     
 ObjectProperty: hasTwoMountFujis
@@ -1217,238 +1246,272 @@ Class: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa})
+        hasSpecificIndividual only ({A_View_of_Mount_Fuji_Across_Lake_Suwa}),
+        hasExactCardinality exactly 1 A_View_of_Mount_Fuji_Across_Lake_Suwa
     
     
-Class: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+Class: A_sketch_of_the_Mitsui_shop
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo})
+        hasSpecificIndividual only ({A_sketch_of_the_Mitsui_shop}),
+        hasExactCardinality exactly 1 A_sketch_of_the_Mitsui_shop
     
     
-Class: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+Class: Asakusa_Hongan-ji_temple
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Asakusa_Hongan-ji_temple_in_the_Eastern_capital})
+        hasSpecificIndividual only ({Asakusa_Hongan-ji_temple}),
+        hasExactCardinality exactly 1 Asakusa_Hongan-ji_temple
     
     
 Class: Barrier_Town_on_the_Sumida_River
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Barrier_Town_on_the_Sumida_River})
+        hasSpecificIndividual only ({Barrier_Town_on_the_Sumida_River}),
+        hasExactCardinality exactly 1 Barrier_Town_on_the_Sumida_River
     
     
 Class: Bay_of_Noboto
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Bay_of_Noboto})
+        hasSpecificIndividual only ({Bay_of_Noboto}),
+        hasExactCardinality exactly 1 Bay_of_Noboto
     
     
 Class: Cushion_Pine_at_Aoyama
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Cushion_Pine_at_Aoyama})
+        hasSpecificIndividual only ({Cushion_Pine_at_Aoyama}),
+        hasExactCardinality exactly 1 Cushion_Pine_at_Aoyama
     
     
 Class: Ejiri_in_Suruga_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Ejiri_in_Suruga_Province})
+        hasSpecificIndividual only ({Ejiri_in_Suruga_Province}),
+        hasExactCardinality exactly 1 Ejiri_in_Suruga_Province
     
     
 Class: Enoshima_in_Sagami_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Enoshima_in_Sagami_Province})
+        hasSpecificIndividual only ({Enoshima_in_Sagami_Province}),
+        hasExactCardinality exactly 1 Enoshima_in_Sagami_Province
     
     
 Class: Fuji_View_Field_in_Owari_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Fuji_View_Field_in_Owari_Province})
+        hasSpecificIndividual only ({Fuji_View_Field_in_Owari_Province}),
+        hasExactCardinality exactly 1 Fuji_View_Field_in_Owari_Province
     
     
 Class: Hodogaya_on_the_Tokaido
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Hodogaya_on_the_Tokaido})
+        hasSpecificIndividual only ({Hodogaya_on_the_Tokaido}),
+        hasExactCardinality exactly 1 Hodogaya_on_the_Tokaido
     
     
 Class: Inume_Pass_Koshu
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Inume_Pass_Koshu})
+        hasSpecificIndividual only ({Inume_Pass_Koshu}),
+        hasExactCardinality exactly 1 Inume_Pass_Koshu
     
     
 Class: Kajikazawa_in_Kai_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Kajikazawa_in_Kai_Province})
+        hasSpecificIndividual only ({Kajikazawa_in_Kai_Province}),
+        hasExactCardinality exactly 1 Kajikazawa_in_Kai_Province
     
     
 Class: Mishima_Pass_in_Kai_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Mishima_Pass_in_Kai_Province})
+        hasSpecificIndividual only ({Mishima_Pass_in_Kai_Province}),
+        hasExactCardinality exactly 1 Mishima_Pass_in_Kai_Province
     
     
 Class: Mount_Fuji_from_the_mountains_of_Totomi
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Mount_Fuji_from_the_mountains_of_Totomi})
+        hasSpecificIndividual only ({Mount_Fuji_from_the_mountains_of_Totomi}),
+        hasExactCardinality exactly 1 Mount_Fuji_from_the_mountains_of_Totomi
     
     
 Class: Mount_Fuji_reflects_in_Lake_Kawaguchi
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Mount_Fuji_reflects_in_Lake_Kawaguchi})
+        hasSpecificIndividual only ({Mount_Fuji_reflects_in_Lake_Kawaguchi}),
+        hasExactCardinality exactly 1 Mount_Fuji_reflects_in_Lake_Kawaguchi
     
     
 Class: Nihonbashi_bridge_in_Edo
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Nihonbashi_bridge_in_Edo})
+        hasSpecificIndividual only ({Nihonbashi_bridge_in_Edo}),
+        hasExactCardinality exactly 1 Nihonbashi_bridge_in_Edo
     
     
 Class: Rainstorm_Beneath_the_Summit
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Rainstorm_Beneath_the_Summit})
+        hasSpecificIndividual only ({Rainstorm_Beneath_the_Summit}),
+        hasExactCardinality exactly 1 Rainstorm_Beneath_the_Summit
     
     
 Class: Sazai_hall_Temple_of_Five_Hundred_Raken
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Sazai_hall_-_Temple_of_Five_Hundred_Rakan})
+        hasSpecificIndividual only ({Sazai_hall_-_Temple_of_Five_Hundred_Rakan}),
+        hasExactCardinality exactly 1 Sazai_hall_Temple_of_Five_Hundred_Raken
     
     
 Class: Senju_Musashi_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Senju_Musashi_Province})
+        hasSpecificIndividual only ({Senju_Musashi_Province}),
+        hasExactCardinality exactly 1 Senju_Musashi_Province
     
     
 Class: Shichiri_beach_in_Sagami_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Shichiri_beach_in_Sagami_Province})
+        hasSpecificIndividual only ({Shichiri_beach_in_Sagami_Province}),
+        hasExactCardinality exactly 1 Shichiri_beach_in_Sagami_Province
     
     
 Class: Shimomeguro
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Shimomeguro})
+        hasSpecificIndividual only ({Shimomeguro}),
+        hasExactCardinality exactly 1 Shimomeguro
     
     
 Class: Shore_of_Tago_Bay_Ejiri_at_Tokaido
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Shore_of_Tago_Bay_Ejiri_at_Tokaido})
+        hasSpecificIndividual only ({Shore_of_Tago_Bay_Ejiri_at_Tokaido}),
+        hasExactCardinality exactly 1 Shore_of_Tago_Bay_Ejiri_at_Tokaido
     
     
 Class: South_Wind_Clear_Sky
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({South_Wind_Clear_Sky})
+        hasSpecificIndividual only ({South_Wind_Clear_Sky}),
+        hasExactCardinality exactly 1 South_Wind_Clear_Sky
     
     
 Class: Sundai_Edo
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Sundai_Edo})
+        hasSpecificIndividual only ({Sundai_Edo}),
+        hasExactCardinality exactly 1 Sundai_Edo
     
     
 Class: Sunset_across_the_Ryogoku_bridge
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Sunset_across_the_Ryogoku_bridge})
+        hasSpecificIndividual only ({Sunset_across_the_Ryogoku_bridge}),
+        hasExactCardinality exactly 1 Sunset_across_the_Ryogoku_bridge
     
     
 Class: Tama_River_in_Musashi_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Tama_River_in_Musashi_Province})
+        hasSpecificIndividual only ({Tama_River_in_Musashi_Province}),
+        hasExactCardinality exactly 1 Tama_River_in_Musashi_Province
     
     
 Class: Tea_house_at_Koishikawa
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Tea_house_at_Koisikawa})
+        hasSpecificIndividual only ({Tea_house_at_Koishikawa}),
+        hasExactCardinality exactly 1 Tea_house_at_Koishikawa
     
     
 Class: The_Great_Wave_off_Kanagawa
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({The_Great_Wave_off_Kanagawa})
+        hasSpecificIndividual only ({The_Great_Wave_off_Kanagawa}),
+        hasExactCardinality exactly 1 The_Great_Wave_off_Kanagawa
     
     
 Class: The_Kazusa_Province_sea_route
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({The_Kazusa_Province_sea_route})
+        hasSpecificIndividual only ({The_Kazusa_Province_sea_route}),
+        hasExactCardinality exactly 1 The_Kazusa_Province_sea_route
     
     
 Class: The_lake_of_Hakone_in_Sagami_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({The_lake_of_Hakone_in_Sagami_Province})
+        hasSpecificIndividual only ({The_lake_of_Hakone_in_Sagami_Province}),
+        hasExactCardinality exactly 1 The_lake_of_Hakone_in_Sagami_Province
     
     
 Class: Tsukuda_Island_in_Musashi_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Tsukuda_Island_in_Musashi_Province})
+        hasSpecificIndividual only ({Tsukuda_Island_in_Musashi_Province}),
+        hasExactCardinality exactly 1 Tsukuda_Island_in_Musashi_Province
     
     
 Class: Umezawa_in_Sagami_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Umezawa_in_Sagami_Province})
+        hasSpecificIndividual only ({Umezawa_in_Sagami_Province}),
+        hasExactCardinality exactly 1 Umezawa_in_Sagami_Province
     
     
 Class: Under_Mannen_Bridge_at_Fukagawa
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Under_Mannen_Bridge_at_Fukagawa})
+        hasSpecificIndividual only ({Under_Mannen_Bridge_at_Fukagawa}),
+        hasExactCardinality exactly 1 Under_Mannen_Bridge_at_Fukagawa
     
     
 Class: Ushibori_in_Hitachi_Province
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Ushibori_in_Hitachi_Province})
+        hasSpecificIndividual only ({Ushibori_in_Hitachi_Province}),
+        hasExactCardinality exactly 1 Ushibori_in_Hitachi_Province
     
     
 Class: View_of_Mount_Fuji
@@ -1461,14 +1524,16 @@ Class: Watermill_at_Onden
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Watermill_at_Onden})
+        hasSpecificIndividual only ({Watermill_at_Onden}),
+        hasExactCardinality exactly 1 Watermill_at_Onden
     
     
 Class: Yoshida_at_Tokaido
 
     SubClassOf: 
         View_of_Mount_Fuji,
-        hasSpecificIndividual exactly 1 ({Yoshida_at_Tokaido})
+        hasSpecificIndividual only ({Yoshida_at_Tokaido}),
+        hasExactCardinality exactly 1 Yoshida_at_Tokaido
     
     
 Class: owl:Thing
@@ -1492,33 +1557,33 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
      treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
     
     
-Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+Individual: A_sketch_of_the_Mitsui_shop
 
     Types: 
-        A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
+        A_sketch_of_the_Mitsui_shop,
         View_of_Mount_Fuji
     
     Facts:  
-     mountFujiBackground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
-     peopleMotif  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
-     rooftopsForeground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
-     snowCappedMountFuji  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
-     urbanisationTheme  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+     mountFujiBackground  A_sketch_of_the_Mitsui_shop,
+     peopleMotif  A_sketch_of_the_Mitsui_shop,
+     rooftopsForeground  A_sketch_of_the_Mitsui_shop,
+     snowCappedMountFuji  A_sketch_of_the_Mitsui_shop,
+     urbanisationTheme  A_sketch_of_the_Mitsui_shop
     
     
-Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+Individual: Asakusa_Hongan-ji_temple
 
     Types: 
-        Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+        Asakusa_Hongan-ji_temple,
         View_of_Mount_Fuji
     
     Facts:  
-     depictsTemple  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     mountFujiBackground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     peopleMotif  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     rooftopsForeground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     snowCappedMountFuji  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     urbanisationTheme  Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+     depictsTemple  Asakusa_Hongan-ji_temple,
+     mountFujiBackground  Asakusa_Hongan-ji_temple,
+     peopleMotif  Asakusa_Hongan-ji_temple,
+     rooftopsForeground  Asakusa_Hongan-ji_temple,
+     snowCappedMountFuji  Asakusa_Hongan-ji_temple,
+     urbanisationTheme  Asakusa_Hongan-ji_temple
     
     
 Individual: Barrier_Town_on_the_Sumida_River
@@ -1846,24 +1911,24 @@ Individual: Tama_River_in_Musashi_Province
      treeForeground  Tama_River_in_Musashi_Province
     
     
-Individual: Tea_house_at_Koisikawa
+Individual: Tea_house_at_Koishikawa
 
     Types: 
         Tea_house_at_Koishikawa,
         View_of_Mount_Fuji
     
     Facts:  
-     animalsMotif  Tea_house_at_Koisikawa,
-     bodiesOfWaterMotif  Tea_house_at_Koisikawa,
-     discolouredMountFuji  Tea_house_at_Koisikawa,
-     mountFujiBackground  Tea_house_at_Koisikawa,
-     peopleMotif  Tea_house_at_Koisikawa,
-     rooftopsForeground  Tea_house_at_Koisikawa,
-     snowCappedMountFuji  Tea_house_at_Koisikawa,
-     treeForeground  Tea_house_at_Koisikawa,
-     urbanisationTheme  Tea_house_at_Koisikawa,
-     wildlifeAndBodiesOfWater  Tea_house_at_Koisikawa,
-     wildlifeMotif  Tea_house_at_Koisikawa
+     animalsMotif  Tea_house_at_Koishikawa,
+     bodiesOfWaterMotif  Tea_house_at_Koishikawa,
+     discolouredMountFuji  Tea_house_at_Koishikawa,
+     mountFujiBackground  Tea_house_at_Koishikawa,
+     peopleMotif  Tea_house_at_Koishikawa,
+     rooftopsForeground  Tea_house_at_Koishikawa,
+     snowCappedMountFuji  Tea_house_at_Koishikawa,
+     treeForeground  Tea_house_at_Koishikawa,
+     urbanisationTheme  Tea_house_at_Koishikawa,
+     wildlifeAndBodiesOfWater  Tea_house_at_Koishikawa,
+     wildlifeMotif  Tea_house_at_Koishikawa
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -2000,7 +2065,10 @@ Individual: Yoshida_at_Tokaido
      mountFujiBackground  Yoshida_at_Tokaido,
      peopleMotif  Yoshida_at_Tokaido,
      snowCappedMountFuji  Yoshida_at_Tokaido
-
+    
+    
+DisjointClasses: 
+    A_View_of_Mount_Fuji_Across_Lake_Suwa,A_sketch_of_the_Mitsui_shop,Asakusa_Hongan-ji_temple,Barrier_Town_on_the_Sumida_River,Bay_of_Noboto,Cushion_Pine_at_Aoyama,Ejiri_in_Suruga_Province,Enoshima_in_Sagami_Province,Fuji_View_Field_in_Owari_Province,Hodogaya_on_the_Tokaido,Inume_Pass_Koshu,Kajikazawa_in_Kai_Province,Mishima_Pass_in_Kai_Province,Mount_Fuji_from_the_mountains_of_Totomi,Mount_Fuji_reflects_in_Lake_Kawaguchi,Nihonbashi_bridge_in_Edo,Rainstorm_Beneath_the_Summit,Sazai_hall_Temple_of_Five_Hundred_Raken,Senju_Musashi_Province,Shichiri_beach_in_Sagami_Province,Shimomeguro,Shore_of_Tago_Bay_Ejiri_at_Tokaido,South_Wind_Clear_Sky,Sundai_Edo,Sunset_across_the_Ryogoku_bridge,Tama_River_in_Musashi_Province,Tea_house_at_Koishikawa,The_Great_Wave_off_Kanagawa,The_Kazusa_Province_sea_route,The_lake_of_Hakone_in_Sagami_Province,Tsukuda_Island_in_Musashi_Province,Umezawa_in_Sagami_Province,Under_Mannen_Bridge_at_Fukagawa,Ushibori_in_Hitachi_Province,Watermill_at_Onden,Yoshida_at_Tokaido
 \end{lstlisting}
 
 \newpage
@@ -2167,7 +2235,7 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
      treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
     
     
-Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+Individual: A_sketch_of_the_Mitsui_shop
 
     Types: 
         NOT_Agriculture_AND_NOT_Maritime,
@@ -2177,10 +2245,10 @@ Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
         owl:Thing
     
     Facts:  
-     rooftopsForeground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+     rooftopsForeground  A_sketch_of_the_Mitsui_shop
     
     
-Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+Individual: Asakusa_Hongan-ji_temple
 
     Types: 
         NOT_Agriculture_AND_NOT_Maritime,
@@ -2190,8 +2258,8 @@ Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
         owl:Thing
     
     Facts:  
-     depictsTemple  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
-     rooftopsForeground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+     depictsTemple  Asakusa_Hongan-ji_temple,
+     rooftopsForeground  Asakusa_Hongan-ji_temple
     
     
 Individual: Barrier_Town_on_the_Sumida_River
