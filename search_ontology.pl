@@ -30,11 +30,11 @@ sub get_ontology{
 	Enter another number to quit: ";
 	chomp(my $ontology = <STDIN>);
 	if($ontology=="1") {
-		$filename = "thirtySixViewsClosed.owl";
+		$filename = "Ontologies/thirtySixViewsClosed.owl";
 	}elsif($ontology=="2") {
-		$filename = "thirtySixViewsOpen.owl";
+		$filename = "Ontologies/thirtySixViewsOpen.owl";
 	}elsif($ontology=="3") { 
-		$filename = "thirtySixViewsMVP.owl";
+		$filename = "Ontologies/thirtySixViewsMVP.owl";
 	}else{exit 0;}
 	return $filename;
 }
