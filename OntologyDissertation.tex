@@ -32,8 +32,8 @@
 \chapter{The OWL2 Specification}
 \section{Description Logics}
 Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
-DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artificial intelligence research and other industries.\par
-Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{P $'$} is a functionally similar yet significantly distinct concept to \textit{Q $'$} is not.
+DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artificial intelligence research and other industries\cite[29]{handbook2003}.\par
+Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{$P'$} is a functionally similar yet significantly distinct concept to \textit{$Q'$} is not.
 Levesque \& Brachman (1987) found that first-order logic (FOL) is not suitable for describing these sorts of complex relationships.
 They identify a fundamental tension between a language's expressive power and its tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a syntactically consistent subset of first order logic.}\par
 Brachman \& Levenesque use the thought experiment of \(\alpha\), an inference implicit in a KB that needs to be deduced computationally:  
@@ -51,21 +51,30 @@ Levesque \& Brachman gesture towards database management systems (DBMS) as a sou
 \end{quote}
 Modern DL languages have pursued this direction.\footnote{There is an argument that this approach is ``relaxing the standards of correctness'' \cite[81]{expressiveness1987}. Although this is the case we shall observe later that the \textit{applications} of software make many allowances for error-handling.}
 Languages conform to knowledge representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
-They operate over discrete domains using a hybrid of two forms of predicate - terminologies and assertions.\par
-Terminology and assertion predicates are also known as TBox and ABox predicates respectively:
+They operate over discrete domains using a hybrid of two forms of predicate - terminologies and attributes.\par
+Terminology and attribute predicates are also known as TBox and ABox predicates respectively:
 \begin{quote}
   Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. \cite[27]{handbook2003}
 \end{quote}
 TBoxes are unary values that classify the individuals in one's ontology.
 ABoxes are binary attributes that are applied to individuals within the ontology.
-These assumptions can be stipulated to be subsumed by one another, intersected with one another, disjoint from one another, or even composed of a disjoint union of two others.\par
-It should be noted that Baader has introduced the notion of the discrete domain being a \textit{world}.
+These assumptions can be stipulated to be subsumed by one another, intersected with one another, disjoint from one another, or even composed of a disjoint union of two others.
+An example of a TBox assertion would be, ``The Cathedral class is subsumed by the Building class,'' or, `Building \(\supset\) Cathedral'.
+TBoxes are \textit{intensional} knowledge as their application stipulates precisely what is being described in their terms.\footnote{eg. All quadrilateral shapes have four angles.}   
+Alternatively, an example of an ABox assertion would be, ``Notre Dame is an instance of a Cathedral,'' or, `Cathedral(Notre Dame)'.
+ABoxes are \textit{extensional} knowledge as their meanings are reliant on their application.\footnote{eg. All bodies are heavy. - The truth of this knowledge depends on how the predicate `is heavy' is applied.}\par
+It should be noted that Baader has introduced the notion of the discrete domain being a \textit{world} in the above quotation.
 Worlds are blank canvases to be explicitly populated by the ontology engineer.
 Pressingly, there is a distinction between an open-world assumption and a closed-world assumption that is relevant for the case study in this article:
 \begin{quote}
 \textbf{Open-world Assumption}: an assumption that a given statement may possibly be true regardless of its nominal truth value.
 \end{quote}
-The closed-world assumption is the opposite assumption, that any given statement that is known to be true is true. OWL languages utilise the open-world assumption.\par
+Given the open-world assumption, an attribute like `Cathedral(Notre Dame)' becomes mutable.
+Say that every Bishop of Notre Dame had been secretly excommunicated or some similar technicality were discovered that disqualified Notre Dame from its cathedral status; the open-world assumption provides the apparatus to correct the KB.\par
+The closed-world assumption is the opposite assumption, that any given statement that is known to be true is true.
+A similar ABox indescrepansey to the Notre Dame example becomes logically impossible to account for.
+OWL languages utilise the open-world assumption.
+
 \section{OWL Languages}
 There are three approaches to constructing a KR system \cite[23]{handbook2003}:
 \begin{enumerate}
@@ -73,38 +82,43 @@ There are three approaches to constructing a KR system \cite[23]{handbook2003}:
 \item{Expressive and incomplete: systems designed for expressiveness and efficiency at the expense of fully functioning reasoning capacities.}
 \item{Expressive and complete: systems designed for expressiveness and speed at the expense of efficiency.}
 \end{enumerate}
-OWL is a family of DL languages that typically follows the latter approach, offering the maximum expressiveness while being computationally complete.\footnote{Alternative reasoning `profiles' are offered in the OWL2 standard.} The OWL languages all adhere to a standard from the World Wide Web Consortium (W3C).\par
+OWL is a family of DL languages that typically follows the third approach, offering the maximum expressiveness while being computationally complete.\footnote{Alternative reasoning `profiles' are offered in the OWL2 standard.}
+The OWL languages all adhere to a standard from the World Wide Web Consortium (W3C)\cite[10]{guide2011}.\par
 In the abstract OWL syntax is comprised of three components: individuals, properties and classes.
 Individuals represent objects within our domain of interest.
-OWL does not adhere to the unique name assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John Le Carre' or `David Cornwell'.
+OWL does not adhere to the unique name assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John le Carre' or `David Cornwell'.
 The latter two components are OWL's implementation of the ABox and TBox predicates from §2.1.\par
-Properties (ABox) can have characteristics that place parameters on their application.
+OWL calls ABox assertions `Properties'\cite[11]{guide2011}.
+To reiterate, `Properties', in the OWL sense, can only ever apply to individuals.
+Properties have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
-Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties.
-Although the OWL2 standard also allows the creation of Data Properties as well as Object Properties these cannot be covered in this article.\footnote{Data Properties are all subsumed by a primitive class called `owl:topDataProperty'.}
-Finally, classes (TBox) are used to create taxonomies (hierarchies of sets) that individuals are instances of.
+Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties provided they are applied to an individual.
+Although the OWL2 standard also allows the creation of Data Properties as well as Object Properties these shall not be covered in this article.\footnote{Data Properties are all subsumed by a primitive class called `owl:topDataProperty'.}\par
+Finally, OWL refers to TBox assertions as `Classes'.
+Classes are used to create taxonomies (hierarchies of sets) that individuals are instances of.
 Just as with properties, every class must be subsumed by a primitive class called `owl:Thing'. 
 Properties and classes can be subsumed by others of their kind, composed of others of their kind or defined in contrast to others of their kind.\par
 Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
-  `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class}. `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} whose name is `Allan' satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa. Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal}, which in turn is subsumed by \textbf{owl:Thing}.
+  There exists a \textbf{Dog} \textit{class} (owl:Thing\(\supset\)Dog). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (owl:Thing\(\supset\)Person) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Louis,Allan))\(\wedge\)(isOwnerOf(Allan,Louis))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Animal\(\supset\)Person,Dog), which in turn is subsumed by \textbf{owl:Thing}.
 \end{quote}
 Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/, accessed 05.03.18, \textit{MIT License}}
-Protégé was utilised in the production of the ontologies for the case study in this article with the FaCT reasoner.\par
-A FaCT reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
+Protégé was utilised in the production of the ontologies for the case study in this article with the widely-used FaCT reasoner\cite[24]{handbook2003}.\par
+The FaCT reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
 It will also deduce the applications of the `isOwnerOf' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
-It would flag up an incoherent ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
-The two most common OWL languages are the XML and Manchester OWLs.
+It would flag a logically impossible (incoherent) ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
+The two most common OWL languages are the XML and Manchester OWLs\cite[30]{handbook2003}\cite[10]{guide2011}.
 Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
-The ontology artefacts in this article are written in Manchester OWL.\par
+The ontology artefacts in this article are written in Manchester OWL.
 
 \chapter{Capturing the Thirty-Six Views}
 \section{Case Study: the Thirty-Six Views of Mount Fuji}
+\centerline{\includegraphics[scale=0.2]{greatwave}}
+\centerline{\textit{The Great Wave Off Kanagawa}, Hokusai (c.1830-1832), Metropolitan Museum of Art, NY}\hfill \break
 Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
 As the name might suggest there are thirty-six prints and each one depicts Mount Fuji.
 The scenes accommodate a variety of seasons, motifs and themes.
-The series achieved regional and international acclaim: both due artist's to the mastery of the medium and the prominence of Mount Fuji in Japanese culture.
-One print in the series, \textit{The Great Wave off Kanagawa}, has surpassed the others to become one of the world's most widely recognisable images.\par
+The series achieved regional and international acclaim: both due artist's to the mastery of the medium and the prominence of Mount Fuji in Japanese culture.\par
 There are several features of this collection that make it an interesting case study.
 Firstly, it is restricted to an exact cardinality.
 This poses a problem for OWL as an accurate modelling this world requires a closed-world assumption.
@@ -114,7 +128,7 @@ The \textit{Views} also contain many distinct individuals.
 Donini \cite[135]{handbook2003} identifies individuals are a source of difficulty for reasoners.
 In particular ABox predicates can slow down the reasoner's deductions considerably.\par
 Lastly, the \textit{Views} are comprised of specific individuals. This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
-Usually the engineer sets the parameters of an ontology at both the TBox and ABox level and the ontology is then populated as it is used.
+Usually the engineer sets the terminological parameters of an ontology first and then it is populated by individuals.
 This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
 \section{Maximal Detail}
 The first ontology artefect captures as much of the world as possible (see Appendix A).
