@@ -41,7 +41,7 @@ Brachman \& Levenesque use the thought experiment of \(\alpha\), an inference im
   In other words, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. \cite[79]{expressiveness1987}
 \end{quote}
 Because it is trivial that the KB will entail \(\alpha\) if it subsumes \(\alpha\) there emerges a problem of generality wherein the reasoner is unable to narrow the scope of their enquiry.
-Proving a theorem in FOL is a notoriously fickle process.
+Proving a theorem in FOL is a notoriously fickle process.\cite[91]{expressiveness1987}
 It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computation.
 This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
 DL were required to fit into a niche of expressivity between propositional logic and FOL.
@@ -60,7 +60,7 @@ TBoxes are unary values that classify the individuals in one's ontology.
 ABoxes are binary attributes that are applied to individuals within the ontology.
 These assumptions can be stipulated to be subsumed by one another, intersected with one another, disjoint from one another, or even composed of a disjoint union of two others.
 An example of a TBox assertion would be, ``The Cathedral class is subsumed by the Building class,'' or, `Building \(\supset\) Cathedral'.
-TBoxes are \textit{intensional} knowledge as their application stipulates precisely what is being described in their terms.\footnote{eg. All quadrilateral shapes have four angles.}   
+TBoxes are \textit{intensional} knowledge as their application stipulates precisely what is being described in their terms.\footnote{eg. All quadrilateral shapes have four angles.}\par   
 Alternatively, an example of an ABox assertion would be, ``Notre Dame is an instance of a Cathedral,'' or, `Cathedral(Notre Dame)'.
 ABoxes are \textit{extensional} knowledge as their meanings are reliant on their application.\footnote{eg. All bodies are heavy. - The truth of this knowledge depends on how the predicate `is heavy' is applied.}\par
 It should be noted that Baader has introduced the notion of the discrete domain being a \textit{world} in the above quotation.
@@ -93,7 +93,10 @@ To reiterate, `Properties', in the OWL sense, can only ever apply to individuals
 Properties have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
 Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties provided they are applied to an individual.
-Although the OWL2 standard also allows the creation of Data Properties as well as Object Properties these shall not be covered in this article.\footnote{Data Properties are all subsumed by a primitive class called `owl:topDataProperty'.}\par
+The OWL2 standard also allows the creation of Data Properties as well as Object Properties these shall not be covered in this article.
+Data Properties are often refered to as R(ole)Boxes, as they stipulate the role that individuals can fulfill.
+They must be subsumed by a primitive class called `owl:topDataProperty'.
+Although RBoxes shall be utilised to enforce some cardinality restrictions, the case-study of this article does not lend itself to a full exploration of their potential use-cases.\par
 Finally, OWL refers to TBox assertions as `Classes'.
 Classes are used to create taxonomies (hierarchies of sets) that individuals are instances of.
 Just as with properties, every class must be subsumed by a primitive class called `owl:Thing'. 
@@ -103,8 +106,8 @@ Let us briefly examine how these tools could interact to create a world:
   There exists a \textbf{Dog} \textit{class} (owl:Thing\(\supset\)Dog). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (owl:Thing\(\supset\)Person) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Louis,Allan))\(\wedge\)(isOwnerOf(Allan,Louis))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Animal\(\supset\)Person,Dog), which in turn is subsumed by \textbf{owl:Thing}.
 \end{quote}
 Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/, accessed 05.03.18, \textit{MIT License}}
-Protégé was utilised in the production of the ontologies for the case study in this article with the widely-used FaCT reasoner\cite[24]{handbook2003}.\par
-The FaCT reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
+Protégé was utilised in the production of the ontologies for the case study in this article with the default Pellet reasoner.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/, accessed 23.03.18}
+The Pellet reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
 It will also deduce the applications of the `isOwnerOf' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
 It would flag a logically impossible (incoherent) ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
 The two most common OWL languages are the XML and Manchester OWLs\cite[30]{handbook2003}\cite[10]{guide2011}.
@@ -125,12 +128,13 @@ This poses a problem for OWL as an accurate modelling this world requires a clos
 To briefly reiterate, this is the assumption that established truth values in the domain are immutable.
 OWL utilises the open-world assumption, indeed it has been described as a ``distinguishing feature'' of DL modelling languages \cite[11]{handbook2003}. This shall require additional constraints upon the modelled ontology.\par
 The \textit{Views} also contain many distinct individuals.
-Donini \cite[135]{handbook2003} identifies individuals are a source of difficulty for reasoners.
-In particular ABox predicates can slow down the reasoner's deductions considerably.\par
+Donini \cite[135]{donini2003} identifies individuals are a source of difficulty for reasoners.
+In particular ABoxes can slow down the reasoner's deductions considerably.\par
 Lastly, the \textit{Views} are comprised of specific individuals. This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
 Usually the engineer sets the terminological parameters of an ontology first and then it is populated by individuals.
 This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
 \section{Maximal Detail}
+% REWRITE FROM HERE AFTER CORRECTING ONTOLOGIES
 The first ontology artefect captures as much of the world as possible (see Appendix A).
 Ontology engineers would rarely use the maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
 Ideally an ontology should describe its subject in the most economical way possible.\par
@@ -138,19 +142,20 @@ Ideally an ontology should describe its subject in the most economical way possi
 The maximal detail ontology needed to force a closed-world assumption.
 A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
 This signals that all that can exist in the ontology are views of Mount Fuji.
-The next step was to create two reflexive properties hasExactCardinality and containsSpecificIndividuals.
-The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the class owl:Thing can only fully represent the closed \textit{Views of Mount Fuji} by having an exact cardinality of 36.
-Similarly, containsSpecificIndividuals is a reflexive property for the class View\_of\_Mount\_Fuji.
-Every single individual in the ontology is explicitly listed as this property is applied as no other individual can exist in this ontology (see Figure 1).
+View\_of\_Mount\_Fuji was then given an exact cardinality restriction of thirty-six as only thirty-six individuals can exist in this world.
+This functionality utilises a primitive DataProperty in OWL that is distributed with the Protege software (\textbf{DataProperty} exactly 36 owl:rational).
+The next step was to create the functional and reflexive property, containsSpecificIndividuals.
+The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the class owl:Thing can only fully represent the closed \textit{Views of Mount Fuji} by having an exact relationship to those individuals.
+Additionally, this relationship is functional as each member of the class has itself as the only concept that can satisfy this restriction. 
+Every single individual in the ontology is explicitly listed as this property is applied, as no other individual can exist in this ontology (see Figure 1).
 \newline
-\centerline{\includegraphics[scale=0.4]{closedComment2}}\\
+\centerline{\includegraphics[scale=0.3]{ClosedViewsClass}}\\
 \centerline{\textit{Figure 1}}
 \newline
 This property acts as a whitelist for the reasoner for valid individuals in the ontology. The `exactly' keyword is essential to stipulate this condition.
 The stipulation reads that the class may only contain one instance of an array containing each distinct individual in the class.\par
 The reason that owl:Thing and View\_of\_Mount\_Fuji are separate classes despite being equivalent is that there is a meaningful distinction in scope between the two.
-While it may be more parsimonious to merge the classes and apply both properties to owl:Thing it is better practice to restrict the application of axioms to one per class.
-This is known as the group axiom guideline.
+While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to restrict the application of axioms to one per class.
 There is a meaningful difference in the functionality of these two classes and it ought to be argued that the order of the generality being established is important.
 First it is established that there are thirty-six owl:Things and then more specifically the whitelist of allowed things is introduced.
 This concludes the application of the closed-world assumption on this ontology.\par
@@ -170,7 +175,7 @@ Their names are descriptive but it is worth briefly mentioning how these classes
 \subsection{Properties}
 Our ABox assertions are binary predicates that either apply or do not apply to every individual in the ontology.
 The most fundamental property is owl:topObjectProperty, which operates in a similar manner to owl:Thing to provide a basic profile for the property predicate.
-The next most fundamental properties are boatsForegroundOrBackground, containsSpecficIndividuals, depictsConstruction, depictsRooftops, depictsTemple, discolouredMountFuji, hasExactCardinality, hasTwoMountFujis, indoorScene, mistForeground, mountFujiBackground, mountFujiForeground, redMountFuji, treeForeground and yellowMountFuji.\par
+The next most fundamental properties are boatsForegroundOrBackground, containsSpecficIndividuals, depictsConstruction, depictsRooftops, depictsTemple, discolouredMountFuji, , hasTwoMountFujis, indoorScene, mistForeground, mountFujiBackground, mountFujiForeground, redMountFuji, treeForeground and yellowMountFuji.\par
 Two of these properties have already been discussed earlier in this section and the others are self explanatory.
 None of the properties have characteristics aside from the two reflexive properties already discussed as the predicates are not characterising relationships between individuals, rather they are just providing a means to differentiate individuals.
 However, it is worth mentioning that discolouredMountFuji, redMountFuji and yellowMountFuji are all disjoint from one another, as Mount Fuji cannot be depicted with more than one of these properties.
@@ -182,13 +187,13 @@ By couching the \textit{Views} in terms of these ABox assertions and the TBox as
 \subsection{The Reasoner}
 The reasoner struggles with this ontology.
 Typically it takes five minutes for the reasoner to deduce its inferences from this KB.
-Curiously, the closed-world assumption ought to make reasoning more tractable, however in this case the FaCT reasoner is designed to reason efficiently over an ontology with the open-world assumption.
-As this ontology forces the closed-world assumption with the two reflexive properties (hasExactCardinality and containsSpecificIndividuals), the reasoner is having to factor in many additional steps when handling the thirty-six individuals.
+Curiously, the closed-world assumption ought to make reasoning more tractable, however in this case the Pellet reasoner is designed to reason efficiently over an ontology with the open-world assumption.
+As this ontology forces the closed-world assumption with the two reflexive properties ( and containsSpecificIndividuals), the reasoner is having to factor in many additional steps when handling the thirty-six individuals.
 Each individual, as every individual is a member of the View\_of\_Mount\_Fuji class, has two additional binary predicates attached to every propositional calculation the reasoner needs to compute.\par
 Despite being slow the reasoner is fully functional. As we can see in fig. 2, it is able to locate instances where classes are invalid.
 \newline
 \newline
-\centerline{\includegraphics[scale=0.3]{DisjointUnionClosed}}\\
+\centerline{\includegraphics[scale=0.3]{ClosedDisjointUnion}}\\
 \centerline{\textit{Figure 2}}
 \newline
 In this output the class NOT\_Agriculture\_AND\_NOT\_Urbanisation, a disjoint union of Agriculture and Urbanisation themes, is refuted by the existence of an individual who manifests both of these themes. While this may appear trivial, reasoning over a large KB would be significantly more challenging for a human reasoner.\par
@@ -270,6 +275,13 @@ Insert measured conclusion here.
   AAAI-84 Proceedings,
   1984.
 
+\bibitem[Donini, 2003]{donini2003}
+  Donini, F. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+
 \bibitem[Horridge, 2011]{guide2011}
   Horridge, M.: 
   \textit{A Practical Guide to Building OWL Ontologies},
@@ -338,6 +350,9 @@ Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-
 AnnotationProperty: rdfs:comment
 
     
+Datatype: owl:rational
+
+    
 Datatype: rdf:PlainLiteral
 
     
@@ -356,9 +371,10 @@ ObjectProperty: boatsForegroundOrBackground
 ObjectProperty: containsSpecificIndividuals
 
     Annotations: 
-        rdfs:comment "Reflexive as the set is related to the Thirty-six views by containing specific members."@en
+        rdfs:comment "Reflexive as the set is related to the Thirty-six views by containing specific members. Functional as there is only one (reflexive) value that can satisfy stipulation."@en
     
     Characteristics: 
+        Functional,
         Reflexive
     
     
@@ -371,26 +387,10 @@ ObjectProperty: depictsRooftops
 ObjectProperty: depictsTemple
 
     
-ObjectProperty: discolouredMountFuji
-
-    DisjointWith: 
-        redMountFuji,
-        yellowMountFuji
-    
-    
 ObjectProperty: hasBoatForeground
 
     SubPropertyOf: 
         boatsForegroundOrBackground
-    
-    
-ObjectProperty: hasExactCardinality
-
-    Annotations: 
-        rdfs:comment "Reflexive as the class is related to itself by being a set with an exact cardinality (36)."@en
-    
-    Characteristics: 
-        Reflexive
     
     
 ObjectProperty: hasTwoMountFujis
@@ -417,16 +417,6 @@ ObjectProperty: mountFujiForeground
 ObjectProperty: owl:topObjectProperty
 
     
-ObjectProperty: redMountFuji
-
-    SubPropertyOf: 
-        owl:topObjectProperty
-    
-    DisjointWith: 
-        discolouredMountFuji,
-        yellowMountFuji
-    
-    
 ObjectProperty: rooftopsForeground
 
     SubPropertyOf: 
@@ -436,12 +426,8 @@ ObjectProperty: rooftopsForeground
 ObjectProperty: treeForeground
 
     
-ObjectProperty: yellowMountFuji
+DataProperty: owl:topDataProperty
 
-    DisjointWith: 
-        discolouredMountFuji,
-        redMountFuji
-    
     
 Class: Agriculture_Theme
 
@@ -459,6 +445,15 @@ Class: Bodies_Of_Water_Motif
 
     SubClassOf: 
         View_of_Mount_Fuji
+    
+    
+Class: Discoloured_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Red_Mount_Fuji, Yellow_Mount_Fuji
     
     
 Class: Horse_Motif
@@ -500,6 +495,15 @@ Class: People_Motif
         NOT_People, Wildlife_NOT_People
     
     
+Class: Red_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Discoloured_Mount_Fuji, Yellow_Mount_Fuji
+    
+    
 Class: Snow_Capped_Mount_Fuji
 
     SubClassOf: 
@@ -522,7 +526,7 @@ Class: View_of_Mount_Fuji
     
     SubClassOf: 
         owl:Thing,
-        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop , Asakusa_Hongan-ji_temple , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tokaido , Inume_Pass_Koshu , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Totomi , Mount_Fuji_reflects_in_Lake_Kawaguchi , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tokaido , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryogoku_bridge , Tama_River_in_Musashi_Province , Tea_house_at_Koisikawa , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tokaido})
+        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop , Asakusa_Hongan-ji_temple , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tokaido , Inume_Pass_Koshu , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Totomi , Mount_Fuji_reflects_in_Lake_Kawaguchi , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tokaido , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryogoku_bridge , Tama_River_in_Musashi_Province , Tea_house_at_Koishikawa , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tokaido})
     
     
 Class: Wildlife_AND_Bodies_of_Water
@@ -549,6 +553,15 @@ Class: Wildlife_NOT_People
         People_Motif
     
     
+Class: Yellow_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Discoloured_Mount_Fuji, Red_Mount_Fuji
+    
+    
 Class: owl:Thing
 
     Annotations: 
@@ -558,7 +571,7 @@ Class: owl:Thing
         View_of_Mount_Fuji
     
     SubClassOf: 
-        hasExactCardinality exactly 36 View_of_Mount_Fuji
+        owl:topDataProperty exactly 36 owl:rational
     
     
 Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
@@ -634,13 +647,13 @@ Individual: Bay_of_Noboto
 Individual: Cushion_Pine_at_Aoyama
 
     Types: 
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         View_of_Mount_Fuji
     
     Facts:  
      depictsRooftops  Cushion_Pine_at_Aoyama,
-     discolouredMountFuji  Cushion_Pine_at_Aoyama,
      mountFujiBackground  Cushion_Pine_at_Aoyama
     
     
@@ -648,11 +661,11 @@ Individual: Ejiri_in_Suruga_Province
 
     Types: 
         Agriculture_Theme,
+        Discoloured_Mount_Fuji,
         People_Motif,
         View_of_Mount_Fuji
     
     Facts:  
-     discolouredMountFuji  Ejiri_in_Suruga_Province,
      mountFujiBackground  Ejiri_in_Suruga_Province,
      treeForeground  Ejiri_in_Suruga_Province
     
@@ -715,12 +728,12 @@ Individual: Kajikazawa_in_Kai_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         View_of_Mount_Fuji
     
     Facts:  
-     discolouredMountFuji  Kajikazawa_in_Kai_Province,
      mountFujiBackground  Kajikazawa_in_Kai_Province
     
     
@@ -739,6 +752,7 @@ Individual: Mishima_Pass_in_Kai_Province
 Individual: Mount_Fuji_from_the_mountains_of_Totomi
 
     Types: 
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -746,7 +760,6 @@ Individual: Mount_Fuji_from_the_mountains_of_Totomi
     
     Facts:  
      depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi,
-     discolouredMountFuji  Mount_Fuji_from_the_mountains_of_Totomi,
      mountFujiBackground  Mount_Fuji_from_the_mountains_of_Totomi
     
     
@@ -757,12 +770,12 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
         Maritime_Theme,
         NOT_People,
         Snow_Capped_Mount_Fuji,
-        View_of_Mount_Fuji
+        View_of_Mount_Fuji,
+        Yellow_Mount_Fuji
     
     Facts:  
      hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi,
-     mountFujiBackground  Mount_Fuji_reflects_in_Lake_Kawaguchi,
-     yellowMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi
+     mountFujiBackground  Mount_Fuji_reflects_in_Lake_Kawaguchi
     
     
 Individual: Nihonbashi_bridge_in_Edo
@@ -785,12 +798,12 @@ Individual: Rainstorm_Beneath_the_Summit
     Types: 
         NOT_Agriculture_AND_NOT_Maritime,
         NOT_People,
+        Red_Mount_Fuji,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
     Facts:  
-     mountFujiForeground  Rainstorm_Beneath_the_Summit,
-     redMountFuji  Rainstorm_Beneath_the_Summit
+     mountFujiForeground  Rainstorm_Beneath_the_Summit
     
     
 Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
@@ -814,13 +827,13 @@ Individual: Senju_Musashi_Province
     Types: 
         Agriculture_Theme,
         Animals_Motif,
+        Discoloured_Mount_Fuji,
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
     Facts:  
-     discolouredMountFuji  Senju_Musashi_Province,
      mountFujiBackground  Senju_Musashi_Province
     
     
@@ -828,13 +841,13 @@ Individual: Shichiri_beach_in_Sagami_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         NOT_People,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
     Facts:  
-     discolouredMountFuji  Shichiri_beach_in_Sagami_Province,
      mountFujiBackground  Shichiri_beach_in_Sagami_Province
     
     
@@ -870,11 +883,11 @@ Individual: South_Wind_Clear_Sky
     Types: 
         NOT_Agriculture_AND_NOT_Maritime,
         NOT_People,
+        Red_Mount_Fuji,
         View_of_Mount_Fuji
     
     Facts:  
-     mountFujiForeground  South_Wind_Clear_Sky,
-     redMountFuji  South_Wind_Clear_Sky
+     mountFujiForeground  South_Wind_Clear_Sky
     
     
 Individual: Sundai_Edo
@@ -918,11 +931,12 @@ Individual: Tama_River_in_Musashi_Province
      treeForeground  Tama_River_in_Musashi_Province
     
     
-Individual: Tea_house_at_Koisikawa
+Individual: Tea_house_at_Koishikawa
 
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -932,10 +946,9 @@ Individual: Tea_house_at_Koisikawa
         Wildlife_Motif
     
     Facts:  
-     discolouredMountFuji  Tea_house_at_Koisikawa,
-     mountFujiBackground  Tea_house_at_Koisikawa,
-     rooftopsForeground  Tea_house_at_Koisikawa,
-     treeForeground  Tea_house_at_Koisikawa
+     mountFujiBackground  Tea_house_at_Koishikawa,
+     rooftopsForeground  Tea_house_at_Koishikawa,
+     treeForeground  Tea_house_at_Koishikawa
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -1012,6 +1025,7 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -1020,7 +1034,6 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
     
     Facts:  
      depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
-     discolouredMountFuji  Under_Mannen_Bridge_at_Fukagawa,
      hasBoatForeground  Under_Mannen_Bridge_at_Fukagawa,
      mountFujiBackground  Under_Mannen_Bridge_at_Fukagawa
     
@@ -1030,6 +1043,7 @@ Individual: Ushibori_in_Hitachi_Province
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -1037,7 +1051,6 @@ Individual: Ushibori_in_Hitachi_Province
         Wildlife_Motif
     
     Facts:  
-     discolouredMountFuji  Ushibori_in_Hitachi_Province,
      hasBoatForeground  Ushibori_in_Hitachi_Province,
      mountFujiBackground  Ushibori_in_Hitachi_Province
     
@@ -1088,6 +1101,9 @@ Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-
 AnnotationProperty: rdfs:comment
 
     
+Datatype: owl:rational
+
+    
 Datatype: rdf:PlainLiteral
 
     
@@ -1130,24 +1146,13 @@ ObjectProperty: depictsRooftops
 ObjectProperty: depictsTemple
 
     
-ObjectProperty: discolouredMountFuji
-
-    
-ObjectProperty: hasExactCardinality
-
-    Annotations: 
-        rdfs:comment "Reflexive: Each individual is related to its class by being the only instance."@en
-    
-    Characteristics: 
-        Reflexive
-    
-    
 ObjectProperty: hasSpecificIndividual
 
     Annotations: 
-        rdfs:comment "Reflexive: Each individual is related to its class by being the only instance."@en
+        rdfs:comment "Reflexive: Each individual is related to its class by being the only instance. Functional: Only one individual can satisfy this property."@en
     
     Characteristics: 
+        Functional,
         Reflexive
     
     
@@ -1202,12 +1207,6 @@ ObjectProperty: peopleMotif
         notPeopleMotif
     
     
-ObjectProperty: redMountFuji
-
-    DisjointWith: 
-        yellowMountFuji
-    
-    
 ObjectProperty: rooftopsForeground
 
     SubPropertyOf: 
@@ -1247,21 +1246,15 @@ ObjectProperty: wildlifeNotPeople
         peopleMotif
     
     
-ObjectProperty: yellowMountFuji
+DataProperty: owl:topDataProperty
 
-    SubPropertyOf: 
-        owl:topObjectProperty
-    
-    DisjointWith: 
-        redMountFuji
-    
     
 Class: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({A_View_of_Mount_Fuji_Across_Lake_Suwa}),
-        hasExactCardinality exactly 1 A_View_of_Mount_Fuji_Across_Lake_Suwa
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: A_sketch_of_the_Mitsui_shop
@@ -1269,7 +1262,7 @@ Class: A_sketch_of_the_Mitsui_shop
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({A_sketch_of_the_Mitsui_shop}),
-        hasExactCardinality exactly 1 A_sketch_of_the_Mitsui_shop
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Asakusa_Hongan-ji_temple
@@ -1277,7 +1270,7 @@ Class: Asakusa_Hongan-ji_temple
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Asakusa_Hongan-ji_temple}),
-        hasExactCardinality exactly 1 Asakusa_Hongan-ji_temple
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Barrier_Town_on_the_Sumida_River
@@ -1285,7 +1278,7 @@ Class: Barrier_Town_on_the_Sumida_River
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Barrier_Town_on_the_Sumida_River}),
-        hasExactCardinality exactly 1 Barrier_Town_on_the_Sumida_River
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Bay_of_Noboto
@@ -1293,7 +1286,7 @@ Class: Bay_of_Noboto
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Bay_of_Noboto}),
-        hasExactCardinality exactly 1 Bay_of_Noboto
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Cushion_Pine_at_Aoyama
@@ -1301,7 +1294,7 @@ Class: Cushion_Pine_at_Aoyama
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Cushion_Pine_at_Aoyama}),
-        hasExactCardinality exactly 1 Cushion_Pine_at_Aoyama
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Ejiri_in_Suruga_Province
@@ -1309,7 +1302,7 @@ Class: Ejiri_in_Suruga_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Ejiri_in_Suruga_Province}),
-        hasExactCardinality exactly 1 Ejiri_in_Suruga_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Enoshima_in_Sagami_Province
@@ -1317,7 +1310,7 @@ Class: Enoshima_in_Sagami_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Enoshima_in_Sagami_Province}),
-        hasExactCardinality exactly 1 Enoshima_in_Sagami_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Fuji_View_Field_in_Owari_Province
@@ -1325,7 +1318,7 @@ Class: Fuji_View_Field_in_Owari_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Fuji_View_Field_in_Owari_Province}),
-        hasExactCardinality exactly 1 Fuji_View_Field_in_Owari_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Hodogaya_on_the_Tokaido
@@ -1333,7 +1326,7 @@ Class: Hodogaya_on_the_Tokaido
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Hodogaya_on_the_Tokaido}),
-        hasExactCardinality exactly 1 Hodogaya_on_the_Tokaido
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Inume_Pass_Koshu
@@ -1341,7 +1334,7 @@ Class: Inume_Pass_Koshu
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Inume_Pass_Koshu}),
-        hasExactCardinality exactly 1 Inume_Pass_Koshu
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Kajikazawa_in_Kai_Province
@@ -1349,7 +1342,7 @@ Class: Kajikazawa_in_Kai_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Kajikazawa_in_Kai_Province}),
-        hasExactCardinality exactly 1 Kajikazawa_in_Kai_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Mishima_Pass_in_Kai_Province
@@ -1357,7 +1350,7 @@ Class: Mishima_Pass_in_Kai_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Mishima_Pass_in_Kai_Province}),
-        hasExactCardinality exactly 1 Mishima_Pass_in_Kai_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Mount_Fuji_from_the_mountains_of_Totomi
@@ -1365,7 +1358,7 @@ Class: Mount_Fuji_from_the_mountains_of_Totomi
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Mount_Fuji_from_the_mountains_of_Totomi}),
-        hasExactCardinality exactly 1 Mount_Fuji_from_the_mountains_of_Totomi
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Mount_Fuji_reflects_in_Lake_Kawaguchi
@@ -1373,7 +1366,7 @@ Class: Mount_Fuji_reflects_in_Lake_Kawaguchi
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Mount_Fuji_reflects_in_Lake_Kawaguchi}),
-        hasExactCardinality exactly 1 Mount_Fuji_reflects_in_Lake_Kawaguchi
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Nihonbashi_bridge_in_Edo
@@ -1381,7 +1374,7 @@ Class: Nihonbashi_bridge_in_Edo
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Nihonbashi_bridge_in_Edo}),
-        hasExactCardinality exactly 1 Nihonbashi_bridge_in_Edo
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Rainstorm_Beneath_the_Summit
@@ -1389,7 +1382,7 @@ Class: Rainstorm_Beneath_the_Summit
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Rainstorm_Beneath_the_Summit}),
-        hasExactCardinality exactly 1 Rainstorm_Beneath_the_Summit
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Sazai_hall_Temple_of_Five_Hundred_Raken
@@ -1397,7 +1390,7 @@ Class: Sazai_hall_Temple_of_Five_Hundred_Raken
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Sazai_hall_-_Temple_of_Five_Hundred_Rakan}),
-        hasExactCardinality exactly 1 Sazai_hall_Temple_of_Five_Hundred_Raken
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Senju_Musashi_Province
@@ -1405,7 +1398,7 @@ Class: Senju_Musashi_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Senju_Musashi_Province}),
-        hasExactCardinality exactly 1 Senju_Musashi_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Shichiri_beach_in_Sagami_Province
@@ -1413,7 +1406,7 @@ Class: Shichiri_beach_in_Sagami_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Shichiri_beach_in_Sagami_Province}),
-        hasExactCardinality exactly 1 Shichiri_beach_in_Sagami_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Shimomeguro
@@ -1421,7 +1414,7 @@ Class: Shimomeguro
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Shimomeguro}),
-        hasExactCardinality exactly 1 Shimomeguro
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Shore_of_Tago_Bay_Ejiri_at_Tokaido
@@ -1429,7 +1422,7 @@ Class: Shore_of_Tago_Bay_Ejiri_at_Tokaido
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Shore_of_Tago_Bay_Ejiri_at_Tokaido}),
-        hasExactCardinality exactly 1 Shore_of_Tago_Bay_Ejiri_at_Tokaido
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: South_Wind_Clear_Sky
@@ -1437,7 +1430,7 @@ Class: South_Wind_Clear_Sky
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({South_Wind_Clear_Sky}),
-        hasExactCardinality exactly 1 South_Wind_Clear_Sky
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Sundai_Edo
@@ -1445,7 +1438,7 @@ Class: Sundai_Edo
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Sundai_Edo}),
-        hasExactCardinality exactly 1 Sundai_Edo
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Sunset_across_the_Ryogoku_bridge
@@ -1453,7 +1446,7 @@ Class: Sunset_across_the_Ryogoku_bridge
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Sunset_across_the_Ryogoku_bridge}),
-        hasExactCardinality exactly 1 Sunset_across_the_Ryogoku_bridge
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Tama_River_in_Musashi_Province
@@ -1461,7 +1454,7 @@ Class: Tama_River_in_Musashi_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Tama_River_in_Musashi_Province}),
-        hasExactCardinality exactly 1 Tama_River_in_Musashi_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Tea_house_at_Koishikawa
@@ -1469,7 +1462,7 @@ Class: Tea_house_at_Koishikawa
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Tea_house_at_Koishikawa}),
-        hasExactCardinality exactly 1 Tea_house_at_Koishikawa
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: The_Great_Wave_off_Kanagawa
@@ -1477,7 +1470,7 @@ Class: The_Great_Wave_off_Kanagawa
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({The_Great_Wave_off_Kanagawa}),
-        hasExactCardinality exactly 1 The_Great_Wave_off_Kanagawa
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: The_Kazusa_Province_sea_route
@@ -1485,7 +1478,7 @@ Class: The_Kazusa_Province_sea_route
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({The_Kazusa_Province_sea_route}),
-        hasExactCardinality exactly 1 The_Kazusa_Province_sea_route
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: The_lake_of_Hakone_in_Sagami_Province
@@ -1493,7 +1486,7 @@ Class: The_lake_of_Hakone_in_Sagami_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({The_lake_of_Hakone_in_Sagami_Province}),
-        hasExactCardinality exactly 1 The_lake_of_Hakone_in_Sagami_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Tsukuda_Island_in_Musashi_Province
@@ -1501,7 +1494,7 @@ Class: Tsukuda_Island_in_Musashi_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Tsukuda_Island_in_Musashi_Province}),
-        hasExactCardinality exactly 1 Tsukuda_Island_in_Musashi_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Umezawa_in_Sagami_Province
@@ -1509,7 +1502,7 @@ Class: Umezawa_in_Sagami_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Umezawa_in_Sagami_Province}),
-        hasExactCardinality exactly 1 Umezawa_in_Sagami_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Under_Mannen_Bridge_at_Fukagawa
@@ -1517,7 +1510,7 @@ Class: Under_Mannen_Bridge_at_Fukagawa
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Under_Mannen_Bridge_at_Fukagawa}),
-        hasExactCardinality exactly 1 Under_Mannen_Bridge_at_Fukagawa
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Ushibori_in_Hitachi_Province
@@ -1525,7 +1518,7 @@ Class: Ushibori_in_Hitachi_Province
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Ushibori_in_Hitachi_Province}),
-        hasExactCardinality exactly 1 Ushibori_in_Hitachi_Province
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: View_of_Mount_Fuji
@@ -1539,7 +1532,7 @@ Class: Watermill_at_Onden
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Watermill_at_Onden}),
-        hasExactCardinality exactly 1 Watermill_at_Onden
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: Yoshida_at_Tokaido
@@ -1547,7 +1540,7 @@ Class: Yoshida_at_Tokaido
     SubClassOf: 
         View_of_Mount_Fuji,
         hasSpecificIndividual only ({Yoshida_at_Tokaido}),
-        hasExactCardinality exactly 1 Yoshida_at_Tokaido
+        owl:topDataProperty exactly 1 owl:rational
     
     
 Class: owl:Thing
@@ -1636,7 +1629,6 @@ Individual: Cushion_Pine_at_Aoyama
     
     Facts:  
      depictsRooftops  Cushion_Pine_at_Aoyama,
-     discolouredMountFuji  Cushion_Pine_at_Aoyama,
      mountFujiBackground  Cushion_Pine_at_Aoyama,
      peopleMotif  Cushion_Pine_at_Aoyama
     
@@ -1649,7 +1641,6 @@ Individual: Ejiri_in_Suruga_Province
     
     Facts:  
      agricultureTheme  Ejiri_in_Suruga_Province,
-     discolouredMountFuji  Ejiri_in_Suruga_Province,
      mountFujiBackground  Ejiri_in_Suruga_Province,
      peopleMotif  Ejiri_in_Suruga_Province,
      treeForeground  Ejiri_in_Suruga_Province
@@ -1719,7 +1710,6 @@ Individual: Kajikazawa_in_Kai_Province
     
     Facts:  
      bodiesOfWaterMotif  Kajikazawa_in_Kai_Province,
-     discolouredMountFuji  Kajikazawa_in_Kai_Province,
      mountFujiBackground  Kajikazawa_in_Kai_Province,
      peopleMotif  Kajikazawa_in_Kai_Province
     
@@ -1744,7 +1734,6 @@ Individual: Mount_Fuji_from_the_mountains_of_Totomi
     
     Facts:  
      depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi,
-     discolouredMountFuji  Mount_Fuji_from_the_mountains_of_Totomi,
      mountFujiBackground  Mount_Fuji_from_the_mountains_of_Totomi,
      peopleMotif  Mount_Fuji_from_the_mountains_of_Totomi,
      snowCappedMountFuji  Mount_Fuji_from_the_mountains_of_Totomi
@@ -1762,8 +1751,7 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
      maritimeTheme  Mount_Fuji_reflects_in_Lake_Kawaguchi,
      mountFujiBackground  Mount_Fuji_reflects_in_Lake_Kawaguchi,
      notPeopleMotif  Mount_Fuji_reflects_in_Lake_Kawaguchi,
-     snowCappedMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi,
-     yellowMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi
+     snowCappedMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi
     
     
 Individual: Nihonbashi_bridge_in_Edo
@@ -1791,7 +1779,6 @@ Individual: Rainstorm_Beneath_the_Summit
     Facts:  
      mountFujiForeground  Rainstorm_Beneath_the_Summit,
      notPeopleMotif  Rainstorm_Beneath_the_Summit,
-     redMountFuji  Rainstorm_Beneath_the_Summit,
      snowCappedMountFuji  Rainstorm_Beneath_the_Summit
     
     
@@ -1820,7 +1807,6 @@ Individual: Senju_Musashi_Province
     Facts:  
      agricultureTheme  Senju_Musashi_Province,
      animalsMotif  Senju_Musashi_Province,
-     discolouredMountFuji  Senju_Musashi_Province,
      horseMotif  Senju_Musashi_Province,
      mountFujiBackground  Senju_Musashi_Province,
      peopleMotif  Senju_Musashi_Province,
@@ -1835,7 +1821,6 @@ Individual: Shichiri_beach_in_Sagami_Province
     
     Facts:  
      bodiesOfWaterMotif  Shichiri_beach_in_Sagami_Province,
-     discolouredMountFuji  Shichiri_beach_in_Sagami_Province,
      mountFujiBackground  Shichiri_beach_in_Sagami_Province,
      notPeopleMotif  Shichiri_beach_in_Sagami_Province,
      snowCappedMountFuji  Shichiri_beach_in_Sagami_Province
@@ -1877,8 +1862,7 @@ Individual: South_Wind_Clear_Sky
     
     Facts:  
      mountFujiForeground  South_Wind_Clear_Sky,
-     notPeopleMotif  South_Wind_Clear_Sky,
-     redMountFuji  South_Wind_Clear_Sky
+     notPeopleMotif  South_Wind_Clear_Sky
     
     
 Individual: Sundai_Edo
@@ -1934,7 +1918,6 @@ Individual: Tea_house_at_Koishikawa
     Facts:  
      animalsMotif  Tea_house_at_Koishikawa,
      bodiesOfWaterMotif  Tea_house_at_Koishikawa,
-     discolouredMountFuji  Tea_house_at_Koishikawa,
      mountFujiBackground  Tea_house_at_Koishikawa,
      peopleMotif  Tea_house_at_Koishikawa,
      rooftopsForeground  Tea_house_at_Koishikawa,
@@ -2028,7 +2011,6 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
      boatForeground  Under_Mannen_Bridge_at_Fukagawa,
      bodiesOfWaterMotif  Under_Mannen_Bridge_at_Fukagawa,
      depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
-     discolouredMountFuji  Under_Mannen_Bridge_at_Fukagawa,
      maritimeTheme  Under_Mannen_Bridge_at_Fukagawa,
      mountFujiBackground  Under_Mannen_Bridge_at_Fukagawa,
      peopleMotif  Under_Mannen_Bridge_at_Fukagawa,
@@ -2045,7 +2027,6 @@ Individual: Ushibori_in_Hitachi_Province
     Facts:  
      boatForeground  Ushibori_in_Hitachi_Province,
      bodiesOfWaterMotif  Ushibori_in_Hitachi_Province,
-     discolouredMountFuji  Ushibori_in_Hitachi_Province,
      maritimeTheme  Ushibori_in_Hitachi_Province,
      mountFujiBackground  Ushibori_in_Hitachi_Province,
      peopleMotif  Ushibori_in_Hitachi_Province,
@@ -2119,12 +2100,6 @@ ObjectProperty: boatsForegroundOrBackground
         Maritime_Theme
     
     
-ObjectProperty: colouredMountFuji
-
-    DisjointWith: 
-        discolouredMountFuji
-    
-    
 ObjectProperty: depictsConstruction
 
     
@@ -2133,12 +2108,6 @@ ObjectProperty: depictsRooftops
     
 ObjectProperty: depictsTemple
 
-    
-ObjectProperty: discolouredMountFuji
-
-    DisjointWith: 
-        colouredMountFuji
-    
     
 ObjectProperty: hasBoatForeground
 
@@ -2177,6 +2146,12 @@ Class: Animals_Motif
 
     
 Class: Bodies_Of_Water_Motif
+
+    
+Class: Coloured_Mount_Fuji
+
+    
+Class: Discoloured_Mount_Fuji
 
     
 Class: Horse_Motif
@@ -2302,24 +2277,24 @@ Individual: Bay_of_Noboto
 Individual: Cushion_Pine_at_Aoyama
 
     Types: 
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         owl:Thing
     
     Facts:  
-     depictsRooftops  Cushion_Pine_at_Aoyama,
-     discolouredMountFuji  Cushion_Pine_at_Aoyama
+     depictsRooftops  Cushion_Pine_at_Aoyama
     
     
 Individual: Ejiri_in_Suruga_Province
 
     Types: 
         Agriculture_Theme,
+        Discoloured_Mount_Fuji,
         People_Motif,
         owl:Thing
     
     Facts:  
-     discolouredMountFuji  Ejiri_in_Suruga_Province,
      treeForeground  Ejiri_in_Suruga_Province
     
     
@@ -2371,12 +2346,10 @@ Individual: Kajikazawa_in_Kai_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Kajikazawa_in_Kai_Province
     
     
 Individual: Mishima_Pass_in_Kai_Province
@@ -2393,26 +2366,26 @@ Individual: Mishima_Pass_in_Kai_Province
 Individual: Mount_Fuji_from_the_mountains_of_Totomi
 
     Types: 
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
     Facts:  
-     depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi,
-     discolouredMountFuji  Mount_Fuji_from_the_mountains_of_Totomi
+     depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi
     
     
 Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
 
     Types: 
         Bodies_Of_Water_Motif,
+        Coloured_Mount_Fuji,
         Maritime_Theme,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
     Facts:  
-     colouredMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi,
      hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi
     
     
@@ -2433,12 +2406,12 @@ Individual: Nihonbashi_bridge_in_Edo
 Individual: Rainstorm_Beneath_the_Summit
 
     Types: 
+        Coloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
     Facts:  
-     colouredMountFuji  Rainstorm_Beneath_the_Summit,
      mountFujiForeground  Rainstorm_Beneath_the_Summit
     
     
@@ -2462,25 +2435,21 @@ Individual: Senju_Musashi_Province
     Types: 
         Agriculture_Theme,
         Animals_Motif,
+        Discoloured_Mount_Fuji,
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Senju_Musashi_Province
     
     
 Individual: Shichiri_beach_in_Sagami_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Shichiri_beach_in_Sagami_Province
     
     
 Individual: Shimomeguro
@@ -2511,11 +2480,11 @@ Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
 Individual: South_Wind_Clear_Sky
 
     Types: 
+        Coloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         owl:Thing
     
     Facts:  
-     colouredMountFuji  South_Wind_Clear_Sky,
      mountFujiForeground  South_Wind_Clear_Sky
     
     
@@ -2557,11 +2526,12 @@ Individual: Tama_River_in_Musashi_Province
      treeForeground  Tama_River_in_Musashi_Province
     
     
-Individual: Tea_house_at_Koisikawa
+Individual: Tea_house_at_Koishikawa
 
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -2571,9 +2541,8 @@ Individual: Tea_house_at_Koisikawa
         owl:Thing
     
     Facts:  
-     discolouredMountFuji  Tea_house_at_Koisikawa,
-     rooftopsForeground  Tea_house_at_Koisikawa,
-     treeForeground  Tea_house_at_Koisikawa
+     rooftopsForeground  Tea_house_at_Koishikawa,
+     treeForeground  Tea_house_at_Koishikawa
     
     
 Individual: The_Great_Wave_off_Kanagawa
@@ -2643,6 +2612,7 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -2651,7 +2621,6 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
     
     Facts:  
      depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
-     discolouredMountFuji  Under_Mannen_Bridge_at_Fukagawa,
      hasBoatForeground  Under_Mannen_Bridge_at_Fukagawa
     
     
@@ -2660,6 +2629,7 @@ Individual: Ushibori_in_Hitachi_Province
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -2667,7 +2637,6 @@ Individual: Ushibori_in_Hitachi_Province
         owl:Thing
     
     Facts:  
-     discolouredMountFuji  Ushibori_in_Hitachi_Province,
      hasBoatForeground  Ushibori_in_Hitachi_Province
     
     
@@ -2694,7 +2663,6 @@ Individual: Yoshida_at_Tokaido
     
     Facts:  
      indoorScene  Yoshida_at_Tokaido
-
 \end{lstlisting}
 
 \newpage
@@ -2706,7 +2674,7 @@ Individual: Yoshida_at_Tokaido
 use strict;
 use warnings;
 
-# Turn off Japanese character print warning
+# Turn off unusual character print warning
 no warnings 'utf8';
 
 # Global Vars
@@ -2732,11 +2700,11 @@ sub get_ontology{
 	Enter another number to quit: ";
 	chomp(my $ontology = <STDIN>);
 	if($ontology=="1") {
-		$filename = "thirtySixViewsClosed.owl";
+		$filename = "Ontologies/thirtySixViewsClosed.owl";
 	}elsif($ontology=="2") {
-		$filename = "thirtySixViewsOpen.owl";
+		$filename = "Ontologies/thirtySixViewsOpen.owl";
 	}elsif($ontology=="3") { 
-		$filename = "thirtySixViewsMVP.owl";
+		$filename = "Ontologies/thirtySixViewsMVP.owl";
 	}else{exit 0;}
 	return $filename;
 }
@@ -2744,13 +2712,15 @@ sub get_ontology{
 # Select search term 
 sub get_search{
 	print ">>>
-	View all classes (1), all individuals (2),
-	all object properties (3) or enter a search term: ";
+	View all classes (1), all individuals (2), all
+	object properties (3), all data properties (4)  
+	or enter a search term: ";
 	chomp($search = <STDIN>);
 	exit 0 if ($search eq "");
 	if ($search eq "1"){$search = "Class:";}
 	if ($search eq "2"){$search = "Individual:";}
 	if ($search eq "3"){$search = "ObjectProperty:";}
+	if ($search eq "4"){$search = "DataProperty:";}
 	return $search;
 }
 
@@ -2767,7 +2737,8 @@ sub print_output{
 		chomp $row; 
 		print "$row\n" if ($row =~ $search);
 	}
-} 
+}
+
 \end{lstlisting}
 
 \newpage
