@@ -29,12 +29,6 @@ ObjectProperty: boatsForegroundOrBackground
         Maritime_Theme
     
     
-ObjectProperty: colouredMountFuji
-
-    DisjointWith: 
-        discolouredMountFuji
-    
-    
 ObjectProperty: depictsConstruction
 
     
@@ -43,12 +37,6 @@ ObjectProperty: depictsRooftops
     
 ObjectProperty: depictsTemple
 
-    
-ObjectProperty: discolouredMountFuji
-
-    DisjointWith: 
-        colouredMountFuji
-    
     
 ObjectProperty: hasBoatForeground
 
@@ -87,6 +75,12 @@ Class: Animals_Motif
 
     
 Class: Bodies_Of_Water_Motif
+
+    
+Class: Coloured_Mount_Fuji
+
+    
+Class: Discoloured_Mount_Fuji
 
     
 Class: Horse_Motif
@@ -212,24 +206,24 @@ Individual: Bay_of_Noboto
 Individual: Cushion_Pine_at_Aoyama
 
     Types: 
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         owl:Thing
     
     Facts:  
-     depictsRooftops  Cushion_Pine_at_Aoyama,
-     discolouredMountFuji  Cushion_Pine_at_Aoyama
+     depictsRooftops  Cushion_Pine_at_Aoyama
     
     
 Individual: Ejiri_in_Suruga_Province
 
     Types: 
         Agriculture_Theme,
+        Discoloured_Mount_Fuji,
         People_Motif,
         owl:Thing
     
     Facts:  
-     discolouredMountFuji  Ejiri_in_Suruga_Province,
      treeForeground  Ejiri_in_Suruga_Province
     
     
@@ -281,12 +275,10 @@ Individual: Kajikazawa_in_Kai_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Kajikazawa_in_Kai_Province
     
     
 Individual: Mishima_Pass_in_Kai_Province
@@ -303,26 +295,26 @@ Individual: Mishima_Pass_in_Kai_Province
 Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
 
     Types: 
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
     Facts:  
-     depictsConstruction  Mount_Fuji_from_the_mountains_of_Tōtōmi,
-     discolouredMountFuji  Mount_Fuji_from_the_mountains_of_Tōtōmi
+     depictsConstruction  Mount_Fuji_from_the_mountains_of_Tōtōmi
     
     
 Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Coloured_Mount_Fuji,
         Maritime_Theme,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
     Facts:  
-     colouredMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
      hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
     
     
@@ -343,12 +335,12 @@ Individual: Nihonbashi_bridge_in_Edo
 Individual: Rainstorm_Beneath_the_Summit
 
     Types: 
+        Coloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
     Facts:  
-     colouredMountFuji  Rainstorm_Beneath_the_Summit,
      mountFujiForeground  Rainstorm_Beneath_the_Summit
     
     
@@ -372,25 +364,21 @@ Individual: Senju_Musashi_Province
     Types: 
         Agriculture_Theme,
         Animals_Motif,
+        Discoloured_Mount_Fuji,
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Senju_Musashi_Province
     
     
 Individual: Shichiri_beach_in_Sagami_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     discolouredMountFuji  Shichiri_beach_in_Sagami_Province
     
     
 Individual: Shimomeguro
@@ -421,11 +409,11 @@ Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
 Individual: South_Wind_Clear_Sky
 
     Types: 
+        Coloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         owl:Thing
     
     Facts:  
-     colouredMountFuji  South_Wind_Clear_Sky,
      mountFujiForeground  South_Wind_Clear_Sky
     
     
@@ -472,6 +460,7 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         NOT_Agriculture_AND_NOT_Maritime,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -481,7 +470,6 @@ Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
         owl:Thing
     
     Facts:  
-     discolouredMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
      rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
      treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
     
@@ -553,6 +541,7 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -561,7 +550,6 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
     
     Facts:  
      depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
-     discolouredMountFuji  Under_Mannen_Bridge_at_Fukagawa,
      hasBoatForeground  Under_Mannen_Bridge_at_Fukagawa
     
     
@@ -570,6 +558,7 @@ Individual: Ushibori_in_Hitachi_Province
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -577,7 +566,6 @@ Individual: Ushibori_in_Hitachi_Province
         owl:Thing
     
     Facts:  
-     discolouredMountFuji  Ushibori_in_Hitachi_Province,
      hasBoatForeground  Ushibori_in_Hitachi_Province
     
     
