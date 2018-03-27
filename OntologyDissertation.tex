@@ -152,7 +152,7 @@ The reflexive characteristic denotes properties that necessarily relate individu
 Additionally, this relationship is functional as each member of the class has itself as the only concept that can satisfy this restriction. 
 Every single individual in the ontology is explicitly listed as this property is applied, as no other individual can exist in this ontology (see Figure 1).
 \newline
-\centerline{\includegraphics[scale=0.3]{ClosedViewsClass}}\\
+\centerline{\includegraphics[scale=0.3]{ClosedViews}}\\
 \centerline{\textit{Figure 1}}
 \newline
 This property acts as a whitelist for the reasoner for valid individuals in the ontology. The `exactly' keyword is essential to stipulate this condition.
@@ -185,8 +185,8 @@ This concludes the application of the closed-world assumption on this ontology.
  Yellow_Mount_Fuji
  owl:Thing
 \end{lstlisting}
-The classes with the named with the pattern \_\_AND\_\_ indicate an intersection.
-Similarly the naming pattern \_NOT\_\_ indicates a disjunction.
+The classes with the named with the pattern \_AND\_ indicate an intersection.
+Similarly, the naming pattern \_NOT\_ indicates a disjunction.
 The different colour attributions for Mount Fuji are also disjoint from one another.
 Maritime\_Theme is subsumed by Bodies\_of\_Water\_Motif as bodies of water are a prerequisite for maritime activity.
 Likewise, horses and wildlife classes are subsumed by the Animals\_Motif.\par
@@ -216,35 +216,44 @@ boatsForegroundOrBackground subsumes hasBoatForeground and uses the Martime\_The
 Properties provide the second level of distinction between the individuals and complete the description of the \textit{Views}.
 Using these two levels in tandem we can isolate each individual by its unique attributes.
 \subsection{The Reasoner}
-The reasoner had little trouble adapting to the closed-world assumption.
-A disjoint union is a set comprised of individuals that are not common to each of its constituent classes.
-Example disjoint union.
-\newline
-\newline
-\centerline{\includegraphics[scale=0.3]{ClosedDisjointUnion}}\\
-\centerline{\textit{Figure 2}}
-\newline
-In this output the class NOT\_Agriculture\_AND\_NOT\_Urbanisation, a disjoint union of Agriculture and Urbanisation themes, is refuted by the existence of an individual who manifests both of these themes. While this may appear trivial, reasoning over a large KB would be significantly more challenging for a human reasoner.\par
-Fig. 3 demonstrates the direct repercussions of the closed-world assumption on the reasoner: 
+The Pellet reasoner had no trouble adapting to the closed-world assumption.
+This case-study originally utilised the FaCT reasoner which had detailed error logs but struggled to compute ontologies with many individuals and ABoxes, often taking up to ten minutes to assess this ontology.
+Ultimately the Pellet reasoner proved more useful, although the inclusion of multiple reasoners in Protege software is an invaluable asset to ontology engineers who may have to model a wide variety of ontologies.\par
+Fig. 2 demonstrates the direct effects of the closed-world assumption on the reasoner: 
 \newline
 \newline
 \centerline{\includegraphics[scale=0.3]{SingletonClosed}}\\
-\centerline{\textit{Figure 3}}
+\centerline{\textit{Figure 2}}
 \newline
 The creation of a singleton class, containing only one individual, has caused the reasoner to flag the ontology as inconsistent.
 As the singleton class is subsumed by the View\_of\_Mount\_Fuji it cannot contradicted the parameters of its superclass.
-For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory properties.\par
+The first thing that clashes is the two whitelists of individuals.
+The\_Great\_Wave\_off\_Kanagawa already satisfies the containsSpecificIndividual constraint reflexively and this cannot be multiply satisfied as containsSpecificIndividuals is also functional.\par
+For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory data properties.\par
 The next two ontology artefacts aim to simplify the KB.
 Initially by representing the KB without forcing the open-world assumption and then by presenting the most economical version of the KB while retaining the same functionality.
 
 \section{Detailed Open-world Assumption}
 Trying to simulate elements of a closed-world assumption without forcing it on the ontology would not normally be possible.
 However, as stated in §3.1, the \textit{Views} make an unusual case study as the individuals that will populate the ontology are already known by the ontology engineer.\par
-The open-world ontology utilises TBox assertions to stipulate that only the thirty-six \textit{Views} can exist because each view has its own singleton class that is subsumed by the View\_of\_Mount\_Fuji class. Each class 
+This open-world ontology utilises TBoxes to stipulate that only the thirty-six \textit{Views} can exist because each individual has its own singleton class that is subsumed by the View\_of\_Mount\_Fuji class (see Figure 3).
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenViews}}\\
+\centerline{\textit{Figure 3}}
+\newline
+Each singleton class has a cardinality restriction of one.
+Additionally each has a functional, reflexive property, hasSpecificIndividual, that stipulated the exact individual that can occupy the class.
+Lastly every \textit{View} class is disjoint from every other class.\par
+As a result of this all of the individuals' attributes, aside from their names, are pushed into ABoxes.\par
+\subsection{Classes}
+\subsection{Properties}
+\subsection{Reasoner}
 
-% reasoner output
 \section{Minimum Viable Product}
-% reasoner output
+\subsection{Classes}
+\subsection{Properties}
+\subsection{Reasoner}
+
 \section{Assessment}
 % ANTIPATTERNS
 %Three classes: logical, non-logical, guidelines
