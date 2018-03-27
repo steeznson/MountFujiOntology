@@ -528,6 +528,7 @@ Individual: Bay_of_Noboto
         View_of_Mount_Fuji
     
     Facts:  
+     boatBackground  Bay_of_Noboto,
      bodiesOfWaterMotif  Bay_of_Noboto,
      maritimeTheme  Bay_of_Noboto,
      mountFujiBackground  Bay_of_Noboto,
@@ -566,6 +567,7 @@ Individual: Enoshima_in_Sagami_Province
         View_of_Mount_Fuji
     
     Facts:  
+     boatBackground  Enoshima_in_Sagami_Province,
      bodiesOfWaterMotif  Enoshima_in_Sagami_Province,
      maritimeTheme  Enoshima_in_Sagami_Province,
      mountFujiBackground  Enoshima_in_Sagami_Province,
@@ -659,6 +661,7 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_K
         View_of_Mount_Fuji
     
     Facts:  
+     boatForeground  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
      bodiesOfWaterMotif  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
      hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
      maritimeTheme  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
@@ -674,6 +677,8 @@ Individual: Nihonbashi_bridge_in_Edo
         View_of_Mount_Fuji
     
     Facts:  
+     boatBackground  Nihonbashi_bridge_in_Edo,
+     boatForeground  Nihonbashi_bridge_in_Edo,
      bodiesOfWaterMotif  Nihonbashi_bridge_in_Edo,
      maritimeTheme  Nihonbashi_bridge_in_Edo,
      mountFujiBackground  Nihonbashi_bridge_in_Edo,
@@ -815,6 +820,7 @@ Individual: Tama_River_in_Musashi_Province
         View_of_Mount_Fuji
     
     Facts:  
+     boatBackground  Tama_River_in_Musashi_Province,
      bodiesOfWaterMotif  Tama_River_in_Musashi_Province,
      maritimeTheme  Tama_River_in_Musashi_Province,
      mountFujiBackground  Tama_River_in_Musashi_Province,
