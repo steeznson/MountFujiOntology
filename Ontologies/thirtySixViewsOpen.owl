@@ -110,6 +110,12 @@ ObjectProperty: notPeopleMotif
     
 ObjectProperty: owl:topObjectProperty
 
+    Annotations: 
+        rdfs:comment "All object properties in this ontology are reflexive as they relate individuals to themselves."@en
+    
+    Characteristics: 
+        Reflexive
+    
     
 ObjectProperty: peopleMotif
 
