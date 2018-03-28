@@ -136,7 +136,7 @@ This feature of the case study provides scope for several different ontology for
 The goal of each of these ontologies is to uniquely capture every individual in the ontology, alongside their defining features.
 Assessing the merits of each approach provides a vehicle to probe the strengths and weaknesses of the OWL2 standard.
 
-\section{Maximal Detail}
+\section{The Closed-World Assumption}
 The first ontology artefect captures as much of the world as possible (see Appendix A).
 Ontology engineers would rarely use the maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
 Ideally an ontology should describe its subject in the most conceptually parsimonious way possible.
@@ -162,57 +162,55 @@ This is because there is a meaningful distinction in scope between the two.
 While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to restrict the application of axioms to one per class.
 There is a difference in the functionality of these two classes and the order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the whitelist of allowed things is introduced.
 This concludes the application of the closed-world assumption on this ontology.
-
 \subsection{Classes}
 \begin{lstlisting}
- Maximal Detail Ontology Classes
- ---
- Agriculture_Theme
- Animals_Motif
- Bodies_Of_Water_Motif
- Discoloured_Mount_Fuji
- Horse_Motif
- Maritime_Theme
- NOT_People
- People_Motif
- Red_Mount_Fuji
- Snow_Capped_Mount_Fuji
- Urbanisation_Theme
- View_of_Mount_Fuji
- Wildlife_AND_Bodies_of_Water
- Wildlife_Motif
- Wildlife_NOT_People
- Yellow_Mount_Fuji
- owl:Thing
+Maximal Detail Ontology Classes
+---
+Agriculture_Theme
+Animals_Motif
+Boats_Foreground
+Bodies_Of_Water_Motif
+Construction_Motif
+Depicts_Rooftops
+Discoloured_Mount_Fuji
+Horse_Motif
+Maritime_Theme
+Mist_Foreground
+Mount_Fuji_Foreground
+NOT_People
+People_Motif
+Red_Mount_Fuji
+Rooftops_Foreground
+Snow_Capped_Mount_Fuji
+Temple_Motif
+Tree_Foreground
+Urbanisation_Theme
+View_of_Mount_Fuji
+Wildlife_AND_Bodies_of_Water
+Wildlife_Motif
+Wildlife_NOT_People
+Yellow_Mount_Fuji
+owl:Thing
 \end{lstlisting}
 The classes with the named with the pattern \_AND\_ indicate an intersection.
 Similarly, the naming pattern \_NOT\_ indicates a disjunction.
-The different colour attributions for Mount Fuji are also disjoint from one another.
+The different colour attributions for Mount Fuji are also disjoint from one another.\par
 Maritime\_Theme is subsumed by Bodies\_of\_Water\_Motif as bodies of water are a prerequisite for maritime activity.
-Likewise, horses and wildlife classes are subsumed by the Animals\_Motif.\par
+Likewise, horses and wildlife classes are subsumed by the Animals\_Motif, and Depicts\_Rooftops subsumes Rooftops\_Foreground.\par
 These groups allow the first level of distinction between the individuals in the ontology.
 \subsection{Properties}
 \begin{lstlisting}
 Maximal Detail Ontology Properties
 ---
-boatsForegroundOrBackground
 containsSpecificIndividuals
-depictsConstruction
-depictsRooftops
-depictsTemple
-hasBoatForeground
 hasTwoMountFujis
 indoorScene
-mistForeground
-mountFujiBackground
-mountFujiForeground
 owl:topObjectProperty
-rooftopsForeground
-treeForeground
 \end{lstlisting}
-The naming conventions for the properties are more self-explanatory.
-It is worth pointing out that containsSpecificIndividuals is unusual for applying to individuals at the class level but the others are satisfied directly by individuals.
-boatsForegroundOrBackground subsumes hasBoatForeground and uses the Martime\_Theme class as its domain as every individual that satisfies this property will be restricted to this class.\par
+As no relationships hold between the individuals, every object property in this ontology is relfexive.
+It is worth pointing out that containsSpecificIndividuals is unusual for applying to individuals at the class level but the other two are satisfied directly by individuals.
+While the properties may function like additional classes, (indoorScene(Yoshida at Tokaido, Yoshida at Tokaido)), the scope of these properties has been reduced to a single individual.
+hasTwoMountFujis and indoorScene each concern a specific individual.\par
 Properties provide the second level of distinction between the individuals and complete the description of the \textit{Views}.
 Using these two levels in tandem we can isolate each individual by its unique attributes.
 \subsection{The Reasoner}
@@ -222,7 +220,7 @@ Ultimately the Pellet reasoner proved more useful, although the inclusion of mul
 Fig. 2 demonstrates the direct effects of the closed-world assumption on the reasoner: 
 \newline
 \newline
-\centerline{\includegraphics[scale=0.3]{SingletonClosed}}\\
+\centerline{\includegraphics[scale=0.3]{ClosedSingleton}}\\
 \centerline{\textit{Figure 2}}
 \newline
 The creation of a singleton class, containing only one individual, has caused the reasoner to flag the ontology as inconsistent.
@@ -235,7 +233,9 @@ Initially by representing the KB without forcing the open-world assumption and t
 
 \section{Detailed Open-world Assumption}
 Trying to simulate elements of a closed-world assumption without forcing it on the ontology would not normally be possible.
-However, as stated in §3.1, the \textit{Views} make an unusual case study as the individuals that will populate the ontology are already known by the ontology engineer.\par
+However, as stated in §3.1, the \textit{Views} make an unusual case study as the individuals that will populate the ontology are already known by the ontology engineer.
+This allows us to implement a pseudo-closed-world assumption, forbidding the creation of any individual except those that comprise the \textit{Views}.
+A pseudo-open-world ontology can only be achieved at an expense: this artefact is our largest ontology, totalling three times the size of the final minimum viable product (MVP) ontology.\par
 This open-world ontology utilises TBoxes to stipulate that only the thirty-six \textit{Views} can exist because each individual has its own singleton class that is subsumed by the View\_of\_Mount\_Fuji class (see Figure 3).
 \newline
 \centerline{\includegraphics[scale=0.3]{OpenViews}}\\
@@ -245,13 +245,49 @@ Each singleton class has a cardinality restriction of one.
 Additionally each has a functional, reflexive property, hasSpecificIndividual, that stipulated the exact individual that can occupy the class.
 Lastly every \textit{View} class is disjoint from every other class.\par
 As a result of this all of the individuals' attributes, aside from their names, are pushed into ABoxes.\par
-\subsection{Classes}
 \subsection{Properties}
+\begin{lstlisting}
+Detailed Open-world Properties
+---
+agricultureTheme
+animalsMotif
+boatBackground
+boatForeground
+bodiesOfWaterMotif
+depictsConstruction
+depictsRooftops
+depictsTemple
+hasSpecificIndividual
+hasTwoMountFujis
+horseMotif
+indoorScenes
+maritimeTheme
+mistForeground
+mountFujiBackground
+mountFujiForeground
+notPeopleMotif
+owl:topObjectProperty
+peopleMotif
+rooftopsForeground
+snowCappedMountFuji
+treeForeground
+urbanisationTheme
+wildlifeAndBodiesOfWater
+wildlifeMotif
+wildlifeNotPeople
+\end{lstlisting}
+As many of these properties were previously classes in the previous ontology, the same relationships hold between them.
+maritimeTheme is still subsumed by bodiesOfWaterMotif, for example.
+Again, as no relationships hold between these individuals, every property is reflexive.\par
+Many of these ABoxes would be more comfortable as TBoxes.
+Some of the properties like peopleMotif apply to the majority of the individuals in the ontology, reducing their descriptiveness.
+The ABox (peopleMotif(Senju Musachi Province, Senju Musachi Province)) is syntactically very similar to a TBox.
+This extensive use of reflexive properties shall be discussed at length at the end of this chapter (§3.5).
 \subsection{Reasoner}
 
 \section{Minimum Viable Product}
 \subsection{Classes}
-\subsection{Properties}
+%properties are identical except containsSpecificIndividuals
 \subsection{Reasoner}
 
 \section{Assessment}
@@ -400,12 +436,6 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
-ObjectProperty: boatsForegroundOrBackground
-
-    Domain: 
-        Maritime_Theme
-    
-    
 ObjectProperty: containsSpecificIndividuals
 
     Annotations: 
@@ -416,53 +446,20 @@ ObjectProperty: containsSpecificIndividuals
         Reflexive
     
     
-ObjectProperty: depictsConstruction
-
-    
-ObjectProperty: depictsRooftops
-
-    
-ObjectProperty: depictsTemple
-
-    
-ObjectProperty: hasBoatForeground
-
-    SubPropertyOf: 
-        boatsForegroundOrBackground
-    
-    
 ObjectProperty: hasTwoMountFujis
 
     
 ObjectProperty: indoorScene
 
     
-ObjectProperty: mistForeground
-
-    
-ObjectProperty: mountFujiBackground
-
-    DisjointWith: 
-        mountFujiForeground
-    
-    
-ObjectProperty: mountFujiForeground
-
-    DisjointWith: 
-        mountFujiBackground
-    
-    
 ObjectProperty: owl:topObjectProperty
 
+    Annotations: 
+        rdfs:comment "All object properties in this ontology are reflexive as they relate the individual to themselves."@en
     
-ObjectProperty: rooftopsForeground
-
-    SubPropertyOf: 
-        depictsRooftops
+    Characteristics: 
+        Reflexive
     
-    
-ObjectProperty: treeForeground
-
     
 DataProperty: owl:topDataProperty
 
@@ -479,7 +476,25 @@ Class: Animals_Motif
         View_of_Mount_Fuji
     
     
+Class: Boats_Foreground
+
+    SubClassOf: 
+        Maritime_Theme
+    
+    
 Class: Bodies_Of_Water_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Construction_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Depicts_Rooftops
 
     SubClassOf: 
         View_of_Mount_Fuji
@@ -504,6 +519,18 @@ Class: Maritime_Theme
 
     SubClassOf: 
         Bodies_Of_Water_Motif
+    
+    
+Class: Mist_Foreground
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Mount_Fuji_Foreground
+
+    SubClassOf: 
+        View_of_Mount_Fuji
     
     
 Class: NOT_People
@@ -533,7 +560,25 @@ Class: Red_Mount_Fuji
         Discoloured_Mount_Fuji, Yellow_Mount_Fuji
     
     
+Class: Rooftops_Foreground
+
+    SubClassOf: 
+        Depicts_Rooftops
+    
+    
 Class: Snow_Capped_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Temple_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Tree_Foreground
 
     SubClassOf: 
         View_of_Mount_Fuji
@@ -607,56 +652,46 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     Types: 
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Maritime_Theme,
         NOT_People,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         View_of_Mount_Fuji
-    
-    Facts:  
-     boatsForegroundOrBackground  A_View_of_Mount_Fuji_Across_Lake_Suwa,
-     mountFujiBackground  A_View_of_Mount_Fuji_Across_Lake_Suwa,
-     treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
     
     
 Individual: A_sketch_of_the_Mitsui_shop
 
     Types: 
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
         Urbanisation_Theme,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mountFujiBackground  A_sketch_of_the_Mitsui_shop,
-     rooftopsForeground  A_sketch_of_the_Mitsui_shop
     
     
 Individual: Asakusa_Hongan-ji_temple
 
     Types: 
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
+        Temple_Motif,
         Urbanisation_Theme,
         View_of_Mount_Fuji
-    
-    Facts:  
-     depictsTemple  Asakusa_Hongan-ji_temple,
-     mountFujiBackground  Asakusa_Hongan-ji_temple,
-     rooftopsForeground  Asakusa_Hongan-ji_temple
     
     
 Individual: Barrier_Town_on_the_Sumida_River
 
     Types: 
         Animals_Motif,
+        Depicts_Rooftops,
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mountFujiBackground  Barrier_Town_on_the_Sumida_River,
-     rooftopsForeground  Barrier_Town_on_the_Sumida_River
     
     
 Individual: Bay_of_Noboto
@@ -667,10 +702,6 @@ Individual: Bay_of_Noboto
         People_Motif,
         View_of_Mount_Fuji
     
-    Facts:  
-     boatsForegroundOrBackground  Bay_of_Noboto,
-     mountFujiBackground  Bay_of_Noboto
-    
     
 Individual: Cushion_Pine_at_Aoyama
 
@@ -679,10 +710,6 @@ Individual: Cushion_Pine_at_Aoyama
         People_Motif,
         View_of_Mount_Fuji
     
-    Facts:  
-     depictsRooftops  Cushion_Pine_at_Aoyama,
-     mountFujiBackground  Cushion_Pine_at_Aoyama
-    
     
 Individual: Ejiri_in_Suruga_Province
 
@@ -690,11 +717,8 @@ Individual: Ejiri_in_Suruga_Province
         Agriculture_Theme,
         Discoloured_Mount_Fuji,
         People_Motif,
+        Tree_Foreground,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mountFujiBackground  Ejiri_in_Suruga_Province,
-     treeForeground  Ejiri_in_Suruga_Province
     
     
 Individual: Enoshima_in_Sagami_Province
@@ -706,22 +730,15 @@ Individual: Enoshima_in_Sagami_Province
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     boatsForegroundOrBackground  Enoshima_in_Sagami_Province,
-     mountFujiBackground  Enoshima_in_Sagami_Province
-    
     
 Individual: Fuji_View_Field_in_Owari_Province
 
     Types: 
         Agriculture_Theme,
+        Construction_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
-    
-    Facts:  
-     depictsConstruction  Fuji_View_Field_in_Owari_Province,
-     mountFujiBackground  Fuji_View_Field_in_Owari_Province
     
     
 Individual: Hodogaya_on_the_Tokaido
@@ -733,9 +750,6 @@ Individual: Hodogaya_on_the_Tokaido
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     mountFujiBackground  Hodogaya_on_the_Tokaido
-    
     
 Individual: Inume_Pass_Koshu
 
@@ -746,9 +760,6 @@ Individual: Inume_Pass_Koshu
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     mountFujiBackground  Inume_Pass_Koshu
-    
     
 Individual: Kajikazawa_in_Kai_Province
 
@@ -758,37 +769,29 @@ Individual: Kajikazawa_in_Kai_Province
         People_Motif,
         View_of_Mount_Fuji
     
-    Facts:  
-     mountFujiBackground  Kajikazawa_in_Kai_Province
-    
     
 Individual: Mishima_Pass_in_Kai_Province
 
     Types: 
         People_Motif,
+        Tree_Foreground,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mountFujiBackground  Mishima_Pass_in_Kai_Province,
-     treeForeground  Mishima_Pass_in_Kai_Province
     
     
 Individual: Mount_Fuji_from_the_mountains_of_Totomi
 
     Types: 
+        Construction_Motif,
         Discoloured_Mount_Fuji,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi,
-     mountFujiBackground  Mount_Fuji_from_the_mountains_of_Totomi
-    
     
 Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         NOT_People,
@@ -797,51 +800,44 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
         Yellow_Mount_Fuji
     
     Facts:  
-     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi,
-     mountFujiBackground  Mount_Fuji_reflects_in_Lake_Kawaguchi
+     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi
     
     
 Individual: Nihonbashi_bridge_in_Edo
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Maritime_Theme,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
         Urbanisation_Theme,
         View_of_Mount_Fuji
-    
-    Facts:  
-     boatsForegroundOrBackground  Nihonbashi_bridge_in_Edo,
-     mountFujiBackground  Nihonbashi_bridge_in_Edo,
-     rooftopsForeground  Nihonbashi_bridge_in_Edo
     
     
 Individual: Rainstorm_Beneath_the_Summit
 
     Types: 
+        Mount_Fuji_Foreground,
         NOT_People,
         Red_Mount_Fuji,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mountFujiForeground  Rainstorm_Beneath_the_Summit
     
     
 Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
 
     Types: 
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
+        Temple_Motif,
         Urbanisation_Theme,
         View_of_Mount_Fuji
-    
-    Facts:  
-     depictsTemple  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
-     mountFujiBackground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
-     rooftopsForeground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan
     
     
 Individual: Senju_Musashi_Province
@@ -855,9 +851,6 @@ Individual: Senju_Musashi_Province
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     mountFujiBackground  Senju_Musashi_Province
-    
     
 Individual: Shichiri_beach_in_Sagami_Province
 
@@ -868,73 +861,56 @@ Individual: Shichiri_beach_in_Sagami_Province
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     mountFujiBackground  Shichiri_beach_in_Sagami_Province
-    
     
 Individual: Shimomeguro
 
     Types: 
+        Mist_Foreground,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mistForeground  Shimomeguro,
-     mountFujiBackground  Shimomeguro
     
     
 Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     hasBoatForeground  Shore_of_Tago_Bay_Ejiri_at_Tokaido,
-     mountFujiBackground  Shore_of_Tago_Bay_Ejiri_at_Tokaido
-    
     
 Individual: South_Wind_Clear_Sky
 
     Types: 
+        Mount_Fuji_Foreground,
         NOT_People,
         Red_Mount_Fuji,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mountFujiForeground  South_Wind_Clear_Sky
     
     
 Individual: Sundai_Edo
 
     Types: 
         Agriculture_Theme,
+        Depicts_Rooftops,
         People_Motif,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         Urbanisation_Theme,
         View_of_Mount_Fuji
-    
-    Facts:  
-     depictsRooftops  Sundai_Edo,
-     mountFujiBackground  Sundai_Edo,
-     treeForeground  Sundai_Edo
     
     
 Individual: Sunset_across_the_Ryogoku_bridge
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         View_of_Mount_Fuji
-    
-    Facts:  
-     hasBoatForeground  Sunset_across_the_Ryogoku_bridge,
-     mountFujiBackground  Sunset_across_the_Ryogoku_bridge
     
     
 Individual: Tama_River_in_Musashi_Province
@@ -943,12 +919,8 @@ Individual: Tama_River_in_Musashi_Province
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
+        Tree_Foreground,
         View_of_Mount_Fuji
-    
-    Facts:  
-     boatsForegroundOrBackground  Tama_River_in_Musashi_Province,
-     mountFujiBackground  Tama_River_in_Musashi_Province,
-     treeForeground  Tama_River_in_Musashi_Province
     
     
 Individual: Tea_house_at_Koishikawa
@@ -956,71 +928,57 @@ Individual: Tea_house_at_Koishikawa
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Discoloured_Mount_Fuji,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         Urbanisation_Theme,
         View_of_Mount_Fuji,
         Wildlife_AND_Bodies_of_Water,
         Wildlife_Motif
     
-    Facts:  
-     mountFujiBackground  Tea_house_at_Koishikawa,
-     rooftopsForeground  Tea_house_at_Koishikawa,
-     treeForeground  Tea_house_at_Koishikawa
-    
     
 Individual: The_Great_Wave_off_Kanagawa
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
     
-    Facts:  
-     hasBoatForeground  The_Great_Wave_off_Kanagawa,
-     mountFujiBackground  The_Great_Wave_off_Kanagawa
-    
     
 Individual: The_Kazusa_Province_sea_route
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         NOT_People,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
-    
-    Facts:  
-     hasBoatForeground  The_Kazusa_Province_sea_route,
-     mountFujiBackground  The_Kazusa_Province_sea_route
     
     
 Individual: The_lake_of_Hakone_in_Sagami_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Mist_Foreground,
         NOT_People,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mistForeground  The_lake_of_Hakone_in_Sagami_Province,
-     mountFujiBackground  The_lake_of_Hakone_in_Sagami_Province
     
     
 Individual: Tsukuda_Island_in_Musashi_Province
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         View_of_Mount_Fuji
-    
-    Facts:  
-     hasBoatForeground  Tsukuda_Island_in_Musashi_Province,
-     mountFujiBackground  Tsukuda_Island_in_Musashi_Province
     
     
 Individual: Umezawa_in_Sagami_Province
@@ -1028,20 +986,19 @@ Individual: Umezawa_in_Sagami_Province
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Mist_Foreground,
         View_of_Mount_Fuji,
         Wildlife_AND_Bodies_of_Water,
         Wildlife_Motif,
         Wildlife_NOT_People
     
-    Facts:  
-     mistForeground  Umezawa_in_Sagami_Province,
-     mountFujiBackground  Umezawa_in_Sagami_Province
-    
     
 Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
@@ -1049,16 +1006,12 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
         Urbanisation_Theme,
         View_of_Mount_Fuji
     
-    Facts:  
-     depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
-     hasBoatForeground  Under_Mannen_Bridge_at_Fukagawa,
-     mountFujiBackground  Under_Mannen_Bridge_at_Fukagawa
-    
     
 Individual: Ushibori_in_Hitachi_Province
 
     Types: 
         Animals_Motif,
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Discoloured_Mount_Fuji,
         Maritime_Theme,
@@ -1067,23 +1020,17 @@ Individual: Ushibori_in_Hitachi_Province
         View_of_Mount_Fuji,
         Wildlife_Motif
     
-    Facts:  
-     hasBoatForeground  Ushibori_in_Hitachi_Province,
-     mountFujiBackground  Ushibori_in_Hitachi_Province
-    
     
 Individual: Watermill_at_Onden
 
     Types: 
         Agriculture_Theme,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
-    
-    Facts:  
-     mountFujiBackground  Watermill_at_Onden,
-     rooftopsForeground  Watermill_at_Onden
     
     
 Individual: Yoshida_at_Tokaido
@@ -1094,8 +1041,7 @@ Individual: Yoshida_at_Tokaido
         View_of_Mount_Fuji
     
     Facts:  
-     indoorScene  Yoshida_at_Tokaido,
-     mountFujiBackground  Yoshida_at_Tokaido
+     indoorScene  Yoshida_at_Tokaido
 \end{lstlisting}
 
 \newpage
@@ -2116,50 +2062,20 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
-ObjectProperty: boatsForegroundOrBackground
-
-    Domain: 
-        Maritime_Theme
-    
-    
-ObjectProperty: depictsConstruction
-
-    
-ObjectProperty: depictsRooftops
-
-    
-ObjectProperty: depictsTemple
-
-    
-ObjectProperty: hasBoatForeground
-
-    SubPropertyOf: 
-        boatsForegroundOrBackground
-    
-    
 ObjectProperty: hasTwoMountFujis
 
     
 ObjectProperty: indoorScene
 
     
-ObjectProperty: mistForeground
-
-    
-ObjectProperty: mountFujiForeground
-
-    
 ObjectProperty: owl:topObjectProperty
 
+    Annotations: 
+        rdfs:comment "Every property in this ontology is reflexive as individuals are only ever related to themselves."@en
     
-ObjectProperty: rooftopsForeground
-
-    SubPropertyOf: 
-        depictsRooftops
+    Characteristics: 
+        Reflexive
     
-    
-ObjectProperty: treeForeground
-
     
 Class: Agriculture_Theme
 
@@ -2167,10 +2083,22 @@ Class: Agriculture_Theme
 Class: Animals_Motif
 
     
+Class: Boats_Foreground
+
+    SubClassOf: 
+        Maritime_Theme
+    
+    
 Class: Bodies_Of_Water_Motif
 
     
 Class: Coloured_Mount_Fuji
+
+    
+Class: Construction_Motif
+
+    
+Class: Depicts_Rooftops
 
     
 Class: Discoloured_Mount_Fuji
@@ -2188,13 +2116,31 @@ Class: Maritime_Theme
         Bodies_Of_Water_Motif
     
     
+Class: Mist_Foreground
+
+    
+Class: Mount_Fuji_Foreground
+
+    
 Class: People_Motif
 
     DisjointWith: 
         Wildlife_NOT_People
     
     
+Class: Rooftops_Foreground
+
+    SubClassOf: 
+        Depicts_Rooftops
+    
+    
 Class: Snow_Capped_Mount_Fuji
+
+    
+Class: Temple_Motif
+
+    
+Class: Tree_Foreground
 
     
 Class: Urbanisation_Theme
@@ -2232,51 +2178,45 @@ Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
 
     Types: 
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Maritime_Theme,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         owl:Thing
-    
-    Facts:  
-     boatsForegroundOrBackground  A_View_of_Mount_Fuji_Across_Lake_Suwa,
-     treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
     
     
 Individual: A_sketch_of_the_Mitsui_shop
 
     Types: 
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
         Urbanisation_Theme,
         owl:Thing
-    
-    Facts:  
-     rooftopsForeground  A_sketch_of_the_Mitsui_shop
     
     
 Individual: Asakusa_Hongan-ji_temple
 
     Types: 
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
+        Temple_Motif,
         Urbanisation_Theme,
         owl:Thing
-    
-    Facts:  
-     depictsTemple  Asakusa_Hongan-ji_temple,
-     rooftopsForeground  Asakusa_Hongan-ji_temple
     
     
 Individual: Barrier_Town_on_the_Sumida_River
 
     Types: 
         Animals_Motif,
+        Depicts_Rooftops,
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     rooftopsForeground  Barrier_Town_on_the_Sumida_River
     
     
 Individual: Bay_of_Noboto
@@ -2287,9 +2227,6 @@ Individual: Bay_of_Noboto
         People_Motif,
         owl:Thing
     
-    Facts:  
-     boatsForegroundOrBackground  Bay_of_Noboto
-    
     
 Individual: Cushion_Pine_at_Aoyama
 
@@ -2298,9 +2235,6 @@ Individual: Cushion_Pine_at_Aoyama
         People_Motif,
         owl:Thing
     
-    Facts:  
-     depictsRooftops  Cushion_Pine_at_Aoyama
-    
     
 Individual: Ejiri_in_Suruga_Province
 
@@ -2308,10 +2242,8 @@ Individual: Ejiri_in_Suruga_Province
         Agriculture_Theme,
         Discoloured_Mount_Fuji,
         People_Motif,
+        Tree_Foreground,
         owl:Thing
-    
-    Facts:  
-     treeForeground  Ejiri_in_Suruga_Province
     
     
 Individual: Enoshima_in_Sagami_Province
@@ -2323,20 +2255,15 @@ Individual: Enoshima_in_Sagami_Province
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
-    Facts:  
-     boatsForegroundOrBackground  Enoshima_in_Sagami_Province
-    
     
 Individual: Fuji_View_Field_in_Owari_Province
 
     Types: 
         Agriculture_Theme,
+        Construction_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     depictsConstruction  Fuji_View_Field_in_Owari_Province
     
     
 Individual: Hodogaya_on_the_Tokaido
@@ -2372,27 +2299,24 @@ Individual: Mishima_Pass_in_Kai_Province
 
     Types: 
         People_Motif,
+        Tree_Foreground,
         owl:Thing
-    
-    Facts:  
-     treeForeground  Mishima_Pass_in_Kai_Province
     
     
 Individual: Mount_Fuji_from_the_mountains_of_Totomi
 
     Types: 
+        Construction_Motif,
         Discoloured_Mount_Fuji,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
-    Facts:  
-     depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi
-    
     
 Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Coloured_Mount_Fuji,
         Maritime_Theme,
@@ -2400,49 +2324,43 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
         owl:Thing
     
     Facts:  
-     hasBoatForeground  Mount_Fuji_reflects_in_Lake_Kawaguchi,
      hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi
     
     
 Individual: Nihonbashi_bridge_in_Edo
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Maritime_Theme,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
         Urbanisation_Theme,
         owl:Thing
-    
-    Facts:  
-     boatsForegroundOrBackground  Nihonbashi_bridge_in_Edo,
-     hasBoatForeground  Nihonbashi_bridge_in_Edo,
-     rooftopsForeground  Nihonbashi_bridge_in_Edo
     
     
 Individual: Rainstorm_Beneath_the_Summit
 
     Types: 
         Coloured_Mount_Fuji,
+        Mount_Fuji_Foreground,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     mountFujiForeground  Rainstorm_Beneath_the_Summit
     
     
 Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
 
     Types: 
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
+        Temple_Motif,
         Urbanisation_Theme,
         owl:Thing
-    
-    Facts:  
-     depictsTemple  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
-     rooftopsForeground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan
     
     
 Individual: Senju_Musashi_Province
@@ -2469,61 +2387,51 @@ Individual: Shichiri_beach_in_Sagami_Province
 Individual: Shimomeguro
 
     Types: 
+        Mist_Foreground,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     mistForeground  Shimomeguro
     
     
 Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     hasBoatForeground  Shore_of_Tago_Bay_Ejiri_at_Tokaido
     
     
 Individual: South_Wind_Clear_Sky
 
     Types: 
         Coloured_Mount_Fuji,
+        Mount_Fuji_Foreground,
         owl:Thing
-    
-    Facts:  
-     mountFujiForeground  South_Wind_Clear_Sky
     
     
 Individual: Sundai_Edo
 
     Types: 
         Agriculture_Theme,
+        Depicts_Rooftops,
         People_Motif,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         Urbanisation_Theme,
         owl:Thing
-    
-    Facts:  
-     depictsRooftops  Sundai_Edo,
-     treeForeground  Sundai_Edo
     
     
 Individual: Sunset_across_the_Ryogoku_bridge
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         owl:Thing
-    
-    Facts:  
-     hasBoatForeground  Sunset_across_the_Ryogoku_bridge
     
     
 Individual: Tama_River_in_Musashi_Province
@@ -2532,11 +2440,8 @@ Individual: Tama_River_in_Musashi_Province
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
+        Tree_Foreground,
         owl:Thing
-    
-    Facts:  
-     boatsForegroundOrBackground  Tama_River_in_Musashi_Province,
-     treeForeground  Tama_River_in_Musashi_Province
     
     
 Individual: Tea_house_at_Koishikawa
@@ -2544,64 +2449,55 @@ Individual: Tea_house_at_Koishikawa
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Discoloured_Mount_Fuji,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         Urbanisation_Theme,
         Wildlife_AND_Bodies_of_Water,
         Wildlife_Motif,
         owl:Thing
     
-    Facts:  
-     rooftopsForeground  Tea_house_at_Koishikawa,
-     treeForeground  Tea_house_at_Koishikawa
-    
     
 Individual: The_Great_Wave_off_Kanagawa
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
-    Facts:  
-     hasBoatForeground  The_Great_Wave_off_Kanagawa
-    
     
 Individual: The_Kazusa_Province_sea_route
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     hasBoatForeground  The_Kazusa_Province_sea_route
     
     
 Individual: The_lake_of_Hakone_in_Sagami_Province
 
     Types: 
         Bodies_Of_Water_Motif,
+        Mist_Foreground,
         owl:Thing
-    
-    Facts:  
-     mistForeground  The_lake_of_Hakone_in_Sagami_Province
     
     
 Individual: Tsukuda_Island_in_Musashi_Province
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Maritime_Theme,
         People_Motif,
         owl:Thing
-    
-    Facts:  
-     hasBoatForeground  Tsukuda_Island_in_Musashi_Province
     
     
 Individual: Umezawa_in_Sagami_Province
@@ -2609,19 +2505,19 @@ Individual: Umezawa_in_Sagami_Province
     Types: 
         Animals_Motif,
         Bodies_Of_Water_Motif,
+        Mist_Foreground,
         Wildlife_AND_Bodies_of_Water,
         Wildlife_Motif,
         Wildlife_NOT_People,
         owl:Thing
     
-    Facts:  
-     mistForeground  Umezawa_in_Sagami_Province
-    
     
 Individual: Under_Mannen_Bridge_at_Fukagawa
 
     Types: 
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Discoloured_Mount_Fuji,
         Maritime_Theme,
         People_Motif,
@@ -2629,15 +2525,12 @@ Individual: Under_Mannen_Bridge_at_Fukagawa
         Urbanisation_Theme,
         owl:Thing
     
-    Facts:  
-     depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
-     hasBoatForeground  Under_Mannen_Bridge_at_Fukagawa
-    
     
 Individual: Ushibori_in_Hitachi_Province
 
     Types: 
         Animals_Motif,
+        Boats_Foreground,
         Bodies_Of_Water_Motif,
         Discoloured_Mount_Fuji,
         Maritime_Theme,
@@ -2646,21 +2539,17 @@ Individual: Ushibori_in_Hitachi_Province
         Wildlife_Motif,
         owl:Thing
     
-    Facts:  
-     hasBoatForeground  Ushibori_in_Hitachi_Province
-    
     
 Individual: Watermill_at_Onden
 
     Types: 
         Agriculture_Theme,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         People_Motif,
+        Rooftops_Foreground,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     rooftopsForeground  Watermill_at_Onden
     
     
 Individual: Yoshida_at_Tokaido
