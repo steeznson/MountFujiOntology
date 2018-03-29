@@ -234,6 +234,7 @@ Individual: Hodogaya_on_the_Tōkaidō
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         owl:Thing
     
     
@@ -242,6 +243,7 @@ Individual: Inume_Pass_Kōshū
     Types: 
         Animals_Motif,
         Horse_Motif,
+        Mist_Foreground,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
@@ -359,6 +361,7 @@ Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
     Types: 
         Boats_Foreground,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,

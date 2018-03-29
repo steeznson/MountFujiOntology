@@ -308,7 +308,9 @@ The class Bay\_of\_Noboto\_Sundai\_Edo could contain two individuals with discre
 
 \section{Minimum Viable Product}
 The most efficient way to describe the \textit{Views} is to accept that the closed-world assumption is too expensive to be included in the ontology.
-The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing functionality.\par 
+The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing functionality.\par
+
+The properties of this ontology are identical to the maximal detail ontology, with the exception of containsSpecificIndividuals, as we are no longer enforcing a closed-world.
 \subsection{Classes}
 %properties are identical except containsSpecificIndividuals
 \subsection{Reasoner}
@@ -769,6 +771,7 @@ Individual: Hodogaya_on_the_Tokaido
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         View_of_Mount_Fuji
     
     
@@ -777,6 +780,7 @@ Individual: Inume_Pass_Koshu
     Types: 
         Animals_Motif,
         Horse_Motif,
+        Mist_Foreground,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         View_of_Mount_Fuji
@@ -897,6 +901,7 @@ Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
     Types: 
         Boats_Foreground,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -1065,7 +1070,6 @@ Individual: Yoshida_at_Tokaido
      indoorScene  Yoshida_at_Tokaido
 \end{lstlisting}
 
-\newpage
 \chapter{Detailed Open-world Formulation}
 \begin{lstlisting}
 Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
@@ -2055,7 +2059,6 @@ DisjointClasses:
     A_View_of_Mount_Fuji_Across_Lake_Suwa,A_sketch_of_the_Mitsui_shop,Asakusa_Hongan-ji_temple,Barrier_Town_on_the_Sumida_River,Bay_of_Noboto,Cushion_Pine_at_Aoyama,Ejiri_in_Suruga_Province,Enoshima_in_Sagami_Province,Fuji_View_Field_in_Owari_Province,Hodogaya_on_the_Tokaido,Inume_Pass_Koshu,Kajikazawa_in_Kai_Province,Mishima_Pass_in_Kai_Province,Mount_Fuji_from_the_mountains_of_Totomi,Mount_Fuji_reflects_in_Lake_Kawaguchi,Nihonbashi_bridge_in_Edo,Rainstorm_Beneath_the_Summit,Sazai_hall_Temple_of_Five_Hundred_Raken,Senju_Musashi_Province,Shichiri_beach_in_Sagami_Province,Shimomeguro,Shore_of_Tago_Bay_Ejiri_at_Tokaido,South_Wind_Clear_Sky,Sundai_Edo,Sunset_across_the_Ryogoku_bridge,Tama_River_in_Musashi_Province,Tea_house_at_Koishikawa,The_Great_Wave_off_Kanagawa,The_Kazusa_Province_sea_route,The_lake_of_Hakone_in_Sagami_Province,Tsukuda_Island_in_Musashi_Province,Umezawa_in_Sagami_Province,Under_Mannen_Bridge_at_Fukagawa,Ushibori_in_Hitachi_Province,Watermill_at_Onden,Yoshida_at_Tokaido
 \end{lstlisting}
 
-\newpage
 \chapter{Minimum Viable Product Ontology (Open-world)}
 \begin{lstlisting}
 Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
@@ -2294,6 +2297,7 @@ Individual: Hodogaya_on_the_Tokaido
         Horse_Motif,
         People_Motif,
         Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
         owl:Thing
     
     
@@ -2302,6 +2306,7 @@ Individual: Inume_Pass_Koshu
     Types: 
         Animals_Motif,
         Horse_Motif,
+        Mist_Foreground,
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
@@ -2419,6 +2424,7 @@ Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
     Types: 
         Boats_Foreground,
         Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
         Maritime_Theme,
         People_Motif,
         Snow_Capped_Mount_Fuji,
@@ -2584,7 +2590,6 @@ Individual: Yoshida_at_Tokaido
      indoorScene  Yoshida_at_Tokaido
 \end{lstlisting}
 
-\newpage
 \chapter{Simple Perl parser for Manchester OWL2}
 \begin{lstlisting}
 #!/usr/bin/perl
@@ -2660,7 +2665,6 @@ sub print_output{
 
 \end{lstlisting}
 
-\newpage
 \chapter{Initial Research Proposal}
 \noindent
 \includegraphics[scale=0.55]{proposal-0}
