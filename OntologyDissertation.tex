@@ -159,7 +159,7 @@ This property acts as a whitelist for the reasoner for valid individuals in the 
 The stipulation reads that the class may only contain one instance of an array containing each distinct individual in the class.\par
 This ontology depicts owl:Thing and View\_of\_Mount\_Fuji as separate classes despite being equivalent.
 This is because there is a meaningful distinction in scope between the two.
-While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to restrict the application of axioms to one per class.
+While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to restrict the application of restrictions to one per class.
 There is a difference in the functionality of these two classes and the order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the whitelist of allowed things is introduced.
 This concludes the application of the closed-world assumption on this ontology.
 \subsection{Classes}
@@ -210,7 +210,7 @@ owl:topObjectProperty
 As no relationships hold between the individuals, every object property in this ontology is relfexive.
 It is worth pointing out that containsSpecificIndividuals is unusual for applying to individuals at the class level but the other two are satisfied directly by individuals.
 While the properties may function like additional classes, (indoorScene(Yoshida at Tokaido, Yoshida at Tokaido)), the scope of these properties has been reduced to a single individual.
-hasTwoMountFujis and indoorScene each concern a specific individual.\par
+Once the scope of an assertion has been reduced to one individual, utilising the apparatus of a bespoke class to make this assertion is unnecessary.\par
 Properties provide the second level of distinction between the individuals and complete the description of the \textit{Views}.
 Using these two levels in tandem we can isolate each individual by its unique attributes.
 \subsection{The Reasoner}
@@ -234,7 +234,7 @@ Initially by representing the KB without forcing the open-world assumption and t
 \section{Detailed Open-world Assumption}
 Trying to simulate elements of a closed-world assumption without forcing it on the ontology would not normally be possible.
 However, as stated in §3.1, the \textit{Views} make an unusual case study as the individuals that will populate the ontology are already known by the ontology engineer.
-This allows us to implement a pseudo-closed-world assumption, forbidding the creation of any individual except those that comprise the \textit{Views}.
+This allows us to implement a pseudo-closed-world assumption, forbidding the creation of any individual except those that comprise the \textit{Views} (see Appendix B).
 A pseudo-open-world ontology can only be achieved at an expense: this artefact is our largest ontology, totalling three times the size of the final minimum viable product (MVP) ontology.\par
 This open-world ontology utilises TBoxes to stipulate that only the thirty-six \textit{Views} can exist because each individual has its own singleton class that is subsumed by the View\_of\_Mount\_Fuji class (see Figure 3).
 \newline
@@ -279,13 +279,36 @@ wildlifeNotPeople
 As many of these properties were previously classes in the previous ontology, the same relationships hold between them.
 maritimeTheme is still subsumed by bodiesOfWaterMotif, for example.
 Again, as no relationships hold between these individuals, every property is reflexive.\par
-Many of these ABoxes would be more comfortable as TBoxes.
+Most of these ABoxes would be more comfortable as TBoxes.
 Some of the properties like peopleMotif apply to the majority of the individuals in the ontology, reducing their descriptiveness.
-The ABox (peopleMotif(Senju Musachi Province, Senju Musachi Province)) is syntactically very similar to a TBox.
+The ABox (peopleMotif(Senju Musachi Province, Senju Musachi Province)) is also syntactically very similar to a TBox.
 This extensive use of reflexive properties shall be discussed at length at the end of this chapter (§3.5).
 \subsection{Reasoner}
+In its current state this ontology is functionally closed.
+Any attempt to add more individuals to a given class results in an inconsistent ontology (see Figure 4).
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenInconsistent}}\\
+\centerline{\textit{Figure 4}}
+\newline
+The reasoner highlights the class restrictions specifying that the class may only contain Bay\_of\_Noboto, along with the assertion that this class is disjoint from all of the other classes.\par
+It is essential that the classes are disjoint from one another.
+If they are not then the reasoner will assume that the two classes are equialent (see Figure 5,6).
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenOnly}}\\
+\centerline{\textit{Figure 5}}
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenExactly}}\\
+\centerline{\textit{Figure 6}}
+\newline
+There appears to be no difference between specifying that the class can `only' contain one individual or `exactly' one individual.
+The reasoner gives the ontology engineer the benefit of the doubt and tries to figure out how multiple individuals in a singleton class could occur.
+By making the two classes equivalent, it reasons that there must be a Bay\_of\_Noboto instance in the Sundai\_Edo class too.
+This flexibility may stem from the OWL open-world assumption, the reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accomodate this relationship by postulating that the singleton classes have merged.\par
+The class Bay\_of\_Noboto\_Sundai\_Edo could contain two individuals with discrete cardinality restrictions on each individual, but this is an unexpected result that would not have been highlighted without a reasoner.
 
 \section{Minimum Viable Product}
+The most efficient way to describe the \textit{Views} is to accept that the closed-world assumption is too expensive to be included in the ontology.
+The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing functionality.\par 
 \subsection{Classes}
 %properties are identical except containsSpecificIndividuals
 \subsection{Reasoner}
@@ -308,7 +331,6 @@ This extensive use of reflexive properties shall be discussed at length at the e
 %GroupAxioms: group all restrictions for a class into a single restriction
 %MinIsZero: trivial that a set is larger than zero in a well designed ontology
 
-
 \chapter{Improving the OWL2 standard}
 \section{Issues Raised by the Case Study}
 % WHY NOT
@@ -325,7 +347,6 @@ This extensive use of reflexive properties shall be discussed at length at the e
 \section{OWL Legibility}
 % ``Problems of OWL syntax'' Manchester University Presses
 % ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
-
 \begin{quote}
   Moreover, we need to know more about what people find easy or hard to handle. There is no doubt that people can reason when necessary with radically incomplete knowledge (such as that expressible in FOL) but apparently only by going into a special problem-solving or logic puzzle mode. In normal commonsense situations, when reading a geography book, for instance, the ability to handle disjunctions (say) seems to be quite limited. \cite[89]{expressiveness1987}
 \end{quote}
