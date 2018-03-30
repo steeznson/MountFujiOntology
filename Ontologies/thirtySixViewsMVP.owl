@@ -23,20 +23,8 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
-ObjectProperty: hasTwoMountFujis
-
-    
-ObjectProperty: indoorScene
-
-    
 ObjectProperty: owl:topObjectProperty
 
-    Annotations: 
-        rdfs:comment "Every property in this ontology is reflexive as individuals are only ever related to themselves."@en
-    
-    Characteristics: 
-        Reflexive
-    
     
 Class: Agriculture_Theme
 
@@ -280,9 +268,6 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_K
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
-    Facts:  
-     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
-    
     
 Individual: Nihonbashi_bridge_in_Edo
 
@@ -515,8 +500,5 @@ Individual: Yoshida_at_Tōkaidō
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     indoorScene  Yoshida_at_Tōkaidō
     
     

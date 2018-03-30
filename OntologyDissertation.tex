@@ -310,7 +310,7 @@ It suggests that the class Bay\_of\_Noboto\_Sundai\_Edo could contain two indivi
 \section{Minimum Viable Product}
 The most efficient way to describe the \textit{Views} is to accept that the closed-world assumption is too expensive to be included in the ontology.
 The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing functionality.\par
-The properties of this ontology are identical to the maximal detail ontology, with the exception of containsSpecificIndividuals, as we are no longer enforcing a closed-world.
+This ontology contains no properties.
 \subsection{Classes}
 \begin{lstlisting}
 MVP Ontology Classes
@@ -337,11 +337,12 @@ Class: Wildlife_AND_Bodies_of_Water
 Class: Wildlife_Motif
 Class: owl:Thing
 \end{lstlisting}
-The properties have been slightly streamlined.
+The classes have been streamlined.
 One of the features that the maximal detail ontology emphasised was the \textit{Views'} depictions of people, or lack thereof.
-There are only seven out of the thirty-six \textit{Views} that do not feature people.\footnote{On the whole Hokusai's work is concerned with articulating mankind's place in nature; a popular theme in nineteenth century art, known as Romanticism.}
-The prevalence of people in the \textit{Views} has been emphasised in the maximal detail ontology with a focus on the few works that lack people.\par
-It transpires that the MVP ontology retains more or less the same functionality without the same emphasis on depictions of people.
+There are only seven out of the thirty-six \textit{Views} that do not feature people.\footnote{Hokusai's work is primarily concerned with articulating mankind's place in nature; a popular theme in nineteenth century art, known as Romanticism.}
+The prevalence of people in the \textit{Views} has been emphasised in the maximal detail ontology with a focus on the few works that lack people.
+It transpires that the MVP ontology retains more or less the same functionality without the same emphasis on depictions of people.\par
+Coloured\_Mount\_Fuji also replaces the Red and Yellow\_Mount\_Fuji classes.
 
 
 \subsection{Reasoner}
@@ -2128,20 +2129,8 @@ Datatype: xsd:int
 Datatype: xsd:string
 
     
-ObjectProperty: hasTwoMountFujis
-
-    
-ObjectProperty: indoorScene
-
-    
 ObjectProperty: owl:topObjectProperty
-
-    Annotations: 
-        rdfs:comment "Every property in this ontology is reflexive as individuals are only ever related to themselves."@en
-    
-    Characteristics: 
-        Reflexive
-    
+   
     
 Class: Agriculture_Theme
 
@@ -2384,9 +2373,6 @@ Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
         Snow_Capped_Mount_Fuji,
         owl:Thing
     
-    Facts:  
-     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi
-    
     
 Individual: Nihonbashi_bridge_in_Edo
 
@@ -2619,9 +2605,6 @@ Individual: Yoshida_at_Tokaido
         People_Motif,
         Snow_Capped_Mount_Fuji,
         owl:Thing
-    
-    Facts:  
-     indoorScene  Yoshida_at_Tokaido
 \end{lstlisting}
 
 \chapter{Simple Perl parser for Manchester OWL2}
