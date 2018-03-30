@@ -55,6 +55,9 @@ Class: Bodies_Of_Water_Motif
     
 Class: Coloured_Mount_Fuji
 
+    DisjointWith: 
+        Discoloured_Mount_Fuji
+    
     
 Class: Construction_Motif
 
@@ -64,6 +67,9 @@ Class: Depicts_Rooftops
     
 Class: Discoloured_Mount_Fuji
 
+    DisjointWith: 
+        Coloured_Mount_Fuji
+    
     
 Class: Horse_Motif
 
@@ -85,9 +91,6 @@ Class: Mount_Fuji_Foreground
     
 Class: People_Motif
 
-    DisjointWith: 
-        Wildlife_NOT_People
-    
     
 Class: Rooftops_Foreground
 
@@ -118,15 +121,6 @@ Class: Wildlife_Motif
 
     SubClassOf: 
         Animals_Motif
-    
-    
-Class: Wildlife_NOT_People
-
-    SubClassOf: 
-        Wildlife_Motif
-    
-    DisjointWith: 
-        People_Motif
     
     
 Class: owl:Thing
@@ -472,7 +466,6 @@ Individual: Umezawa_in_Sagami_Province
         Mist_Foreground,
         Wildlife_AND_Bodies_of_Water,
         Wildlife_Motif,
-        Wildlife_NOT_People,
         owl:Thing
     
     

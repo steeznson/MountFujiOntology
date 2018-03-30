@@ -130,8 +130,9 @@ OWL utilises the open-world assumption, indeed it has been described as a ``dist
 The \textit{Views} also contain many distinct individuals.
 Donini \cite[135]{donini2003} identifies individuals are a source of difficulty for reasoners.
 In particular ABoxes can slow down the reasoner's deductions considerably.\par
-Lastly, the \textit{Views} are comprised of specific individuals. This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
-Usually the engineer sets the terminological parameters of an ontology first and then it is populated by individuals.
+Lastly, the \textit{Views} are comprised of specific individuals.
+This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
+Usually the engineer sets the parameters of an ontology first and then it is populated by individuals.
 This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
 The goal of each of these ontologies is to uniquely capture every individual in the ontology, alongside their defining features.
 Assessing the merits of each approach provides a vehicle to probe the strengths and weaknesses of the OWL2 standard.
@@ -145,7 +146,7 @@ As we know all that can or will ever exist in this ontology, describing it in ma
 A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
 This signals that all that can exist in the ontology are views of Mount Fuji.
 View\_of\_Mount\_Fuji was then given an exact cardinality restriction of thirty-six as only thirty-six individuals can exist in this world.
-This functionality utilises a primitive DataProperty in OWL that is distributed with the Protege software (\textbf{DataProperty} exactly 36 owl:rational).
+This functionality utilises a primitive DataProperty in OWL that is distributed with the Protege software (\textbf{owl:topDataProperty} exactly 36 owl:rational).
 This restricts any individuals in this set to being members of a set with thirty-six individuals.\par
 The next step was to create the functional and reflexive property, containsSpecificIndividuals.
 The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the individuals of class Views\_of\_Mount\_Fuji can only fully represent the \textit{Views of Mount Fuji} by having an exact relationship to themselves.
@@ -234,7 +235,7 @@ Initially by representing the KB without forcing the open-world assumption and t
 \section{Detailed Open-world Assumption}
 Trying to simulate elements of a closed-world assumption without forcing it on the ontology would not normally be possible.
 However, as stated in §3.1, the \textit{Views} make an unusual case study as the individuals that will populate the ontology are already known by the ontology engineer.
-This allows us to implement a pseudo-closed-world assumption, forbidding the creation of any individual except those that comprise the \textit{Views} (see Appendix B).
+This allows us to implement a pseudo-closed-world assumption, forbidding the classification of any individual except those that comprise the \textit{Views} (see Appendix B).
 A pseudo-open-world ontology can only be achieved at an expense: this artefact is our largest ontology, totalling three times the size of the final minimum viable product (MVP) ontology.\par
 This open-world ontology utilises TBoxes to stipulate that only the thirty-six \textit{Views} can exist because each individual has its own singleton class that is subsumed by the View\_of\_Mount\_Fuji class (see Figure 3).
 \newline
@@ -302,18 +303,53 @@ If they are not then the reasoner will assume that the two classes are equialent
 \newline
 There appears to be no difference between specifying that the class can `only' contain one individual or `exactly' one individual.
 The reasoner gives the ontology engineer the benefit of the doubt and tries to figure out how multiple individuals in a singleton class could occur.
-By making the two classes equivalent, it reasons that there must be a Bay\_of\_Noboto instance in the Sundai\_Edo class too.
-This flexibility may stem from the OWL open-world assumption, the reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accomodate this relationship by postulating that the singleton classes have merged.\par
-The class Bay\_of\_Noboto\_Sundai\_Edo could contain two individuals with discrete cardinality restrictions on each individual, but this is an unexpected result that would not have been highlighted without a reasoner.
+By making the two classes equivalent, it infers that there must be a Bay\_of\_Noboto instance in the Sundai\_Edo class too.
+This flexibility stems from the OWL open-world assumption, the reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accomodate this relationship by postulating that the singleton classes have merged.\par
+It suggests that the class Bay\_of\_Noboto\_Sundai\_Edo could contain two individuals with discrete cardinality restrictions on each individual, but this is an unexpected result that would not have been highlighted without a reasoner.
 
 \section{Minimum Viable Product}
 The most efficient way to describe the \textit{Views} is to accept that the closed-world assumption is too expensive to be included in the ontology.
 The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing functionality.\par
-
 The properties of this ontology are identical to the maximal detail ontology, with the exception of containsSpecificIndividuals, as we are no longer enforcing a closed-world.
 \subsection{Classes}
-%properties are identical except containsSpecificIndividuals
+\begin{lstlisting}
+MVP Ontology Classes
+---
+Class: Agriculture_Theme
+Class: Animals_Motif
+Class: Boats_Foreground
+Class: Bodies_Of_Water_Motif
+Class: Coloured_Mount_Fuji
+Class: Construction_Motif
+Class: Depicts_Rooftops
+Class: Discoloured_Mount_Fuji
+Class: Horse_Motif
+Class: Maritime_Theme
+Class: Mist_Foreground
+Class: Mount_Fuji_Foreground
+Class: People_Motif
+Class: Rooftops_Foreground
+Class: Snow_Capped_Mount_Fuji
+Class: Temple_Motif
+Class: Tree_Foreground
+Class: Urbanisation_Theme
+Class: Wildlife_AND_Bodies_of_Water
+Class: Wildlife_Motif
+Class: owl:Thing
+\end{lstlisting}
+The properties have been slightly streamlined.
+One of the features that the maximal detail ontology emphasised was the \textit{Views'} depictions of people, or lack thereof.
+There are only seven out of the thirty-six \textit{Views} that do not feature people.\footnote{On the whole Hokusai's work is concerned with articulating mankind's place in nature; a popular theme in nineteenth century art, known as Romanticism.}
+The prevalence of people in the \textit{Views} has been emphasised in the maximal detail ontology with a focus on the few works that lack people.\par
+It transpires that the MVP ontology retains more or less the same functionality without the same emphasis on depictions of people.
+
+
 \subsection{Reasoner}
+The MVP still has some areas that could require the attention of the reasoner (see Figure 7).
+\newline
+\centerline{\includegraphics[scale=0.3]{MVPInconsistent}}\\
+\centerline{\textit{Figure 7}}
+\newline
 
 \section{Assessment}
 % ANTIPATTERNS
@@ -1183,6 +1219,12 @@ ObjectProperty: notPeopleMotif
     
     
 ObjectProperty: owl:topObjectProperty
+
+    Annotations: 
+        rdfs:comment "All object properties in this ontology are reflexive as they relate individuals to themselves."@en
+    
+    Characteristics: 
+        Reflexive
 
     
 ObjectProperty: peopleMotif
@@ -2118,6 +2160,9 @@ Class: Bodies_Of_Water_Motif
     
 Class: Coloured_Mount_Fuji
 
+    DisjointWith: 
+        Discoloured_Mount_Fuji
+
     
 Class: Construction_Motif
 
@@ -2126,6 +2171,9 @@ Class: Depicts_Rooftops
 
     
 Class: Discoloured_Mount_Fuji
+
+    DisjointWith: 
+        Coloured_Mount_Fuji
 
     
 Class: Horse_Motif
@@ -2148,10 +2196,7 @@ Class: Mount_Fuji_Foreground
     
 Class: People_Motif
 
-    DisjointWith: 
-        Wildlife_NOT_People
-    
-    
+        
 Class: Rooftops_Foreground
 
     SubClassOf: 
@@ -2181,16 +2226,6 @@ Class: Wildlife_Motif
 
     SubClassOf: 
         Animals_Motif
-    
-    
-Class: Wildlife_NOT_People
-
-    SubClassOf: 
-        Wildlife_Motif
-    
-    DisjointWith: 
-        People_Motif
-    
     
 Class: owl:Thing
 
@@ -2535,7 +2570,6 @@ Individual: Umezawa_in_Sagami_Province
         Mist_Foreground,
         Wildlife_AND_Bodies_of_Water,
         Wildlife_Motif,
-        Wildlife_NOT_People,
         owl:Thing
     
     
