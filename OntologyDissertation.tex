@@ -88,7 +88,7 @@ In the abstract OWL syntax is comprised of three components: individuals, proper
 Individuals represent objects within our domain of interest.
 OWL does not adhere to the unique name assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John le Carre' or `David Cornwell'.
 The latter two components are OWL's implementation of the ABox and TBox predicates from §2.1.\par
-OWL calls ABox assertions `Properties' \cite[11]{guide2011}.
+OWL calls ABoxes `Properties' \cite[11]{guide2011}.
 To reiterate, `Properties', in the OWL sense, can only ever apply to individuals.
 Properties have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
@@ -97,7 +97,7 @@ The OWL2 standard also allows the creation of Data Properties as well as Object 
 Data Properties are often refered to as R(ole)Boxes, as they stipulate the role that individuals can fulfill.
 They must be subsumed by a primitive class called `owl:topDataProperty'.
 Although RBoxes shall be utilised to enforce some cardinality restrictions, the case-study of this article does not lend itself to a full exploration of their potential use-cases.\par
-Finally, OWL refers to TBox assertions as `Classes'.
+Finally, OWL refers to TBoxes as `Classes'.
 Classes are used to create taxonomies (hierarchies of sets) that individuals are instances of.
 Just as with properties, every class must be subsumed by a primitive class called `owl:Thing'. 
 Properties and classes can be subsumed by others of their kind, composed of others of their kind or defined in contrast to others of their kind.\par
@@ -309,7 +309,7 @@ It suggests that the class Bay\_of\_Noboto\_Sundai\_Edo could contain two indivi
 
 \section{Minimum Viable Product}
 The most efficient way to describe the \textit{Views} is to accept that the closed-world assumption is too expensive to be included in the ontology.
-The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing functionality.\par
+The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing the functionality to uniquely identify individuals.\par
 This ontology contains no properties.
 \subsection{Classes}
 \begin{lstlisting}
@@ -344,15 +344,26 @@ The prevalence of people in the \textit{Views} has been emphasised in the maxima
 It transpires that the MVP ontology retains more or less the same functionality without the same emphasis on depictions of people.\par
 Coloured\_Mount\_Fuji also replaces the Red and Yellow\_Mount\_Fuji classes.
 
-
 \subsection{Reasoner}
 The MVP still has some areas that could require the attention of the reasoner (see Figure 7).
 \newline
 \centerline{\includegraphics[scale=0.3]{MVPInconsistent}}\\
 \centerline{\textit{Figure 7}}
 \newline
+We can observe the reasoner alerting the reasoner to the fact that the ontology is now inconsistent as a \textit{View} with a discoloured depiction of Mount Fuji is erroneously placed into the Coloured\_Mount\_Fuji class.
 
 \section{Assessment}
+The author believes that the maximal detail provides the most descriptive KB of the \textit{Views}, although others may not agree.
+There is more than an element of curation in deciding which attributes of the \textit{Views} to accentuate in the description.
+Aside from the fact that another may interpret the \textit{Views} in a different way, the ontology's primary function of separating the individuals with T- and ABoxes becomes obfuscated by the editorialised description.
+Even setting aside the aim of ontological parsimony, it is hard to argue that the maximally detailed ontology could be preferable to the MVP ontology.\par
+The detailed open-world ontology succeeds in providing a detailed description of the \textit{Views} despite its modal handicap, however the extravagant lengths it goes to to achieve this disqualify it from serious consideration.
+It falls prey to the same charges of editorialisation as the maximal detail ontology does whilst being twice the size as an ontology artefact.
+The misuse of ABoxes as surrogate TBoxes is also a problem.
+As stated in §3.3.1, the reflexive characteristic is utilised in this ontology to allow terminological predicates to be applied through its properties.
+The results are ABoxes that look syntactically very close to TBoxes: `mountFujiForeground(South\_Wind\_Clear\_Sky, South\_Wind\_Clear\_Sky)' is not substantively different from, `Mount\_Fuji\_Foreground(South\_Wind\_Clear\_Sky)'.
+This flouting of convention goes against the OWL standard, even if it is technically possible in an OWL ontology.\par
+The reasoner output from the case-study demonstrates several OWL anti-patterns, design practices that often lead to incoherent ontologies.
 % ANTIPATTERNS
 %Three classes: logical, non-logical, guidelines
 %- Logical
