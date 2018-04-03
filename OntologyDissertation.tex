@@ -41,7 +41,7 @@ Brachman \& Levenesque use the thought experiment of \(\alpha\), an inference im
   In other words, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. \cite[79]{expressiveness1987}
 \end{quote}
 Because it is trivial that the KB will entail \(\alpha\) if it subsumes \(\alpha\) there emerges a problem of generality wherein the reasoner is unable to narrow the scope of their enquiry.
-Proving a theorem in FOL is a notoriously fickle process. \cite[91]{expressiveness1987}
+Proving a theorem in FOL is a notoriously fickle process \cite[91]{expressiveness1987}.
 It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computation.
 This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
 DL were required to fit into a niche of expressivity between propositional logic and FOL.
@@ -59,9 +59,9 @@ Terminology and attribute predicates are also known as TBox and ABox predicates 
 TBoxes are unary values that classify the individuals in one's ontology.
 ABoxes are binary attributes that are applied to individuals within the ontology.
 These assumptions can be stipulated to be subsumed by one another, intersected with one another, disjoint from one another, or even composed of a disjoint union of two others.
-An example of a TBox assertion would be, ``The Cathedral class is subsumed by the Building class,'' or, `Building \(\supset\) Cathedral'.
+An example of a TBox assertion would be, ``The Cathedral class is subsumed by the Building class,'' or, `Cathedral \(\supseteq\) Building'.
 TBoxes are \textit{intensional} knowledge as their application stipulates precisely what is being described in their terms.\footnote{eg. All quadrilateral shapes have four angles.}\par   
-Alternatively, an example of an ABox assertion would be, ``Notre Dame is an instance of a Cathedral,'' or, `Cathedral(Notre Dame)'.
+Alternatively, an example of an ABox assertion would be, ``Notre Dame has one spire,'' or, `hasOne(Spire, Notre Dame)'.
 ABoxes are \textit{extensional} knowledge as their meanings are reliant on their application.\footnote{eg. All bodies are heavy. - The truth of this knowledge depends on how the predicate `is heavy' is applied.}\par
 It should be noted that Baader has introduced the notion of the discrete domain being a \textit{world} in the above quotation.
 Worlds are blank canvases to be explicitly populated by the ontology engineer.
@@ -69,10 +69,10 @@ Pressingly, there is a distinction between an open-world assumption and a closed
 \begin{quote}
 \textbf{Open-world Assumption}: an assumption that a given statement may possibly be true regardless of its nominal truth value.
 \end{quote}
-Given the open-world assumption, an attribute like `Cathedral(Notre Dame)' becomes mutable.
+Given the open-world assumption, a TBox like `Cathedral(Notre Dame)' becomes mutable.
 Say that every Bishop of Notre Dame had been secretly excommunicated or some similar technicality were discovered that disqualified Notre Dame from its cathedral status; the open-world assumption provides the apparatus to correct the KB.\par
 The closed-world assumption is the opposite assumption, that any given statement that is known to be true is true.
-A similar ABox indescrepansey to the Notre Dame example becomes logically impossible to account for.
+A similar indescrepansey to the Notre Dame example becomes logically impossible to account for.
 OWL languages utilise the open-world assumption.
 
 \section{OWL Languages}
@@ -103,7 +103,7 @@ Just as with properties, every class must be subsumed by a primitive class calle
 Properties and classes can be subsumed by others of their kind, composed of others of their kind or defined in contrast to others of their kind.\par
 Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
-  There exists a \textbf{Dog} \textit{class} (owl:Thing\(\supset\)Dog). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (owl:Thing\(\supset\)Person) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Louis,Allan))\(\wedge\)(isOwnerOf(Allan,Louis))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Animal\(\supset\)Person,Dog), which in turn is subsumed by \textbf{owl:Thing}.
+  There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) and (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing}.
 \end{quote}
 Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/, accessed 05.03.18, \textit{MIT License}}
 Protégé was utilised in the production of the ontologies for the case study in this article with the default Pellet reasoner.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/, accessed 23.03.18}
@@ -146,7 +146,7 @@ As we know all that can or will ever exist in this ontology, describing it in ma
 A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
 This signals that all that can exist in the ontology are views of Mount Fuji.
 View\_of\_Mount\_Fuji was then given an exact cardinality restriction of thirty-six as only thirty-six individuals can exist in this world.
-This functionality utilises a primitive DataProperty in OWL that is distributed with the Protege software (\textbf{owl:topDataProperty} exactly 36 owl:rational).
+This functionality utilises a primitive DataProperty in OWL that is distributed with the Protégé software (\textbf{owl:topDataProperty} exactly 36 owl:rational).
 This restricts any individuals in this set to being members of a set with thirty-six individuals.\par
 The next step was to create the functional and reflexive property, containsSpecificIndividuals.
 The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the individuals of class Views\_of\_Mount\_Fuji can only fully represent the \textit{Views of Mount Fuji} by having an exact relationship to themselves.
@@ -217,7 +217,7 @@ Using these two levels in tandem we can isolate each individual by its unique at
 \subsection{The Reasoner}
 The Pellet reasoner had no trouble adapting to the closed-world assumption.
 This case-study originally utilised the FaCT reasoner which had detailed error logs but struggled to compute ontologies with many individuals and ABoxes, often taking up to ten minutes to assess this ontology.
-Ultimately the Pellet reasoner proved more useful, although the inclusion of multiple reasoners in Protege software is an invaluable asset to ontology engineers who may have to model a wide variety of ontologies.\par
+Ultimately the Pellet reasoner proved more useful, although the inclusion of multiple reasoners in Protégé software is an invaluable asset to ontology engineers who may have to model a wide variety of ontologies.\par
 Fig. 2 demonstrates the direct effects of the closed-world assumption on the reasoner: 
 \newline
 \newline
@@ -363,7 +363,21 @@ The misuse of ABoxes as surrogate TBoxes is also a problem.
 As stated in §3.3.1, the reflexive characteristic is utilised in this ontology to allow terminological predicates to be applied through its properties.
 The results are ABoxes that look syntactically very close to TBoxes: `mountFujiForeground(South\_Wind\_Clear\_Sky, South\_Wind\_Clear\_Sky)' is not substantively different from, `Mount\_Fuji\_Foreground(South\_Wind\_Clear\_Sky)'.
 This flouting of convention goes against the OWL standard, even if it is technically possible in an OWL ontology.\par
-The reasoner output from the case-study demonstrates several OWL anti-patterns, design practices that often lead to incoherent ontologies.
+The reasoner output from the case-study demonstrates several OWL antipatterns, design practices that often lead to incoherent ontologies.
+Roussay, et. al identify three categories of antipattern: logical, non-logical and guidelines \cite[1]{antipatterns2009}.
+Identification of logical antipatterns is most urgent as a logical inconsistencies guarantee ontology inconsistencies.
+Non-logical antipatterns concern the erroneous addition of restrictions, relationships or classes.
+Although they do not guarantee an inconsistent ontology, they create more opportunity for ontology inconsistencies to arise by inflating the ontology beyond necessity.
+The guidelines are antipatterns that one must avoid in order to maintain an efficient and legible ontology.\par
+The reasoner output for our MVP ontology in §3.4.2 is a simple example of a logical antipattern.
+Cushion\_Pine\_at\_Pine is simultaneously placed into two disjoint TBoxes:
+\begin{quote}
+  1. X(),Y() \\
+  2. X $\bigsqcup$ Y \\
+  3. X(a) \& Y(a) // inconsistent, from 2
+\end{quote}
+
+
 % ANTIPATTERNS
 %Three classes: logical, non-logical, guidelines
 %- Logical
