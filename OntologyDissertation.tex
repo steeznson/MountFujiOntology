@@ -32,7 +32,7 @@
 \chapter{The OWL2 Specification}
 \section{Description Logics}
 Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
-DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artificial intelligence research and other industries \cite[29]{handbook2003}.\par
+DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artificial intelligence research and other industries \cite[29]{handbookIntro2003}.\par
 Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{$P'$} is a functionally similar yet significantly distinct concept to \textit{$Q'$} is not.
 Levesque \& Brachman (1987) found that first-order logic (FOL) is not suitable for describing these sorts of complex relationships.
 They identify a fundamental tension between a language's expressive power and its tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a syntactically consistent subset of first order logic.}\par
@@ -54,7 +54,7 @@ Languages conform to knowledge representation (KR) systems that take the form of
 They operate over discrete domains using a hybrid of two forms of predicate - terminologies and attributes.\par
 Terminology and attribute predicates are also known as TBox and ABox predicates respectively:
 \begin{quote}
-  Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. \cite[27]{handbook2003}
+  Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. \cite[27]{handbookIntro2003}
 \end{quote}
 TBoxes are unary values that classify the individuals in one's ontology.
 ABoxes are binary attributes that are applied to individuals within the ontology.
@@ -63,7 +63,7 @@ An example of a TBox assertion would be, ``The Cathedral class is subsumed by th
 TBoxes are \textit{intensional} knowledge as their application stipulates precisely what is being described in their terms.\footnote{eg. All quadrilateral shapes have four angles.}\par   
 Alternatively, an example of an ABox assertion would be, ``Notre Dame has one spire,'' or, `hasOne(Spire, Notre Dame)'.
 ABoxes are \textit{extensional} knowledge as their meanings are reliant on their application.\footnote{eg. All bodies are heavy. - The truth of this knowledge depends on how the predicate `is heavy' is applied.}\par
-It should be noted that Baader has introduced the notion of the discrete domain being a \textit{world} in the above quotation.
+It should be noted that Nardi \& Brachman has introduced the notion of the discrete domain being a \textit{world} in the above quotation.
 Worlds are blank canvases to be explicitly populated by the ontology engineer.
 Pressingly, there is a distinction between an open-world assumption and a closed-world assumption that is relevant for the case study in this article:
 \begin{quote}
@@ -76,7 +76,7 @@ A similar indescrepansey to the Notre Dame example becomes logically impossible 
 OWL languages utilise the open-world assumption.
 
 \section{OWL Languages}
-There are three approaches to constructing a KR system \cite[23]{handbook2003}:
+There are three approaches to constructing a KR system \cite[23]{handbookIntro2003}:
 \begin{enumerate}
 \item{Limited and complete: systems designed so that inferences can be efficiently computed at the expense of expressiveness.}
 \item{Expressive and incomplete: systems designed for expressiveness and efficiency at the expense of fully functioning reasoning capacities.}
@@ -103,14 +103,14 @@ Just as with properties, every class must be subsumed by a primitive class calle
 Properties and classes can be subsumed by others of their kind, composed of others of their kind or defined in contrast to others of their kind.\par
 Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
-  There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) and (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing}.
+  There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) \textbf{and} (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing}.
 \end{quote}
 Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/, accessed 05.03.18, \textit{MIT License}}
 Protégé was utilised in the production of the ontologies for the case study in this article with the default Pellet reasoner.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/, accessed 23.03.18}
 The Pellet reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
 It will also deduce the applications of the `isOwnerOf' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
 It would flag a logically impossible (incoherent) ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
-The two most common OWL languages are the XML and Manchester OWLs \cite[30]{handbook2003}\cite[10]{guide2011}.
+The two most common OWL languages are the XML and Manchester OWLs \cite[30]{handbookIntro2003}\cite[10]{guide2011}.
 Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
 The ontology artefacts in this article are written in Manchester OWL.
 
@@ -126,7 +126,7 @@ There are several features of this collection that make it an interesting case s
 Firstly, it is restricted to an exact cardinality.
 This poses a problem for OWL as an accurate modelling this world requires a closed-world assumption.
 To briefly reiterate, this is the assumption that established truth values in the domain are immutable.
-OWL utilises the open-world assumption, indeed it has been described as a ``distinguishing feature'' of DL modelling languages \cite[11]{handbook2003}. This shall require additional constraints upon the modelled ontology.\par
+OWL utilises the open-world assumption, indeed it has been described as a ``distinguishing feature'' of DL modelling languages \cite[11]{handbookIntro2003}. This shall require additional constraints upon the modelled ontology.\par
 The \textit{Views} also contain many distinct individuals.
 Donini \cite[135]{donini2003} identifies individuals are a source of difficulty for reasoners.
 In particular ABoxes can slow down the reasoner's deductions considerably.\par
@@ -159,7 +159,8 @@ Every single individual in the ontology is explicitly listed as this property is
 This property acts as a whitelist for the reasoner for valid individuals in the ontology. The `exactly' keyword is essential to stipulate this condition.
 The stipulation reads that the class may only contain one instance of an array containing each distinct individual in the class.\par
 This ontology depicts owl:Thing and View\_of\_Mount\_Fuji as separate classes despite being equivalent.
-This is because there is a meaningful distinction in scope between the two.
+Some may argue that this ontology manifests the `EquivalenceIsDifference' antipattern where an equivalent class is erroneously designated as a subclass \cite[2]{antipatterns2009}.
+This article argues that there is a meaningful distinction in scope between the two.
 While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to restrict the application of restrictions to one per class.
 There is a difference in the functionality of these two classes and the order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the whitelist of allowed things is introduced.
 This concludes the application of the closed-world assumption on this ontology.
@@ -229,6 +230,24 @@ As the singleton class is subsumed by the View\_of\_Mount\_Fuji it cannot contra
 The first thing that clashes is the two whitelists of individuals.
 The\_Great\_Wave\_off\_Kanagawa already satisfies the containsSpecificIndividual constraint reflexively and this cannot be multiply satisfied as containsSpecificIndividuals is also functional.\par
 For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory data properties.\par
+The reasoner output from the case-study demonstrates several OWL antipatterns; design practices that often lead to incoherent ontologies.
+Roussay, et al. identify three categories of antipattern: logical, non-logical and guidelines \cite[1]{antipatterns2009}.\par
+Identification of logical antipatterns is most urgent as a logical inconsistencies guarantee ontology inconsistencies.
+Non-logical antipatterns concern the erroneous addition of restrictions, relationships or classes.
+Although they do not guarantee an inconsistent ontology, they create more opportunity for ontology inconsistencies to arise by inflating the ontology beyond necessity.
+The guidelines are antipatterns that one must avoid in order to maintain an efficient and legible ontology.\par
+The maximal detail ontology offers an interesting example of the `OnlynessIsLoneliness' logical antipattern \cite[1]{antipatterns2009}.
+The creation of a singleton class in a world with a closed-world assumption contradicts the exact cardinality role restriction placed on owl:Thing:
+\begin{quote}
+  1. Y $\subseteq$ X \\
+  2. R1 $\bigsqcup$ R2 \\
+  3. $\forall$R1.X \\ 
+  4. $\forall$R2.Y // inconsistent from 2\\ 
+\end{quote}
+Class \textit{X} subsumes class \textit{Y}.
+Two roles, {R1} and \textit{R2}, are disjoint from one another.
+\textit{R1} applies universally to class \textit{X} while \textit{R2} applies universally to class \textit{Y}.
+This creates a logical incoherence as \textit{Y} must inherit all roles of \textit{X}.\par
 The next two ontology artefacts aim to simplify the KB.
 Initially by representing the KB without forcing the open-world assumption and then by presenting the most economical version of the KB while retaining the same functionality.
 
@@ -282,8 +301,8 @@ maritimeTheme is still subsumed by bodiesOfWaterMotif, for example.
 Again, as no relationships hold between these individuals, every property is reflexive.\par
 Most of these ABoxes would be more comfortable as TBoxes.
 Some of the properties like peopleMotif apply to the majority of the individuals in the ontology, reducing their descriptiveness.
-The ABox (peopleMotif(Senju Musachi Province, Senju Musachi Province)) is also syntactically very similar to a TBox.
-This extensive use of reflexive properties shall be discussed at length at the end of this chapter (§3.5).
+The ABox (peopleMotif(Senju Musachi Province, Senju Musachi Province)) is both syntactically and semantically similar to a TBox.
+This extensive use of reflexive properties shall be returned to at the end of this chapter (§3.5).
 \subsection{Reasoner}
 In its current state this ontology is functionally closed.
 Any attempt to add more individuals to a given class results in an inconsistent ontology (see Figure 4).
@@ -339,7 +358,7 @@ Class: owl:Thing
 \end{lstlisting}
 The classes have been streamlined.
 One of the features that the maximal detail ontology emphasised was the \textit{Views'} depictions of people, or lack thereof.
-There are only seven out of the thirty-six \textit{Views} that do not feature people.\footnote{Hokusai's work is primarily concerned with articulating mankind's place in nature; a popular theme in nineteenth century art, known as Romanticism.}
+There are only seven out of the thirty-six \textit{Views} that do not feature people.\footnote{Hokusai's work is often concerned with articulating mankind's place in nature; a popular theme in nineteenth century art, known as Romanticism.}
 The prevalence of people in the \textit{Views} has been emphasised in the maximal detail ontology with a focus on the few works that lack people.
 It transpires that the MVP ontology retains more or less the same functionality without the same emphasis on depictions of people.\par
 Coloured\_Mount\_Fuji also replaces the Red and Yellow\_Mount\_Fuji classes.
@@ -350,7 +369,16 @@ The MVP still has some areas that could require the attention of the reasoner (s
 \centerline{\includegraphics[scale=0.3]{MVPInconsistent}}\\
 \centerline{\textit{Figure 7}}
 \newline
-We can observe the reasoner alerting the reasoner to the fact that the ontology is now inconsistent as a \textit{View} with a discoloured depiction of Mount Fuji is erroneously placed into the Coloured\_Mount\_Fuji class.
+We can observe the reasoner alerting the reasoner to the fact that the ontology is now inconsistent as a \textit{View} with a discoloured depiction of Mount Fuji is erroneously placed into the Coloured\_Mount\_Fuji class.\par
+The reasoner highlights a simple example of a logical antipattern.
+Cushion\_Pine\_at\_Pine is simultaneously placed into two disjoint TBoxes:
+\begin{quote}
+  1. X $\bigsqcup$ Y \\
+  2. X(a) \textbf{and} Y(a) // inconsistent from 1
+\end{quote}
+This is an example of an `AndIsOr' antipattern \cite[1]{antipatterns2009}.
+As \textit{X} and \textit{Y} are disjoint classes, an individual can only ever inhabit \textit{X} \textbf{or} \textit{Y}.
+Simultaneously \textit{a} is being asserted to exist in \textit{X} \textbf{and} \textit{Y}.\par
 
 \section{Assessment}
 The author believes that the maximal detail provides the most descriptive KB of the \textit{Views}, although others may not agree.
@@ -361,39 +389,8 @@ The detailed open-world ontology succeeds in providing a detailed description of
 It falls prey to the same charges of editorialisation as the maximal detail ontology does whilst being twice the size as an ontology artefact.
 The misuse of ABoxes as surrogate TBoxes is also a problem.
 As stated in §3.3.1, the reflexive characteristic is utilised in this ontology to allow terminological predicates to be applied through its properties.
-The results are ABoxes that look syntactically very close to TBoxes: `mountFujiForeground(South\_Wind\_Clear\_Sky, South\_Wind\_Clear\_Sky)' is not substantively different from, `Mount\_Fuji\_Foreground(South\_Wind\_Clear\_Sky)'.
+The results are ABoxes that look syntactically very close, and function almost identically, to TBoxes: `mountFujiForeground(South\_Wind\_Clear\_Sky, South\_Wind\_Clear\_Sky)' is not substantively different from, `Mount\_Fuji\_Foreground(South\_Wind\_Clear\_Sky)'.
 This flouting of convention goes against the OWL standard, even if it is technically possible in an OWL ontology.\par
-The reasoner output from the case-study demonstrates several OWL antipatterns, design practices that often lead to incoherent ontologies.
-Roussay, et. al identify three categories of antipattern: logical, non-logical and guidelines \cite[1]{antipatterns2009}.
-Identification of logical antipatterns is most urgent as a logical inconsistencies guarantee ontology inconsistencies.
-Non-logical antipatterns concern the erroneous addition of restrictions, relationships or classes.
-Although they do not guarantee an inconsistent ontology, they create more opportunity for ontology inconsistencies to arise by inflating the ontology beyond necessity.
-The guidelines are antipatterns that one must avoid in order to maintain an efficient and legible ontology.\par
-The reasoner output for our MVP ontology in §3.4.2 is a simple example of a logical antipattern.
-Cushion\_Pine\_at\_Pine is simultaneously placed into two disjoint TBoxes:
-\begin{quote}
-  1. X(),Y() \\
-  2. X $\bigsqcup$ Y \\
-  3. X(a) \& Y(a) // inconsistent, from 2
-\end{quote}
-
-
-% ANTIPATTERNS
-%Three classes: logical, non-logical, guidelines
-%- Logical
-%AndIsOr: relation cannot be simultaneously (and) and (or)
-%OnlynessIsLoneliness: link only A and B with universal restriction but later link some A to C (disjunction B and C)
-%UniversalExistence: A is simultaneously subsumed by all roles of B but only some of C. (disjunction B and C)
-%EquivalenceIsDifference: ontologist wants to say that A is a subclass of B but says that they are equivalent
-%- Non-Logical
-%SynonymeOfEquivalence: having two equivalent classes where one would suffice. 
-%SumOfSome: Multiple (some) quantifier relationships for the same concept
-%SomeMeansAtLeastOne: no need to specify cardinality when using (some) quantifier
-%- Guidelines
-%DisjointednessOfComplement: more correct to say that two concepts are disjoint than A === (not B)
-%Domain&CardinalityConstraints: cardinality restrictions are exact and should not be used in place of universal restrictions
-%GroupAxioms: group all restrictions for a class into a single restriction
-%MinIsZero: trivial that a set is larger than zero in a well designed ontology
 
 \chapter{Improving the OWL2 standard}
 \section{Issues Raised by the Case Study}
@@ -428,11 +425,39 @@ Insert measured conclusion here.
   Cambridge University Press New York,
   2003.
 
+\bibitem[Baader, Kusters \& Wolter, 2003]{handbookExtensions2003}
+  Baader, F., Kusters, R., Wolter, F. \textit{in} Baader, F et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+
+\bibitem[Baader \& Nutt, 2003]{basicDL2003}
+  Baader, F., Nutt, W. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+
+\bibitem[Bordiga \& Brachman, 2003]{handbookConceptual2003}
+  Bordiga, A., Brachman, R. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+  
 \bibitem[Brachman \& Levesque, 1984]{frame-based1984}
   Brachman, R., Levesque, H.:
   \textit{The Tractability of Subsumption in Frame-Based Description Languages},
   AAAI-84 Proceedings,
   1984.
+
+\bibitem[Calvanese \& De Giacomo, 2003]{handbookExpressiveDL2003}
+  Calvanese, D., De Giacomo, G. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
 
 \bibitem[Donini, 2003]{donini2003}
   Donini, F. \textit{in} Baader, F. et al.:
@@ -447,18 +472,12 @@ Insert measured conclusion here.
   1st Edition,
   University of Manchester, 2011.
 
-\bibitem[Levesque \& Brachman, 1987]{expressiveness1987}
-  Levesque, H., Brachman, R.:
-  \textit{Expressiveness and tractibility in knowledge representation and reasoning},
-  Journal of Computing Intelligence,
-  pp.78-92,
-  1987.
-
-\bibitem[Horrocks \& Motik, 2006]{problems2006}
-  Motik, B., Horrocks, I.:
-  \textit{Problems with OWL Syntax},
-  University of Manchester,
-  2006.
+\bibitem[Horrocks, 2003]{handbookImplementation2003}
+  Horrocks, I. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
 
 \bibitem[Krötzsch, Simancik \& Horrocks, 2012]{primer2012}
   Krötzsch, M., Simancik, F., Horrocks, I.: 
@@ -466,13 +485,54 @@ Insert measured conclusion here.
   Computing Research Repository abs/1201.4089,
   2012.
 
+\bibitem[Levesque \& Brachman, 1987]{expressiveness1987}
+  Levesque, H., Brachman, R.:
+  \textit{Expressiveness and tractibility in knowledge representation and reasoning},
+  Journal of Computing Intelligence,
+  pp.78-92,
+  1987.
+
+\bibitem[MacGuinness \& Patel-Schneider, 2003]{handbookKRS2003}
+  MacGuinness, D., Patel-Schneider, P. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+
+\bibitem[Moller \& Haarslev, 2003]{handbookDLS2003}
+  Moller, R., Haarslev, V. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+
+\bibitem[Motik \& Horrocks, 2006]{problems2006}
+  Motik, B., Horrocks, I.:
+  \textit{Problems with OWL Syntax},
+  University of Manchester,
+  2006.
+
+\bibitem[Nardi \& Brachman, 2003]{handbookIntro2003}
+  Nardi, D., Brachman, R. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+
 \bibitem[Roussey, Corcho \& Blazquez, 2009]{antipatterns2009}
   Roussey, C., Corcho, O, Blazquez, L.M.V.: 
   \textit{A Catalogue of OWL Ontology AntiPatterns},
   K-CAP '09 Proceedings of the fifth international conference on Knowledge capture,
   ACM New York,
   pp.205-206,
-  2009. 
+  2009.
+
+\bibitem[Sattler, Calvanese \& Molitor, 2003]{handbookOtherFormalisms2003}
+  Sattler, U. D. Calvanese, Molitor, R. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
 
 \bibitem[Schlobach, Huang, Cornet \& van Harmelen, 2007]{incoherent2007} 
   Schlobach, S., Huang, Z., Cornet, R., van Harmelen, F.: 
