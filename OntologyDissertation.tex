@@ -96,7 +96,7 @@ Every property must be subsumed by a primitive property called `owl:topObjectPro
 The OWL2 standard also allows the creation of Data Properties as well as Object Properties these shall not be covered in this article.
 Data Properties are often refered to as R(ole)Boxes, as they stipulate the role that individuals can fulfill.
 They must be subsumed by a primitive class called `owl:topDataProperty'.
-Although RBoxes shall be utilised to enforce some cardinality restrictions, the case-study of this article does not lend itself to a full exploration of their potential use-cases.\par
+Although RBoxes shall be utilised to enforce some cardinality restrictions, the case study of this article does not lend itself to a full exploration of their potential use-cases.\par
 Finally, OWL refers to TBoxes as `Classes'.
 Classes are used to create taxonomies (hierarchies of sets) that individuals are instances of.
 Just as with properties, every class must be subsumed by a primitive class called `owl:Thing'. 
@@ -217,7 +217,7 @@ Properties provide the second level of distinction between the individuals and c
 Using these two levels in tandem we can isolate each individual by its unique attributes.
 \subsection{The Reasoner}
 The Pellet reasoner had no trouble adapting to the closed-world assumption.
-This case-study originally utilised the FaCT reasoner which had detailed error logs but struggled to compute ontologies with many individuals and ABoxes, often taking up to ten minutes to assess this ontology.
+This case study originally utilised the FaCT reasoner which had detailed error logs but struggled to compute ontologies with many individuals and ABoxes, often taking up to ten minutes to assess this ontology.
 Ultimately the Pellet reasoner proved more useful, although the inclusion of multiple reasoners in Protégé software is an invaluable asset to ontology engineers who may have to model a wide variety of ontologies.\par
 Fig. 2 demonstrates the direct effects of the closed-world assumption on the reasoner: 
 \newline
@@ -230,7 +230,7 @@ As the singleton class is subsumed by the View\_of\_Mount\_Fuji it cannot contra
 The first thing that clashes is the two whitelists of individuals.
 The\_Great\_Wave\_off\_Kanagawa already satisfies the containsSpecificIndividual constraint reflexively and this cannot be multiply satisfied as containsSpecificIndividuals is also functional.\par
 For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory data properties.\par
-The reasoner output from the case-study demonstrates several OWL antipatterns; design practices that often lead to incoherent ontologies.
+The reasoner output from the case study demonstrates several OWL antipatterns; design practices that often lead to incoherent ontologies.
 Roussay, et al. identify three categories of antipattern: logical, non-logical and guidelines \cite[1]{antipatterns2009}.\par
 Identification of logical antipatterns is most urgent as a logical inconsistencies guarantee ontology inconsistencies.
 Non-logical antipatterns concern the erroneous addition of restrictions, relationships or classes.
@@ -394,11 +394,24 @@ This flouting of convention goes against the OWL standard, even if it is technic
 
 \chapter{Improving the OWL2 standard}
 \section{Issues Raised by the Case Study}
-% WHY NOT
-% implementation should be as small as possible
-% not precluded from working on closed-world ontology aretfacts
-% not all closed-world ontologies have to be strictly closed
-% could be handled by a protege plugin
+The \textit{Views} ontologies have raised some of the potential issues with utilising OWL for an unusual case study.
+Yet none of these issues have proved to be insurmountable barriers.\par
+It is true that a closed-world assumption is not offered as a feature of OWL languagaes but this does not preclude the ontology engineer from simulating a closed-world assumption.
+Additionally, the implementation of a closed-world assumption is not always desirable; the aim of producing one's ontology as economically as possible will often prevent the engineer from including it in their description.
+In this case study, it was not necessary to include the MVP ontology in §3.4.\par
+The OWL standard does not have to change to accomodate closed-world assumption as it is already possible to describe a closed-world within its framework.
+Fortunately, Protege offers support for plugins, and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
+As evidenced by the detailed open-world assumption's attempt to implement a pseudo-open-world assumption, the role of subsumption is integral to OWL.
+Although every singleton class is subsumed by owl:Thing there are no additional restrictions being inherited by each class.
+Dedicating the entirity of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their knowledge base.
+The abuse of reflexive properties in this ontology has also been discussed in §3.5.
+None of the reasoners currently bundled with Protege can identify poor ontology design: while it may prove a challenge to implement, many integrated development environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
+Creating a reasoner with such functionality would allow novice ontology engineers to hone their skills without interfering with the malleability of the OWL standard as a framework.\par
+Ultimately OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs.
+The case study does suggest that some features may be lacking from Protege's extend toolset.
+Contributors to Protege ought to consider expanding the functionality of future reasoners and creating new plugins to cover a wide range of use-cases.\par
+The remainder of this article will evaluate the OWL ontology artefacts themselves.
+
 \section{Simple Perl Parser}
 % Prelude to legibility and Perspectives
 \section{The Tripartite Structure of Ontology Engineering}
