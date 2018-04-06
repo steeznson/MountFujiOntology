@@ -27,6 +27,7 @@
 \tableofcontents
 
 \chapter{Introduction}
+% MOTIVATION
 % explain project overview in greater detail
 
 \chapter{The OWL2 Specification}
@@ -113,6 +114,7 @@ It would flag a logically impossible (incoherent) ontology up to the engineer if
 The two most common OWL languages are the XML and Manchester OWLs \cite[30]{handbookIntro2003}\cite[10]{guide2011}.
 Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
 The ontology artefacts in this article are written in Manchester OWL.
+% MOTIVATION
 
 \chapter{Capturing the Thirty-Six Views}
 \section{Case Study: the Thirty-Six Views of Mount Fuji}
@@ -396,28 +398,51 @@ This flouting of convention goes against the OWL standard, even if it is technic
 \section{Issues Raised by the Case Study}
 The \textit{Views} ontologies have raised some of the potential issues with utilising OWL for an unusual case study.
 Yet none of these issues have proved to be insurmountable barriers.\par
-It is true that a closed-world assumption is not offered as a feature of OWL languagaes but this does not preclude the ontology engineer from simulating a closed-world assumption.
+It is true that the option to implement closed-world assumption is not offered as a feature of OWL languages but this does not preclude the ontology engineer from simulating a closed-world assumption.
 Additionally, the implementation of a closed-world assumption is not always desirable; the aim of producing one's ontology as economically as possible will often prevent the engineer from including it in their description.
 In this case study, it was not necessary to include the MVP ontology in §3.4.\par
 The OWL standard does not have to change to accomodate closed-world assumption as it is already possible to describe a closed-world within its framework.
-Fortunately, Protege offers support for plugins, and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
+However, there are means to remedy the labour intensive implementation process.
+Protege offers support for plugins and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
 As evidenced by the detailed open-world assumption's attempt to implement a pseudo-open-world assumption, the role of subsumption is integral to OWL.
 Although every singleton class is subsumed by owl:Thing there are no additional restrictions being inherited by each class.
 Dedicating the entirity of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their knowledge base.
 The abuse of reflexive properties in this ontology has also been discussed in §3.5.
 None of the reasoners currently bundled with Protege can identify poor ontology design: while it may prove a challenge to implement, many integrated development environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
 Creating a reasoner with such functionality would allow novice ontology engineers to hone their skills without interfering with the malleability of the OWL standard as a framework.\par
-Ultimately OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs.
+Ultimately, OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs.
 The case study does suggest that some features may be lacking from Protege's extend toolset.
 Contributors to Protege ought to consider expanding the functionality of future reasoners and creating new plugins to cover a wide range of use-cases.\par
-The remainder of this article will evaluate the OWL ontology artefacts themselves.
+% MOTIVATION
 
 \section{Simple Perl Parser}
-% Prelude to legibility and Perspectives
+The Protege ontology creation tool saves its output to a variety of formats, including Manchester OWL2.
+It provides an intuitive interface through the use of a layer of abstraction between the engineer and the ontology artefacts.
+In order to fully understand the OWL2 artefacts themselves a simple parser has been implemented in Perl (see Appendix D).\par
+The main routine of the parser is a loop:
+\begin{lstlisting}
+do {
+	get_ontology();
+	open_file();
+	get_search();
+	print_output();
+} while (1); # loop until user exits
+\end{lstlisting}
+Firstly the get\_ontology() sub-routine asks the user to select which ontology artefact they want to query, and allows the option to exit the loop.
+The open\_file() sub-routine ensures that the artefact is readable and then opens it.
+Next, the get\_search() sub-routine asks the user either to choose from a list of search terms or enter their own query.
+Lastly, the print\_output() uses a while loop to remove whitespace and print all lines that match the search term.\par
+This is a very simple parser and as such must be run from the command line.
+It can be run with any version of Perl 5, which is available on Windows and comes bundled with virtually every unix and unix-like operating system.\footnote{There are also modules available for Perl 6 that allow the execution of Perl 5 code.}\par
+As discussed in §2.2, Manchester OWL strives to be as legible as possible.
+An equivalent parser would have been more complex to implement for XML OWL due to the need to filter the XML tags from the output.
+As we shall see, Manchester OWL still suffers from some legibility issues when a human attempts to reason directly from the ontology.\par
+The implementation of this parser gives a glimpse into the structure of ontology engineering as a field.
 \section{The Tripartite Structure of Ontology Engineering}
 % who is the language for? logicians, programmers or ontology engineers?
 % OWL standard implementors, OWL software developers, ontology engineers
 % have to ensure accessible to all three
+% discuss nature of abstraction and error-handling
 \section{OWL Legibility}
 % ``Problems of OWL syntax'' Manchester University Presses
 % ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
@@ -2777,7 +2802,6 @@ sub print_output{
 		print "$row\n" if ($row =~ $search);
 	}
 }
-
 \end{lstlisting}
 
 \chapter{Initial Research Proposal}
