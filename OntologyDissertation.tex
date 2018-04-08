@@ -106,8 +106,8 @@ Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
   There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) \textbf{and} (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing}.
 \end{quote}
-Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/, accessed 05.03.18, \textit{MIT License}}
-Protégé was utilised in the production of the ontologies for the case study in this article with the default Pellet reasoner.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/, accessed 23.03.18}
+Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/ - accessed 05.03.18, \textit{MIT License}}
+Protégé was utilised in the production of the ontologies for the case study in this article with the default Pellet reasoner.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 23.03.18}
 The Pellet reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
 It will also deduce the applications of the `isOwnerOf' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
 It would flag a logically impossible (incoherent) ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
@@ -211,7 +211,7 @@ hasTwoMountFujis
 indoorScene
 owl:topObjectProperty
 \end{lstlisting}
-As no relationships hold between the individuals, every object property in this ontology is relfexive.
+As no relationships hold between the individuals, every object property in this ontology is reflexive.
 It is worth pointing out that containsSpecificIndividuals is unusual for applying to individuals at the class level but the other two are satisfied directly by individuals.
 While the properties may function like additional classes, (indoorScene(Yoshida at Tokaido, Yoshida at Tokaido)), the scope of these properties has been reduced to a single individual.
 Once the scope of an assertion has been reduced to one individual, utilising the apparatus of a bespoke class to make this assertion is unnecessary.\par
@@ -403,20 +403,20 @@ Additionally, the implementation of a closed-world assumption is not always desi
 In this case study, it was not necessary to include the MVP ontology in §3.4.\par
 The OWL standard does not have to change to accomodate closed-world assumption as it is already possible to describe a closed-world within its framework.
 However, there are means to remedy the labour intensive implementation process.
-Protege offers support for plugins and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
+Protégé offers support for plugins and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
 As evidenced by the detailed open-world assumption's attempt to implement a pseudo-open-world assumption, the role of subsumption is integral to OWL.
 Although every singleton class is subsumed by owl:Thing there are no additional restrictions being inherited by each class.
 Dedicating the entirity of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their knowledge base.
 The abuse of reflexive properties in this ontology has also been discussed in §3.5.
-None of the reasoners currently bundled with Protege can identify poor ontology design: while it may prove a challenge to implement, many integrated development environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
+None of the reasoners currently bundled with Protégé can identify poor ontology design: while it may prove a challenge to implement, many integrated development environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
 Creating a reasoner with such functionality would allow novice ontology engineers to hone their skills without interfering with the malleability of the OWL standard as a framework.\par
 Ultimately, OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs.
-The case study does suggest that some features may be lacking from Protege's extend toolset.
-Contributors to Protege ought to consider expanding the functionality of future reasoners and creating new plugins to cover a wide range of use-cases.\par
+The case study does suggest that some features may be lacking from Protégé's extend toolset.
+Contributors to Protégé ought to consider expanding the functionality of future reasoners and creating new plugins to cover a wide range of use-cases.\par
 % MOTIVATION
 
 \section{Simple Perl Parser}
-The Protege ontology creation tool saves its output to a variety of formats, including Manchester OWL2.
+The Protégé ontology creation tool saves its output to a variety of formats, including Manchester OWL2.
 It provides an intuitive interface through the use of a layer of abstraction between the engineer and the ontology artefacts.
 In order to fully understand the OWL2 artefacts themselves a simple parser has been implemented in Perl (see Appendix D).\par
 The main routine of the parser is a loop:
@@ -438,18 +438,25 @@ As discussed in §2.2, Manchester OWL strives to be as legible as possible.
 An equivalent parser would have been more complex to implement for XML OWL due to the need to filter the XML tags from the output.
 As we shall see, Manchester OWL still suffers from some legibility issues when a human attempts to reason directly from the ontology.\par
 The implementation of this parser gives a glimpse into the structure of ontology engineering as a field.
+\section{OWL Legibility}
+The release of the OWL2 standard helped to greatly reduce the ambiguity of ontology artefacts.
+Many previously unresolved issues \cite[1]{problems2006} have been corrected in OWL2.\footnote{W3 Organisation: https://www.w3.org/TR/owl2-new-features/ - accessed 08.04.18}\par
+Despite these improvements, legibility remains a key issue for OWL.
+This is a long-standing concern that existed well before OWL's inception:
+\begin{quote}
+  Moreover, we need to know more about what people find easy or hard to handle... In normal commonsense situations, when reading a geography book, for instance, the ability to handle disjunctions (say) seems to be quite limited. \cite[89]{expressiveness1987}
+\end{quote}
+Research suggests that even specialists find ontology artefacts excessively hard to reason from \cite[551]{usability2014}.\par
+It had previously been established that naive reasoners, those without a firm grasp of logical rules, have to rely on some form of mental modelling to make an inference, with inclusive disjunction proving particularly challenging to mentally grasp \cite[552]{usability2014}.
+Yet this study also suggests that even those with a specialist background in DL struggle (in terms of accuracy and time-taken) to make inferences from Manchester OWL \cite[562]{usability2014}.\par
+While it is clear that OWL designers ought to facilitate human legibility, this does not indicate any defects in the OWL standard itself.
+It is true that Manchester OWL seeks to provide better legibility but it does not purport to have perfected it.
+
 \section{The Tripartite Structure of Ontology Engineering}
 % who is the language for? logicians, programmers or ontology engineers?
 % OWL standard implementors, OWL software developers, ontology engineers
 % have to ensure accessible to all three
 % discuss nature of abstraction and error-handling
-\section{OWL Legibility}
-% ``Problems of OWL syntax'' Manchester University Presses
-% ``Usability of DL'' suggests that even DL researcher have trouble with holding mental models and some DL languages
-\begin{quote}
-  Moreover, we need to know more about what people find easy or hard to handle. There is no doubt that people can reason when necessary with radically incomplete knowledge (such as that expressible in FOL) but apparently only by going into a special problem-solving or logic puzzle mode. In normal commonsense situations, when reading a geography book, for instance, the ability to handle disjunctions (say) seems to be quite limited. \cite[89]{expressiveness1987}
-\end{quote}
-
 \chapter{Conclusion}
 % placeholder title
 Insert measured conclusion here.
@@ -557,8 +564,8 @@ Insert measured conclusion here.
   Cambridge University Press New York,
   2003.
 
-\bibitem[Roussey, Corcho \& Blazquez, 2009]{antipatterns2009}
-  Roussey, C., Corcho, O, Blazquez, L.M.V.: 
+\bibitem[Roussey, Corcho \& Blázquez, 2009]{antipatterns2009}
+  Roussey, C., Corcho, O, Blázquez, L.M.V.: 
   \textit{A Catalogue of OWL Ontology AntiPatterns},
   K-CAP '09 Proceedings of the fifth international conference on Knowledge capture,
   ACM New York,
@@ -579,7 +586,8 @@ Insert measured conclusion here.
   Springer,
   2007.
 
-\bibitem[Warren, Mulholland, Collins \& Motta, 2014]{usability2014}
+% WHY WON'T THIS CITE?
+\bibitem[Warren et al., 2014]{usability2014}
   Warren P., Mulholland P., Collins T., Motta E.:
   \textit{The Usability of Description Logics},
   The Semantic Web: Trends and Challenges,
