@@ -383,6 +383,9 @@ As \textit{X} and \textit{Y} are disjoint classes, an individual can only ever i
 Simultaneously \textit{a} is being asserted to exist in \textit{X} \textbf{and} \textit{Y}.\par
 
 \section{Assessment}
+\centerline{\includegraphics[scale=0.3]{comparison}}
+\centerline{\textit{Figure 8: A comparison of the three ontologies - closed, open and MVP}}
+\hfill \break
 The author believes that the maximal detail provides the most descriptive KB of the \textit{Views}, although others may not agree.
 There is more than an element of curation in deciding which attributes of the \textit{Views} to accentuate in the description.
 Aside from the fact that another may interpret the \textit{Views} in a different way, the ontology's primary function of separating the individuals with T- and ABoxes becomes obfuscated by the editorialised description.
@@ -456,10 +459,18 @@ Even when evaluated solely in terms of implementation, Manchester OWL does not f
 While an individual may stuggle to parse some inferences quickly and correctly on first glance, in most DL use-cases they will have time for consideration and evaluation.\par
 The field of ontology engineering is a multifaceted enterprise.
 Just by considering OWL in isolation the interests of the standard designers, language designers, software developers, ontology engineers and wider stakeholders begin to come into focus.
-Legibility only becomes a - surmountable - problem in the least fundamental strata of this ecosystem and as such it is hard to justify it taking precedent over core functionality.
-\section{The Tripartite Structure of Ontology Engineering}
-% who is the language for? logicians, programmers or ontology engineers?
-% OWL standard implementors, OWL software developers, ontology engineers
+Legibility is both a surmountable problem and one which primarily appears in the less fundamental strata of this ecosystem.
+It may be that legibility issues cannot be fixed without fundamental reformulations of the standard.
+In such a scenario the cure may be worse than the disease.
+
+\section{The Tripartite Structure of an OWL Ontology}
+The production of a successful OWL ontology relies on the cooperation of three groups: logicians, software developers and ontology engineers.\par
+Logicians need to design both the standard and languages.
+Developers need to implement software that can interact with OWL in its abstract form and parse this abstract form to produce a serialized ontology in a given OWL language. 
+Engineers use these tools provided by the developers to produce ontologies for stakeholders.
+As touched upon in the previous section, there is a delicate balance to be struck between these parties.\par
+The role of W3 as a forum to coordinate the active development of OWL is invaluable... %citation
+% mention W3 as mediator?
 % have to ensure accessible to all three
 % discuss nature of abstraction and error-handling
 
