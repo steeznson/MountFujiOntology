@@ -21,21 +21,31 @@
 \maketitle
 
 \chapter*{Abstract}
-  Insert compact and informative summary here.
-
+OWL2 is a widely used standard in ontology engineering.
+Following a brief exploration of OWL's roots in description logics, this article logics seeks to test the OWL2 standard with an unusual case study.
+Three different ontology artefacts are produced to describe Hokusai's \textit{Thirty-six Views of Mount Fuji} woodcut series (c.1830); these are then compared and evaluated.\par
+The first two ontologies experiment with OWL's \textbf{open-world assumption} default while attempting to provide a detailed description of the \textbf{closed-world} of the \textit{Views}.
+The third ontology seeks to emulate the ontology engineering process by trimming the baggage of the other ontologies without sacrificing the functionality to isolate a unique description of each individual.
+This final ontology has the most utility as an ontology artefact but the first two provide valuable insight as to the limitations of OWL technologies.\par
+The article concludes that most issues can be solved at the software implementation-level and makes the following recommendations: encourage a wider array of Protégé plugins to facilitate unusual OWL use-cases; enhance reasoner functionality to encourage good OWL practices by providing intelligent recommendations to ontology engineers, and; standardise reasoners to encourage full implementation of the OWL standard.
 
 \tableofcontents
 
 \chapter{Introduction}
+Web Ontology Language (OWL) is used in the production of Knowledge Bases (KB).
+A KB is an abstract container that represents a certain state of affairs.
+It is the job of an ontology engineer to create KBs.
+The OWL2 standard the lastest version of OWL and is recommended by the World Wide Web Consortium (W3) for ontology engineering \cite[22]{introduction2011}.
+`Ontology' in this article refers to a KB that has been produced with OWL.\par
 % MOTIVATION
 % explain project overview in greater detail
 
 \chapter{The OWL2 Specification}
 \section{Description Logics}
 Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
-DL ontologies are notably utilised to create knowledge bases (KB) in the biomedical sciences but have also found wider use in artificial intelligence research and other industries \cite[29]{handbookIntro2003}.\par
+DL ontologies are notably utilised to create KBs in the biomedical sciences but have also found wider use in artificial intelligence research and other industries \cite[29]{handbookIntro2003}.\par
 Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{$P'$} is a functionally similar yet significantly distinct concept to \textit{$Q'$} is not.
-Levesque \& Brachman (1987) found that first-order logic (FOL) is not suitable for describing these sorts of complex relationships.
+Levesque \& Brachman (1987) found that First-Order Logic (FOL) is not suitable for describing these sorts of complex relationships.
 They identify a fundamental tension between a language's expressive power and its tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a syntactically consistent subset of first order logic.}\par
 Brachman \& Levesque use the thought experiment of \(\alpha\), an inference implicit in a KB that needs to be deduced computationally:  
 \begin{quote}
@@ -46,12 +56,12 @@ Proving a theorem in FOL is a notoriously fickle process \cite[91]{expressivenes
 It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computation.
 This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
 DL were required to fit into a niche of expressivity between propositional logic and FOL.
-Levesque \& Brachman gesture towards database management systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
+Levesque \& Brachman gesture towards Database Management Systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
 \begin{quote}
   ...the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. \cite[82]{expressiveness1987}
 \end{quote}
 Modern DL languages have pursued this direction.
-Languages conform to knowledge representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
+Languages conform to Knowledge Representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
 They operate over discrete domains using a hybrid of two forms of predicate - terminologies and attributes.\par
 Terminology and attribute predicates are also known as TBox and ABox predicates respectively:
 \begin{quote}
@@ -84,7 +94,7 @@ There are three approaches to constructing a KR system \cite[23]{handbookIntro20
 \item{Expressive and complete: systems designed for expressiveness and speed at the expense of efficiency.}
 \end{enumerate}
 OWL is a family of DL languages that typically follows the third approach, offering the maximum expressiveness while being computationally complete.\footnote{Alternative reasoning `profiles' are offered in the OWL2 standard.}
-The OWL languages all adhere to a standard from the World Wide Web Consortium (W3C) \cite[10]{guide2011}.\par
+The OWL languages all adhere to a standard from W3 \cite[10]{guide2011}.\par
 In the abstract OWL syntax is comprised of three components: individuals, properties and classes.
 Individuals represent objects within our domain of interest.
 OWL does not adhere to the unique name assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John le Carre' or `David Cornwell'.
@@ -411,7 +421,7 @@ As evidenced by the detailed open-world assumption's attempt to implement a pseu
 Although every singleton class is subsumed by owl:Thing there are no additional restrictions being inherited by each class.
 Dedicating the entirety of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their knowledge base.
 The abuse of reflexive properties in this ontology has also been discussed in §3.5.
-None of the reasoners currently bundled with Protégé can identify poor ontology design: while it may prove a challenge to implement, many integrated development environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
+None of the reasoners currently bundled with Protégé can identify poor ontology design: while it may prove a challenge to implement, many Integrated Development Environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
 Creating a reasoner with such functionality would allow novice ontology engineers to hone their skills without interfering with the malleability of the OWL standard as a framework.\par
 Ultimately, OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs.
 The case study does suggest that some features may be lacking from Protégé's extend tool-set.
@@ -483,7 +493,7 @@ The ready availability and re-distribution of the source code has allowed develo
 As discussed in §4.1, plugins can offer a partial solution to challenging case studies that require unusual or unweildy ontologies.\par
 The practical issues that arise in the implementation of OWL reflect some of the challenges that arose during the infancy of DL.
 Just as the generality of inquiry had to be abstracted into a specific domain of interest to allow for efficient reasoning - an approach described as ``relaxing the standards of correctness'' \cite[81]{expressiveness1987} - a similar leap of abstraction has to occur between the standard and its implementation.
-The core functionality of Protege is related to the underlying OWL standard but only superficially.
+The core functionality of Protégé is related to the underlying OWL standard but only superficially.
 It is the job of reasoners to connect the dots and enforce the standard onto a given ontology.
 This poses a problem as each reasoner has a different implementation and will abstract from the standard in a unique way.\par
 Let's briefly consider the Pellet and FaCT++ reasoners.
@@ -510,6 +520,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 226-269,
   2003.
 
 \bibitem[Baader \& Nutt, 2003]{basicDL2003}
@@ -517,6 +528,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 47-95,
   2003.
 
 \bibitem[Bordiga \& Brachman, 2003]{handbookConceptual2003}
@@ -524,6 +536,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 359-381,
   2003.
   
 \bibitem[Brachman \& Levesque, 1984]{frame-based1984}
@@ -537,6 +550,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 184-222,
   2003.
 
 \bibitem[Donini, 2003]{donini2003}
@@ -544,7 +558,15 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 101-138,
   2003.
+
+\bibitem[Falquet, G. et al., 2011]{urban2011}
+  Falquet, G., et al.:
+  \textit{Ontologies in Urban Development Projects},
+  Advanced Information and Knowledge Processing 1,
+  Springer-Verlag,
+  2011.
 
 \bibitem[Horridge, 2011]{guide2011}
   Horridge, M.: 
@@ -557,6 +579,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 313-357,
   2003.
 
 \bibitem[Krötzsch, Simancik \& Horrocks, 2012]{primer2012}
@@ -577,6 +600,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 271-287,
   2003.
 
 \bibitem[Moller \& Haarslev, 2003]{handbookDLS2003}
@@ -584,6 +608,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 289-310,
   2003.
 
 \bibitem[Motik \& Horrocks, 2006]{problems2006}
@@ -597,6 +622,7 @@ Insert measured conclusion here.
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 5-45,
   2003.
 
 \bibitem[Roussey, Corcho \& Blázquez, 2009]{antipatterns2009}
@@ -607,11 +633,20 @@ Insert measured conclusion here.
   pp.205-206,
   2009.
 
+\bibitem[Roussey, et al., 2011]{introduction2011}
+  Roussey, C., Pinet, F., Kang, M.A., Corcho, O. \textit{in} Falquet, G. et al.:
+  \textit{Ontologies in Urban Development Projects},
+  Advanced Information and Knowledge Processing 1,
+  Springer-Verlag,
+  pp. 9-38,
+  2011.
+
 \bibitem[Sattler, Calvanese \& Molitor, 2003]{handbookOtherFormalisms2003}
   Sattler, U. D. Calvanese, Molitor, R. \textit{in} Baader, F. et al.:
   \textit{The Description Logic Handbook: Theory, Implementation and Applications},
   1st Edition,
   Cambridge University Press New York,
+  pp. 142-166,
   2003.
 
 \bibitem[Schlobach, Huang, Cornet \& van Harmelen, 2007]{incoherent2007} 
