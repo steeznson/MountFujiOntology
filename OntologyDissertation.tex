@@ -37,8 +37,23 @@ A KB is an abstract container that represents a certain state of affairs.
 It is the job of an ontology engineer to create KBs.
 The OWL2 standard the lastest version of OWL and is recommended by the World Wide Web Consortium (W3) for ontology engineering \cite[22]{introduction2011}.
 `Ontology' in this article refers to a KB that has been produced with OWL.\par
-% MOTIVATION
-% explain project overview in greater detail
+In more concrete terms, an ontology engineer may use OWL technologies to describe factory components that are being used in the production of a car.
+Some components will be similar to one another, others will be very different.
+There are different types of components involved - such as screws, pedals and tires - and some of these components may be interchangeable with other components in their group while others are absolutely essential to the design.\par
+An engineer or technician working in a car manufacturing plant needs to have quick access to this information.
+Furthermore, the structure of this information needs to logically represent its uses.
+Bearing in mind these requirements, the KB that the ontology engineer has constructed will be an invaluable resource at the plant.\par
+This article uses an atypical case study to probe the limitations of OWL technologies.
+Three distinct ontology artefacts are created to describe Hokusai's \textit{Thirty-six Views of Mount Fuji} series of woodcuts (c.1830).
+This case poses a particular challenge for OWL as, unlike a manufacturing plant, a full description of the \textit{Views} includes the restriction that there can only ever be the specific thirty-six individuals being represented in the ontology.
+Typically OWL is used to create KBs that are subject to change.
+Additionally, the large number of individuals, and the fact that they co-exist in the same set without interacting with one another further complicate the ontology.\par
+The first ontology artefact attempts to create the KB in as much detail as possible while overriding OWL's defaults.
+The second accepts OWL's default settings buttries to maintain the same level of description as the first ontology.
+Lastly, the third ontology simulates the process of ontology engineering as the first ontology is deflated and purged of superfluous detail.
+The resulting ontology is lean and substantially more efficient compared to its counterparts.\par
+The final portion of this article considers the improvements that could be made to the OWL technology stack to remedy the issues raised in the case study.
+A critical look is taken at OWL syntax and the broader concerns of the OWL ecosystem, and additional recommendations are offered in these areas respectively.
 
 \chapter{The OWL2 Specification}
 \section{Description Logics}
@@ -97,7 +112,7 @@ OWL is a family of DL languages that typically follows the third approach, offer
 The OWL languages all adhere to a standard from W3 \cite[10]{guide2011}.\par
 In the abstract OWL syntax is comprised of three components: individuals, properties and classes.
 Individuals represent objects within our domain of interest.
-OWL does not adhere to the unique name assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John le Carre' or `David Cornwell'.
+OWL does not adhere to the Unique Name Assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John le Carre' or `David Cornwell'.
 The latter two components are OWL's implementation of the ABox and TBox predicates from §2.1.\par
 OWL calls ABoxes `Properties' \cite[11]{guide2011}.
 To reiterate, `Properties', in the OWL sense, can only ever apply to individuals.
@@ -656,7 +671,6 @@ Insert measured conclusion here.
   Springer,
   2007.
 
-% WHY WON'T THIS CITE?
 \bibitem[Warren et al., 2014]{usability2014}
   Warren P., Mulholland P., Collins T., Motta E.:
   \textit{The Usability of Description Logics},
