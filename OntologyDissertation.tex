@@ -27,7 +27,7 @@ Three different ontology artefacts are produced to describe Hokusai's \textit{Th
 The first two ontologies experiment with OWL's \textbf{open-world assumption} default while attempting to provide a detailed description of the \textbf{closed-world} of the \textit{Views}.
 The third ontology seeks to emulate the ontology engineering process by trimming the baggage of the other ontologies without sacrificing the functionality to isolate a unique description of each individual.
 This final ontology has the most utility as an ontology artefact but the first two provide valuable insight as to the limitations of OWL technologies.\par
-The article concludes that most issues can be solved at the software implementation-level and makes the following recommendations: encourage a wider array of Protégé plugins to facilitate unusual OWL use-cases; enhance reasoner functionality to encourage good OWL practices by providing intelligent recommendations to ontology engineers, and; standardise reasoners to encourage full implementation of the OWL standard.
+The article concludes that most issues can be solved at the software implementation-level and makes the following recommendations: continued encouragement of community engagement to produce Protégé plugins; the enhancement reasoner functionality to encourage good OWL practices by providing intelligent recommendations to ontology engineers, and; the standardisation of reasoners to encourage full implementation of the OWL standard.
 
 \tableofcontents
 
@@ -132,7 +132,7 @@ Let us briefly examine how these tools could interact to create a world:
   There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) \textbf{and} (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing}.
 \end{quote}
 Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/ - accessed 05.03.18, \textit{BSD 2-Clause License}}
-Protégé was utilised in the production of the ontologies for the case study in this article with the default Pellet reasoner plugin.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 23.03.18}
+Protégé was utilised in the production of the ontologies for the case study in this article with the Pellet reasoner plugin.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 23.03.18}
 The Pellet reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
 It will also deduce the applications of the `isOwnerOf' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
 It would flag a logically impossible (incoherent) ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
@@ -518,8 +518,22 @@ In this case the standards of correctness are entirely dependent on implementati
 In the long term a standardised reasoner implementation could help clear up this ambiguity.
 
 \chapter{Conclusion}
-% placeholder title
-Insert measured conclusion here.
+The \textit{Thirty-six Views of Mount Fuji} series posed a challenge to OWL.
+This article has covered issues of plugin availability, ontology engineer editorialisation, the enforcement of proper OWL procedure, syntax concerns and reasoner standardisation.
+These are important issues for the wider OWL ecosystem but most of them are manifested at the software implementation stage.
+As Protégé is the only ontology editor for OWL the recommendations in this article are addressed to the Protégé core team.\par
+The enforcement of proper OWL procedure and reasoner standardisation are most pressing recommendations.
+While plugin availability is also important, the Protégé team are already encouraging community development through supporting plugins as a feature, their use of a permissive license and hosting the source files for the application publically on GitHub.
+More plugins can lead to quality of life improvements when dealing with cases like the maximal detail ontology but they are not necessary for this ontology.\par
+Reasoners on Protégé could do much more to guide ontology engineers to use good OWL practices.
+In particular the open-world ontology flouts conventional OWL practice eggregiously in its use of ABoxes as surrogate TBoxes and this ought to have led to a warning from the reasoner.
+Moreover, reasoners could be designed to recognise potential anti-patterns and make suggestions to engineers as to how to avoid them.
+There is an argument to be made that the reasoner could end up nagging engineers who are constructing atypical ontologies but this would be easily remedied by offering engineers the chance to toggle the best-practice suggestions.\par
+Lastly, the inconsistent implementation of the OWL standard between different reasoners is very problematic.
+Semi-arbitrary application of the standard onto ontologies weakens the connection between the ontology and the underlying description logics.
+Reasoners are complex pieces of software but facilitating wider adoption of OWL technologies requires a standardisation of software implementation.
+It could be that the Pellet reasoner is considered to be the de facto standard implementation, as it is given precedence in the documentation\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 11.04.18} but this is not made clear.\par
+OWL technologies are still in their infancy but an increased focus on consistent software implementation could pay back dividends as their use becomes more widespread. 
 
 \begin{thebibliography}{99}
 
