@@ -22,9 +22,9 @@
 
 \chapter*{Abstract}
 OWL2 is a widely used standard in ontology engineering.
-Following a brief exploration of OWL's roots in description logics, this article logics seeks to test the OWL2 standard with an unusual case study.
+Following a brief exploration of OWL's roots in description logics, this article seeks to test the OWL2 standard with an unusual case study.
 Three different ontology artefacts are produced to describe Hokusai's \textit{Thirty-six Views of Mount Fuji} woodcut series (c.1830); these are then compared and evaluated.\par
-The first two ontologies experiment with OWL's \textbf{open-world assumption} default while attempting to provide a detailed description of the \textbf{closed-world} of the \textit{Views}.
+The first two ontologies experiment with OWL's \textbf{open-world assumption} while attempting to provide a detailed description of the \textbf{closed-world} of the \textit{Views}.
 The third ontology seeks to emulate the ontology engineering process by trimming the baggage of the other ontologies without sacrificing the functionality to isolate a unique description of each individual.
 This final ontology has the most utility as an ontology artefact but the first two provide valuable insight as to the limitations of OWL technologies.\par
 The article concludes that most issues can be solved at the software implementation-level and makes the following recommendations: continued encouragement of community engagement to produce Protégé plugins; the enhancement reasoner functionality to encourage good OWL practices by providing intelligent recommendations to ontology engineers, and; the standardisation of reasoners to encourage full implementation of the OWL standard.
@@ -35,25 +35,25 @@ The article concludes that most issues can be solved at the software implementat
 Web Ontology Language (OWL) is used in the production of Knowledge Bases (KB).
 A KB is an abstract container that represents a certain state of affairs.
 It is the job of an ontology engineer to create KBs.
-The OWL2 standard the latest version of OWL and is recommended by the World Wide Web Consortium (W3) for ontology engineering \cite[22]{introduction2011}.
+The OWL2 standard is the latest version of OWL and is recommended by the World Wide Web Consortium (W3) for ontology engineering \cite[22]{introduction2011}.
 `Ontology' in this article refers to a KB that has been produced with OWL.\par
 In more concrete terms, an ontology engineer may use OWL technologies to describe factory components that are being used in the production of a car.
 Some components will be similar to one another, others will be very different.
-There are different types of components involved - such as screws, pedals and tires - and some of these components may be interchangeable with other components in their group while others are absolutely essential to the design.\par
+There are various types of components involved - such as screws, pedals and tires - and some of these components may be interchangeable with other components in their group while others are absolutely essential to the design.\par
 An engineer or technician working in a car manufacturing plant needs to have quick access to this information.
 Furthermore, the structure of this information needs to logically represent its uses.
 Bearing in mind these requirements, the KB that the ontology engineer has constructed will be an invaluable resource at the plant.\par
 This article uses an atypical case study to probe the limitations of OWL technologies.
 Three distinct ontology artefacts are created to describe Hokusai's \textit{Thirty-six Views of Mount Fuji} series of woodcuts (c.1830).
-This case poses a particular challenge for OWL as, unlike a manufacturing plant, a full description of the \textit{Views} includes the restriction that there can only ever be the specific thirty-six individuals being represented in the ontology.
+This case poses a particular challenge for OWL as, unlike a manufacturing plant, a full description of the \textit{Views} includes the restriction that there can only ever be the specific thirty-six individuals represented in the ontology.
 Typically OWL is used to create KBs that are subject to change.
 Additionally, the large number of individuals, and the fact that they co-exist in the same set without interacting with one another further complicate the ontology.\par
-The first ontology artefact attempts to create the KB in as much detail as possible while overriding OWL's defaults.
-The second accepts OWL's default settings but tries to maintain the same level of description as the first ontology.
+The first ontology artefact attempts to create the KB in as much detail as possible, which includes implementing additional functionality over the default OWL functionality.
+The second accepts OWL's default functionality but tries to maintain the same level of description as the first ontology.
 Lastly, the third ontology simulates the process of ontology engineering as the first ontology is deflated and purged of superfluous detail.
 The resulting ontology is lean and substantially more efficient compared to its counterparts.\par
 The final portion of this article considers the improvements that could be made to the OWL technology stack to remedy the issues raised in the case study.
-A critical look is taken at OWL syntax and the broader concerns of the OWL ecosystem, and additional recommendations are offered in these areas respectively.
+A critical look is taken at OWL syntax and the broader concerns of the OWL ecosystem; additional recommendations are offered in these areas respectively.
 
 \chapter{The OWL2 Specification}
 \section{Description Logics}
@@ -119,23 +119,23 @@ To reiterate, `Properties', in the OWL sense, can only ever apply to individuals
 Properties have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
 Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties provided they are applied to an individual.
-The OWL2 standard also allows the creation of Data Properties as well as Object Properties these shall not be covered in this article.
+The OWL2 standard also allows the creation of Data Properties as well as Object Properties.
 Data Properties are often referred to as R(ole)Boxes, as they stipulate the role that individuals can fulfil.
 They must be subsumed by a primitive class called `owl:topDataProperty'.
 Although RBoxes shall be utilised to enforce some cardinality restrictions, the case study of this article does not lend itself to a full exploration of their potential use-cases.\par
 Finally, OWL refers to TBoxes as `Classes'.
-Classes are used to create taxonomies (hierarchies of sets) that individuals are instances of.
+Classes are used to create taxonomies (hierarchies of sets) of which individuals are instances.
 Just as with properties, every class must be subsumed by a primitive class called `owl:Thing'. 
 Properties and classes can be subsumed by others of their kind, composed of others of their kind or defined in contrast to others of their kind.\par
 Let us briefly examine how these tools could interact to create a world:
 \begin{quote}
-  There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) \textbf{and} (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing}.
+  There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) \textbf{and} (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing} (Animal \(\supseteq\) owl:Thing).
 \end{quote}
 Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/ - accessed 05.03.18, \textit{BSD 2-Clause License}}
 Protégé was utilised in the production of the ontologies for the case study in this article with the Pellet reasoner plugin.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 23.03.18}
 The Pellet reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
 It will also deduce the applications of the `isOwnerOf' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
-It would flag a logically impossible (incoherent) ontology up to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
+It would flag up a logically impossible (incoherent) ontology to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
 The two most common OWL languages are the XML and Manchester OWLs \cite[30]{handbookIntro2003}\cite[10]{guide2011}.
 Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
 The ontology artefacts in this article are written in Manchester OWL.
