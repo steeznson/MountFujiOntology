@@ -146,7 +146,7 @@ The ontology artefacts in this article are written in Manchester OWL.
 \centerline{\includegraphics[scale=0.2]{greatwave}}
 \centerline{\textit{The Great Wave Off Kanagawa}, Hokusai (c.1830-1832), Metropolitan Museum of Art, NY}\hfill \break
 Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
-As the name might suggest there are thirty-six prints and each one depicts Mount Fuji.
+As the name suggests there are thirty-six prints and each one depicts Mount Fuji.
 The scenes accommodate a variety of seasons, motifs and themes.
 The series achieved regional and international acclaim: both due artist's to the mastery of the medium and the prominence of Mount Fuji in Japanese culture.\par
 There are several features of this collection that make it an interesting case study.
@@ -161,18 +161,18 @@ Lastly, the \textit{Views} are comprised of specific individuals.
 This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
 Usually the engineer sets the parameters of an ontology first and then it is populated by individuals.
 This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
-The goal of each of these ontologies is to uniquely capture every individual in the ontology, alongside their defining features.
+The goal of each of these ontologies is to uniquely capture every individual in the \textit{Views}, alongside their defining features.
 Assessing the merits of each approach provides a vehicle to probe the strengths and weaknesses of the OWL2 standard.
 
 \section{The Closed-World Assumption}
 The first ontology artefact captures as much of the world as possible (see Appendix A).
-Ontology engineers would rarely use the maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
+Ontology engineers would rarely use maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
 Ideally an ontology should describe its subject in the most conceptually parsimonious way possible.
 \subsection{Implementing the Closed-world Assumption}
 As we know all that can or will ever exist in this ontology, describing it in maximal detail requires a closed-world assumption.\par
 A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
 This signals that all that can exist in the ontology are views of Mount Fuji.
-View\_of\_Mount\_Fuji was then given an exact cardinality restriction of thirty-six as only thirty-six individuals can exist in this world.
+owl:Thing was then given an exact cardinality restriction of thirty-six as only thirty-six individuals can exist in this world.
 This functionality utilises a primitive DataProperty in OWL that is distributed with the Protégé software (\textbf{owl:topDataProperty} exactly 36 owl:rational).
 This restricts any individuals in this set to being members of a set with thirty-six individuals.\par
 The next step was to create the functional and reflexive property, containsSpecificIndividuals.
@@ -183,13 +183,13 @@ Every single individual in the ontology is explicitly listed as this property is
 \centerline{\includegraphics[scale=0.3]{ClosedViews}}\\
 \centerline{\textit{Figure 1}}
 \newline
-This property acts as a white-list for the reasoner for valid individuals in the ontology. The `exactly' keyword is essential to stipulate this condition.
-The stipulation reads that the class may only contain one instance of an array containing each distinct individual in the class.\par
-This ontology depicts owl:Thing and View\_of\_Mount\_Fuji as separate classes despite being equivalent.
+This property acts as a white-list to provide the reasoner with valid individuals in the ontology. The `exactly' keyword is essential to stipulate this condition.
+The restriction states that the class may only contain one instance of an array containing each distinct individual in the class.\par
+This ontology depicts owl:Thing and View\_of\_Mount\_Fuji as separate classes despite their equivalence.
 Some may argue that this ontology manifests the `EquivalenceIsDifference' anti-pattern where an equivalent class is erroneously designated as a subclass \cite[2]{antipatterns2009}.
 This article argues that there is a meaningful distinction in scope between the two.
-While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to restrict the application of restrictions to one per class.
-There is a difference in the functionality of these two classes and the order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the white-list of allowed things is introduced.
+While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to apply the restrictions separately to each class.
+The order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the white-list of allowed things is introduced.
 This concludes the application of the closed-world assumption on this ontology.
 \subsection{Classes}
 \begin{lstlisting}
