@@ -148,14 +148,14 @@ The ontology artefacts in this article are written in Manchester OWL.
 Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
 As the name suggests there are thirty-six prints and each one depicts Mount Fuji.
 The scenes accommodate a variety of seasons, motifs and themes.
-The series achieved regional and international acclaim: both due artist's to the mastery of the medium and the prominence of Mount Fuji in Japanese culture.\par
+The series achieved regional and international acclaim: both due to the artist's mastery of the medium and the prominence of Mount Fuji in Japanese culture.\par
 There are several features of this collection that make it an interesting case study.
 Firstly, it is restricted to an exact cardinality.
-This poses a problem for OWL as an accurate modelling this world requires a closed-world assumption.
+This poses a problem for OWL as an accurate modelling of this world requires a closed-world assumption.
 To briefly reiterate, this is the assumption that established truth values in the domain are immutable.
 OWL utilises the open-world assumption, indeed it has been described as a ``distinguishing feature'' of DL modelling languages \cite[11]{handbookIntro2003}. This shall require additional constraints upon the modelled ontology.\par
 The \textit{Views} also contain many distinct individuals.
-Donini \cite[135]{donini2003} identifies individuals are a source of difficulty for reasoners.
+Donini \cite[135]{donini2003} identifies individuals as a source of difficulty for reasoners.
 In particular ABoxes can slow down the reasoner's deductions considerably.\par
 Lastly, the \textit{Views} are comprised of specific individuals.
 This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
@@ -176,7 +176,7 @@ owl:Thing was then given an exact cardinality restriction of thirty-six as only 
 This functionality utilises a primitive DataProperty in OWL that is distributed with the Protégé software (\textbf{owl:topDataProperty} exactly 36 owl:rational).
 This restricts any individuals in this set to being members of a set with thirty-six individuals.\par
 The next step was to create the functional and reflexive property, containsSpecificIndividuals.
-The reflexive characteristic denotes properties that necessarily relate individuals to themselves: in this case the individuals of class Views\_of\_Mount\_Fuji can only fully represent the \textit{Views of Mount Fuji} by having an exact relationship to themselves.
+The `reflexive' characteristic denotes properties that necessarily relate individuals to themselves: in this case the individuals of class Views\_of\_Mount\_Fuji can only fully represent the \textit{Views of Mount Fuji} by having an exact relationship to themselves.
 Additionally, this relationship is functional as each member of the class has itself as the only concept that can satisfy this restriction. 
 Every single individual in the ontology is explicitly listed as this property is applied, as no other individual can exist in this ontology (see Figure 1).
 \newline
@@ -188,7 +188,7 @@ The restriction states that the class may only contain one instance of an array 
 This ontology depicts owl:Thing and View\_of\_Mount\_Fuji as separate classes despite their equivalence.
 Some may argue that this ontology manifests the `EquivalenceIsDifference' anti-pattern where an equivalent class is erroneously designated as a subclass \cite[2]{antipatterns2009}.
 This article argues that there is a meaningful distinction in scope between the two.
-While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to apply the restrictions separately to each class.
+While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to apply the restrictions separately; even though they are both ultimately being applied to the same class.
 The order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the white-list of allowed things is introduced.
 This concludes the application of the closed-world assumption on this ontology.
 \subsection{Classes}
@@ -221,11 +221,11 @@ Wildlife_NOT_People
 Yellow_Mount_Fuji
 owl:Thing
 \end{lstlisting}
-The classes with the named with the pattern \_AND\_ indicate an intersection.
+The classes whose names contain the pattern \_AND\_ indicate an intersection.
 Similarly, the naming pattern \_NOT\_ indicates a dis-junction.
 The different colour attributions for Mount Fuji are also disjoint from one another.\par
 Maritime\_Theme is subsumed by Bodies\_of\_Water\_Motif as bodies of water are a prerequisite for maritime activity.
-Likewise, horses and wildlife classes are subsumed by the Animals\_Motif, and Depicts\_Rooftops subsumes Rooftops\_Foreground.\par
+Likewise, the horse and wildlife classes are subsumed by the Animals\_Motif, and Depicts\_Rooftops subsumes Rooftops\_Foreground.\par
 These groups allow the first level of distinction between the individuals in the ontology.
 \subsection{Properties}
 \begin{lstlisting}
@@ -272,7 +272,7 @@ The creation of a singleton class in a world with a closed-world assumption cont
   4. $\forall$R2.Y // inconsistent from 2\\ 
 \end{quote}
 Class \textit{X} subsumes class \textit{Y}.
-Two roles, {R1} and \textit{R2}, are disjoint from one another.
+Two roles, \textit{R1} and \textit{R2}, are disjoint from one another.
 \textit{R1} applies universally to class \textit{X} while \textit{R2} applies universally to class \textit{Y}.
 This creates a logical incoherence as \textit{Y} must inherit all roles of \textit{X}.\par
 The next two ontology artefacts aim to simplify the KB.
@@ -323,11 +323,10 @@ wildlifeAndBodiesOfWater
 wildlifeMotif
 wildlifeNotPeople
 \end{lstlisting}
-As many of these properties were previously classes in the previous ontology, the same relationships hold between them.
-maritimeTheme is still subsumed by bodiesOfWaterMotif, for example.
+As many of these properties were previously classes in the previous ontology, the same relationships hold between them: maritimeTheme is still subsumed by bodiesOfWaterMotif, for example.
 Again, as no relationships hold between these individuals, every property is reflexive.\par
 Most of these ABoxes would be more comfortable as TBoxes.
-Some of the properties like peopleMotif apply to the majority of the individuals in the ontology, reducing their descriptiveness.
+Some of the properties, such as peopleMotif, apply to the majority of the individuals in the ontology, reducing their descriptiveness.
 The ABox (peopleMotif(Senju Musachi Province, Senju Musachi Province)) is both syntactically and semantically similar to a TBox.
 This extensive use of reflexive properties shall be returned to at the end of this chapter (§3.5).
 \subsection{Reasoner}
@@ -350,7 +349,8 @@ If they are not then the reasoner will assume that the two classes are equivalen
 There appears to be no difference between specifying that the class can `only' contain one individual or `exactly' one individual.
 The reasoner gives the ontology engineer the benefit of the doubt and tries to figure out how multiple individuals in a singleton class could occur.
 By making the two classes equivalent, it infers that there must be a Bay\_of\_Noboto instance in the Sundai\_Edo class too.
-This flexibility stems from the OWL open-world assumption, the reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accommodate this relationship by postulating that the singleton classes have merged.\par
+This flexibility stems from the OWL open-world assumption.
+The reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accommodate this relationship by postulating that the singleton classes have merged.\par
 It suggests that the class Bay\_of\_Noboto\_Sundai\_Edo could contain two individuals with discrete cardinality restrictions on each individual, but this is an unexpected result that would not have been highlighted without a reasoner.
 
 \section{Minimum Viable Product}
@@ -396,7 +396,7 @@ The MVP still has some areas that could require the attention of the reasoner (s
 \centerline{\includegraphics[scale=0.3]{MVPInconsistent}}\\
 \centerline{\textit{Figure 7}}
 \newline
-We can observe the reasoner alerting the reasoner to the fact that the ontology is now inconsistent as a \textit{View} with a discoloured depiction of Mount Fuji is erroneously placed into the Coloured\_Mount\_Fuji class.\par
+We can observe the reasoner alerting the engineer that the ontology is now inconsistent as a \textit{View} with a discoloured depiction of Mount Fuji is erroneously placed into the Coloured\_Mount\_Fuji class.\par
 The reasoner highlights a simple example of a logical anti-pattern.
 Cushion\_Pine\_at\_Pine is simultaneously placed into two disjoint TBoxes:
 \begin{quote}
@@ -415,8 +415,8 @@ The author believes that the maximal detail provides the most descriptive KB of 
 There is more than an element of curation in deciding which attributes of the \textit{Views} to accentuate in the description.
 Aside from the fact that another may interpret the \textit{Views} in a different way, the ontology's primary function of separating the individuals with T- and ABoxes becomes obfuscated by the editorialised description.
 Even setting aside the aim of ontological parsimony, it is hard to argue that the maximally detailed ontology could be preferable to the MVP ontology.\par
-The detailed open-world ontology succeeds in providing a detailed description of the \textit{Views} despite its modal handicap, however the extravagant lengths it goes to to achieve this disqualify it from serious consideration.
-It falls prey to the same charges of editorialising as the maximal detail ontology does whilst being twice the size as an ontology artefact.
+The detailed open-world ontology succeeds in providing a detailed description of the \textit{Views} despite its modal handicap, however the extravagant lengths it reaches for in order to to achieve this disqualify it from serious consideration.
+Moreover, it falls prey to the same charges of editorialising as the maximal detail ontology: the excessive detail is even more of an issue in this ontology as the open-world ontology artefact is twice the size of the maximal detail ontology artefact. 
 The misuse of ABoxes as surrogate TBoxes is also a problem.
 As stated in §3.3.1, the reflexive characteristic is utilised in this ontology to allow terminological predicates to be applied through its properties.
 The results are ABoxes that look syntactically very close, and function almost identically, to TBoxes: `mountFujiForeground(South\_Wind\_Clear\_Sky, South\_Wind\_Clear\_Sky)' is not substantively different from, `Mount\_Fuji\_Foreground(South\_Wind\_Clear\_Sky)'.
@@ -424,8 +424,7 @@ This flouting of convention goes against the OWL standard, even if it is technic
 
 \chapter{Improving the OWL2 standard}
 \section{Issues Raised by the Case Study}
-The \textit{Views} ontologies have raised some of the potential issues with utilising OWL for an unusual case study.
-Yet none of these issues have proved to be insurmountable barriers.\par
+The \textit{Views} ontologies have raised some of the potential issues with utilising OWL for an unusual case study, yet none of these issues have proved to be insurmountable barriers.\par
 It is true that the option to implement closed-world assumption is not offered as a feature of OWL languages but this does not preclude the ontology engineer from simulating a closed-world assumption.
 Additionally, the implementation of a closed-world assumption is not always desirable; the aim of producing one's ontology as economically as possible will often prevent the engineer from including it in their description.
 In this case study, it was not necessary to include the MVP ontology in §3.4.\par
@@ -436,12 +435,11 @@ As evidenced by the detailed open-world assumption's attempt to implement a pseu
 Although every singleton class is subsumed by owl:Thing there are no additional restrictions being inherited by each class.
 Dedicating the entirety of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their knowledge base.
 The abuse of reflexive properties in this ontology has also been discussed in §3.5.
-None of the reasoners currently bundled with Protégé can identify poor ontology design: while it may prove a challenge to implement, many Integrated Development Environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
+None of the reasoners currently bundled with Protégé can identify poor ontology design.
+While it may prove a challenge to implement, many Integrated Development Environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
 Creating a reasoner with such functionality would allow novice ontology engineers to hone their skills without interfering with the malleability of the OWL standard as a framework.\par
-Ultimately, OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs.
-The case study does suggest that some features may be lacking from Protégé's extend tool-set.
+OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs, although this case study suggests that some features may be lacking from Protégé's extended tool-set.
 Contributors to Protégé ought to consider expanding the functionality of future reasoners and creating new plugins to cover a wide range of use-cases.\par
-% MOTIVATION
 
 \section{Simple Perl Parser}
 The Protégé ontology creation tool saves its output to a variety of formats, including Manchester OWL2.
@@ -480,7 +478,7 @@ It had previously been established that naive reasoners - those without a firm g
 Yet this study also suggests that even those with a specialist background in DL struggle (in terms of accuracy and time-taken) to make inferences from Manchester OWL \cite[562]{usability2014}.\par
 While it is clear that OWL designers ought to facilitate human legibility, this does not indicate any defects in the OWL standard itself.
 It is true that Manchester OWL seeks to provide better legibility but this does not mean it purports to have perfected it.
-When we get down to brass tacks legibility is a quality of life issue related to the implementation of the OWL standard as opposed to the standard itself.\par
+When we get down to brass tacks, legibility is a quality of life issue related to the implementation of the OWL standard as opposed to the standard itself.\par
 Even when evaluated solely in terms of implementation, Manchester OWL does not fall at this hurdle.
 While an individual may struggle to parse some inferences quickly and correctly on first glance, in most DL use-cases they will have time for consideration and evaluation.\par
 The field of ontology engineering is a multifaceted enterprise.
@@ -503,8 +501,8 @@ These categories roughly match the distinction between logicians, developers and
 The production of an ontology editor like Protégé requires an in-depth understanding of the OWL ecosystem.
 Use of open-source licensing has allowed the project to pull in a wide variety of contributors with different expertise.
 The source code is hosted and published on GitHub, allowing for easy access and version control.\footnote{GitHub: https://github.com/protegeproject/protege - accessed 10.04.18}
-The license itself, BSD 2-Clause, is very permissive and allows ``redistribution and use in source and binary forms, with or without modification,'' provided that the original license is bundled with any distribution.\footnote{GitHub: https://github.com/protegeproject/protege/blob/master/license.txt - accessed 10.04.18}
-The ready availability and re-distribution of the source code has allowed developers to create their own plugins for Protégé to augment existing or add new functionality.
+The license itself, BSD 2-Clause, is very permissive and allows ``redistribution and use in source and binary forms, with or without modification,'' provided that the original licence is bundled with any distribution.\footnote{GitHub: https://github.com/protegeproject/protege/blob/master/license.txt - accessed 10.04.18}
+The ready availability and re-distribution of the source code has allowed developers to create their own plugins for Protégé to augment existing, or add new, functionality.
 As discussed in §4.1, plugins can offer a partial solution to challenging case studies that require unusual or unwieldy ontologies.\par
 The practical issues that arise in the implementation of OWL reflect some of the challenges that arose during the infancy of DL.
 Just as the generality of inquiry had to be abstracted into a specific domain of interest to allow for efficient reasoning - an approach described as ``relaxing the standards of correctness'' \cite[81]{expressiveness1987} - a similar leap of abstraction has to occur between the standard and its implementation.
@@ -515,15 +513,15 @@ Let's briefly consider the Pellet and FaCT++ reasoners.
 While FaCT++ lacks support for key constraints and some data-types,\footnote{University of Manchester: http://owl.cs.manchester.ac.uk/tools/fact/ - accessed 10.04.18} Pellet seeks to implement complete OWL expressivity.\footnote{SemanticWeb Wiki: http://semanticweb.org/wiki/Pellet - accessed 10.04.18}
 This disparity could lead the same ontology to be judged to have two different coherence evaluations depending on what reasoner is used.
 In this case the standards of correctness are entirely dependent on implementation.
-In the long term a standardised reasoner implementation could help clear up this ambiguity.
+In the long term a standardised reasoner implementation could help to clear up this ambiguity.
 
 \chapter{Conclusion}
 The \textit{Thirty-six Views of Mount Fuji} series posed a challenge to OWL.
 This article has covered issues of plugin availability, ontology engineer editorialising, the enforcement of proper OWL procedure, syntax concerns and reasoner standardisation.
 These are important issues for the wider OWL ecosystem but most of them are manifested at the software implementation stage.
 As Protégé is the only ontology editor for OWL the recommendations in this article are addressed to the Protégé core team.\par
-The enforcement of proper OWL procedure and reasoner standardisation are most pressing recommendations.
-While plugin availability is also important, the Protégé team are already encouraging community development through supporting plugins as a feature, their use of a permissive license and hosting the source files for the application publicly on GitHub.
+The enforcement of proper OWL practice and reasoner standardisation are the most pressing recommendations.
+While plugin availability is also important, the Protégé team are already encouraging community development through supporting plugins as a feature, their use of a permissive licence and hosting the source files for the application publicly on GitHub.
 More plugins can lead to quality of life improvements when dealing with cases like the maximal detail ontology but they are not necessary for this ontology.\par
 Reasoners on Protégé could do much more to guide ontology engineers to use good OWL practices.
 In particular the open-world ontology flouts conventional OWL practice egregiously in its use of ABoxes as surrogate TBoxes and this ought to have led to a warning from the reasoner.
@@ -533,7 +531,7 @@ Lastly, the inconsistent implementation of the OWL standard between different re
 Semi-arbitrary application of the standard onto ontologies weakens the connection between the ontology and the underlying description logics.
 Reasoners are complex pieces of software but facilitating wider adoption of OWL technologies requires a standardisation of software implementation.
 It could be that the Pellet reasoner is considered to be the de facto standard implementation, as it is given precedence in the documentation\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 11.04.18} but this is not made clear.\par
-OWL technologies are still in their infancy but an increased focus on consistent software implementation could pay back dividends as their use becomes more widespread. 
+OWL technologies are still in their infancy but an increased focus on consistent software implementation could pay dividends as their use becomes more widespread. 
 
 \begin{thebibliography}{99}
 
@@ -2844,7 +2842,7 @@ Individual: Yoshida_at_Tokaido
 use strict;
 use warnings;
 
-# Turn off unusual character print warning
+# Turn off Japanese character print warning
 no warnings 'utf8';
 
 # Global Vars
