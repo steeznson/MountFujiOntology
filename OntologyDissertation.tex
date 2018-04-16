@@ -45,13 +45,13 @@ Furthermore, the structure of this information needs to logically represent its 
 Bearing in mind these requirements, the KB that the ontology engineer has constructed will be an invaluable resource at the plant.\par
 This article uses an atypical case study to probe the limitations of OWL technologies.
 Three distinct ontology artefacts are created to describe Hokusai's \textit{Thirty-six Views of Mount Fuji} series of woodcuts (c.1830).
-This case poses a particular challenge for OWL as, unlike a manufacturing plant, a full description of the \textit{Views} includes the restriction that there can only ever be the specific thirty-six individuals represented in the ontology.
+This case poses a particular challenge for OWL as, unlike a manufacturing plant, a full description of the \textit{Views} includes the restriction that there can only ever be thirty-six specific individuals represented in the ontology.
 Typically OWL is used to create KBs that are subject to change.
 Additionally, the large number of individuals, and the fact that they co-exist in the same set without interacting with one another further complicate the ontology.\par
 The first ontology artefact attempts to create the KB in as much detail as possible, which includes implementing additional functionality over the default OWL functionality.
 The second accepts OWL's default functionality but tries to maintain the same level of description as the first ontology.
 Lastly, the third ontology simulates the process of ontology engineering as the first ontology is deflated and purged of superfluous detail.
-The resulting ontology is lean and substantially more efficient compared to its counterparts.\par
+The resulting ontology is lean and substantially more efficient than its counterparts.\par
 The final portion of this article considers the improvements that could be made to the OWL technology stack to remedy the issues raised in the case study.
 A critical look is taken at OWL syntax and the broader concerns of the OWL ecosystem; additional recommendations are offered in these areas respectively.
 
@@ -155,13 +155,13 @@ This poses a problem for OWL as an accurate modelling of this world requires a c
 To briefly reiterate, this is the assumption that established truth values in the domain are immutable.
 OWL utilises the open-world assumption, indeed it has been described as a ``distinguishing feature'' of DL modelling languages \cite[11]{handbookIntro2003}. This shall require additional constraints upon the modelled ontology.\par
 The \textit{Views} also contain many distinct individuals.
-Donini \cite[135]{donini2003} identifies individuals as a source of difficulty for reasoners.
+Donini identifies individuals as a source of difficulty for reasoners \cite[135]{donini2003}.
 In particular ABoxes can slow down the reasoner's deductions considerably.\par
 Lastly, the \textit{Views} are comprised of specific individuals.
 This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
 Usually the engineer sets the parameters of an ontology first and then it is populated by individuals.
 This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
-The goal of each of these ontologies is to uniquely capture every individual in the \textit{Views}, alongside their defining features.
+The goal of each of these ontologies is to capture a unique description of every individual in the \textit{Views}.
 Assessing the merits of each approach provides a vehicle to probe the strengths and weaknesses of the OWL2 standard.
 
 \section{The Closed-World Assumption}
@@ -188,8 +188,9 @@ The restriction states that the class may only contain one instance of an array 
 This ontology depicts owl:Thing and View\_of\_Mount\_Fuji as separate classes despite their equivalence.
 Some may argue that this ontology manifests the `EquivalenceIsDifference' anti-pattern where an equivalent class is erroneously designated as a subclass \cite[2]{antipatterns2009}.
 This article argues that there is a meaningful distinction in scope between the two.
-While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to apply the restrictions separately; even though they are both ultimately being applied to the same class.
+While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to apply the restrictions separately; even though they are both being applied to the same class.
 The order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the white-list of allowed things is introduced.
+Framed as two separate equivalent classes, a human reader of the ontology artefact will be able to clearly see the steps in the closed-world assumption.\par
 This concludes the application of the closed-world assumption on this ontology.
 \subsection{Classes}
 \begin{lstlisting}
@@ -245,7 +246,7 @@ Using these two levels in tandem we can isolate each individual by its unique at
 \subsection{The Reasoner}
 The Pellet reasoner had no trouble adapting to the closed-world assumption.
 This case study originally utilised the FaCT++ reasoner which had detailed error logs but struggled to compute ontologies with many individuals and ABoxes, often taking up to ten minutes to assess this ontology.
-Ultimately the Pellet reasoner proved more useful, although the inclusion of multiple reasoners in Protégé software is an invaluable asset to ontology engineers who may have to model a wide variety of ontologies.\par
+The Pellet reasoner proved more useful, although the inclusion of multiple reasoners in Protégé software is a point of ambiguity that will be returned to in §4.4.\par
 Fig. 2 demonstrates the direct effects of the closed-world assumption on the reasoner: 
 \newline
 \newline
@@ -253,7 +254,7 @@ Fig. 2 demonstrates the direct effects of the closed-world assumption on the rea
 \centerline{\textit{Figure 2}}
 \newline
 The creation of a singleton class, containing only one individual, has caused the reasoner to flag the ontology as inconsistent.
-As the singleton class is subsumed by the View\_of\_Mount\_Fuji it cannot contradicted the parameters of its superclass.
+As the singleton class is subsumed by the View\_of\_Mount\_Fuji it cannot contradict the parameters of its superclass.
 The first thing that clashes is the two white-lists of individuals.
 The\_Great\_Wave\_off\_Kanagawa already satisfies the containsSpecificIndividual constraint reflexively and this cannot be multiply satisfied as containsSpecificIndividuals is also functional.\par
 For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory data properties.\par
