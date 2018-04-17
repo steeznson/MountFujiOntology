@@ -426,14 +426,14 @@ This flouting of convention goes against the OWL standard, even if it is technic
 \chapter{Improving the OWL2 standard}
 \section{Issues Raised by the Case Study}
 The \textit{Views} ontologies have raised some of the potential issues with utilising OWL for an unusual case study, yet none of these issues have proved to be insurmountable barriers.\par
-It is true that the option to implement closed-world assumption is not offered as a feature of OWL languages but this does not preclude the ontology engineer from simulating a closed-world assumption.
+It is true that the option to implement a closed-world assumption is not offered as a feature of OWL languages but this does not preclude the ontology engineer from simulating a closed-world assumption.
 Additionally, the implementation of a closed-world assumption is not always desirable; the aim of producing one's ontology as economically as possible will often prevent the engineer from including it in their description.
-In this case study, it was not necessary to include the MVP ontology in §3.4.\par
-The OWL standard does not have to change to accommodate closed-world assumption as it is already possible to describe a closed-world within its framework.
+In this case study there were no issues raised by the MVP ontology.\par
+The OWL standard does not have to change to accommodate a closed-world assumption as it is already possible to describe a closed-world within its framework.
 However, there are means to remedy the labour intensive implementation process.
 Protégé offers support for plugins and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
-As evidenced by the detailed open-world assumption's attempt to implement a pseudo-open-world assumption, the role of subsumption is integral to OWL.
-Although every singleton class is subsumed by owl:Thing there are no additional restrictions being inherited by each class.
+As evidenced by the detailed open-world ontology's attempt to implement a pseudo-open-world assumption, the role of TBoxes is integral to OWL KBs.
+Although every singleton class is subsumed by owl:Thing there are no additional descriptions or restrictions being inherited by each class.
 Dedicating the entirety of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their knowledge base.
 The abuse of reflexive properties in this ontology has also been discussed in §3.5.
 None of the reasoners currently bundled with Protégé can identify poor ontology design.
@@ -492,7 +492,7 @@ In such a scenario the cure may be worse than the disease.
 The production of a successful OWL ontology relies on the cooperation of three groups: logicians, software developers and ontology engineers.\par
 Logicians need to design both the standard and languages.
 Developers need to implement software that can interact with OWL in its abstract form and parse this abstract form to produce a serialised ontology in a given OWL language. 
-Engineers use these tools provided by the developers to produce ontologies for stakeholders.
+Engineers use the tools provided by the developers to produce ontologies for stakeholders.
 As touched upon in the previous section, there is a delicate balance to be struck between these parties.\par
 The role of W3 as a forum to coordinate the development and use of OWL is invaluable.
 Information has to be readily accessible to everyone.
