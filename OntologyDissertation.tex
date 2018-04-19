@@ -27,7 +27,7 @@ Three different ontology artefacts are produced to describe Hokusai's \textit{Th
 The first two ontologies experiment with OWL's \textbf{open-world assumption} while attempting to provide a detailed description of the \textbf{closed-world} of the \textit{Views}.
 The third ontology seeks to emulate the ontology engineering process by trimming the baggage of the other ontologies without sacrificing the functionality to isolate a unique description of each individual.
 This final ontology has the most utility as an ontology artefact but the first two provide valuable insight as to the limitations of OWL technologies.\par
-The article concludes that most issues can be solved at the software implementation-level and makes the following recommendations: continued encouragement of community engagement to produce Protégé plugins; the enhancement reasoner functionality to encourage good OWL practices by providing intelligent recommendations to ontology engineers, and; the standardisation of reasoners to encourage full implementation of the OWL standard.
+The article concludes that most issues can be solved at the software implementation-level and makes the following recommendations: continued encouragement of community engagement to produce Protégé plugins; the enhancement of reasoner functionality to encourage good OWL practices by providing intelligent recommendations to ontology engineers, and; the standardisation of reasoners to encourage full implementation of the OWL standard.
 
 \tableofcontents
 
@@ -118,8 +118,8 @@ OWL calls ABoxes `Properties' \cite[11]{guide2011}.
 To reiterate, `Properties', in the OWL sense, can only ever apply to individuals.
 Properties have characteristics that place parameters on their application.
 They can be used to describe the relationships between individuals or a single individual's attributes.
-Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties provided they are applied to an individual.
-The OWL2 standard also allows the creation of Data Properties as well as Object Properties.
+Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties provided they are applied to an individual.\par
+The OWL2 standard allows the creation of Data Properties as well as Object Properties.
 Data Properties are often referred to as R(ole)Boxes, as they stipulate the role that individuals can fulfil.
 They must be subsumed by a primitive class called `owl:topDataProperty'.
 Although RBoxes shall be utilised to enforce some cardinality restrictions, the case study of this article does not lend itself to a full exploration of their potential use-cases.\par
@@ -190,7 +190,7 @@ Some may argue that this ontology manifests the `EquivalenceIsDifference' anti-p
 This article argues that there is a meaningful distinction in scope between the two.
 While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to apply the restrictions separately; even though they are both being applied to the same class.
 The order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the white-list of allowed things is introduced.
-Framed as two separate equivalent classes, a human reader of the ontology artefact will be able to clearly see the steps in the closed-world assumption.\par
+Framed as two equivalent classes, a human reader of the ontology artefact will be able to clearly see the steps in the closed-world assumption.\par
 This concludes the application of the closed-world assumption on this ontology.
 \subsection{Classes}
 \begin{lstlisting}
@@ -238,7 +238,7 @@ indoorScene
 owl:topObjectProperty
 \end{lstlisting}
 As no relationships hold between the individuals, every object property in this ontology is reflexive.
-It is worth pointing out that containsSpecificIndividuals is unusual for applying to individuals at the class level but the other two are satisfied directly by individuals.
+It is worth pointing out that containsSpecificIndividuals differs by applying to individuals at the class level but the other two are satisfied directly by individuals.
 While the properties may function like additional classes, (indoorScene(Yoshida at Tokaido, Yoshida at Tokaido)), the scope of these properties has been reduced to a single individual.
 Once the scope of an assertion has been reduced to one individual, utilising the apparatus of a bespoke class to make this assertion is unnecessary.\par
 Properties provide the second level of distinction between the individuals and complete the description of the \textit{Views}.
@@ -253,8 +253,8 @@ Fig. 2 demonstrates the direct effects of the closed-world assumption on the rea
 \centerline{\includegraphics[scale=0.3]{ClosedSingleton}}\\
 \centerline{\textit{Figure 2}}
 \newline
-The creation of a singleton class, containing only one individual, has caused the reasoner to flag the ontology as inconsistent.
-As the singleton class is subsumed by the View\_of\_Mount\_Fuji it cannot contradict the parameters of its superclass.
+The creation of a singleton class, containing only one individual, has caused the reasoner to flag up the ontology as inconsistent.
+As the singleton class is subsumed by View\_of\_Mount\_Fuji, it cannot contradict the parameters of its superclass.
 The first thing that clashes is the two white-lists of individuals.
 The\_Great\_Wave\_off\_Kanagawa already satisfies the containsSpecificIndividual constraint reflexively and this cannot be multiply satisfied as containsSpecificIndividuals is also functional.\par
 For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory data properties.\par
@@ -290,7 +290,7 @@ This open-world ontology utilises TBoxes to stipulate that only the thirty-six \
 \centerline{\textit{Figure 3}}
 \newline
 Each singleton class has a cardinality restriction of one.
-Additionally each has a functional, reflexive property, hasSpecificIndividual, that stipulated the exact individual that can occupy the class.
+Additionally each has a functional, reflexive property, hasSpecificIndividual, that stipulates the exact individual that can occupy the class.
 Lastly every \textit{View} class is disjoint from every other class.\par
 As a result of this all of the individuals' attributes, aside from their names, are pushed into ABoxes.\par
 \subsection{Properties}
@@ -351,7 +351,7 @@ There appears to be no difference between specifying that the class can `only' c
 The reasoner gives the ontology engineer the benefit of the doubt and tries to figure out how multiple individuals in a singleton class could occur.
 By making the two classes equivalent, it infers that there must be a Bay\_of\_Noboto instance in the Sundai\_Edo class too.
 This flexibility stems from the OWL open-world assumption.
-The reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accommodate this relationship by postulating that the singleton classes have merged.\par
+The reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accommodate this relationship \textit{post hoc} by postulating that the singleton classes have merged.\par
 It suggests that the class Bay\_of\_Noboto\_Sundai\_Edo could contain two individuals with discrete cardinality restrictions on each individual, but this is an unexpected result that would not have been highlighted without a reasoner.
 
 \section{Minimum Viable Product}
@@ -417,7 +417,7 @@ There is more than an element of curation in deciding which attributes of the \t
 Aside from the fact that another may interpret the \textit{Views} in a different way, the ontology's primary function of separating the individuals with T- and ABoxes becomes obfuscated by the editorialised description.
 Even setting aside the aim of ontological parsimony, it is hard to argue that the maximally detailed ontology could be preferable to the MVP ontology.\par
 The detailed open-world ontology succeeds in providing a detailed description of the \textit{Views} despite its modal handicap, however the extravagant lengths it reaches for in order to to achieve this disqualify it from serious consideration.
-Moreover, it falls prey to the same charges of editorialising as the maximal detail ontology: the excessive detail is even more of an issue in this ontology as the open-world ontology artefact is twice the size of the maximal detail ontology artefact. 
+Moreover, it falls prey to the same charges of editorialising as the maximal detail ontology: the excessive detail is even more of an issue in this ontology as the open-world ontology artefact is twice the size of the maximal detail ontology artefact.
 The misuse of ABoxes as surrogate TBoxes is also a problem.
 As stated in §3.3.1, the reflexive characteristic is utilised in this ontology to allow terminological predicates to be applied through its properties.
 The results are ABoxes that look syntactically very close, and function almost identically, to TBoxes: `mountFujiForeground(South\_Wind\_Clear\_Sky, South\_Wind\_Clear\_Sky)' is not substantively different from, `Mount\_Fuji\_Foreground(South\_Wind\_Clear\_Sky)'.
@@ -434,7 +434,7 @@ However, there are means to remedy the labour intensive implementation process.
 Protégé offers support for plugins and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
 As evidenced by the detailed open-world ontology's attempt to implement a pseudo-open-world assumption, the role of TBoxes is integral to OWL KBs.
 Although every singleton class is subsumed by owl:Thing there are no additional descriptions or restrictions being inherited by each class.
-Dedicating the entirety of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their knowledge base.
+Dedicating the entirety of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their KB.
 The abuse of reflexive properties in this ontology has also been discussed in §3.5.
 None of the reasoners currently bundled with Protégé can identify poor ontology design.
 While it may prove a challenge to implement, many Integrated Development Environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
@@ -444,7 +444,7 @@ Contributors to Protégé ought to consider expanding the functionality of futur
 
 \section{Simple Perl Parser}
 The Protégé ontology creation tool saves its output to a variety of formats, including Manchester OWL2.
-It provides an intuitive interface through the use of a layer of abstraction between the engineer and the ontology artefacts.
+It provides an intuitive interface through the use of multiple layers of abstraction between the engineer and the ontology artefacts.
 In order to fully understand the OWL2 artefacts themselves a simple parser has been implemented in Perl (see Appendix D).\par
 The main routine of the parser is a loop:
 \begin{lstlisting}
@@ -464,7 +464,7 @@ It can be run with any version of Perl 5, which is available on Windows and come
 As discussed in §2.2, Manchester OWL strives to be as legible as possible.
 An equivalent parser would have been more complex to implement for XML OWL due to the need to filter the XML tags from the output.
 As we shall see, Manchester OWL still suffers from some legibility issues when a human attempts to reason directly from the ontology.\par
-The implementation of this parser gives a glimpse into the structure of ontology engineering as a field.
+The implementation of this parser gives a glimpse into the careful consideration required to produce an OWL syntax.
 
 \section{OWL Legibility}
 The release of the OWL2 standard helped to greatly reduce the ambiguity of ontology artefacts.
@@ -484,7 +484,7 @@ Even when evaluated solely in terms of implementation, Manchester OWL does not f
 While an individual may struggle to parse some inferences quickly and correctly on first glance, in most DL use-cases they will have time for consideration and evaluation.\par
 The field of ontology engineering is a multifaceted enterprise.
 Just by considering OWL in isolation the interests of the standard designers, language designers, software developers, ontology engineers and wider stakeholders begin to come into focus.
-Legibility is both a surmountable problem and one which primarily appears in the less fundamental strata of this ecosystem.
+Legibility is both a surmountable problem and one which manifests itself in the less fundamental strata of this ecosystem.
 It may be that legibility issues cannot be fixed without fundamental reformulations of the standard.
 In such a scenario the cure may be worse than the disease.
 
