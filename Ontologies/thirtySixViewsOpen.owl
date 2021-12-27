@@ -1,0 +1,992 @@
+Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: owl:rational
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: agricultureTheme
+
+    
+ObjectProperty: animalsMotif
+
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    
+ObjectProperty: boatBackground
+
+    SubPropertyOf: 
+        maritimeTheme
+    
+    
+ObjectProperty: boatForeground
+
+    SubPropertyOf: 
+        maritimeTheme
+    
+    
+ObjectProperty: bodiesOfWaterMotif
+
+    
+ObjectProperty: depictsConstruction
+
+    
+ObjectProperty: depictsRooftops
+
+    
+ObjectProperty: depictsTemple
+
+    
+ObjectProperty: hasSpecificIndividual
+
+    Annotations: 
+        rdfs:comment "Reflexive: Each individual is related to its class by being the only instance. Functional: Only one individual can satisfy this property."@en
+    
+    Characteristics: 
+        Functional,
+        Reflexive
+    
+    
+ObjectProperty: hasTwoMountFujis
+
+    
+ObjectProperty: horseMotif
+
+    SubPropertyOf: 
+        animalsMotif
+    
+    
+ObjectProperty: indoorScenes
+
+    
+ObjectProperty: maritimeTheme
+
+    SubPropertyOf: 
+        bodiesOfWaterMotif
+    
+    
+ObjectProperty: mistForeground
+
+    
+ObjectProperty: mountFujiBackground
+
+    DisjointWith: 
+        mountFujiForeground
+    
+    
+ObjectProperty: mountFujiForeground
+
+    DisjointWith: 
+        mountFujiBackground
+    
+    
+ObjectProperty: notPeopleMotif
+
+    InverseOf: 
+        peopleMotif
+    
+    
+ObjectProperty: owl:topObjectProperty
+
+    Annotations: 
+        rdfs:comment "All object properties in this ontology are reflexive as they relate individuals to themselves."@en
+    
+    Characteristics: 
+        Reflexive
+    
+    
+ObjectProperty: peopleMotif
+
+    DisjointWith: 
+        wildlifeNotPeople
+    
+    InverseOf: 
+        notPeopleMotif
+    
+    
+ObjectProperty: rooftopsForeground
+
+    SubPropertyOf: 
+        depictsRooftops
+    
+    
+ObjectProperty: snowCappedMountFuji
+
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    
+ObjectProperty: treeForeground
+
+    
+ObjectProperty: urbanisationTheme
+
+    
+ObjectProperty: wildlifeAndBodiesOfWater
+
+    SubPropertyOf: 
+        wildlifeMotif
+    
+    
+ObjectProperty: wildlifeMotif
+
+    SubPropertyOf: 
+        animalsMotif
+    
+    
+ObjectProperty: wildlifeNotPeople
+
+    SubPropertyOf: 
+        wildlifeMotif
+    
+    DisjointWith: 
+        peopleMotif
+    
+    
+DataProperty: owl:topDataProperty
+
+    
+Class: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({A_View_of_Mount_Fuji_Across_Lake_Suwa}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Asakusa_Hongan-ji_temple_in_the_Eastern_capital}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Barrier_Town_on_the_Sumida_River
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Barrier_Town_on_the_Sumida_River}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Bay_of_Noboto
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Bay_of_Noboto}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Cushion_Pine_at_Aoyama
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Cushion_Pine_at_Aoyama}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Ejiri_in_Suruga_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Ejiri_in_Suruga_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Enoshima_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Enoshima_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Fuji_View_Field_in_Owari_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Fuji_View_Field_in_Owari_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Hodogaya_on_the_Tōkaidō
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Hodogaya_on_the_Tōkaidō}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Inume_Pass_Kōshū
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Inume_Pass_Kōshū}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Kajikazawa_in_Kai_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Kajikazawa_in_Kai_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Mishima_Pass_in_Kai_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Mishima_Pass_in_Kai_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Mount_Fuji_from_the_mountains_of_Tōtōmi
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Mount_Fuji_from_the_mountains_of_Tōtōmi}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Mount_Fuji_reflects_in_Lake_Kawaguchi
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Nihonbashi_bridge_in_Edo
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Nihonbashi_bridge_in_Edo}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Rainstorm_Beneath_the_Summit
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Rainstorm_Beneath_the_Summit}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Sazai_hall_Temple_of_Five_Hundred_Raken
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Sazai_hall_-_Temple_of_Five_Hundred_Rakan}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Senju_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Senju_Musashi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Shichiri_beach_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Shichiri_beach_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Shimomeguro
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Shimomeguro}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Shore_of_Tago_Bay_Ejiri_at_Tōkaidō}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: South_Wind_Clear_Sky
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({South_Wind_Clear_Sky}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Sundai_Edo
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Sundai_Edo}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Tama_River_in_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Tama_River_in_Musashi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Tea_house_at_Koishikawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Tea_house_at_Koishikawa._The_morning_after_a_snowfall}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: The_Great_Wave_off_Kanagawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({The_Great_Wave_off_Kanagawa}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: The_Kazusa_Province_sea_route
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({The_Kazusa_Province_sea_route}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: The_lake_of_Hakone_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({The_lake_of_Hakone_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Tsukuda_Island_in_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Tsukuda_Island_in_Musashi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Umezawa_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Umezawa_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Under_Mannen_Bridge_at_Fukagawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Under_Mannen_Bridge_at_Fukagawa}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Ushibori_in_Hitachi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Ushibori_in_Hitachi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: View_of_Mount_Fuji
+
+    SubClassOf: 
+        owl:Thing
+    
+    
+Class: Watermill_at_Onden
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Watermill_at_Onden}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Yoshida_at_Tōkaidō
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Yoshida_at_Tōkaidō}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: owl:Thing
+
+    Annotations: 
+        rdfs:comment "Built with Open-World Assumption as OWL was designed"@en
+    
+    
+Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    Types: 
+        A_View_of_Mount_Fuji_Across_Lake_Suwa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     maritimeTheme  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     mountFujiBackground  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     notPeopleMotif  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     snowCappedMountFuji  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
+    
+    
+Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+
+    Types: 
+        A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiBackground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
+     peopleMotif  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
+     rooftopsForeground  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
+     snowCappedMountFuji  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,
+     urbanisationTheme  A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+    
+    
+Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+
+    Types: 
+        Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     depictsTemple  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+     mountFujiBackground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+     peopleMotif  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+     rooftopsForeground  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+     snowCappedMountFuji  Asakusa_Hongan-ji_temple_in_the_Eastern_capital,
+     urbanisationTheme  Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+    
+    
+Individual: Barrier_Town_on_the_Sumida_River
+
+    Types: 
+        Barrier_Town_on_the_Sumida_River,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Barrier_Town_on_the_Sumida_River,
+     horseMotif  Barrier_Town_on_the_Sumida_River,
+     mountFujiBackground  Barrier_Town_on_the_Sumida_River,
+     peopleMotif  Barrier_Town_on_the_Sumida_River,
+     rooftopsForeground  Barrier_Town_on_the_Sumida_River,
+     snowCappedMountFuji  Barrier_Town_on_the_Sumida_River
+    
+    
+Individual: Bay_of_Noboto
+
+    Types: 
+        Bay_of_Noboto,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Bay_of_Noboto,
+     bodiesOfWaterMotif  Bay_of_Noboto,
+     maritimeTheme  Bay_of_Noboto,
+     mountFujiBackground  Bay_of_Noboto,
+     peopleMotif  Bay_of_Noboto
+    
+    
+Individual: Cushion_Pine_at_Aoyama
+
+    Types: 
+        Cushion_Pine_at_Aoyama,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     depictsRooftops  Cushion_Pine_at_Aoyama,
+     mountFujiBackground  Cushion_Pine_at_Aoyama,
+     peopleMotif  Cushion_Pine_at_Aoyama
+    
+    
+Individual: Ejiri_in_Suruga_Province
+
+    Types: 
+        Ejiri_in_Suruga_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Ejiri_in_Suruga_Province,
+     mountFujiBackground  Ejiri_in_Suruga_Province,
+     peopleMotif  Ejiri_in_Suruga_Province,
+     treeForeground  Ejiri_in_Suruga_Province
+    
+    
+Individual: Enoshima_in_Sagami_Province
+
+    Types: 
+        Enoshima_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Enoshima_in_Sagami_Province,
+     bodiesOfWaterMotif  Enoshima_in_Sagami_Province,
+     maritimeTheme  Enoshima_in_Sagami_Province,
+     mountFujiBackground  Enoshima_in_Sagami_Province,
+     peopleMotif  Enoshima_in_Sagami_Province,
+     snowCappedMountFuji  Enoshima_in_Sagami_Province
+    
+    
+Individual: Fuji_View_Field_in_Owari_Province
+
+    Types: 
+        Fuji_View_Field_in_Owari_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Fuji_View_Field_in_Owari_Province,
+     depictsConstruction  Fuji_View_Field_in_Owari_Province,
+     mountFujiBackground  Fuji_View_Field_in_Owari_Province,
+     peopleMotif  Fuji_View_Field_in_Owari_Province,
+     snowCappedMountFuji  Fuji_View_Field_in_Owari_Province
+    
+    
+Individual: Hodogaya_on_the_Tōkaidō
+
+    Types: 
+        Hodogaya_on_the_Tōkaidō,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Hodogaya_on_the_Tōkaidō,
+     horseMotif  Hodogaya_on_the_Tōkaidō,
+     mountFujiBackground  Hodogaya_on_the_Tōkaidō,
+     peopleMotif  Hodogaya_on_the_Tōkaidō,
+     snowCappedMountFuji  Hodogaya_on_the_Tōkaidō
+    
+    
+Individual: Inume_Pass_Kōshū
+
+    Types: 
+        Inume_Pass_Kōshū,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Inume_Pass_Kōshū,
+     horseMotif  Inume_Pass_Kōshū,
+     mountFujiBackground  Inume_Pass_Kōshū,
+     peopleMotif  Inume_Pass_Kōshū,
+     snowCappedMountFuji  Inume_Pass_Kōshū
+    
+    
+Individual: Kajikazawa_in_Kai_Province
+
+    Types: 
+        Kajikazawa_in_Kai_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  Kajikazawa_in_Kai_Province,
+     mountFujiBackground  Kajikazawa_in_Kai_Province,
+     peopleMotif  Kajikazawa_in_Kai_Province
+    
+    
+Individual: Mishima_Pass_in_Kai_Province
+
+    Types: 
+        Mishima_Pass_in_Kai_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiBackground  Mishima_Pass_in_Kai_Province,
+     peopleMotif  Mishima_Pass_in_Kai_Province,
+     treeForeground  Mishima_Pass_in_Kai_Province
+    
+    
+Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
+
+    Types: 
+        Mount_Fuji_from_the_mountains_of_Tōtōmi,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     depictsConstruction  Mount_Fuji_from_the_mountains_of_Tōtōmi,
+     mountFujiBackground  Mount_Fuji_from_the_mountains_of_Tōtōmi,
+     peopleMotif  Mount_Fuji_from_the_mountains_of_Tōtōmi,
+     snowCappedMountFuji  Mount_Fuji_from_the_mountains_of_Tōtōmi
+    
+    
+Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
+
+    Types: 
+        Mount_Fuji_reflects_in_Lake_Kawaguchi,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
+     bodiesOfWaterMotif  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
+     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
+     maritimeTheme  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
+     mountFujiBackground  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
+     notPeopleMotif  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province,
+     snowCappedMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
+    
+    
+Individual: Nihonbashi_bridge_in_Edo
+
+    Types: 
+        Nihonbashi_bridge_in_Edo,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Nihonbashi_bridge_in_Edo,
+     boatForeground  Nihonbashi_bridge_in_Edo,
+     bodiesOfWaterMotif  Nihonbashi_bridge_in_Edo,
+     maritimeTheme  Nihonbashi_bridge_in_Edo,
+     mountFujiBackground  Nihonbashi_bridge_in_Edo,
+     peopleMotif  Nihonbashi_bridge_in_Edo,
+     rooftopsForeground  Nihonbashi_bridge_in_Edo,
+     snowCappedMountFuji  Nihonbashi_bridge_in_Edo,
+     urbanisationTheme  Nihonbashi_bridge_in_Edo
+    
+    
+Individual: Rainstorm_Beneath_the_Summit
+
+    Types: 
+        Rainstorm_Beneath_the_Summit,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiForeground  Rainstorm_Beneath_the_Summit,
+     notPeopleMotif  Rainstorm_Beneath_the_Summit,
+     snowCappedMountFuji  Rainstorm_Beneath_the_Summit
+    
+    
+Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+
+    Types: 
+        Sazai_hall_Temple_of_Five_Hundred_Raken,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     depictsTemple  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     mountFujiBackground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     peopleMotif  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     rooftopsForeground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     snowCappedMountFuji  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     urbanisationTheme  Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+    
+    
+Individual: Senju_Musashi_Province
+
+    Types: 
+        Senju_Musashi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Senju_Musashi_Province,
+     animalsMotif  Senju_Musashi_Province,
+     horseMotif  Senju_Musashi_Province,
+     mountFujiBackground  Senju_Musashi_Province,
+     peopleMotif  Senju_Musashi_Province,
+     snowCappedMountFuji  Senju_Musashi_Province
+    
+    
+Individual: Shichiri_beach_in_Sagami_Province
+
+    Types: 
+        Shichiri_beach_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  Shichiri_beach_in_Sagami_Province,
+     mountFujiBackground  Shichiri_beach_in_Sagami_Province,
+     notPeopleMotif  Shichiri_beach_in_Sagami_Province,
+     snowCappedMountFuji  Shichiri_beach_in_Sagami_Province
+    
+    
+Individual: Shimomeguro
+
+    Types: 
+        Shimomeguro,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mistForeground  Shimomeguro,
+     mountFujiBackground  Shimomeguro,
+     peopleMotif  Shimomeguro,
+     snowCappedMountFuji  Shimomeguro
+    
+    
+Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
+
+    Types: 
+        Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,
+     bodiesOfWaterMotif  Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,
+     maritimeTheme  Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,
+     mountFujiForeground  Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,
+     peopleMotif  Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,
+     snowCappedMountFuji  Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
+    
+    
+Individual: South_Wind_Clear_Sky
+
+    Types: 
+        South_Wind_Clear_Sky,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiForeground  South_Wind_Clear_Sky,
+     notPeopleMotif  South_Wind_Clear_Sky
+    
+    
+Individual: Sundai_Edo
+
+    Types: 
+        Sundai_Edo,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Sundai_Edo,
+     depictsRooftops  Sundai_Edo,
+     mountFujiBackground  Sundai_Edo,
+     peopleMotif  Sundai_Edo,
+     snowCappedMountFuji  Sundai_Edo,
+     treeForeground  Sundai_Edo,
+     urbanisationTheme  Sundai_Edo
+    
+    
+Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
+
+    Types: 
+        Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi,
+     bodiesOfWaterMotif  Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi,
+     maritimeTheme  Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi,
+     mountFujiBackground  Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi,
+     peopleMotif  Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
+    
+    
+Individual: Tama_River_in_Musashi_Province
+
+    Types: 
+        Tama_River_in_Musashi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Tama_River_in_Musashi_Province,
+     bodiesOfWaterMotif  Tama_River_in_Musashi_Province,
+     maritimeTheme  Tama_River_in_Musashi_Province,
+     mountFujiBackground  Tama_River_in_Musashi_Province,
+     peopleMotif  Tama_River_in_Musashi_Province,
+     treeForeground  Tama_River_in_Musashi_Province
+    
+    
+Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+
+    Types: 
+        Tea_house_at_Koishikawa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     bodiesOfWaterMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     mountFujiBackground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     peopleMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     rooftopsForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     snowCappedMountFuji  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     treeForeground  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     urbanisationTheme  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     wildlifeAndBodiesOfWater  Tea_house_at_Koishikawa._The_morning_after_a_snowfall,
+     wildlifeMotif  Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+    
+    
+Individual: The_Great_Wave_off_Kanagawa
+
+    Types: 
+        The_Great_Wave_off_Kanagawa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  The_Great_Wave_off_Kanagawa,
+     bodiesOfWaterMotif  The_Great_Wave_off_Kanagawa,
+     maritimeTheme  The_Great_Wave_off_Kanagawa,
+     mountFujiBackground  The_Great_Wave_off_Kanagawa,
+     peopleMotif  The_Great_Wave_off_Kanagawa,
+     snowCappedMountFuji  The_Great_Wave_off_Kanagawa
+    
+    
+Individual: The_Kazusa_Province_sea_route
+
+    Types: 
+        The_Kazusa_Province_sea_route,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  The_Kazusa_Province_sea_route,
+     bodiesOfWaterMotif  The_Kazusa_Province_sea_route,
+     maritimeTheme  The_Kazusa_Province_sea_route,
+     mountFujiBackground  The_Kazusa_Province_sea_route,
+     notPeopleMotif  The_Kazusa_Province_sea_route,
+     snowCappedMountFuji  The_Kazusa_Province_sea_route
+    
+    
+Individual: The_lake_of_Hakone_in_Sagami_Province
+
+    Types: 
+        The_lake_of_Hakone_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  The_lake_of_Hakone_in_Sagami_Province,
+     mistForeground  The_lake_of_Hakone_in_Sagami_Province,
+     mountFujiBackground  The_lake_of_Hakone_in_Sagami_Province,
+     notPeopleMotif  The_lake_of_Hakone_in_Sagami_Province
+    
+    
+Individual: Tsukuda_Island_in_Musashi_Province
+
+    Types: 
+        Tsukuda_Island_in_Musashi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Tsukuda_Island_in_Musashi_Province,
+     bodiesOfWaterMotif  Tsukuda_Island_in_Musashi_Province,
+     maritimeTheme  Tsukuda_Island_in_Musashi_Province,
+     mountFujiBackground  Tsukuda_Island_in_Musashi_Province,
+     peopleMotif  Tsukuda_Island_in_Musashi_Province
+    
+    
+Individual: Umezawa_in_Sagami_Province
+
+    Types: 
+        Umezawa_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Umezawa_in_Sagami_Province,
+     bodiesOfWaterMotif  Umezawa_in_Sagami_Province,
+     mistForeground  Umezawa_in_Sagami_Province,
+     mountFujiBackground  Umezawa_in_Sagami_Province,
+     wildlifeAndBodiesOfWater  Umezawa_in_Sagami_Province,
+     wildlifeMotif  Umezawa_in_Sagami_Province,
+     wildlifeNotPeople  Umezawa_in_Sagami_Province
+    
+    
+Individual: Under_Mannen_Bridge_at_Fukagawa
+
+    Types: 
+        Under_Mannen_Bridge_at_Fukagawa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Under_Mannen_Bridge_at_Fukagawa,
+     bodiesOfWaterMotif  Under_Mannen_Bridge_at_Fukagawa,
+     depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
+     maritimeTheme  Under_Mannen_Bridge_at_Fukagawa,
+     mountFujiBackground  Under_Mannen_Bridge_at_Fukagawa,
+     peopleMotif  Under_Mannen_Bridge_at_Fukagawa,
+     snowCappedMountFuji  Under_Mannen_Bridge_at_Fukagawa,
+     urbanisationTheme  Under_Mannen_Bridge_at_Fukagawa
+    
+    
+Individual: Ushibori_in_Hitachi_Province
+
+    Types: 
+        Ushibori_in_Hitachi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Ushibori_in_Hitachi_Province,
+     bodiesOfWaterMotif  Ushibori_in_Hitachi_Province,
+     maritimeTheme  Ushibori_in_Hitachi_Province,
+     mountFujiBackground  Ushibori_in_Hitachi_Province,
+     peopleMotif  Ushibori_in_Hitachi_Province,
+     snowCappedMountFuji  Ushibori_in_Hitachi_Province,
+     wildlifeMotif  Ushibori_in_Hitachi_Province
+    
+    
+Individual: Watermill_at_Onden
+
+    Types: 
+        View_of_Mount_Fuji,
+        Watermill_at_Onden
+    
+    Facts:  
+     agricultureTheme  Watermill_at_Onden,
+     bodiesOfWaterMotif  Watermill_at_Onden,
+     mountFujiBackground  Watermill_at_Onden,
+     peopleMotif  Watermill_at_Onden,
+     rooftopsForeground  Watermill_at_Onden,
+     snowCappedMountFuji  Watermill_at_Onden
+    
+    
+Individual: Yoshida_at_Tōkaidō
+
+    Types: 
+        View_of_Mount_Fuji,
+        Yoshida_at_Tōkaidō
+    
+    Facts:  
+     indoorScenes  Yoshida_at_Tōkaidō,
+     mountFujiBackground  Yoshida_at_Tōkaidō,
+     peopleMotif  Yoshida_at_Tōkaidō,
+     snowCappedMountFuji  Yoshida_at_Tōkaidō
+    
+    
+DisjointClasses: 
+    A_View_of_Mount_Fuji_Across_Lake_Suwa,A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo,Asakusa_Hongan-ji_temple_in_the_Eastern_capital,Barrier_Town_on_the_Sumida_River,Bay_of_Noboto,Cushion_Pine_at_Aoyama,Ejiri_in_Suruga_Province,Enoshima_in_Sagami_Province,Fuji_View_Field_in_Owari_Province,Hodogaya_on_the_Tōkaidō,Inume_Pass_Kōshū,Kajikazawa_in_Kai_Province,Mishima_Pass_in_Kai_Province,Mount_Fuji_from_the_mountains_of_Tōtōmi,Mount_Fuji_reflects_in_Lake_Kawaguchi,Nihonbashi_bridge_in_Edo,Rainstorm_Beneath_the_Summit,Sazai_hall_Temple_of_Five_Hundred_Raken,Senju_Musashi_Province,Shichiri_beach_in_Sagami_Province,Shimomeguro,Shore_of_Tago_Bay_Ejiri_at_Tōkaidō,South_Wind_Clear_Sky,Sundai_Edo,Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi,Tama_River_in_Musashi_Province,Tea_house_at_Koishikawa,The_Great_Wave_off_Kanagawa,The_Kazusa_Province_sea_route,The_lake_of_Hakone_in_Sagami_Province,Tsukuda_Island_in_Musashi_Province,Umezawa_in_Sagami_Province,Under_Mannen_Bridge_at_Fukagawa,Ushibori_in_Hitachi_Province,Watermill_at_Onden,Yoshida_at_Tōkaidō
+

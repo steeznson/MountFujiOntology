@@ -1,0 +1,2927 @@
+\documentclass[titlepage,a4paper,12pt,oneside]{book}
+\usepackage{csquotes}
+\usepackage{authblk}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[toc,page]{appendix}
+\usepackage[sort&compress,comma,authoryear]{natbib}
+\lstset{basicstyle=\ttfamily,breaklines=true}
+\title{\textbf{Designing Decriptions: A Case Study-based evaluation of Web Ontology Language (OWL2) Functionality and Methodology}}
+\author{Examination Number: 40298315}
+\affil{School of Computing}
+\affil{Edinburgh Napier}
+\date{23.04.18}
+\begin{document}
+\maketitle
+
+\chapter*{Abstract}
+OWL2 is a widely used standard in ontology engineering.
+Following a brief exploration of OWL's roots in description logics, this article seeks to test the OWL2 standard with an unusual case study.
+Three different ontology artefacts are produced to describe Hokusai's \textit{Thirty-six Views of Mount Fuji} woodcut series (c.1830); these are then compared and evaluated.\par
+The first two ontologies experiment with OWL's \textbf{open-world assumption} while attempting to provide a detailed description of the \textbf{closed-world} of the \textit{Views}.
+The third ontology seeks to emulate the ontology engineering process by trimming the baggage of the other ontologies without sacrificing the functionality to isolate a unique description of each individual.
+This final ontology has the most utility as an ontology artefact but the first two provide valuable insight as to the limitations of OWL technologies.\par
+The article concludes that most issues can be solved at the software implementation-level and makes the following recommendations: continued encouragement of community engagement to produce Protégé plugins; the enhancement of reasoner functionality to encourage good OWL practices by providing intelligent recommendations to ontology engineers, and; the standardisation of reasoners to encourage full implementation of the OWL standard.
+
+\tableofcontents
+
+\chapter{Introduction}
+Web Ontology Language (OWL) is used in the production of Knowledge Bases (KB).
+A KB is an abstract container that represents a certain state of affairs.
+It is the job of an ontology engineer to create KBs.
+The OWL2 standard is the latest version of OWL and is recommended by the World Wide Web Consortium (W3) for ontology engineering \cite[22]{introduction2011}.
+`Ontology' in this article refers to a KB that has been produced with OWL.\par
+In more concrete terms, an ontology engineer may use OWL technologies to describe factory components that are being used in the production of a car.
+Some components will be similar to one another, others will be very different.
+There are various types of components involved - such as screws, pedals and tires - and some of these components may be interchangeable with other components in their group while others are absolutely essential to the design.\par
+An engineer or technician working in a car manufacturing plant needs to have quick access to this information.
+Furthermore, the structure of this information needs to logically represent its uses.
+Bearing in mind these requirements, the KB that the ontology engineer has constructed will be an invaluable resource at the plant.\par
+This article uses an atypical case study to probe the limitations of OWL technologies.
+Three distinct ontology artefacts are created to describe Hokusai's \textit{Thirty-six Views of Mount Fuji} series of woodcuts (c.1830).
+This case poses a particular challenge for OWL as, unlike a manufacturing plant, a full description of the \textit{Views} includes the restriction that there can only ever be thirty-six specific individuals represented in the ontology.
+Typically OWL is used to create KBs that are subject to change.
+Additionally, the large number of individuals, and the fact that they co-exist in the same set without interacting with one another further complicate the ontology.\par
+The first ontology artefact attempts to create the KB in as much detail as possible, which includes implementing additional functionality over the default OWL functionality.
+The second accepts OWL's default functionality but tries to maintain the same level of description as the first ontology.
+Lastly, the third ontology simulates the process of ontology engineering as the first ontology is deflated and purged of superfluous detail.
+The resulting ontology is lean and substantially more efficient than its counterparts.\par
+The final portion of this article considers the improvements that could be made to the OWL technology stack to remedy the issues raised in the case study.
+A critical look is taken at OWL syntax and the broader concerns of the OWL ecosystem; additional recommendations are offered in these areas respectively.
+
+\chapter{The OWL2 Specification}
+\section{Description Logics}
+Description Logics (DL) emerged out of a need to develop knowledge representation tools with a greater expressive power than conventional propositional logics.
+DL ontologies are notably utilised to create KBs in the biomedical sciences but have also found wider use in artificial intelligence research and other industries \cite[29]{handbookIntro2003}.\par
+Complex relationships between individuals and groups of individuals cannot be described with primitive logical connectives: while the conjunction of \textit{P} and \textit{Q} is trivial, expressing that \textit{$P'$} is a functionally similar yet significantly distinct concept to \textit{$Q'$} is not.
+Levesque \& Brachman (1987) found that First-Order Logic (FOL) is not suitable for describing these sorts of complex relationships.
+They identify a fundamental tension between a language's expressive power and its tractability; in other words what can be represented and the ease of computing inferences from what is represented.\footnote{In this sense ``language'' refers to a syntactically consistent subset of first order logic.}\par
+Brachman \& Levesque use the thought experiment of \(\alpha\), an inference implicit in a KB that needs to be deduced computationally:  
+\begin{quote}
+  In other words, the question as to whether or not the truth of \(\alpha\) is implicit in the KB reduces to whether or not a certain sentence is a theorem of FOL. Thus, the question-answering operation becomes one of theorem proving in FOL. \cite[79]{expressiveness1987}
+\end{quote}
+Because it is trivial that the KB will entail \(\alpha\) if it subsumes \(\alpha\) there emerges a problem of generality wherein the reasoner is unable to narrow the scope of their enquiry.
+Proving a theorem in FOL is a notoriously fickle process \cite[91]{expressiveness1987}.
+It may be that the truth of an assertion is easily discovered but there is also a possibility that the assertion could be undecidable - meaning that there is no guarantee of a result even with an unlimited amount of computation.
+This form of DL may work as a heuristic but success is not guaranteed. Such a system would not be suitable for real world applications like self-driving cars where results are time-sensitive and life-critical for humans.\par
+DL were required to fit into a niche of expressivity between propositional logic and FOL.
+Levesque \& Brachman gesture towards Database Management Systems (DBMS) as a source of inspiration for restricting the generality of the logical inquiry: 
+\begin{quote}
+  ...the database retrieval version of the question asks about the structures in the database itself, and not about what these structures represent. \cite[82]{expressiveness1987}
+\end{quote}
+Modern DL languages have pursued this direction.
+Languages conform to Knowledge Representation (KR) systems that take the form of networks or frames representing sets of individuals and their relationships.
+They operate over discrete domains using a hybrid of two forms of predicate - terminologies and attributes.\par
+Terminology and attribute predicates are also known as TBox and ABox predicates respectively:
+\begin{quote}
+  Roles of TBox and ABox motivated by the need to distinguish general knowledge about the domain of interest from specific knowledge about individuals characterising a specific world/situation under construction. \cite[27]{handbookIntro2003}
+\end{quote}
+TBoxes are unary values that classify the individuals in one's ontology.
+ABoxes are binary attributes that are applied to individuals within the ontology.
+These assumptions can be stipulated to be subsumed by one another, intersected with one another, disjoint from one another, or even composed of a disjoint union of two others.
+An example of a TBox assertion would be, ``The Cathedral class is subsumed by the Building class,'' or, `Cathedral \(\supseteq\) Building'.
+TBoxes are \textit{intensional} knowledge as their application stipulates precisely what is being described in their terms.\footnote{eg. All quadrilateral shapes have four angles.}\par   
+Alternatively, an example of an ABox assertion would be, ``Notre Dame has one spire,'' or, `hasOne(Spire, Notre Dame)'.
+ABoxes are \textit{extensional} knowledge as their meanings are reliant on their application.\footnote{eg. All bodies are heavy. - The truth of this knowledge depends on how the predicate `is heavy' is applied.}\par
+It should be noted that Nardi \& Brachman has introduced the notion of the discrete domain being a \textit{world} in the above quotation.
+Worlds are blank canvases to be explicitly populated by the ontology engineer.
+Pressingly, there is a distinction between an open-world assumption and a closed-world assumption that is relevant for the case study in this article:
+\begin{quote}
+\textbf{Open-world Assumption}: an assumption that a given statement may possibly be true regardless of its nominal truth value.
+\end{quote}
+Given the open-world assumption, a TBox like `Cathedral(Notre Dame)' becomes mutable.
+Say that every Bishop of Notre Dame had been secretly excommunicated or some similar technicality were discovered that disqualified Notre Dame from its cathedral status; the open-world assumption provides the apparatus to correct the KB.\par
+The closed-world assumption is the opposite assumption, that any given statement that is known to be true is true.
+A similar discrepancy to the Notre Dame example becomes logically impossible to account for.
+OWL languages utilise the open-world assumption.
+
+\section{OWL Languages}
+There are three approaches to constructing a KR system \cite[23]{handbookIntro2003}:
+\begin{enumerate}
+\item{Limited and complete: systems designed so that inferences can be efficiently computed at the expense of expressiveness.}
+\item{Expressive and incomplete: systems designed for expressiveness and efficiency at the expense of fully functioning reasoning capacities.}
+\item{Expressive and complete: systems designed for expressiveness and speed at the expense of efficiency.}
+\end{enumerate}
+OWL is a family of DL languages that typically follows the third approach, offering the maximum expressiveness while being computationally complete.\footnote{Alternative reasoning `profiles' are offered in the OWL2 standard.}
+The OWL languages all adhere to a standard from W3 \cite[10]{guide2011}.\par
+In the abstract OWL syntax is comprised of three components: individuals, properties and classes.
+Individuals represent objects within our domain of interest.
+OWL does not adhere to the Unique Name Assumption (UNA) that prevents names from co-referring to individuals, as a consequence an given individual could be referred to with either `John le Carre' or `David Cornwell'.
+The latter two components are OWL's implementation of the ABox and TBox predicates from §2.1.\par
+OWL calls ABoxes `Properties' \cite[11]{guide2011}.
+To reiterate, `Properties', in the OWL sense, can only ever apply to individuals.
+Properties have characteristics that place parameters on their application.
+They can be used to describe the relationships between individuals or a single individual's attributes.
+Every property must be subsumed by a primitive property called `owl:topObjectProperty' but aside from this the engineer is given freedom to arrange their properties provided they are applied to an individual.\par
+The OWL2 standard allows the creation of Data Properties as well as Object Properties.
+Data Properties are often referred to as R(ole)Boxes, as they stipulate the role that individuals can fulfil.
+They must be subsumed by a primitive class called `owl:topDataProperty'.
+Although RBoxes shall be utilised to enforce some cardinality restrictions, the case study of this article does not lend itself to a full exploration of their potential use-cases.\par
+Finally, OWL refers to TBoxes as `Classes'.
+Classes are used to create taxonomies (hierarchies of sets) of which individuals are instances.
+Just as with properties, every class must be subsumed by a primitive class called `owl:Thing'. 
+Properties and classes can be subsumed by others of their kind, composed of others of their kind or defined in contrast to others of their kind.\par
+Let us briefly examine how these tools could interact to create a world:
+\begin{quote}
+  There exists a \textbf{Dog} \textit{class} (Dog \(\supseteq\) owl:Thing). `Louis' is an \textit{individual} instance of the \textbf{Dog} \textit{class} (Dog(Louis)). `Louis' has the \textit{property} \textbf{isOwnedBy}. An instance of another class, \textbf{Person} (Person \(\supseteq\) owl:Thing) whose name is `Allan' (Person(Allan)) satisfies the \textbf{isOwnedBy} property for `Louis'. Simultaneously `Louis' satisfies the \textbf{isOwnerOf} property for `Allan'. \textbf{isOwnerOf} has the characteristic of being the inverse of \textbf{isOwnedBy} and vice versa ((isOwnedBy(Allan, Louis)) \textbf{and} (isOwnerOf(Louis, Allan))). Both the \textbf{Person} and \textbf{Dog} classes are subsumed by the superclass \textbf{Animal} (Dog, Person \(\supseteq\) Animal), which in turn is subsumed by \textbf{owl:Thing} (Animal \(\supseteq\) owl:Thing).
+\end{quote}
+Stanford University has written a free ontology creation software called Protégé that offers full support for OWL languages and has support for several reasoners.\footnote{Official website: https://protege.stanford.edu/ - accessed 05.03.18, \textit{BSD 2-Clause License}}
+Protégé was utilised in the production of the ontologies for the case study in this article with the Pellet reasoner plugin.\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 23.03.18}
+The Pellet reasoner would be able to deduce from the above example that both `Allan' and `Louis' are members of the `Animal' class.
+It will also deduce the applications of the `isOwnerOf' property from the `isOwnedBy' property provided they are properly defined as the inverse of one another.
+It would flag up a logically impossible (incoherent) ontology to the engineer if an individual were classed as a `Person' but not also as an `Animal'.\par
+The two most common OWL languages are the XML and Manchester OWLs \cite[30]{handbookIntro2003}\cite[10]{guide2011}.
+Both descriptions share the same underlying logic, and in many ways the same structure, but Manchester OWL prioritises human legibility.
+The ontology artefacts in this article are written in Manchester OWL.
+% MOTIVATION
+
+\chapter{Capturing the Thirty-Six Views}
+\section{Case Study: the Thirty-Six Views of Mount Fuji}
+\centerline{\includegraphics[scale=0.2]{greatwave}}
+\centerline{\textit{The Great Wave Off Kanagawa}, Hokusai (c.1830-1832), Metropolitan Museum of Art, NY}\hfill \break
+Katsushika Hokusai's \textit{Thirty-Six Views of Mount Fuji} (c.1830-1832) are a series of woodcut prints.
+As the name suggests there are thirty-six prints and each one depicts Mount Fuji.
+The scenes accommodate a variety of seasons, motifs and themes.
+The series achieved regional and international acclaim: both due to the artist's mastery of the medium and the prominence of Mount Fuji in Japanese culture.\par
+There are several features of this collection that make it an interesting case study.
+Firstly, it is restricted to an exact cardinality.
+This poses a problem for OWL as an accurate modelling of this world requires a closed-world assumption.
+To briefly reiterate, this is the assumption that established truth values in the domain are immutable.
+OWL utilises the open-world assumption, indeed it has been described as a ``distinguishing feature'' of DL modelling languages \cite[11]{handbookIntro2003}. This shall require additional constraints upon the modelled ontology.\par
+The \textit{Views} also contain many distinct individuals.
+Donini identifies individuals as a source of difficulty for reasoners \cite[135]{donini2003}.
+In particular ABoxes can slow down the reasoner's deductions considerably.\par
+Lastly, the \textit{Views} are comprised of specific individuals.
+This case study is unusual as the ontology engineer is already aware of the individuals that will be entered into the ontology.
+Usually the engineer sets the parameters of an ontology first and then it is populated by individuals.
+This feature of the case study provides scope for several different ontology formulations that would otherwise not be possible.\par
+The goal of each of these ontologies is to capture a unique description of every individual in the \textit{Views}.
+Assessing the merits of each approach provides a vehicle to probe the strengths and weaknesses of the OWL2 standard.
+
+\section{The Closed-World Assumption}
+The first ontology artefact captures as much of the world as possible (see Appendix A).
+Ontology engineers would rarely use maximal detail in the finished product but it is often a good starting point; the next step would be to experiment with what can be taken away whilst still retaining the same functionality.
+Ideally an ontology should describe its subject in the most conceptually parsimonious way possible.
+\subsection{Implementing the Closed-world Assumption}
+As we know all that can or will ever exist in this ontology, describing it in maximal detail requires a closed-world assumption.\par
+A new class, View\_of\_Mount\_Fuji, was created and made equivalent to owl:Thing.
+This signals that all that can exist in the ontology are views of Mount Fuji.
+owl:Thing was then given an exact cardinality restriction of thirty-six as only thirty-six individuals can exist in this world.
+This functionality utilises a primitive DataProperty in OWL that is distributed with the Protégé software (\textbf{owl:topDataProperty} exactly 36 owl:rational).
+This restricts any individuals in this set to being members of a set with thirty-six individuals.\par
+The next step was to create the functional and reflexive property, containsSpecificIndividuals.
+The `reflexive' characteristic denotes properties that necessarily relate individuals to themselves: in this case the individuals of class Views\_of\_Mount\_Fuji can only fully represent the \textit{Views of Mount Fuji} by having an exact relationship to themselves.
+Additionally, this relationship is functional as each member of the class has itself as the only concept that can satisfy this restriction. 
+Every single individual in the ontology is explicitly listed as this property is applied, as no other individual can exist in this ontology (see Figure 1).
+\newline
+\centerline{\includegraphics[scale=0.3]{ClosedViews}}\\
+\centerline{\textit{Figure 1}}
+\newline
+This property acts as a white-list to provide the reasoner with valid individuals in the ontology. The `exactly' keyword is essential to stipulate this condition.
+The restriction states that the class may only contain one instance of an array containing each distinct individual in the class.\par
+This ontology depicts owl:Thing and View\_of\_Mount\_Fuji as separate classes despite their equivalence.
+Some may argue that this ontology manifests the `EquivalenceIsDifference' anti-pattern where an equivalent class is erroneously designated as a subclass \cite[2]{antipatterns2009}.
+This article argues that there is a meaningful distinction in scope between the two.
+While it may be more parsimonious to merge the classes and apply both properties to owl:Thing, in this case it is more descriptive to apply the restrictions separately; even though they are both being applied to the same class.
+The order of the generality being established is important: first it is established that there are thirty-six owl:Things and then more specifically the white-list of allowed things is introduced.
+Framed as two equivalent classes, a human reader of the ontology artefact will be able to clearly see the steps in the closed-world assumption.\par
+This concludes the application of the closed-world assumption on this ontology.
+\subsection{Classes}
+\begin{lstlisting}
+Maximal Detail Ontology Classes
+---
+Agriculture_Theme
+Animals_Motif
+Boats_Foreground
+Bodies_Of_Water_Motif
+Construction_Motif
+Depicts_Rooftops
+Discoloured_Mount_Fuji
+Horse_Motif
+Maritime_Theme
+Mist_Foreground
+Mount_Fuji_Foreground
+NOT_People
+People_Motif
+Red_Mount_Fuji
+Rooftops_Foreground
+Snow_Capped_Mount_Fuji
+Temple_Motif
+Tree_Foreground
+Urbanisation_Theme
+View_of_Mount_Fuji
+Wildlife_AND_Bodies_of_Water
+Wildlife_Motif
+Wildlife_NOT_People
+Yellow_Mount_Fuji
+owl:Thing
+\end{lstlisting}
+The classes whose names contain the pattern \_AND\_ indicate an intersection.
+Similarly, the naming pattern \_NOT\_ indicates a dis-junction.
+The different colour attributions for Mount Fuji are also disjoint from one another.\par
+Maritime\_Theme is subsumed by Bodies\_of\_Water\_Motif as bodies of water are a prerequisite for maritime activity.
+Likewise, the horse and wildlife classes are subsumed by the Animals\_Motif, and Depicts\_Rooftops subsumes Rooftops\_Foreground.\par
+These groups allow the first level of distinction between the individuals in the ontology.
+\subsection{Properties}
+\begin{lstlisting}
+Maximal Detail Ontology Properties
+---
+containsSpecificIndividuals
+hasTwoMountFujis
+indoorScene
+owl:topObjectProperty
+\end{lstlisting}
+As no relationships hold between the individuals, every object property in this ontology is reflexive.
+It is worth pointing out that containsSpecificIndividuals differs by applying to individuals at the class level but the other two are satisfied directly by individuals.
+While the properties may function like additional classes, (indoorScene(Yoshida at Tokaido, Yoshida at Tokaido)), the scope of these properties has been reduced to a single individual.
+Once the scope of an assertion has been reduced to one individual, utilising the apparatus of a bespoke class to make this assertion is unnecessary.\par
+Properties provide the second level of distinction between the individuals and complete the description of the \textit{Views}.
+Using these two levels in tandem we can isolate each individual by its unique attributes.
+\subsection{The Reasoner}
+The Pellet reasoner had no trouble adapting to the closed-world assumption.
+This case study originally utilised the FaCT++ reasoner which had detailed error logs but struggled to compute ontologies with many individuals and ABoxes, often taking up to ten minutes to assess this ontology.
+The Pellet reasoner proved more useful, although the inclusion of multiple reasoners in Protégé software is a point of ambiguity that will be returned to in §4.4.\par
+Fig. 2 demonstrates the direct effects of the closed-world assumption on the reasoner: 
+\newline
+\newline
+\centerline{\includegraphics[scale=0.3]{ClosedSingleton}}\\
+\centerline{\textit{Figure 2}}
+\newline
+The creation of a singleton class, containing only one individual, has caused the reasoner to flag up the ontology as inconsistent.
+As the singleton class is subsumed by View\_of\_Mount\_Fuji, it cannot contradict the parameters of its superclass.
+The first thing that clashes is the two white-lists of individuals.
+The\_Great\_Wave\_off\_Kanagawa already satisfies the containsSpecificIndividual constraint reflexively and this cannot be multiply satisfied as containsSpecificIndividuals is also functional.\par
+For the singleton class to have a cardinality of exactly one, whilst simultaneously being a member of a class with a cardinality of exactly thirty-six is a logical impossibility: any individual of this class will have two contradictory data properties.\par
+The reasoner output from the case study demonstrates several OWL anti-patterns; design practices that often lead to incoherent ontologies.
+Roussay, et al. identify three categories of anti-pattern: logical, non-logical and guidelines \cite[1]{antipatterns2009}.\par
+Identification of logical anti-patterns is most urgent as a logical inconsistencies guarantee ontology inconsistencies.
+Non-logical anti-patterns concern the erroneous addition of restrictions, relationships or classes.
+Although they do not guarantee an inconsistent ontology, they create more opportunity for ontology inconsistencies to arise by inflating the ontology beyond necessity.
+The guidelines are anti-patterns that one must avoid in order to maintain an efficient and legible ontology.\par
+The maximal detail ontology offers an interesting example of the `OnlynessIsLoneliness' logical anti-pattern \cite[1]{antipatterns2009}.
+The creation of a singleton class in a world with a closed-world assumption contradicts the exact cardinality role restriction placed on owl:Thing:
+\begin{quote}
+  1. Y $\subseteq$ X \\
+  2. R1 $\bigsqcup$ R2 \\
+  3. $\forall$R1.X \\ 
+  4. $\forall$R2.Y // inconsistent from 2\\ 
+\end{quote}
+Class \textit{X} subsumes class \textit{Y}.
+Two roles, \textit{R1} and \textit{R2}, are disjoint from one another.
+\textit{R1} applies universally to class \textit{X} while \textit{R2} applies universally to class \textit{Y}.
+This creates a logical incoherence as \textit{Y} must inherit all roles of \textit{X}.\par
+The next two ontology artefacts aim to simplify the KB.
+Initially by representing the KB without forcing the open-world assumption and then by presenting the most economical version of the KB while retaining the same functionality.
+
+\section{Detailed Open-world Assumption}
+Trying to simulate elements of a closed-world assumption without forcing it on the ontology would not normally be possible.
+However, as stated in §3.1, the \textit{Views} make an unusual case study as the individuals that will populate the ontology are already known by the ontology engineer.
+This allows us to implement a pseudo-closed-world assumption, forbidding the classification of any individual except those that comprise the \textit{Views} (see Appendix B).
+A pseudo-open-world ontology can only be achieved at an expense: this artefact is our largest ontology, totalling three times the size of the final minimum viable product (MVP) ontology.\par
+This open-world ontology utilises TBoxes to stipulate that only the thirty-six \textit{Views} can exist because each individual has its own singleton class that is subsumed by the View\_of\_Mount\_Fuji class (see Figure 3).
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenViews}}\\
+\centerline{\textit{Figure 3}}
+\newline
+Each singleton class has a cardinality restriction of one.
+Additionally each has a functional, reflexive property, hasSpecificIndividual, that stipulates the exact individual that can occupy the class.
+Lastly every \textit{View} class is disjoint from every other class.\par
+As a result of this all of the individuals' attributes, aside from their names, are pushed into ABoxes.\par
+\subsection{Properties}
+\begin{lstlisting}
+Detailed Open-world Properties
+---
+agricultureTheme
+animalsMotif
+boatBackground
+boatForeground
+bodiesOfWaterMotif
+depictsConstruction
+depictsRooftops
+depictsTemple
+hasSpecificIndividual
+hasTwoMountFujis
+horseMotif
+indoorScenes
+maritimeTheme
+mistForeground
+mountFujiBackground
+mountFujiForeground
+notPeopleMotif
+owl:topObjectProperty
+peopleMotif
+rooftopsForeground
+snowCappedMountFuji
+treeForeground
+urbanisationTheme
+wildlifeAndBodiesOfWater
+wildlifeMotif
+wildlifeNotPeople
+\end{lstlisting}
+As many of these properties were previously classes in the previous ontology, the same relationships hold between them: maritimeTheme is still subsumed by bodiesOfWaterMotif, for example.
+Again, as no relationships hold between these individuals, every property is reflexive.\par
+Most of these ABoxes would be more comfortable as TBoxes.
+Some of the properties, such as peopleMotif, apply to the majority of the individuals in the ontology, reducing their descriptiveness.
+The ABox (peopleMotif(Senju Musachi Province, Senju Musachi Province)) is both syntactically and semantically similar to a TBox.
+This extensive use of reflexive properties shall be returned to at the end of this chapter (§3.5).
+\subsection{Reasoner}
+In its current state this ontology is functionally closed.
+Any attempt to add more individuals to a given class results in an inconsistent ontology (see Figure 4).
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenInconsistent}}\\
+\centerline{\textit{Figure 4}}
+\newline
+The reasoner highlights the class restrictions specifying that the class may only contain Bay\_of\_Noboto, along with the assertion that this class is disjoint from all of the other classes.\par
+It is essential that the classes are disjoint from one another.
+If they are not then the reasoner will assume that the two classes are equivalent (see Figure 5,6).
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenOnly}}\\
+\centerline{\textit{Figure 5}}
+\newline
+\centerline{\includegraphics[scale=0.3]{OpenExactly}}\\
+\centerline{\textit{Figure 6}}
+\newline
+There appears to be no difference between specifying that the class can `only' contain one individual or `exactly' one individual.
+The reasoner gives the ontology engineer the benefit of the doubt and tries to figure out how multiple individuals in a singleton class could occur.
+By making the two classes equivalent, it infers that there must be a Bay\_of\_Noboto instance in the Sundai\_Edo class too.
+This flexibility stems from the OWL open-world assumption.
+The reasoner could think that the class can only have one individual, until it becomes apparent that there is another, and then tries to accommodate this relationship \textit{post hoc} by postulating that the singleton classes have merged.\par
+It suggests that the class Bay\_of\_Noboto\_Sundai\_Edo could contain two individuals with discrete cardinality restrictions on each individual, but this is an unexpected result that would not have been highlighted without a reasoner.
+
+\section{Minimum Viable Product}
+The most efficient way to describe the \textit{Views} is to accept that the closed-world assumption is too expensive to be included in the ontology.
+The MVP ontology takes the maximal detail ontology and deflates the ontology without sacrificing the functionality to uniquely identify individuals.\par
+This ontology contains no properties.
+\subsection{Classes}
+\begin{lstlisting}
+MVP Ontology Classes
+---
+Class: Agriculture_Theme
+Class: Animals_Motif
+Class: Boats_Foreground
+Class: Bodies_Of_Water_Motif
+Class: Coloured_Mount_Fuji
+Class: Construction_Motif
+Class: Depicts_Rooftops
+Class: Discoloured_Mount_Fuji
+Class: Horse_Motif
+Class: Maritime_Theme
+Class: Mist_Foreground
+Class: Mount_Fuji_Foreground
+Class: People_Motif
+Class: Rooftops_Foreground
+Class: Snow_Capped_Mount_Fuji
+Class: Temple_Motif
+Class: Tree_Foreground
+Class: Urbanisation_Theme
+Class: Wildlife_AND_Bodies_of_Water
+Class: Wildlife_Motif
+Class: owl:Thing
+\end{lstlisting}
+The classes have been streamlined.
+One of the features that the maximal detail ontology emphasised was the \textit{Views'} depictions of people, or lack thereof.
+There are only seven out of the thirty-six \textit{Views} that do not feature people.\footnote{Hokusai's work is often concerned with articulating mankind's place in nature; a popular theme in nineteenth century art, known as Romanticism.}
+The prevalence of people in the \textit{Views} has been emphasised in the maximal detail ontology with a focus on the few works that lack people.
+It transpires that the MVP ontology retains more or less the same functionality without the same emphasis on depictions of people.\par
+Coloured\_Mount\_Fuji also replaces the Red and Yellow\_Mount\_Fuji classes.
+
+\subsection{Reasoner}
+The MVP still has some areas that could require the attention of the reasoner (see Figure 7).
+\newline
+\centerline{\includegraphics[scale=0.3]{MVPInconsistent}}\\
+\centerline{\textit{Figure 7}}
+\newline
+We can observe the reasoner alerting the engineer that the ontology is now inconsistent as a \textit{View} with a discoloured depiction of Mount Fuji is erroneously placed into the Coloured\_Mount\_Fuji class.\par
+The reasoner highlights a simple example of a logical anti-pattern.
+Cushion\_Pine\_at\_Pine is simultaneously placed into two disjoint TBoxes:
+\begin{quote}
+  1. X $\bigsqcup$ Y \\
+  2. X(a) \textbf{and} Y(a) // inconsistent from 1
+\end{quote}
+This is an example of an `AndIsOr' anti-pattern \cite[1]{antipatterns2009}.
+As \textit{X} and \textit{Y} are disjoint classes, an individual can only ever inhabit \textit{X} \textbf{or} \textit{Y}.
+Simultaneously \textit{a} is being asserted to exist in \textit{X} \textbf{and} \textit{Y}.\par
+
+\section{Assessment}
+\centerline{\includegraphics[scale=0.3]{comparison}}
+\centerline{\textit{Figure 8: An overview of the three ontologies}}
+\hfill \break
+The author believes that the maximal detail provides the most descriptive KB of the \textit{Views}, although others may not agree.
+There is more than an element of curation in deciding which attributes of the \textit{Views} to accentuate in the description.
+Aside from the fact that another may interpret the \textit{Views} in a different way, the ontology's primary function of separating the individuals with T- and ABoxes becomes obfuscated by the editorialised description.
+Even setting aside the aim of ontological parsimony, it is hard to argue that the maximally detailed ontology could be preferable to the MVP ontology.\par
+The detailed open-world ontology succeeds in providing a detailed description of the \textit{Views} despite its modal handicap, however the extravagant lengths it reaches for in order to to achieve this disqualify it from serious consideration.
+Moreover, it falls prey to the same charges of editorialising as the maximal detail ontology: the excessive detail is even more of an issue in this ontology as the open-world ontology artefact is twice the size of the maximal detail ontology artefact.
+The misuse of ABoxes as surrogate TBoxes is also a problem.
+As stated in §3.3.1, the reflexive characteristic is utilised in this ontology to allow terminological predicates to be applied through its properties.
+The results are ABoxes that look syntactically very close, and function almost identically, to TBoxes: `mountFujiForeground(South\_Wind\_Clear\_Sky, South\_Wind\_Clear\_Sky)' is not substantively different from, `Mount\_Fuji\_Foreground(South\_Wind\_Clear\_Sky)'.
+This flouting of convention goes against the OWL standard, even if it is technically possible in an OWL ontology.\par
+
+\chapter{Improving the OWL2 standard}
+\section{Issues Raised by the Case Study}
+The \textit{Views} ontologies have raised some of the potential issues with utilising OWL for an unusual case study, yet none of these issues have proved to be insurmountable barriers.\par
+It is true that the option to implement a closed-world assumption is not offered as a feature of OWL languages but this does not preclude the ontology engineer from simulating a closed-world assumption.
+Additionally, the implementation of a closed-world assumption is not always desirable; the aim of producing one's ontology as economically as possible will often prevent the engineer from including it in their description.
+In this case study there were no issues raised by the MVP ontology.\par
+The OWL standard does not have to change to accommodate a closed-world assumption as it is already possible to describe a closed-world within its framework.
+However, there are means to remedy the labour intensive implementation process.
+Protégé offers support for plugins and it would be relatively straightforward to add functionality to automate the steps taken in §3.2.1.\par
+As evidenced by the detailed open-world ontology's attempt to implement a pseudo-open-world assumption, the role of TBoxes is integral to OWL KBs.
+Although every singleton class is subsumed by owl:Thing there are no additional descriptions or restrictions being inherited by each class.
+Dedicating the entirety of the TBox level to isolating each of the individuals in the ontology wastes half of the tools at the ontology engineer's disposal to build their KB.
+The abuse of reflexive properties in this ontology has also been discussed in §3.5.
+None of the reasoners currently bundled with Protégé can identify poor ontology design.
+While it may prove a challenge to implement, many Integrated Development Environments (IDE) offer intelligent code completion and recommendations to keep developers on track.
+Creating a reasoner with such functionality would allow novice ontology engineers to hone their skills without interfering with the malleability of the OWL standard as a framework.\par
+OWL succeeds in providing a versatile KR system without encroaching on the engineer's ability to describe atypical KBs, although this case study suggests that some features may be lacking from Protégé's extended tool-set.
+Contributors to Protégé ought to consider expanding the functionality of future reasoners and creating new plugins to cover a wide range of use-cases.\par
+
+\section{Simple Perl Parser}
+The Protégé ontology creation tool saves its output to a variety of formats, including Manchester OWL2.
+It provides an intuitive interface through the use of multiple layers of abstraction between the engineer and the ontology artefacts.
+In order to fully understand the OWL2 artefacts themselves a simple parser has been implemented in Perl (see Appendix D).\par
+The main routine of the parser is a loop:
+\begin{lstlisting}
+do {
+	get_ontology();
+	open_file();
+	get_search();
+	print_output();
+} while (1); # loop until user exits
+\end{lstlisting}
+Firstly the get\_ontology() sub-routine asks the user to select which ontology artefact they want to query, and allows the option to exit the loop.
+The open\_file() sub-routine ensures that the artefact is readable and then opens it.
+Next, the get\_search() sub-routine asks the user either to choose from a list of search terms or enter their own query.
+Lastly, the print\_output() uses a while loop to remove white-space and print all lines that match the search term.\par
+This is a very simple parser and as such must be run from the command line.
+It can be run with any version of Perl 5, which is available on Windows and comes bundled with virtually every UNIX and UNIX-like operating system.\footnote{There are also modules available for Perl 6 that allow the execution of Perl 5 code.}\par
+As discussed in §2.2, Manchester OWL strives to be as legible as possible.
+An equivalent parser would have been more complex to implement for XML OWL due to the need to filter the XML tags from the output.
+As we shall see, Manchester OWL still suffers from some legibility issues when a human attempts to reason directly from the ontology.\par
+The implementation of this parser gives a glimpse into the careful consideration required to produce an OWL syntax.
+
+\section{OWL Legibility}
+The release of the OWL2 standard helped to greatly reduce the ambiguity of ontology artefacts.
+Many previously unresolved issues \cite[1]{problems2006} have been corrected in OWL2.\footnote{W3 Organisation: https://www.w3.org/TR/owl2-new-features/ - accessed 08.04.18}\par
+Despite these improvements, legibility remains a key issue for OWL.
+This is a long-standing concern that existed well before OWL's inception:
+\begin{quote}
+  Moreover, we need to know more about what people find easy or hard to handle... In normal commonsense situations, when reading a geography book, for instance, the ability to handle dis-junctions (say) seems to be quite limited. \cite[89]{expressiveness1987}
+\end{quote}
+Research suggests that even specialists find ontology artefacts excessively hard to reason from \cite[551]{usability2014}.\par
+It had previously been established that naive reasoners - those without a firm grasp of logical rules - have to rely on some form of mental modelling to make an inference, with inclusive dis-junction proving particularly challenging to envision \cite[552]{usability2014}.
+Yet this study also suggests that even those with a specialist background in DL struggle (in terms of accuracy and time-taken) to make inferences from Manchester OWL \cite[562]{usability2014}.\par
+While it is clear that OWL designers ought to facilitate human legibility, this does not indicate any defects in the OWL standard itself.
+It is true that Manchester OWL seeks to provide better legibility but this does not mean it purports to have perfected it.
+When we get down to brass tacks, legibility is a quality of life issue related to the implementation of the OWL standard as opposed to the standard itself.\par
+Even when evaluated solely in terms of implementation, Manchester OWL does not fall at this hurdle.
+While an individual may struggle to parse some inferences quickly and correctly on first glance, in most DL use-cases they will have time for consideration and evaluation.\par
+The field of ontology engineering is a multifaceted enterprise.
+Just by considering OWL in isolation the interests of the standard designers, language designers, software developers, ontology engineers and wider stakeholders begin to come into focus.
+Legibility is both a surmountable problem and one which manifests itself in the less fundamental strata of this ecosystem.
+It may be that legibility issues cannot be fixed without fundamental reformulations of the standard.
+In such a scenario the cure may be worse than the disease.
+
+\section{The Tripartite Structure of an OWL Ontology}
+The production of a successful OWL ontology relies on the cooperation of three groups: logicians, software developers and ontology engineers.\par
+Logicians need to design both the standard and languages.
+Developers need to implement software that can interact with OWL in its abstract form and parse this abstract form to produce a serialised ontology in a given OWL language. 
+Engineers use the tools provided by the developers to produce ontologies for stakeholders.
+As touched upon in the previous section, there is a delicate balance to be struck between these parties.\par
+The role of W3 as a forum to coordinate the development and use of OWL is invaluable.
+Information has to be readily accessible to everyone.
+The documentation on their website is carefully grouped into three sections: for users, core specification and specification.\footnote{W3 Documentation: http://www.w3.org/TR/2012/REC-owl2-overview-20121211/\#Documentation\_Roadmap - accessed 10.04.18}
+Core specification documents describe the standard itself, specification documents describe the implementation of OWL and the users documents describe utilising OWL to build ontologies.
+These categories roughly match the distinction between logicians, developers and engineers respectively.\par
+The production of an ontology editor like Protégé requires an in-depth understanding of the OWL ecosystem.
+Use of open-source licensing has allowed the project to pull in a wide variety of contributors with different expertise.
+The source code is hosted and published on GitHub, allowing for easy access and version control.\footnote{GitHub: https://github.com/protegeproject/protege - accessed 10.04.18}
+The license itself, BSD 2-Clause, is very permissive and allows ``redistribution and use in source and binary forms, with or without modification,'' provided that the original licence is bundled with any distribution.\footnote{GitHub: https://github.com/protegeproject/protege/blob/master/license.txt - accessed 10.04.18}
+The ready availability and re-distribution of the source code has allowed developers to create their own plugins for Protégé to augment existing, or add new, functionality.
+As discussed in §4.1, plugins can offer a partial solution to challenging case studies that require unusual or unwieldy ontologies.\par
+The practical issues that arise in the implementation of OWL reflect some of the challenges that arose during the infancy of DL.
+Just as the generality of inquiry had to be abstracted into a specific domain of interest to allow for efficient reasoning - an approach described as ``relaxing the standards of correctness'' \cite[81]{expressiveness1987} - a similar leap of abstraction has to occur between the standard and its implementation.
+The core functionality of Protégé is related to the underlying OWL standard but only superficially.
+It is the job of reasoners to connect the dots and enforce the standard onto a given ontology.
+This poses a problem as each reasoner has a different implementation and will abstract from the standard in a unique way.\par
+Let's briefly consider the Pellet and FaCT++ reasoners.
+While FaCT++ lacks support for key constraints and some data-types,\footnote{University of Manchester: http://owl.cs.manchester.ac.uk/tools/fact/ - accessed 10.04.18} Pellet seeks to implement complete OWL expressivity.\footnote{SemanticWeb Wiki: http://semanticweb.org/wiki/Pellet - accessed 10.04.18}
+This disparity could lead the same ontology to be judged to have two different coherence evaluations depending on what reasoner is used.
+In this case the standards of correctness are entirely dependent on implementation.
+In the long term a standardised reasoner implementation could help to clear up this ambiguity.
+
+\chapter{Conclusion}
+The \textit{Thirty-six Views of Mount Fuji} series posed a challenge to OWL.
+This article has covered issues of plugin availability, ontology engineer editorialising, the enforcement of proper OWL procedure, syntax concerns and reasoner standardisation.
+These are important issues for the wider OWL ecosystem but most of them are manifested at the software implementation stage.
+As Protégé is the only ontology editor for OWL the recommendations in this article are addressed to the Protégé core team.\par
+The enforcement of proper OWL practice and reasoner standardisation are the most pressing recommendations.
+While plugin availability is also important, the Protégé team are already encouraging community development through supporting plugins as a feature, their use of a permissive licence and hosting the source files for the application publicly on GitHub.
+More plugins can lead to quality of life improvements when dealing with cases like the maximal detail ontology but they are not necessary for this ontology.\par
+Reasoners on Protégé could do much more to guide ontology engineers to use good OWL practices.
+In particular the open-world ontology flouts conventional OWL practice egregiously in its use of ABoxes as surrogate TBoxes and this ought to have led to a warning from the reasoner.
+Moreover, reasoners could be designed to recognise potential anti-patterns and make suggestions to engineers as to how to avoid them.
+There is an argument to be made that the reasoner could end up nagging engineers who are constructing atypical ontologies but this would be easily remedied by offering engineers the chance to toggle the best-practice suggestions.\par
+Lastly, the inconsistent implementation of the OWL standard between different reasoners is very problematic.
+Semi-arbitrary application of the standard onto ontologies weakens the connection between the ontology and the underlying description logics.
+Reasoners are complex pieces of software but facilitating wider adoption of OWL technologies requires a standardisation of software implementation.
+It could be that the Pellet reasoner is considered to be the de facto standard implementation, as it is given precedence in the documentation\footnote{Protégé Wiki: https://protegewiki.stanford.edu/wiki/Using\_Reasoners/ - accessed 11.04.18} but this is not made clear.\par
+OWL technologies are still in their infancy but an increased focus on consistent software implementation could pay dividends as their use becomes more widespread. 
+
+\begin{thebibliography}{99}
+
+\bibitem[Baader, 2003]{handbook2003}
+  Baader, F. et al.: 
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  2003.
+
+\bibitem[Baader, Kusters \& Wolter, 2003]{handbookExtensions2003}
+  Baader, F., Kusters, R., Wolter, F. \textit{in} Baader, F et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 226-269,
+  2003.
+
+\bibitem[Baader \& Nutt, 2003]{basicDL2003}
+  Baader, F., Nutt, W. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 47-95,
+  2003.
+
+\bibitem[Bordiga \& Brachman, 2003]{handbookConceptual2003}
+  Bordiga, A., Brachman, R. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 359-381,
+  2003.
+  
+\bibitem[Brachman \& Levesque, 1984]{frame-based1984}
+  Brachman, R., Levesque, H.:
+  \textit{The Tractability of Subsumption in Frame-Based Description Languages},
+  AAAI-84 Proceedings,
+  1984.
+
+\bibitem[Calvanese \& De Giacomo, 2003]{handbookExpressiveDL2003}
+  Calvanese, D., De Giacomo, G. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 184-222,
+  2003.
+
+\bibitem[Donini, 2003]{donini2003}
+  Donini, F. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 101-138,
+  2003.
+
+\bibitem[Falquet, G. et al., 2011]{urban2011}
+  Falquet, G., et al.:
+  \textit{Ontologies in Urban Development Projects},
+  Advanced Information and Knowledge Processing 1,
+  Springer-Verlag,
+  2011.
+
+\bibitem[Horridge, 2011]{guide2011}
+  Horridge, M.: 
+  \textit{A Practical Guide to Building OWL Ontologies},
+  1st Edition,
+  University of Manchester, 2011.
+
+\bibitem[Horrocks, 2003]{handbookImplementation2003}
+  Horrocks, I. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 313-357,
+  2003.
+
+\bibitem[Krötzsch, Simancik \& Horrocks, 2012]{primer2012}
+  Krötzsch, M., Simancik, F., Horrocks, I.: 
+  \textit{A Description Logic Primer},
+  Computing Research Repository abs/1201.4089,
+  2012.
+
+\bibitem[Levesque \& Brachman, 1987]{expressiveness1987}
+  Levesque, H., Brachman, R.:
+  \textit{Expressiveness and tractibility in knowledge representation and reasoning},
+  Journal of Computing Intelligence,
+  pp.78-92,
+  1987.
+
+\bibitem[MacGuinness \& Patel-Schneider, 2003]{handbookKRS2003}
+  MacGuinness, D., Patel-Schneider, P. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 271-287,
+  2003.
+
+\bibitem[Moller \& Haarslev, 2003]{handbookDLS2003}
+  Moller, R., Haarslev, V. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 289-310,
+  2003.
+
+\bibitem[Motik \& Horrocks, 2006]{problems2006}
+  Motik, B., Horrocks, I.:
+  \textit{Problems with OWL Syntax},
+  University of Manchester,
+  2006.
+
+\bibitem[Nardi \& Brachman, 2003]{handbookIntro2003}
+  Nardi, D., Brachman, R. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 5-45,
+  2003.
+
+\bibitem[Roussey, Corcho \& Blázquez, 2009]{antipatterns2009}
+  Roussey, C., Corcho, O, Blázquez, L.M.V.: 
+  \textit{A Catalogue of OWL Ontology AntiPatterns},
+  K-CAP '09 Proceedings of the fifth international conference on Knowledge capture,
+  ACM New York,
+  pp.205-206,
+  2009.
+
+\bibitem[Roussey, et al., 2011]{introduction2011}
+  Roussey, C., Pinet, F., Kang, M.A., Corcho, O. \textit{in} Falquet, G. et al.:
+  \textit{Ontologies in Urban Development Projects},
+  Advanced Information and Knowledge Processing 1,
+  Springer-Verlag,
+  pp. 9-38,
+  2011.
+
+\bibitem[Sattler, Calvanese \& Molitor, 2003]{handbookOtherFormalisms2003}
+  Sattler, U. D. Calvanese, Molitor, R. \textit{in} Baader, F. et al.:
+  \textit{The Description Logic Handbook: Theory, Implementation and Applications},
+  1st Edition,
+  Cambridge University Press New York,
+  pp. 142-166,
+  2003.
+
+\bibitem[Schlobach, Huang, Cornet \& van Harmelen, 2007]{incoherent2007} 
+  Schlobach, S., Huang, Z., Cornet, R., van Harmelen, F.: 
+  \textit{Debugging Incoherent Terminologies},
+  Journal of Automated Reasoning,
+  Springer,
+  2007.
+
+\bibitem[Warren et al., 2014]{usability2014}
+  Warren P., Mulholland P., Collins T., Motta E.:
+  \textit{The Usability of Description Logics},
+  The Semantic Web: Trends and Challenges,
+  Springer,
+  2014.
+
+\end{thebibliography}
+
+\begin{appendices}
+\chapter{Maximally descriptive ontology (Closed-world)}
+\begin{lstlisting}
+Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: owl:rational
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: containsSpecificIndividuals
+
+    Annotations: 
+        rdfs:comment "Reflexive as the set is related to the Thirty-six views by containing specific members. Functional as there is only one (reflexive) value that can satisfy stipulation."@en
+    
+    Characteristics: 
+        Functional,
+        Reflexive
+    
+    
+ObjectProperty: hasTwoMountFujis
+
+    
+ObjectProperty: indoorScene
+
+    
+ObjectProperty: owl:topObjectProperty
+
+    Annotations: 
+        rdfs:comment "All object properties in this ontology are reflexive as they relate the individual to themselves."@en
+    
+    Characteristics: 
+        Reflexive
+    
+    
+DataProperty: owl:topDataProperty
+
+    
+Class: Agriculture_Theme
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Animals_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Boats_Foreground
+
+    SubClassOf: 
+        Maritime_Theme
+    
+    
+Class: Bodies_Of_Water_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Construction_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Depicts_Rooftops
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Discoloured_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Red_Mount_Fuji, Yellow_Mount_Fuji
+    
+    
+Class: Horse_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+    
+Class: Maritime_Theme
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+    
+    
+Class: Mist_Foreground
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Mount_Fuji_Foreground
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: NOT_People
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        People_Motif
+    
+    
+Class: People_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        NOT_People, Wildlife_NOT_People
+    
+    
+Class: Red_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Discoloured_Mount_Fuji, Yellow_Mount_Fuji
+    
+    
+Class: Rooftops_Foreground
+
+    SubClassOf: 
+        Depicts_Rooftops
+    
+    
+Class: Snow_Capped_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Temple_Motif
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Tree_Foreground
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: Urbanisation_Theme
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    
+Class: View_of_Mount_Fuji
+
+    Annotations: 
+        rdfs:comment "Group Axioms guideline: all restrictions for a class should be in a single restriction. While owl:Thing and View_of_Mount_Fuji contain the same members they are functionally different in terms of what they restrict. In this case it is more informative to have two separate classes despite this being less parsimonious."@en
+    
+    EquivalentTo: 
+        owl:Thing
+    
+    SubClassOf: 
+        owl:Thing,
+        containsSpecificIndividuals exactly 1 ({A_View_of_Mount_Fuji_Across_Lake_Suwa , A_sketch_of_the_Mitsui_shop , Asakusa_Hongan-ji_temple , Barrier_Town_on_the_Sumida_River , Bay_of_Noboto , Cushion_Pine_at_Aoyama , Ejiri_in_Suruga_Province , Enoshima_in_Sagami_Province , Fuji_View_Field_in_Owari_Province , Hodogaya_on_the_Tokaido , Inume_Pass_Koshu , Kajikazawa_in_Kai_Province , Mishima_Pass_in_Kai_Province , Mount_Fuji_from_the_mountains_of_Totomi , Mount_Fuji_reflects_in_Lake_Kawaguchi , Nihonbashi_bridge_in_Edo , Rainstorm_Beneath_the_Summit , Sazai_hall_-_Temple_of_Five_Hundred_Rakan , Senju_Musashi_Province , Shichiri_beach_in_Sagami_Province , Shimomeguro , Shore_of_Tago_Bay_Ejiri_at_Tokaido , South_Wind_Clear_Sky , Sundai_Edo , Sunset_across_the_Ryogoku_bridge , Tama_River_in_Musashi_Province , Tea_house_at_Koishikawa , The_Great_Wave_off_Kanagawa , The_Kazusa_Province_sea_route , The_lake_of_Hakone_in_Sagami_Province , Tsukuda_Island_in_Musashi_Province , Umezawa_in_Sagami_Province , Under_Mannen_Bridge_at_Fukagawa , Ushibori_in_Hitachi_Province , Watermill_at_Onden , Yoshida_at_Tokaido})
+    
+    
+Class: Wildlife_AND_Bodies_of_Water
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Bodies_Of_Water_Motif
+         and Wildlife_Motif
+    
+    
+Class: Wildlife_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+    
+Class: Wildlife_NOT_People
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        Wildlife_Motif
+    
+    DisjointWith: 
+        People_Motif
+    
+    
+Class: Yellow_Mount_Fuji
+
+    SubClassOf: 
+        View_of_Mount_Fuji
+    
+    DisjointWith: 
+        Discoloured_Mount_Fuji, Red_Mount_Fuji
+    
+    
+Class: owl:Thing
+
+    Annotations: 
+        rdfs:comment "Closed-world assumption: Only 36 things can exist in this ontology."@en
+    
+    EquivalentTo: 
+        View_of_Mount_Fuji
+    
+    SubClassOf: 
+        owl:topDataProperty exactly 36 owl:rational
+    
+    
+Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        NOT_People,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        View_of_Mount_Fuji
+    
+    
+Individual: A_sketch_of_the_Mitsui_shop
+
+    Types: 
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Asakusa_Hongan-ji_temple
+
+    Types: 
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Temple_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Barrier_Town_on_the_Sumida_River
+
+    Types: 
+        Animals_Motif,
+        Depicts_Rooftops,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Bay_of_Noboto
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Cushion_Pine_at_Aoyama
+
+    Types: 
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Ejiri_in_Suruga_Province
+
+    Types: 
+        Agriculture_Theme,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Tree_Foreground,
+        View_of_Mount_Fuji
+    
+    
+Individual: Enoshima_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Fuji_View_Field_in_Owari_Province
+
+    Types: 
+        Agriculture_Theme,
+        Construction_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Hodogaya_on_the_Tokaido
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        View_of_Mount_Fuji
+    
+    
+Individual: Inume_Pass_Koshu
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        Mist_Foreground,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Kajikazawa_in_Kai_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Mishima_Pass_in_Kai_Province
+
+    Types: 
+        People_Motif,
+        Tree_Foreground,
+        View_of_Mount_Fuji
+    
+    
+Individual: Mount_Fuji_from_the_mountains_of_Totomi
+
+    Types: 
+        Construction_Motif,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        NOT_People,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji,
+        Yellow_Mount_Fuji
+    
+    Facts:  
+     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi
+    
+    
+Individual: Nihonbashi_bridge_in_Edo
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Rainstorm_Beneath_the_Summit
+
+    Types: 
+        Mount_Fuji_Foreground,
+        NOT_People,
+        Red_Mount_Fuji,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Temple_Motif,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Senju_Musashi_Province
+
+    Types: 
+        Agriculture_Theme,
+        Animals_Motif,
+        Discoloured_Mount_Fuji,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Shichiri_beach_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        NOT_People,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Shimomeguro
+
+    Types: 
+        Mist_Foreground,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: South_Wind_Clear_Sky
+
+    Types: 
+        Mount_Fuji_Foreground,
+        NOT_People,
+        Red_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Sundai_Edo
+
+    Types: 
+        Agriculture_Theme,
+        Depicts_Rooftops,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Sunset_across_the_Ryogoku_bridge
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Tama_River_in_Musashi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Tree_Foreground,
+        View_of_Mount_Fuji
+    
+    
+Individual: Tea_house_at_Koishikawa
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif
+    
+    
+Individual: The_Great_Wave_off_Kanagawa
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: The_Kazusa_Province_sea_route
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        NOT_People,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: The_lake_of_Hakone_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mist_Foreground,
+        NOT_People,
+        View_of_Mount_Fuji
+    
+    
+Individual: Tsukuda_Island_in_Musashi_Province
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        View_of_Mount_Fuji
+    
+    
+Individual: Umezawa_in_Sagami_Province
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        Mist_Foreground,
+        View_of_Mount_Fuji,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif,
+        Wildlife_NOT_People
+    
+    
+Individual: Under_Mannen_Bridge_at_Fukagawa
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Discoloured_Mount_Fuji,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        View_of_Mount_Fuji
+    
+    
+Individual: Ushibori_in_Hitachi_Province
+
+    Types: 
+        Animals_Motif,
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji,
+        Wildlife_Motif
+    
+    
+Individual: Watermill_at_Onden
+
+    Types: 
+        Agriculture_Theme,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    
+Individual: Yoshida_at_Tokaido
+
+    Types: 
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     indoorScene  Yoshida_at_Tokaido
+\end{lstlisting}
+
+\chapter{Detailed Open-world Formulation}
+\begin{lstlisting}
+Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: owl:rational
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: agricultureTheme
+
+    
+ObjectProperty: animalsMotif
+
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    
+ObjectProperty: boatBackground
+
+    SubPropertyOf: 
+        maritimeTheme
+    
+    
+ObjectProperty: boatForeground
+
+    SubPropertyOf: 
+        maritimeTheme
+    
+    
+ObjectProperty: bodiesOfWaterMotif
+
+    
+ObjectProperty: depictsConstruction
+
+    
+ObjectProperty: depictsRooftops
+
+    
+ObjectProperty: depictsTemple
+
+    
+ObjectProperty: hasSpecificIndividual
+
+    Annotations: 
+        rdfs:comment "Reflexive: Each individual is related to its class by being the only instance. Functional: Only one individual can satisfy this property."@en
+    
+    Characteristics: 
+        Functional,
+        Reflexive
+    
+    
+ObjectProperty: hasTwoMountFujis
+
+    
+ObjectProperty: horseMotif
+
+    SubPropertyOf: 
+        animalsMotif
+    
+    
+ObjectProperty: indoorScenes
+
+    
+ObjectProperty: maritimeTheme
+
+    SubPropertyOf: 
+        bodiesOfWaterMotif
+    
+    
+ObjectProperty: mistForeground
+
+    
+ObjectProperty: mountFujiBackground
+
+    DisjointWith: 
+        mountFujiForeground
+    
+    
+ObjectProperty: mountFujiForeground
+
+    DisjointWith: 
+        mountFujiBackground
+    
+    
+ObjectProperty: notPeopleMotif
+
+    InverseOf: 
+        peopleMotif
+    
+    
+ObjectProperty: owl:topObjectProperty
+
+    Annotations: 
+        rdfs:comment "All object properties in this ontology are reflexive as they relate individuals to themselves."@en
+    
+    Characteristics: 
+        Reflexive
+
+    
+ObjectProperty: peopleMotif
+
+    DisjointWith: 
+        wildlifeNotPeople
+    
+    InverseOf: 
+        notPeopleMotif
+    
+    
+ObjectProperty: rooftopsForeground
+
+    SubPropertyOf: 
+        depictsRooftops
+    
+    
+ObjectProperty: snowCappedMountFuji
+
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    
+ObjectProperty: treeForeground
+
+    
+ObjectProperty: urbanisationTheme
+
+    
+ObjectProperty: wildlifeAndBodiesOfWater
+
+    SubPropertyOf: 
+        wildlifeMotif
+    
+    
+ObjectProperty: wildlifeMotif
+
+    SubPropertyOf: 
+        animalsMotif
+    
+    
+ObjectProperty: wildlifeNotPeople
+
+    SubPropertyOf: 
+        wildlifeMotif
+    
+    DisjointWith: 
+        peopleMotif
+    
+    
+DataProperty: owl:topDataProperty
+
+    
+Class: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({A_View_of_Mount_Fuji_Across_Lake_Suwa}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: A_sketch_of_the_Mitsui_shop
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({A_sketch_of_the_Mitsui_shop}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Asakusa_Hongan-ji_temple
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Asakusa_Hongan-ji_temple}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Barrier_Town_on_the_Sumida_River
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Barrier_Town_on_the_Sumida_River}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Bay_of_Noboto
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Bay_of_Noboto}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Cushion_Pine_at_Aoyama
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Cushion_Pine_at_Aoyama}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Ejiri_in_Suruga_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Ejiri_in_Suruga_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Enoshima_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Enoshima_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Fuji_View_Field_in_Owari_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Fuji_View_Field_in_Owari_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Hodogaya_on_the_Tokaido
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Hodogaya_on_the_Tokaido}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Inume_Pass_Koshu
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Inume_Pass_Koshu}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Kajikazawa_in_Kai_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Kajikazawa_in_Kai_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Mishima_Pass_in_Kai_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Mishima_Pass_in_Kai_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Mount_Fuji_from_the_mountains_of_Totomi
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Mount_Fuji_from_the_mountains_of_Totomi}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Mount_Fuji_reflects_in_Lake_Kawaguchi
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Mount_Fuji_reflects_in_Lake_Kawaguchi}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Nihonbashi_bridge_in_Edo
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Nihonbashi_bridge_in_Edo}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Rainstorm_Beneath_the_Summit
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Rainstorm_Beneath_the_Summit}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Sazai_hall_Temple_of_Five_Hundred_Raken
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Sazai_hall_-_Temple_of_Five_Hundred_Rakan}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Senju_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Senju_Musashi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Shichiri_beach_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Shichiri_beach_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Shimomeguro
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Shimomeguro}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Shore_of_Tago_Bay_Ejiri_at_Tokaido
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Shore_of_Tago_Bay_Ejiri_at_Tokaido}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: South_Wind_Clear_Sky
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({South_Wind_Clear_Sky}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Sundai_Edo
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Sundai_Edo}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Sunset_across_the_Ryogoku_bridge
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Sunset_across_the_Ryogoku_bridge}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Tama_River_in_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Tama_River_in_Musashi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Tea_house_at_Koishikawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Tea_house_at_Koishikawa}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: The_Great_Wave_off_Kanagawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({The_Great_Wave_off_Kanagawa}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: The_Kazusa_Province_sea_route
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({The_Kazusa_Province_sea_route}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: The_lake_of_Hakone_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({The_lake_of_Hakone_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Tsukuda_Island_in_Musashi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Tsukuda_Island_in_Musashi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Umezawa_in_Sagami_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Umezawa_in_Sagami_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Under_Mannen_Bridge_at_Fukagawa
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Under_Mannen_Bridge_at_Fukagawa}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Ushibori_in_Hitachi_Province
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Ushibori_in_Hitachi_Province}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: View_of_Mount_Fuji
+
+    SubClassOf: 
+        owl:Thing
+    
+    
+Class: Watermill_at_Onden
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Watermill_at_Onden}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: Yoshida_at_Tokaido
+
+    SubClassOf: 
+        View_of_Mount_Fuji,
+        hasSpecificIndividual only ({Yoshida_at_Tokaido}),
+        owl:topDataProperty exactly 1 owl:rational
+    
+    
+Class: owl:Thing
+
+    Annotations: 
+        rdfs:comment "Built with Open-World Assumption as OWL was designed"@en
+    
+    
+Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    Types: 
+        A_View_of_Mount_Fuji_Across_Lake_Suwa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     maritimeTheme  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     mountFujiBackground  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     notPeopleMotif  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     snowCappedMountFuji  A_View_of_Mount_Fuji_Across_Lake_Suwa,
+     treeForeground  A_View_of_Mount_Fuji_Across_Lake_Suwa
+    
+    
+Individual: A_sketch_of_the_Mitsui_shop
+
+    Types: 
+        A_sketch_of_the_Mitsui_shop,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiBackground  A_sketch_of_the_Mitsui_shop,
+     peopleMotif  A_sketch_of_the_Mitsui_shop,
+     rooftopsForeground  A_sketch_of_the_Mitsui_shop,
+     snowCappedMountFuji  A_sketch_of_the_Mitsui_shop,
+     urbanisationTheme  A_sketch_of_the_Mitsui_shop
+    
+    
+Individual: Asakusa_Hongan-ji_temple
+
+    Types: 
+        Asakusa_Hongan-ji_temple,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     depictsTemple  Asakusa_Hongan-ji_temple,
+     mountFujiBackground  Asakusa_Hongan-ji_temple,
+     peopleMotif  Asakusa_Hongan-ji_temple,
+     rooftopsForeground  Asakusa_Hongan-ji_temple,
+     snowCappedMountFuji  Asakusa_Hongan-ji_temple,
+     urbanisationTheme  Asakusa_Hongan-ji_temple
+    
+    
+Individual: Barrier_Town_on_the_Sumida_River
+
+    Types: 
+        Barrier_Town_on_the_Sumida_River,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Barrier_Town_on_the_Sumida_River,
+     horseMotif  Barrier_Town_on_the_Sumida_River,
+     mountFujiBackground  Barrier_Town_on_the_Sumida_River,
+     peopleMotif  Barrier_Town_on_the_Sumida_River,
+     rooftopsForeground  Barrier_Town_on_the_Sumida_River,
+     snowCappedMountFuji  Barrier_Town_on_the_Sumida_River
+    
+    
+Individual: Bay_of_Noboto
+
+    Types: 
+        Bay_of_Noboto,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Bay_of_Noboto,
+     bodiesOfWaterMotif  Bay_of_Noboto,
+     maritimeTheme  Bay_of_Noboto,
+     mountFujiBackground  Bay_of_Noboto,
+     peopleMotif  Bay_of_Noboto
+    
+    
+Individual: Cushion_Pine_at_Aoyama
+
+    Types: 
+        Cushion_Pine_at_Aoyama,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     depictsRooftops  Cushion_Pine_at_Aoyama,
+     mountFujiBackground  Cushion_Pine_at_Aoyama,
+     peopleMotif  Cushion_Pine_at_Aoyama
+    
+    
+Individual: Ejiri_in_Suruga_Province
+
+    Types: 
+        Ejiri_in_Suruga_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Ejiri_in_Suruga_Province,
+     mountFujiBackground  Ejiri_in_Suruga_Province,
+     peopleMotif  Ejiri_in_Suruga_Province,
+     treeForeground  Ejiri_in_Suruga_Province
+    
+    
+Individual: Enoshima_in_Sagami_Province
+
+    Types: 
+        Enoshima_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Enoshima_in_Sagami_Province,
+     bodiesOfWaterMotif  Enoshima_in_Sagami_Province,
+     maritimeTheme  Enoshima_in_Sagami_Province,
+     mountFujiBackground  Enoshima_in_Sagami_Province,
+     peopleMotif  Enoshima_in_Sagami_Province,
+     snowCappedMountFuji  Enoshima_in_Sagami_Province
+    
+    
+Individual: Fuji_View_Field_in_Owari_Province
+
+    Types: 
+        Fuji_View_Field_in_Owari_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Fuji_View_Field_in_Owari_Province,
+     depictsConstruction  Fuji_View_Field_in_Owari_Province,
+     mountFujiBackground  Fuji_View_Field_in_Owari_Province,
+     peopleMotif  Fuji_View_Field_in_Owari_Province,
+     snowCappedMountFuji  Fuji_View_Field_in_Owari_Province
+    
+    
+Individual: Hodogaya_on_the_Tokaido
+
+    Types: 
+        Hodogaya_on_the_Tokaido,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Hodogaya_on_the_Tokaido,
+     horseMotif  Hodogaya_on_the_Tokaido,
+     mountFujiBackground  Hodogaya_on_the_Tokaido,
+     peopleMotif  Hodogaya_on_the_Tokaido,
+     snowCappedMountFuji  Hodogaya_on_the_Tokaido
+    
+    
+Individual: Inume_Pass_Koshu
+
+    Types: 
+        Inume_Pass_Koshu,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Inume_Pass_Koshu,
+     horseMotif  Inume_Pass_Koshu,
+     mountFujiBackground  Inume_Pass_Koshu,
+     peopleMotif  Inume_Pass_Koshu,
+     snowCappedMountFuji  Inume_Pass_Koshu
+    
+    
+Individual: Kajikazawa_in_Kai_Province
+
+    Types: 
+        Kajikazawa_in_Kai_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  Kajikazawa_in_Kai_Province,
+     mountFujiBackground  Kajikazawa_in_Kai_Province,
+     peopleMotif  Kajikazawa_in_Kai_Province
+    
+    
+Individual: Mishima_Pass_in_Kai_Province
+
+    Types: 
+        Mishima_Pass_in_Kai_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiBackground  Mishima_Pass_in_Kai_Province,
+     peopleMotif  Mishima_Pass_in_Kai_Province,
+     treeForeground  Mishima_Pass_in_Kai_Province
+    
+    
+Individual: Mount_Fuji_from_the_mountains_of_Totomi
+
+    Types: 
+        Mount_Fuji_from_the_mountains_of_Totomi,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     depictsConstruction  Mount_Fuji_from_the_mountains_of_Totomi,
+     mountFujiBackground  Mount_Fuji_from_the_mountains_of_Totomi,
+     peopleMotif  Mount_Fuji_from_the_mountains_of_Totomi,
+     snowCappedMountFuji  Mount_Fuji_from_the_mountains_of_Totomi
+    
+    
+Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
+
+    Types: 
+        Mount_Fuji_reflects_in_Lake_Kawaguchi,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Mount_Fuji_reflects_in_Lake_Kawaguchi,
+     bodiesOfWaterMotif  Mount_Fuji_reflects_in_Lake_Kawaguchi,
+     hasTwoMountFujis  Mount_Fuji_reflects_in_Lake_Kawaguchi,
+     maritimeTheme  Mount_Fuji_reflects_in_Lake_Kawaguchi,
+     mountFujiBackground  Mount_Fuji_reflects_in_Lake_Kawaguchi,
+     notPeopleMotif  Mount_Fuji_reflects_in_Lake_Kawaguchi,
+     snowCappedMountFuji  Mount_Fuji_reflects_in_Lake_Kawaguchi
+    
+    
+Individual: Nihonbashi_bridge_in_Edo
+
+    Types: 
+        Nihonbashi_bridge_in_Edo,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Nihonbashi_bridge_in_Edo,
+     boatForeground  Nihonbashi_bridge_in_Edo,
+     bodiesOfWaterMotif  Nihonbashi_bridge_in_Edo,
+     maritimeTheme  Nihonbashi_bridge_in_Edo,
+     mountFujiBackground  Nihonbashi_bridge_in_Edo,
+     peopleMotif  Nihonbashi_bridge_in_Edo,
+     rooftopsForeground  Nihonbashi_bridge_in_Edo,
+     snowCappedMountFuji  Nihonbashi_bridge_in_Edo,
+     urbanisationTheme  Nihonbashi_bridge_in_Edo
+    
+    
+Individual: Rainstorm_Beneath_the_Summit
+
+    Types: 
+        Rainstorm_Beneath_the_Summit,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiForeground  Rainstorm_Beneath_the_Summit,
+     notPeopleMotif  Rainstorm_Beneath_the_Summit,
+     snowCappedMountFuji  Rainstorm_Beneath_the_Summit
+    
+    
+Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+
+    Types: 
+        Sazai_hall_Temple_of_Five_Hundred_Raken,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     depictsTemple  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     mountFujiBackground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     peopleMotif  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     rooftopsForeground  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     snowCappedMountFuji  Sazai_hall_-_Temple_of_Five_Hundred_Rakan,
+     urbanisationTheme  Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+    
+    
+Individual: Senju_Musashi_Province
+
+    Types: 
+        Senju_Musashi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Senju_Musashi_Province,
+     animalsMotif  Senju_Musashi_Province,
+     horseMotif  Senju_Musashi_Province,
+     mountFujiBackground  Senju_Musashi_Province,
+     peopleMotif  Senju_Musashi_Province,
+     snowCappedMountFuji  Senju_Musashi_Province
+    
+    
+Individual: Shichiri_beach_in_Sagami_Province
+
+    Types: 
+        Shichiri_beach_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  Shichiri_beach_in_Sagami_Province,
+     mountFujiBackground  Shichiri_beach_in_Sagami_Province,
+     notPeopleMotif  Shichiri_beach_in_Sagami_Province,
+     snowCappedMountFuji  Shichiri_beach_in_Sagami_Province
+    
+    
+Individual: Shimomeguro
+
+    Types: 
+        Shimomeguro,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mistForeground  Shimomeguro,
+     mountFujiBackground  Shimomeguro,
+     peopleMotif  Shimomeguro,
+     snowCappedMountFuji  Shimomeguro
+    
+    
+Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
+
+    Types: 
+        Shore_of_Tago_Bay_Ejiri_at_Tokaido,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Shore_of_Tago_Bay_Ejiri_at_Tokaido,
+     bodiesOfWaterMotif  Shore_of_Tago_Bay_Ejiri_at_Tokaido,
+     maritimeTheme  Shore_of_Tago_Bay_Ejiri_at_Tokaido,
+     mountFujiForeground  Shore_of_Tago_Bay_Ejiri_at_Tokaido,
+     peopleMotif  Shore_of_Tago_Bay_Ejiri_at_Tokaido,
+     snowCappedMountFuji  Shore_of_Tago_Bay_Ejiri_at_Tokaido
+    
+    
+Individual: South_Wind_Clear_Sky
+
+    Types: 
+        South_Wind_Clear_Sky,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     mountFujiForeground  South_Wind_Clear_Sky,
+     notPeopleMotif  South_Wind_Clear_Sky
+    
+    
+Individual: Sundai_Edo
+
+    Types: 
+        Sundai_Edo,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     agricultureTheme  Sundai_Edo,
+     depictsRooftops  Sundai_Edo,
+     mountFujiBackground  Sundai_Edo,
+     peopleMotif  Sundai_Edo,
+     snowCappedMountFuji  Sundai_Edo,
+     treeForeground  Sundai_Edo,
+     urbanisationTheme  Sundai_Edo
+    
+    
+Individual: Sunset_across_the_Ryogoku_bridge
+
+    Types: 
+        Sunset_across_the_Ryogoku_bridge,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Sunset_across_the_Ryogoku_bridge,
+     bodiesOfWaterMotif  Sunset_across_the_Ryogoku_bridge,
+     maritimeTheme  Sunset_across_the_Ryogoku_bridge,
+     mountFujiBackground  Sunset_across_the_Ryogoku_bridge,
+     peopleMotif  Sunset_across_the_Ryogoku_bridge
+    
+    
+Individual: Tama_River_in_Musashi_Province
+
+    Types: 
+        Tama_River_in_Musashi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatBackground  Tama_River_in_Musashi_Province,
+     bodiesOfWaterMotif  Tama_River_in_Musashi_Province,
+     maritimeTheme  Tama_River_in_Musashi_Province,
+     mountFujiBackground  Tama_River_in_Musashi_Province,
+     peopleMotif  Tama_River_in_Musashi_Province,
+     treeForeground  Tama_River_in_Musashi_Province
+    
+    
+Individual: Tea_house_at_Koishikawa
+
+    Types: 
+        Tea_house_at_Koishikawa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Tea_house_at_Koishikawa,
+     bodiesOfWaterMotif  Tea_house_at_Koishikawa,
+     mountFujiBackground  Tea_house_at_Koishikawa,
+     peopleMotif  Tea_house_at_Koishikawa,
+     rooftopsForeground  Tea_house_at_Koishikawa,
+     snowCappedMountFuji  Tea_house_at_Koishikawa,
+     treeForeground  Tea_house_at_Koishikawa,
+     urbanisationTheme  Tea_house_at_Koishikawa,
+     wildlifeAndBodiesOfWater  Tea_house_at_Koishikawa,
+     wildlifeMotif  Tea_house_at_Koishikawa
+    
+    
+Individual: The_Great_Wave_off_Kanagawa
+
+    Types: 
+        The_Great_Wave_off_Kanagawa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  The_Great_Wave_off_Kanagawa,
+     bodiesOfWaterMotif  The_Great_Wave_off_Kanagawa,
+     maritimeTheme  The_Great_Wave_off_Kanagawa,
+     mountFujiBackground  The_Great_Wave_off_Kanagawa,
+     peopleMotif  The_Great_Wave_off_Kanagawa,
+     snowCappedMountFuji  The_Great_Wave_off_Kanagawa
+    
+    
+Individual: The_Kazusa_Province_sea_route
+
+    Types: 
+        The_Kazusa_Province_sea_route,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  The_Kazusa_Province_sea_route,
+     bodiesOfWaterMotif  The_Kazusa_Province_sea_route,
+     maritimeTheme  The_Kazusa_Province_sea_route,
+     mountFujiBackground  The_Kazusa_Province_sea_route,
+     notPeopleMotif  The_Kazusa_Province_sea_route,
+     snowCappedMountFuji  The_Kazusa_Province_sea_route
+    
+    
+Individual: The_lake_of_Hakone_in_Sagami_Province
+
+    Types: 
+        The_lake_of_Hakone_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     bodiesOfWaterMotif  The_lake_of_Hakone_in_Sagami_Province,
+     mistForeground  The_lake_of_Hakone_in_Sagami_Province,
+     mountFujiBackground  The_lake_of_Hakone_in_Sagami_Province,
+     notPeopleMotif  The_lake_of_Hakone_in_Sagami_Province
+    
+    
+Individual: Tsukuda_Island_in_Musashi_Province
+
+    Types: 
+        Tsukuda_Island_in_Musashi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Tsukuda_Island_in_Musashi_Province,
+     bodiesOfWaterMotif  Tsukuda_Island_in_Musashi_Province,
+     maritimeTheme  Tsukuda_Island_in_Musashi_Province,
+     mountFujiBackground  Tsukuda_Island_in_Musashi_Province,
+     peopleMotif  Tsukuda_Island_in_Musashi_Province
+    
+    
+Individual: Umezawa_in_Sagami_Province
+
+    Types: 
+        Umezawa_in_Sagami_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     animalsMotif  Umezawa_in_Sagami_Province,
+     bodiesOfWaterMotif  Umezawa_in_Sagami_Province,
+     mistForeground  Umezawa_in_Sagami_Province,
+     mountFujiBackground  Umezawa_in_Sagami_Province,
+     wildlifeAndBodiesOfWater  Umezawa_in_Sagami_Province,
+     wildlifeMotif  Umezawa_in_Sagami_Province,
+     wildlifeNotPeople  Umezawa_in_Sagami_Province
+    
+    
+Individual: Under_Mannen_Bridge_at_Fukagawa
+
+    Types: 
+        Under_Mannen_Bridge_at_Fukagawa,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Under_Mannen_Bridge_at_Fukagawa,
+     bodiesOfWaterMotif  Under_Mannen_Bridge_at_Fukagawa,
+     depictsRooftops  Under_Mannen_Bridge_at_Fukagawa,
+     maritimeTheme  Under_Mannen_Bridge_at_Fukagawa,
+     mountFujiBackground  Under_Mannen_Bridge_at_Fukagawa,
+     peopleMotif  Under_Mannen_Bridge_at_Fukagawa,
+     snowCappedMountFuji  Under_Mannen_Bridge_at_Fukagawa,
+     urbanisationTheme  Under_Mannen_Bridge_at_Fukagawa
+    
+    
+Individual: Ushibori_in_Hitachi_Province
+
+    Types: 
+        Ushibori_in_Hitachi_Province,
+        View_of_Mount_Fuji
+    
+    Facts:  
+     boatForeground  Ushibori_in_Hitachi_Province,
+     bodiesOfWaterMotif  Ushibori_in_Hitachi_Province,
+     maritimeTheme  Ushibori_in_Hitachi_Province,
+     mountFujiBackground  Ushibori_in_Hitachi_Province,
+     peopleMotif  Ushibori_in_Hitachi_Province,
+     snowCappedMountFuji  Ushibori_in_Hitachi_Province,
+     wildlifeMotif  Ushibori_in_Hitachi_Province
+    
+    
+Individual: Watermill_at_Onden
+
+    Types: 
+        View_of_Mount_Fuji,
+        Watermill_at_Onden
+    
+    Facts:  
+     agricultureTheme  Watermill_at_Onden,
+     bodiesOfWaterMotif  Watermill_at_Onden,
+     mountFujiBackground  Watermill_at_Onden,
+     peopleMotif  Watermill_at_Onden,
+     rooftopsForeground  Watermill_at_Onden,
+     snowCappedMountFuji  Watermill_at_Onden
+    
+    
+Individual: Yoshida_at_Tokaido
+
+    Types: 
+        View_of_Mount_Fuji,
+        Yoshida_at_Tokaido
+    
+    Facts:  
+     indoorScenes  Yoshida_at_Tokaido,
+     mountFujiBackground  Yoshida_at_Tokaido,
+     peopleMotif  Yoshida_at_Tokaido,
+     snowCappedMountFuji  Yoshida_at_Tokaido
+    
+    
+DisjointClasses: 
+    A_View_of_Mount_Fuji_Across_Lake_Suwa,A_sketch_of_the_Mitsui_shop,Asakusa_Hongan-ji_temple,Barrier_Town_on_the_Sumida_River,Bay_of_Noboto,Cushion_Pine_at_Aoyama,Ejiri_in_Suruga_Province,Enoshima_in_Sagami_Province,Fuji_View_Field_in_Owari_Province,Hodogaya_on_the_Tokaido,Inume_Pass_Koshu,Kajikazawa_in_Kai_Province,Mishima_Pass_in_Kai_Province,Mount_Fuji_from_the_mountains_of_Totomi,Mount_Fuji_reflects_in_Lake_Kawaguchi,Nihonbashi_bridge_in_Edo,Rainstorm_Beneath_the_Summit,Sazai_hall_Temple_of_Five_Hundred_Raken,Senju_Musashi_Province,Shichiri_beach_in_Sagami_Province,Shimomeguro,Shore_of_Tago_Bay_Ejiri_at_Tokaido,South_Wind_Clear_Sky,Sundai_Edo,Sunset_across_the_Ryogoku_bridge,Tama_River_in_Musashi_Province,Tea_house_at_Koishikawa,The_Great_Wave_off_Kanagawa,The_Kazusa_Province_sea_route,The_lake_of_Hakone_in_Sagami_Province,Tsukuda_Island_in_Musashi_Province,Umezawa_in_Sagami_Province,Under_Mannen_Bridge_at_Fukagawa,Ushibori_in_Hitachi_Province,Watermill_at_Onden,Yoshida_at_Tokaido
+\end{lstlisting}
+
+\chapter{Minimum Viable Product Ontology (Open-world)}
+\begin{lstlisting}
+Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: owl:topObjectProperty
+   
+    
+Class: Agriculture_Theme
+
+    
+Class: Animals_Motif
+
+    
+Class: Boats_Foreground
+
+    SubClassOf: 
+        Maritime_Theme
+    
+    
+Class: Bodies_Of_Water_Motif
+
+    
+Class: Coloured_Mount_Fuji
+
+    DisjointWith: 
+        Discoloured_Mount_Fuji
+
+    
+Class: Construction_Motif
+
+    
+Class: Depicts_Rooftops
+
+    
+Class: Discoloured_Mount_Fuji
+
+    DisjointWith: 
+        Coloured_Mount_Fuji
+
+    
+Class: Horse_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+    
+Class: Maritime_Theme
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+    
+    
+Class: Mist_Foreground
+
+    
+Class: Mount_Fuji_Foreground
+
+    
+Class: People_Motif
+
+        
+Class: Rooftops_Foreground
+
+    SubClassOf: 
+        Depicts_Rooftops
+    
+    
+Class: Snow_Capped_Mount_Fuji
+
+    
+Class: Temple_Motif
+
+    
+Class: Tree_Foreground
+
+    
+Class: Urbanisation_Theme
+
+    
+Class: Wildlife_AND_Bodies_of_Water
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+         and Wildlife_Motif
+    
+    
+Class: Wildlife_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+Class: owl:Thing
+
+    Annotations: 
+        rdfs:comment "This ontology artefact represents the same information as the Closed-world ontology as efficiently as possible. MVP."@en
+    
+    
+Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: A_sketch_of_the_Mitsui_shop
+
+    Types: 
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Asakusa_Hongan-ji_temple
+
+    Types: 
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Temple_Motif,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Barrier_Town_on_the_Sumida_River
+
+    Types: 
+        Animals_Motif,
+        Depicts_Rooftops,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Bay_of_Noboto
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Cushion_Pine_at_Aoyama
+
+    Types: 
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Ejiri_in_Suruga_Province
+
+    Types: 
+        Agriculture_Theme,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Enoshima_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Fuji_View_Field_in_Owari_Province
+
+    Types: 
+        Agriculture_Theme,
+        Construction_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Hodogaya_on_the_Tokaido
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Inume_Pass_Koshu
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        Mist_Foreground,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Kajikazawa_in_Kai_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Mishima_Pass_in_Kai_Province
+
+    Types: 
+        People_Motif,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Mount_Fuji_from_the_mountains_of_Totomi
+
+    Types: 
+        Construction_Motif,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Coloured_Mount_Fuji,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Nihonbashi_bridge_in_Edo
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Rainstorm_Beneath_the_Summit
+
+    Types: 
+        Coloured_Mount_Fuji,
+        Mount_Fuji_Foreground,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Temple_Motif,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Senju_Musashi_Province
+
+    Types: 
+        Agriculture_Theme,
+        Animals_Motif,
+        Discoloured_Mount_Fuji,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Shichiri_beach_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Shimomeguro
+
+    Types: 
+        Mist_Foreground,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Shore_of_Tago_Bay_Ejiri_at_Tokaido
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: South_Wind_Clear_Sky
+
+    Types: 
+        Coloured_Mount_Fuji,
+        Mount_Fuji_Foreground,
+        owl:Thing
+    
+    
+Individual: Sundai_Edo
+
+    Types: 
+        Agriculture_Theme,
+        Depicts_Rooftops,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Sunset_across_the_Ryogoku_bridge
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Tama_River_in_Musashi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Tea_house_at_Koishikawa
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        Urbanisation_Theme,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif,
+        owl:Thing
+    
+    
+Individual: The_Great_Wave_off_Kanagawa
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: The_Kazusa_Province_sea_route
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: The_lake_of_Hakone_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mist_Foreground,
+        owl:Thing
+    
+    
+Individual: Tsukuda_Island_in_Musashi_Province
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Umezawa_in_Sagami_Province
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        Mist_Foreground,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif,
+        owl:Thing
+    
+    
+Individual: Under_Mannen_Bridge_at_Fukagawa
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Discoloured_Mount_Fuji,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Ushibori_in_Hitachi_Province
+
+    Types: 
+        Animals_Motif,
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Wildlife_Motif,
+        owl:Thing
+    
+    
+Individual: Watermill_at_Onden
+
+    Types: 
+        Agriculture_Theme,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Yoshida_at_Tokaido
+
+    Types: 
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+\end{lstlisting}
+
+\chapter{Simple Perl parser for Manchester OWL2}
+\begin{lstlisting}
+#!/usr/bin/perl
+
+# Packages
+use strict;
+use warnings;
+
+# Turn off Japanese character print warning
+no warnings 'utf8';
+
+# Global Vars
+my $filename; # .owl file
+my $search; # search term
+my $fh; # file buffer
+
+# Main routine
+do {
+	get_ontology();
+	open_file();
+	get_search();
+	print_output();
+} while (1); # loop until user exits
+
+# Select ontology sub-routine
+sub get_ontology{
+	print ">>>
+	Which ontology would you like to search?
+	Closed-world Assumption (1),
+	Open-world Assumption (2) or
+	MVP Ontology (3). 
+	Enter another number to quit: ";
+	chomp(my $ontology = <STDIN>);
+	if($ontology=="1") {
+		$filename = "Ontologies/thirtySixViewsClosed.owl";
+	}elsif($ontology=="2") {
+		$filename = "Ontologies/thirtySixViewsOpen.owl";
+	}elsif($ontology=="3") { 
+		$filename = "Ontologies/thirtySixViewsMVP.owl";
+	}else{exit 0;}
+	return $filename;
+}
+
+# Select search term 
+sub get_search{
+	print ">>>
+	View all classes (1), all individuals (2), all
+	object properties (3), all data properties (4)  
+	or enter a search term: ";
+	chomp($search = <STDIN>);
+	exit 0 if ($search eq "");
+	if ($search eq "1"){$search = "Class:";}
+	if ($search eq "2"){$search = "Individual:";}
+	if ($search eq "3"){$search = "ObjectProperty:";}
+	if ($search eq "4"){$search = "DataProperty:";}
+	return $search;
+}
+
+# Open file
+sub open_file{
+	open ($fh, '<encoding(UTF-8)', $filename)
+		or die "Could not open file '$filename' $!";
+}
+
+# Print output
+sub print_output{
+	print ">>>\n"; # output formatting
+	while (my $row = <$fh>) {
+		chomp $row; 
+		print "$row\n" if ($row =~ $search);
+	}
+}
+\end{lstlisting}
+
+\chapter{Initial Research Proposal}
+\noindent
+\includegraphics[scale=0.55]{proposal-0}
+\newpage
+\noindent
+\includegraphics[scale=0.55]{proposal-1}
+\newpage
+\noindent
+\includegraphics[scale=0.55]{proposal-2}
+\newpage
+\noindent
+\includegraphics[scale=0.55]{proposal-3}
+
+\end{appendices}
+
+\end{document}

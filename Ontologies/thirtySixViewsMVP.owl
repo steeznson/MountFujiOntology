@@ -1,0 +1,504 @@
+Prefix: : <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://www.semanticweb.org/james/ontologies/2018/0/36-Views-of-Mount-Fuji>
+
+
+AnnotationProperty: rdfs:comment
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+ObjectProperty: owl:topObjectProperty
+
+    
+Class: Agriculture_Theme
+
+    
+Class: Animals_Motif
+
+    
+Class: Boats_Foreground
+
+    SubClassOf: 
+        Maritime_Theme
+    
+    
+Class: Bodies_Of_Water_Motif
+
+    
+Class: Coloured_Mount_Fuji
+
+    DisjointWith: 
+        Discoloured_Mount_Fuji
+    
+    
+Class: Construction_Motif
+
+    
+Class: Depicts_Rooftops
+
+    
+Class: Discoloured_Mount_Fuji
+
+    DisjointWith: 
+        Coloured_Mount_Fuji
+    
+    
+Class: Horse_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+    
+Class: Maritime_Theme
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+    
+    
+Class: Mist_Foreground
+
+    
+Class: Mount_Fuji_Foreground
+
+    
+Class: People_Motif
+
+    
+Class: Rooftops_Foreground
+
+    SubClassOf: 
+        Depicts_Rooftops
+    
+    
+Class: Snow_Capped_Mount_Fuji
+
+    
+Class: Temple_Motif
+
+    
+Class: Tree_Foreground
+
+    
+Class: Urbanisation_Theme
+
+    
+Class: Wildlife_AND_Bodies_of_Water
+
+    SubClassOf: 
+        Bodies_Of_Water_Motif
+         and Wildlife_Motif
+    
+    
+Class: Wildlife_Motif
+
+    SubClassOf: 
+        Animals_Motif
+    
+    
+Class: owl:Thing
+
+    Annotations: 
+        rdfs:comment "This ontology artefact represents the same information as the Closed-world ontology as efficiently as possible. MVP."@en
+    
+    
+Individual: A_View_of_Mount_Fuji_Across_Lake_Suwa
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: A_sketch_of_the_Mitsui_shop_in_Suruga_in_Edo
+
+    Types: 
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Asakusa_Hongan-ji_temple_in_the_Eastern_capital
+
+    Types: 
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Temple_Motif,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Barrier_Town_on_the_Sumida_River
+
+    Types: 
+        Animals_Motif,
+        Depicts_Rooftops,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Bay_of_Noboto
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Cushion_Pine_at_Aoyama
+
+    Types: 
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Ejiri_in_Suruga_Province
+
+    Types: 
+        Agriculture_Theme,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Enoshima_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Fuji_View_Field_in_Owari_Province
+
+    Types: 
+        Agriculture_Theme,
+        Construction_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Hodogaya_on_the_Tōkaidō
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Inume_Pass_Kōshū
+
+    Types: 
+        Animals_Motif,
+        Horse_Motif,
+        Mist_Foreground,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Kajikazawa_in_Kai_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Mishima_Pass_in_Kai_Province
+
+    Types: 
+        People_Motif,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Mount_Fuji_from_the_mountains_of_Tōtōmi
+
+    Types: 
+        Construction_Motif,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Mount_Fuji_reflects_in_Lake_Kawaguchi_seen_from_the_Misaka_Pass_in_Kai_Province
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Coloured_Mount_Fuji,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Nihonbashi_bridge_in_Edo
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Rainstorm_Beneath_the_Summit
+
+    Types: 
+        Coloured_Mount_Fuji,
+        Mount_Fuji_Foreground,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Sazai_hall_-_Temple_of_Five_Hundred_Rakan
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Temple_Motif,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Senju_Musashi_Province
+
+    Types: 
+        Agriculture_Theme,
+        Animals_Motif,
+        Discoloured_Mount_Fuji,
+        Horse_Motif,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Shichiri_beach_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Shimomeguro
+
+    Types: 
+        Mist_Foreground,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Shore_of_Tago_Bay_Ejiri_at_Tōkaidō
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: South_Wind_Clear_Sky
+
+    Types: 
+        Coloured_Mount_Fuji,
+        Mount_Fuji_Foreground,
+        owl:Thing
+    
+    
+Individual: Sundai_Edo
+
+    Types: 
+        Agriculture_Theme,
+        Depicts_Rooftops,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Sunset_across_the_Ryōgoku_bridge_from_the_bank_of_the_Sumida_River_at_Onmayagashi
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Tama_River_in_Musashi_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Tree_Foreground,
+        owl:Thing
+    
+    
+Individual: Tea_house_at_Koishikawa._The_morning_after_a_snowfall
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Discoloured_Mount_Fuji,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        Tree_Foreground,
+        Urbanisation_Theme,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif,
+        owl:Thing
+    
+    
+Individual: The_Great_Wave_off_Kanagawa
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: The_Kazusa_Province_sea_route
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: The_lake_of_Hakone_in_Sagami_Province
+
+    Types: 
+        Bodies_Of_Water_Motif,
+        Mist_Foreground,
+        owl:Thing
+    
+    
+Individual: Tsukuda_Island_in_Musashi_Province
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Maritime_Theme,
+        People_Motif,
+        owl:Thing
+    
+    
+Individual: Umezawa_in_Sagami_Province
+
+    Types: 
+        Animals_Motif,
+        Bodies_Of_Water_Motif,
+        Mist_Foreground,
+        Wildlife_AND_Bodies_of_Water,
+        Wildlife_Motif,
+        owl:Thing
+    
+    
+Individual: Under_Mannen_Bridge_at_Fukagawa
+
+    Types: 
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        Discoloured_Mount_Fuji,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Urbanisation_Theme,
+        owl:Thing
+    
+    
+Individual: Ushibori_in_Hitachi_Province
+
+    Types: 
+        Animals_Motif,
+        Boats_Foreground,
+        Bodies_Of_Water_Motif,
+        Discoloured_Mount_Fuji,
+        Maritime_Theme,
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        Wildlife_Motif,
+        owl:Thing
+    
+    
+Individual: Watermill_at_Onden
+
+    Types: 
+        Agriculture_Theme,
+        Bodies_Of_Water_Motif,
+        Depicts_Rooftops,
+        People_Motif,
+        Rooftops_Foreground,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
+Individual: Yoshida_at_Tōkaidō
+
+    Types: 
+        People_Motif,
+        Snow_Capped_Mount_Fuji,
+        owl:Thing
+    
+    
